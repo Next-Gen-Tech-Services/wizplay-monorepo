@@ -1,0 +1,376 @@
+2025-08-21T14:38:08.538Z info: Database connection established ✅
+2025-08-21T14:38:08.988Z info: Redis client is ready to use
+2025-08-21T14:38:10.214Z info: Rabbit client is connected
+2025-08-21T14:38:10.216Z info: Server started at PORT: 4001
+2025-08-21T14:38:20.792Z info: Database connection established ✅
+2025-08-21T14:38:20.876Z info: Redis client is ready to use
+2025-08-21T14:38:22.027Z info: Rabbit client is connected
+2025-08-21T14:38:22.030Z info: Server started at PORT: 4001
+2025-08-22T10:49:44.208Z info: Database connection established ✅
+2025-08-22T10:49:44.572Z info: Redis client is ready to use
+2025-08-22T10:49:45.819Z info: Rabbit client is connected
+2025-08-22T10:49:45.823Z info: Server started at PORT: 4001
+2025-08-22T10:53:22.636Z info: Database connection established ✅
+2025-08-22T10:53:22.930Z info: Redis client is ready to use
+2025-08-22T10:53:24.337Z info: Rabbit client is connected
+2025-08-22T10:53:24.344Z info: Server started at PORT: 4001
+2025-08-22T10:54:18.973Z info: Database connection established ✅
+2025-08-22T10:54:19.445Z info: Redis client is ready to use
+2025-08-22T10:54:20.745Z info: Rabbit client is connected
+2025-08-22T11:00:52.726Z info: Database connection established ✅
+2025-08-22T11:00:53.042Z info: Redis client is ready to use
+2025-08-22T11:00:54.368Z info: Rabbit client is connected
+2025-08-22T11:01:01.901Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"0","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-22T11:01:01.904Z info: Server started at PORT: 4001
+2025-08-22T11:01:01.924Z info: Received message:
+2025-08-22T11:01:01.924Z info: Handle signup:
+2025-08-22T11:02:20.791Z info: Database connection established ✅
+2025-08-22T11:02:21.216Z info: Redis client is ready to use
+2025-08-22T11:02:22.469Z info: Rabbit client is connected
+2025-08-22T11:06:13.715Z info: Database connection established ✅
+2025-08-22T11:06:14.077Z info: Redis client is ready to use
+2025-08-22T11:06:15.266Z info: Rabbit client is connected
+2025-08-22T11:06:27.287Z info: Database connection established ✅
+2025-08-22T11:06:27.359Z info: Redis client is ready to use
+2025-08-22T11:06:28.409Z info: Rabbit client is connected
+2025-08-22T11:07:00.952Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"1","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-22T11:07:00.957Z info: Server started at PORT: 4001
+2025-08-22T11:07:00.975Z info: Received message:
+2025-08-22T11:07:00.975Z info: Handle signup:
+2025-08-22T11:08:47.603Z info: Database connection established ✅
+2025-08-22T11:08:47.968Z info: Redis client is ready to use
+2025-08-22T11:08:49.123Z info: Rabbit client is connected
+2025-08-22T11:14:31.977Z info: Database connection established ✅
+2025-08-22T11:14:32.484Z info: Redis client is ready to use
+2025-08-22T11:14:33.935Z info: Rabbit client is connected
+2025-08-22T11:19:41.163Z info: Database connection established ✅
+2025-08-22T11:19:41.622Z info: Redis client is ready to use
+2025-08-22T11:19:43.026Z info: Rabbit client is connected
+2025-08-22T11:23:29.358Z info: Database connection established ✅
+2025-08-22T11:23:29.870Z info: Redis client is ready to use
+2025-08-22T11:23:31.385Z info: Rabbit client is connected
+2025-08-22T11:30:55.431Z info: Database connection established ✅
+2025-08-22T11:30:55.873Z info: Redis client is ready to use
+2025-08-22T11:30:57.386Z info: Rabbit client is connected
+2025-08-22T11:31:29.496Z info: Database connection established ✅
+2025-08-22T11:31:29.916Z info: Redis client is ready to use
+2025-08-22T11:31:31.039Z info: Rabbit client is connected
+2025-08-22T11:31:54.076Z info: Database connection established ✅
+2025-08-22T11:31:54.343Z info: Redis client is ready to use
+2025-08-22T11:31:55.471Z info: Rabbit client is connected
+2025-08-22T11:31:55.474Z info: Waiting for Kafka to be ready...
+2025-08-22T11:32:01.536Z info: Database connection established ✅
+2025-08-22T11:32:01.605Z info: Redis client is ready to use
+2025-08-22T11:32:03.836Z info: Rabbit client is connected
+2025-08-22T11:32:03.839Z info: Waiting for Kafka to be ready...
+2025-08-22T11:32:14.795Z info: Database connection established ✅
+2025-08-22T11:32:15.077Z info: Redis client is ready to use
+2025-08-22T11:32:16.265Z info: Rabbit client is connected
+2025-08-22T11:32:16.267Z info: Waiting for Kafka to be ready...
+2025-08-22T11:32:27.641Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: getaddrinfo ENOTFOUND kafka
+    at Socket.onError (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-22T11:32:27.647Z info: Server started at PORT: 4001
+2025-08-22T11:32:37.656Z info: Retrying Kafka initialization...
+2025-08-22T11:32:37.658Z info: Waiting for Kafka to be ready...
+2025-08-22T11:32:42.661Z warn: Consumer already connected!
+2025-08-22T11:32:51.423Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: getaddrinfo ENOTFOUND kafka
+    at Socket.onError (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-22T11:33:01.426Z info: Retrying Kafka initialization...
+2025-08-22T11:33:01.427Z info: Waiting for Kafka to be ready...
+2025-08-22T11:33:06.428Z warn: Consumer already connected!
+2025-08-22T11:33:15.313Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: getaddrinfo ENOTFOUND kafka
+    at Socket.onError (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-22T11:33:25.316Z info: Retrying Kafka initialization...
+2025-08-22T11:33:25.317Z info: Waiting for Kafka to be ready...
+2025-08-22T11:33:30.324Z warn: Consumer already connected!
+2025-08-22T11:51:53.933Z info: Database connection established ✅
+2025-08-22T11:51:54.293Z info: Redis client is ready to use
+2025-08-22T11:51:55.668Z info: Rabbit client is connected
+2025-08-22T11:51:55.671Z info: Waiting for Kafka to be ready...
+2025-08-22T11:52:00.715Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-22T11:52:00.719Z info: Server started at PORT: 4001
+2025-08-22T11:52:10.716Z info: Retrying Kafka initialization...
+2025-08-22T11:52:10.716Z info: Waiting for Kafka to be ready...
+2025-08-23T07:20:52.416Z info: Database connection established ✅
+2025-08-23T07:20:52.799Z info: Redis client is ready to use
+2025-08-23T07:20:54.166Z info: Rabbit client is connected
+2025-08-23T07:20:54.170Z info: Waiting for Kafka to be ready...
+2025-08-23T07:20:59.219Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T07:20:59.223Z info: Server started at PORT: 4001
+2025-08-23T07:21:09.220Z info: Retrying Kafka initialization...
+2025-08-23T07:21:09.221Z info: Waiting for Kafka to be ready...
+2025-08-23T07:21:14.221Z warn: Consumer already connected!
+2025-08-23T07:21:14.231Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T07:21:24.231Z info: Retrying Kafka initialization...
+2025-08-23T07:21:24.232Z info: Waiting for Kafka to be ready...
+2025-08-23T07:21:29.233Z warn: Consumer already connected!
+2025-08-23T07:21:29.245Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T07:21:39.248Z info: Retrying Kafka initialization...
+2025-08-23T07:21:39.248Z info: Waiting for Kafka to be ready...
+2025-08-23T07:21:44.250Z warn: Consumer already connected!
+2025-08-23T07:21:47.664Z info: Successfully subscribed to user events
+2025-08-23T07:21:47.708Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"0","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:21:47.709Z info: Test event published successfully
+2025-08-23T07:21:47.720Z info: Received message:
+2025-08-23T07:21:47.720Z info: Handle signup:
+2025-08-23T07:28:27.156Z info: Database connection established ✅
+2025-08-23T07:28:27.688Z info: Redis client is ready to use
+2025-08-23T07:28:28.976Z info: Rabbit client is connected
+2025-08-23T07:28:28.980Z info: Waiting for Kafka to be ready...
+2025-08-23T07:28:32.513Z info: Database connection established ✅
+2025-08-23T07:28:32.589Z info: Redis client is ready to use
+2025-08-23T07:28:33.708Z info: Rabbit client is connected
+2025-08-23T07:28:33.711Z info: Waiting for Kafka to be ready...
+2025-08-23T07:28:46.202Z info: Database connection established ✅
+2025-08-23T07:28:46.480Z info: Redis client is ready to use
+2025-08-23T07:28:48.243Z info: Rabbit client is connected
+2025-08-23T07:28:48.247Z info: Waiting for Kafka to be ready...
+2025-08-23T07:28:53.451Z info: Successfully subscribed to user events
+2025-08-23T07:28:53.477Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"1","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:28:53.478Z info: Test event published successfully
+2025-08-23T07:28:53.480Z info: Server started at PORT: 4001
+2025-08-23T07:28:53.482Z info: Received message:
+2025-08-23T07:28:53.482Z info: Handle signup:
+2025-08-23T07:29:19.662Z info: Database connection established ✅
+2025-08-23T07:29:19.855Z info: Redis client is ready to use
+2025-08-23T07:29:20.690Z info: Database connection established ✅
+2025-08-23T07:29:20.764Z info: Redis client is ready to use
+2025-08-23T07:29:21.860Z info: Rabbit client is connected
+2025-08-23T07:29:21.862Z info: Waiting for Kafka to be ready...
+2025-08-23T07:29:22.575Z info: Database connection established ✅
+2025-08-23T07:29:22.638Z info: Redis client is ready to use
+2025-08-23T07:29:23.744Z info: Rabbit client is connected
+2025-08-23T07:29:23.748Z info: Waiting for Kafka to be ready...
+2025-08-23T07:29:48.574Z info: Successfully subscribed to user events
+2025-08-23T07:29:48.610Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"2","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:29:48.610Z info: Test event published successfully
+2025-08-23T07:29:48.612Z info: Server started at PORT: 4001
+2025-08-23T07:29:48.616Z info: Received message:
+2025-08-23T07:29:48.617Z info: Handle signup:
+2025-08-23T07:30:03.371Z info: Database connection established ✅
+2025-08-23T07:30:04.183Z info: Redis client is ready to use
+2025-08-23T07:30:05.443Z info: Rabbit client is connected
+2025-08-23T07:30:05.447Z info: Waiting for Kafka to be ready...
+2025-08-23T07:30:24.994Z info: Database connection established ✅
+2025-08-23T07:30:25.191Z info: Redis client is ready to use
+2025-08-23T07:30:26.339Z info: Rabbit client is connected
+2025-08-23T07:30:26.344Z info: Waiting for Kafka to be ready...
+2025-08-23T07:30:31.383Z info: Successfully created topics
+2025-08-23T07:30:58.670Z info: Successfully subscribed to user events
+2025-08-23T07:30:58.671Z warn: Producer already connected!
+2025-08-23T07:30:58.696Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"3","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:30:58.697Z info: Test event published successfully
+2025-08-23T07:30:58.701Z info: Server started at PORT: 4001
+2025-08-23T07:30:58.707Z info: Received message:
+2025-08-23T07:30:58.707Z info: Handle signup:
+2025-08-23T07:32:17.396Z info: Database connection established ✅
+2025-08-23T07:32:17.842Z info: Redis client is ready to use
+2025-08-23T07:32:19.003Z info: Rabbit client is connected
+2025-08-23T07:32:19.008Z info: Waiting for Kafka to be ready...
+2025-08-23T07:32:24.049Z info: Successfully created topics
+2025-08-23T07:32:35.755Z info: Successfully subscribed to user events
+2025-08-23T07:32:35.755Z warn: Producer already connected!
+2025-08-23T07:32:35.775Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"4","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:32:35.775Z info: Test event published successfully
+2025-08-23T07:32:35.777Z info: Server started at PORT: 4001
+2025-08-23T07:32:35.800Z info: Received message:
+2025-08-23T07:32:35.800Z info: Handle signup:
+2025-08-23T07:34:36.358Z info: Database connection established ✅
+2025-08-23T07:34:36.726Z info: Redis client is ready to use
+2025-08-23T07:34:37.974Z info: Rabbit client is connected
+2025-08-23T07:34:37.978Z info: Waiting for Kafka to be ready...
+2025-08-23T07:34:43.015Z info: Successfully created topics
+2025-08-23T07:35:01.067Z info: Successfully subscribed to user events
+2025-08-23T07:35:01.067Z warn: Producer already connected!
+2025-08-23T07:35:01.078Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"5","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:35:01.078Z info: Test event published successfully
+2025-08-23T07:35:01.080Z info: Server started at PORT: 4001
+2025-08-23T07:35:01.091Z info: Received message:
+2025-08-23T07:35:01.091Z info: Handle signup:
+2025-08-23T07:35:38.562Z info: Database connection established ✅
+2025-08-23T07:35:38.919Z info: Redis client is ready to use
+2025-08-23T07:35:40.166Z info: Rabbit client is connected
+2025-08-23T07:35:40.169Z info: Waiting for Kafka to be ready...
+2025-08-23T07:35:45.216Z info: Successfully created topics
+2025-08-23T07:36:06.206Z info: Successfully subscribed to user events
+2025-08-23T07:36:06.207Z warn: Producer already connected!
+2025-08-23T07:36:06.235Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"6","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:36:06.235Z info: Test event published successfully
+2025-08-23T07:36:06.238Z info: Server started at PORT: 4001
+2025-08-23T07:36:06.245Z info: Received message:
+2025-08-23T07:36:06.245Z info: Handle signup:, [object Object]
+2025-08-23T07:36:17.675Z info: Database connection established ✅
+2025-08-23T07:36:17.973Z info: Redis client is ready to use
+2025-08-23T07:36:19.187Z info: Rabbit client is connected
+2025-08-23T07:36:19.189Z info: Waiting for Kafka to be ready...
+2025-08-23T07:36:24.231Z info: Successfully created topics
+2025-08-23T07:36:46.314Z info: Successfully subscribed to user events
+2025-08-23T07:36:46.315Z warn: Producer already connected!
+2025-08-23T07:36:46.337Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"7","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-23T07:36:46.337Z info: Test event published successfully
+2025-08-23T07:36:46.340Z info: Server started at PORT: 4001
+2025-08-23T07:36:46.344Z info: Received message:
+2025-08-23T07:36:46.344Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-23T08:01:02.480Z error: Error: Socket closed unexpectedly
+    at Socket.<anonymous> (/app/node_modules/.pnpm/@redis+client@5.8.2/node_modules/@redis/client/lib/client/socket.ts:272:29)
+    at Object.onceWrapper (node:events:623:26)
+    at Socket.emit (node:events:508:28)
+    at TCP.<anonymous> (node:net:346:12)
+2025-08-23T08:01:19.435Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:19.678Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:19.792Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:20.113Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:20.575Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:21.433Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:23.162Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:25.350Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:27.423Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:29.471Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:31.618Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:33.628Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:35.683Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:37.754Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:39.838Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:41.935Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:44.032Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:46.095Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:52.254Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:54.402Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:56.531Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:58.563Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:07:00.665Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:07:02.846Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:07:03.298Z error: Error: Unexpected close
+    at succeed (/app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:226:15)
+    at onOpenOk (/app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:208:7)
+    at /app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:111:11
+    at /app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:104:11
+    at TLSSocket.recv (/app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:453:9)
+    at Object.onceWrapper (node:events:622:28)
+    at TLSSocket.emit (node:events:508:28)
+    at emitReadable_ (node:internal/streams/readable:832:12)
+    at processTicksAndRejections (node:internal/process/task_queues:89:21)
+2025-08-24T05:51:57.416Z info: Database connection established ✅
+2025-08-24T05:51:57.855Z info: Redis client is ready to use
+2025-08-24T05:51:59.295Z info: Rabbit client is connected
+2025-08-24T05:51:59.298Z info: Waiting for Kafka to be ready...
+2025-08-24T05:52:04.351Z info: Successfully created topics
+2025-08-24T05:52:07.421Z info: Successfully subscribed to user events
+2025-08-24T05:52:07.421Z warn: Producer already connected!
+2025-08-24T05:52:07.447Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"8","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-24T05:52:07.447Z info: Test event published successfully
+2025-08-24T05:52:07.454Z info: Server started at PORT: 4001
+2025-08-24T05:52:07.469Z info: Received message:
+2025-08-24T05:52:07.469Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-25T14:35:44.723Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T14:35:45.007Z info: Redis client is ready to use
+2025-08-25T14:35:46.530Z info: Rabbit client is connected
+2025-08-25T14:35:46.532Z info: Waiting for Kafka to be ready...
+2025-08-25T14:36:01.659Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T14:36:02.170Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T14:36:02.226Z info: Redis client is ready to use
+2025-08-25T14:36:03.560Z info: Rabbit client is connected
+2025-08-25T14:36:03.565Z info: Waiting for Kafka to be ready...
+2025-08-25T16:14:07.795Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T16:14:08.419Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T16:14:08.478Z info: Redis client is ready to use
+2025-08-25T16:14:10.225Z info: Rabbit client is connected
+2025-08-25T16:14:10.229Z info: Waiting for Kafka to be ready...
+2025-08-25T16:15:32.435Z info: Database connection established ✅
+2025-08-25T16:15:33.132Z info: Database connection established ✅
+2025-08-25T16:15:33.193Z info: Redis client is ready to use
+2025-08-25T16:15:34.563Z info: Rabbit client is connected
+2025-08-25T16:15:34.567Z info: Waiting for Kafka to be ready...
+2025-08-25T16:15:56.083Z info: Database connection established ✅
+2025-08-25T16:15:56.592Z info: Database connection established ✅
+2025-08-25T16:15:56.653Z info: Redis client is ready to use
+2025-08-25T16:15:58.006Z info: Rabbit client is connected
+2025-08-25T16:15:58.011Z info: Waiting for Kafka to be ready...
+2025-08-25T16:16:03.257Z info: Created Topics: user_signup, user_login, user_send_otp
+2025-08-25T16:16:03.261Z info: Successfully created topics
+2025-08-25T16:16:06.952Z info: Successfully subscribed to user events
+2025-08-25T16:16:06.952Z warn: Producer already connected!
+2025-08-25T16:16:06.990Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"0","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-25T16:16:06.990Z info: Test event published successfully
+2025-08-25T16:16:06.992Z info: Server started at PORT: 4001
+2025-08-25T16:16:07.016Z info: Received message:
+2025-08-25T16:16:07.016Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}

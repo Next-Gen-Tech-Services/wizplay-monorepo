@@ -1,0 +1,133 @@
+2025-08-22T11:32:27.641Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: getaddrinfo ENOTFOUND kafka
+    at Socket.onError (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-22T11:32:51.423Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: getaddrinfo ENOTFOUND kafka
+    at Socket.onError (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-22T11:33:15.313Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: getaddrinfo ENOTFOUND kafka
+    at Socket.onError (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-22T11:52:00.715Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T07:20:59.219Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T07:21:14.231Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T07:21:29.245Z error: KafkaJSProtocolError: This server does not host this topic-partition
+    at createErrorFromCode (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/error.js:581:10)
+    at Object.parse (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/protocol/requests/metadata/v0/response.js:55:11)
+    at Connection.send (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:433:35)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Broker.[private:Broker:sendRequest] (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:904:14)
+    at Broker.metadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/broker/index.js:177:12)
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/brokerPool.js:158:25
+    at /app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:111:14
+    at Cluster.refreshMetadata (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:172:5)
+    at Cluster.addMultipleTargetTopics (/app/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/cluster/index.js:230:11)
+2025-08-23T08:01:02.480Z error: Error: Socket closed unexpectedly
+    at Socket.<anonymous> (/app/node_modules/.pnpm/@redis+client@5.8.2/node_modules/@redis/client/lib/client/socket.ts:272:29)
+    at Object.onceWrapper (node:events:623:26)
+    at Socket.emit (node:events:508:28)
+    at TCP.<anonymous> (node:net:346:12)
+2025-08-23T08:01:19.435Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:19.678Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:19.792Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:20.113Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:20.575Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:21.433Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:23.162Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:25.350Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:27.423Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:29.471Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:31.618Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:33.628Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:35.683Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:37.754Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:39.838Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:41.935Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:44.032Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:01:46.095Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:52.254Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:54.402Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:56.531Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:06:58.563Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:07:00.665Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:07:02.846Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T08:07:03.298Z error: Error: Unexpected close
+    at succeed (/app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:226:15)
+    at onOpenOk (/app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:208:7)
+    at /app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:111:11
+    at /app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:104:11
+    at TLSSocket.recv (/app/node_modules/.pnpm/amqplib@0.10.8/node_modules/amqplib/lib/connection.js:453:9)
+    at Object.onceWrapper (node:events:622:28)
+    at TLSSocket.emit (node:events:508:28)
+    at emitReadable_ (node:internal/streams/readable:832:12)
+    at processTicksAndRejections (node:internal/process/task_queues:89:21)
+2025-08-25T14:35:44.723Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T14:36:01.659Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T14:36:02.170Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T16:14:07.795Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-25T16:14:08.419Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 

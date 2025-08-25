@@ -1,0 +1,118 @@
+version: "3.8"
+
+services:
+  # user-service:
+  #   build:
+  #     context: . # Build from root for better Turborepo support
+  #     dockerfile: dockerfile.dev
+  #   container_name: user-service
+  #   ports:
+  #     - "4001:4001"
+  #   env_file:
+  #     - ./apps/user_service/.env.development
+  #   volumes:
+  #     # Mount entire monorepo for live reload with better caching
+  #     - .:/app:cached
+  #     # Exclude node_modules to avoid conflicts between host and container
+  #     - /app/node_modules
+  #     - /app/apps/user_service/node_modules
+  #     - /app/packages/*/node_modules
+  #   environment:
+  #     - NODE_ENV=development
+  #     - CHOKIDAR_USEPOLLING=true
+  #     - TURBO_CACHE_DIR=/app/.turbo
+  #   # Use turbo dev with proper filter syntax
+  #   command: pnpm turbo dev --filter=user_service
+  #   depends_on:
+  #     kafka:
+  #       condition: service_healthy
+  #     user_db_server:
+  #       condition: service_started
+  #   networks:
+  #     - app-network
+  #   restart: unless-stopped
+  #   stdin_open: true
+  #   tty: true
+
+  # Improved database service
+  user_db_server:
+    image: "postgres:15-alpine"
+    container_name: user_db_server
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user_db
+      POSTGRES_PASSWORD: user_db
+      POSTGRES_DB: user_service
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+      - ./database/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user_db -d user_service"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Kafka with improved configuration
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092" # external access (host)
+      - "9094:9094" # internal access (docker services)
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,DOCKER_INTERNAL://:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092,DOCKER_INTERNAL://kafka:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,DOCKER_INTERNAL:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
+      # Performance improvements
+      - KAFKA_CFG_NUM_NETWORK_THREADS=8
+      - KAFKA_CFG_NUM_IO_THREADS=16
+    volumes:
+      - kafka_data:/bitnami/kafka
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        ["CMD", "kafka-topics.sh", "--bootstrap-server=kafka:9094", "--list"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  # Optional: Redis for caching/sessions
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    restart: unless-stopped
+    profiles:
+      - with-redis
+
+  # Optional: Development tools container
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  kafka_data:
+    driver: local
+  user_db_data:
+    driver: local
+  redis_data:
+    driver: local
