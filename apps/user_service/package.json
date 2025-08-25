@@ -15,8 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "@repo/common": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@mvbet/common": "^1.0.19",
     "amqplib": "^0.10.8",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",

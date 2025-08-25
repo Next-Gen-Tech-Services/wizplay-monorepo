@@ -374,3 +374,7 @@
 2025-08-25T16:16:06.992Z info: Server started at PORT: 4001
 2025-08-25T16:16:07.016Z info: Received message:
 2025-08-25T16:16:07.016Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-25T18:59:42.001Z info: Database connection established ✅
+2025-08-25T18:59:42.396Z info: Redis client is ready to use
+2025-08-25T18:59:43.921Z info: Rabbit client is connected
+2025-08-25T18:59:43.924Z info: Waiting for Kafka to be ready...
