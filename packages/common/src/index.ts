@@ -3,6 +3,7 @@ export * from "./broker/kafka-client.types";
 export * from "./errors/customError";
 export * from "./middlewares/error.middleware";
 export * from "./middlewares/reqId.middleware";
+export * from "./middlewares/request-validation";
 export * from "./utils/globalLogger";
 export * from "./utils/statusCodes";
 

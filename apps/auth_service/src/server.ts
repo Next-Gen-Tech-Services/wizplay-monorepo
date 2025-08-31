@@ -1,7 +1,7 @@
 // Must be at the very top
 import { logger } from "@repo/common";
 import AppInit from "./app";
-import connectDatabase from "./configs/database.config";
+import { connectDatabase } from "./configs/database.config";
 import rabbitmqInstance from "./configs/rabbitmq.config";
 import Redis, { IRedis } from "./configs/redis.config";
 import ServerConfigs from "./configs/server.config";

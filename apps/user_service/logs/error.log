@@ -131,3 +131,5 @@
 2025-08-25T14:36:02.170Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
 2025-08-25T16:14:07.795Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
 2025-08-25T16:14:08.419Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
+2025-08-31T08:38:22.189Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
