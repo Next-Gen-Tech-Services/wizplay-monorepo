@@ -1,3 +1,5 @@
+import { ValidationError } from "express-validator";
+
 // ERROR CODES
 export enum ErrorCodes {
   BAD_REQUEST = 400,
@@ -56,5 +58,23 @@ export class NotFoundError extends BaseError {
 export class BadGatewayError extends BaseError {
   constructor(description = "Bad Gateway") {
     super("BAD GATEWAY ERROR", ErrorCodes.BAD_GATEWAY, description);
+  }
+}
+
+export class RequestValidationError extends BaseError {
+  constructor(public errors: ValidationError[]) {
+    super(
+      "REQUEST VALIDATION ERROR",
+      ErrorCodes.BAD_REQUEST,
+      "Invalid request parameters"
+    );
+  }
+
+  // Format validation errors for API response
+  serializeErrors() {
+    return this.errors.map((err) => ({
+      message: err.msg,
+      field: err.type === "field" ? err.path : undefined,
+    }));
   }
 }

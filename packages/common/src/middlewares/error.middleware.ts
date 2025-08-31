@@ -1,22 +1,39 @@
 import { NextFunction, Request, Response } from "express";
-import { BaseError } from "../errors/customError";
+import { BaseError, RequestValidationError } from "../errors/customError";
 import { logger } from "../utils/globalLogger";
 
 export class ErrorMiddleware {
   static handleError(
-    err: BaseError,
+    err: Error,
     req: Request,
     res: Response,
     next: NextFunction,
   ) {
-    const statusCode = err.statusCode || 500;
-    const message =
-      (err instanceof BaseError && err.message) || "Internal Server Error";
+    let statusCode = 500;
+    let message = "Internal Server Error";
+    let errors: any = null;
 
-    logger.error(`${err.message} | Req-ID:${req.headers["x-request-id"]}`);
+    // Handle custom errors
+    if (err instanceof BaseError) {
+      statusCode = err.statusCode;
+      message = err.message;
+    }
+
+    // Handle request validation error specifically
+    if (err instanceof RequestValidationError) {
+      statusCode = err.statusCode;
+      message = "Validation Failed";
+      errors = err.serializeErrors();
+    }
+
+    logger.error(
+      `${err.message} | Req-ID:${req.headers["x-request-id"]} | URL:${req.url}`,
+    );
+
     res.status(statusCode).json({
       success: false,
       message,
+      ...(errors && { errors }),
       ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
     });
   }

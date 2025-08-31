@@ -378,70 +378,139 @@
 2025-08-25T18:59:42.396Z info: Redis client is ready to use
 2025-08-25T18:59:43.921Z info: Rabbit client is connected
 2025-08-25T18:59:43.924Z info: Waiting for Kafka to be ready...
-2025-08-31T07:28:18.061Z info: Database connection established ✅
+2025-08-31T07:28:18.056Z info: Database connection established ✅
 2025-08-31T07:28:18.655Z info: Database connection established ✅
-2025-08-31T07:28:18.711Z info: Redis client is ready to use
-2025-08-31T07:28:20.094Z info: Rabbit client is connected
-2025-08-31T07:28:20.098Z info: Waiting for Kafka to be ready...
-2025-08-31T07:28:25.137Z info: Successfully created topics
-2025-08-31T07:28:28.177Z info: Successfully subscribed to user events
-2025-08-31T07:28:28.178Z warn: Producer already connected!
-2025-08-31T07:28:28.198Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"2","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:28:18.710Z info: Redis client is ready to use
+2025-08-31T07:28:20.025Z info: Rabbit client is connected
+2025-08-31T07:28:20.032Z info: Waiting for Kafka to be ready...
+2025-08-31T07:28:25.069Z info: Successfully created topics
+2025-08-31T07:28:28.162Z info: Successfully subscribed to user events
+2025-08-31T07:28:28.162Z warn: Producer already connected!
+2025-08-31T07:28:28.198Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"1","logAppendTime":"-1","logStartOffset":"0"}]
 2025-08-31T07:28:28.198Z info: Test event published successfully
-2025-08-31T07:28:28.200Z info: Server started at PORT: 4001
+2025-08-31T07:28:28.200Z info: Server started at PORT: 4002
 2025-08-31T07:28:28.240Z info: Received message:
-2025-08-31T07:28:28.240Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:28:28.241Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T07:28:28.258Z info: Received message:
 2025-08-31T07:28:28.258Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
-2025-08-31T07:36:49.741Z info: Received message:
-2025-08-31T07:36:49.742Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
-2025-08-31T07:37:24.183Z info: Received message:
-2025-08-31T07:37:24.183Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
-2025-08-31T07:37:58.324Z info: Received message:
-2025-08-31T07:37:58.324Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
-2025-08-31T07:38:28.413Z info: Received message:
-2025-08-31T07:38:28.413Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
-2025-08-31T07:38:58.451Z info: Received message:
-2025-08-31T07:38:58.451Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:28:28.267Z info: Received message:
+2025-08-31T07:28:28.267Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:36:23.852Z info: Database connection established ✅
+2025-08-31T07:36:24.274Z info: Redis client is ready to use
+2025-08-31T07:36:25.805Z info: Rabbit client is connected
+2025-08-31T07:36:25.817Z info: Waiting for Kafka to be ready...
+2025-08-31T07:36:30.870Z info: Successfully created topics
+2025-08-31T07:36:32.721Z info: Database connection established ✅
+2025-08-31T07:36:32.777Z info: Redis client is ready to use
+2025-08-31T07:36:34.066Z info: Rabbit client is connected
+2025-08-31T07:36:34.073Z info: Waiting for Kafka to be ready...
+2025-08-31T07:36:39.123Z info: Successfully created topics
+2025-08-31T07:36:49.725Z info: Successfully subscribed to user events
+2025-08-31T07:36:49.726Z warn: Producer already connected!
+2025-08-31T07:36:49.740Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"3","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:36:49.740Z info: Test event published successfully
+2025-08-31T07:36:49.742Z info: Server started at PORT: 4002
+2025-08-31T07:37:14.344Z info: Database connection established ✅
+2025-08-31T07:37:14.563Z info: Redis client is ready to use
+2025-08-31T07:37:15.982Z info: Rabbit client is connected
+2025-08-31T07:37:15.989Z info: Waiting for Kafka to be ready...
+2025-08-31T07:37:21.076Z info: Successfully created topics
+2025-08-31T07:37:24.155Z info: Successfully subscribed to user events
+2025-08-31T07:37:24.156Z warn: Producer already connected!
+2025-08-31T07:37:24.181Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"4","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:37:24.181Z info: Test event published successfully
+2025-08-31T07:37:24.183Z info: Server started at PORT: 4002
+2025-08-31T07:37:24.196Z info: Received message:
+2025-08-31T07:37:24.196Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:37:24.212Z info: Received message:
+2025-08-31T07:37:24.212Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:37:48.677Z info: Database connection established ✅
+2025-08-31T07:37:48.858Z info: Redis client is ready to use
+2025-08-31T07:37:50.140Z info: Rabbit client is connected
+2025-08-31T07:37:50.148Z info: Waiting for Kafka to be ready...
+2025-08-31T07:37:55.209Z info: Successfully created topics
+2025-08-31T07:37:58.298Z info: Successfully subscribed to user events
+2025-08-31T07:37:58.298Z warn: Producer already connected!
+2025-08-31T07:37:58.329Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"5","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:37:58.329Z info: Test event published successfully
+2025-08-31T07:37:58.331Z info: Server started at PORT: 4002
+2025-08-31T07:37:58.337Z info: Received message:
+2025-08-31T07:37:58.338Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:37:59.213Z info: Database connection established ✅
+2025-08-31T07:37:59.269Z info: Redis client is ready to use
+2025-08-31T07:38:00.689Z info: Rabbit client is connected
+2025-08-31T07:38:00.697Z info: Waiting for Kafka to be ready...
+2025-08-31T07:38:05.744Z info: Successfully created topics
+2025-08-31T07:38:28.389Z info: Successfully subscribed to user events
+2025-08-31T07:38:28.389Z warn: Producer already connected!
+2025-08-31T07:38:28.419Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"6","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:38:28.419Z info: Test event published successfully
+2025-08-31T07:38:28.421Z info: Server started at PORT: 4002
+2025-08-31T07:38:28.935Z info: Database connection established ✅
+2025-08-31T07:38:29.281Z info: Redis client is ready to use
+2025-08-31T07:38:30.581Z info: Rabbit client is connected
+2025-08-31T07:38:30.596Z info: Waiting for Kafka to be ready...
+2025-08-31T07:38:32.593Z info: Database connection established ✅
+2025-08-31T07:38:32.642Z info: Redis client is ready to use
+2025-08-31T07:38:33.866Z info: Rabbit client is connected
+2025-08-31T07:38:33.881Z info: Waiting for Kafka to be ready...
+2025-08-31T07:38:37.943Z info: Database connection established ✅
+2025-08-31T07:38:37.990Z info: Redis client is ready to use
+2025-08-31T07:38:39.228Z info: Rabbit client is connected
+2025-08-31T07:38:39.239Z info: Waiting for Kafka to be ready...
+2025-08-31T07:38:42.521Z info: Database connection established ✅
+2025-08-31T07:38:42.571Z info: Redis client is ready to use
+2025-08-31T07:38:45.960Z info: Rabbit client is connected
+2025-08-31T07:38:45.978Z info: Waiting for Kafka to be ready...
+2025-08-31T07:38:51.053Z info: Successfully created topics
+2025-08-31T07:38:58.424Z info: Successfully subscribed to user events
+2025-08-31T07:38:58.425Z warn: Producer already connected!
+2025-08-31T07:38:58.456Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"7","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:38:58.456Z info: Test event published successfully
+2025-08-31T07:38:58.457Z info: Server started at PORT: 4002
+2025-08-31T07:38:58.463Z info: Received message:
+2025-08-31T07:38:58.463Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-08-31T07:38:58.482Z info: Received message:
+2025-08-31T07:38:58.482Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T07:50:54.900Z info: Database connection established ✅
-2025-08-31T07:50:55.292Z info: Redis client is ready to use
-2025-08-31T07:50:56.909Z info: Rabbit client is connected
-2025-08-31T07:50:56.923Z info: Waiting for Kafka to be ready...
-2025-08-31T07:51:01.964Z info: Successfully created topics
+2025-08-31T07:50:55.285Z info: Redis client is ready to use
+2025-08-31T07:50:56.894Z info: Rabbit client is connected
+2025-08-31T07:50:56.900Z info: Waiting for Kafka to be ready...
+2025-08-31T07:51:01.960Z info: Successfully created topics
 2025-08-31T07:51:20.935Z info: Successfully subscribed to user events
 2025-08-31T07:51:20.935Z warn: Producer already connected!
-2025-08-31T07:51:20.994Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"9","logAppendTime":"-1","logStartOffset":"0"}]
-2025-08-31T07:51:20.994Z info: Test event published successfully
-2025-08-31T07:51:20.996Z info: Server started at PORT: 4001
+2025-08-31T07:51:20.979Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"8","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:51:20.979Z info: Test event published successfully
+2025-08-31T07:51:20.983Z info: Server started at PORT: 4002
 2025-08-31T07:51:21.011Z info: Received message:
 2025-08-31T07:51:21.011Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T07:51:21.026Z info: Received message:
 2025-08-31T07:51:21.026Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T07:52:46.851Z info: Database connection established ✅
-2025-08-31T07:52:49.327Z info: Database connection established ✅
-2025-08-31T07:52:49.444Z info: Redis client is ready to use
-2025-08-31T07:52:50.832Z info: Rabbit client is connected
-2025-08-31T07:52:50.835Z info: Waiting for Kafka to be ready...
-2025-08-31T07:52:55.860Z info: Successfully created topics
-2025-08-31T07:52:58.919Z info: Successfully subscribed to user events
-2025-08-31T07:52:58.920Z warn: Producer already connected!
-2025-08-31T07:52:58.943Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"10","logAppendTime":"-1","logStartOffset":"0"}]
-2025-08-31T07:52:58.943Z info: Test event published successfully
-2025-08-31T07:52:58.944Z info: Server started at PORT: 4001
+2025-08-31T07:52:49.307Z info: Database connection established ✅
+2025-08-31T07:52:49.410Z info: Redis client is ready to use
+2025-08-31T07:52:50.797Z info: Rabbit client is connected
+2025-08-31T07:52:50.801Z info: Waiting for Kafka to be ready...
+2025-08-31T07:52:55.846Z info: Successfully created topics
+2025-08-31T07:52:58.921Z info: Successfully subscribed to user events
+2025-08-31T07:52:58.921Z warn: Producer already connected!
+2025-08-31T07:52:58.948Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"11","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:52:58.948Z info: Test event published successfully
+2025-08-31T07:52:58.949Z info: Server started at PORT: 4002
 2025-08-31T07:52:58.953Z info: Received message:
 2025-08-31T07:52:58.953Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T07:52:58.972Z info: Received message:
 2025-08-31T07:52:58.972Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
-2025-08-31T07:54:44.066Z info: Database connection established ✅
-2025-08-31T07:54:44.412Z info: Redis client is ready to use
-2025-08-31T07:54:45.866Z info: Rabbit client is connected
-2025-08-31T07:54:45.870Z info: Waiting for Kafka to be ready...
+2025-08-31T07:54:44.068Z info: Database connection established ✅
+2025-08-31T07:54:44.403Z info: Redis client is ready to use
+2025-08-31T07:54:45.867Z info: Rabbit client is connected
+2025-08-31T07:54:45.871Z info: Waiting for Kafka to be ready...
 2025-08-31T07:54:50.910Z info: Successfully created topics
-2025-08-31T07:55:09.268Z info: Successfully subscribed to user events
-2025-08-31T07:55:09.269Z warn: Producer already connected!
-2025-08-31T07:55:09.300Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"13","logAppendTime":"-1","logStartOffset":"0"}]
+2025-08-31T07:55:09.267Z info: Successfully subscribed to user events
+2025-08-31T07:55:09.268Z warn: Producer already connected!
+2025-08-31T07:55:09.300Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"12","logAppendTime":"-1","logStartOffset":"0"}]
 2025-08-31T07:55:09.300Z info: Test event published successfully
-2025-08-31T07:55:09.302Z info: Server started at PORT: 4001
+2025-08-31T07:55:09.302Z info: Server started at PORT: 4002
 2025-08-31T07:55:09.318Z info: Received message:
 2025-08-31T07:55:09.318Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T07:55:09.330Z info: Received message:

@@ -1,5 +1,5 @@
 {
-  "name": "user_service",
+  "name": "auth_service",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
