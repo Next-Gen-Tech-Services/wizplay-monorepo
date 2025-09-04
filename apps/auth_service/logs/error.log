@@ -151,3 +151,92 @@
 2025-08-31T12:03:49.216Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
 2025-08-31T12:05:55.969Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
 2025-08-31T12:06:45.539Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:38:31.702Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:39:43.436Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:53:24.337Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:53:58.674Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:54:39.471Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:55:00.466Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:04.352Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:12.871Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:24.531Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:41.873Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:59:11.808Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:59:17.885Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T13:00:07.140Z error: Invalid request parameters | Req-ID:8516306e-afd1-47b6-adec-933b7fe44a5a | URL:/api/v1/auth/verify-otp
+2025-09-01T13:00:32.437Z error: Invalid request parameters | Req-ID:4898ef78-a90a-48cf-b804-91079b17d1df | URL:/api/v1/auth/verify-otp
+2025-09-01T13:00:45.028Z error: Invalid request parameters | Req-ID:a8cd6d3b-83b6-4305-9f11-92036d55725c | URL:/api/v1/auth/verify-otp
+2025-09-01T13:01:01.310Z error: Database Error: SequelizeDatabaseError: column Auth.otpExpiresAt does not exist
+2025-09-01T13:01:32.323Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T13:01:35.428Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T04:37:57.858Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T04:38:11.326Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:507:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T04:41:03.390Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T04:41:09.571Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T04:48:39.140Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T04:48:42.123Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:42.205Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:42.374Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:42.732Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:43.271Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:44.240Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:45.992Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:48.111Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:50.197Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:52.222Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:54.277Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:53:49.861Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T04:56:43.261Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T04:56:49.716Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T05:04:47.294Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T05:12:14.558Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T05:12:15.376Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T05:45:45.187Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T05:45:45.986Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T05:46:57.960Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T05:46:57.966Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:58.124Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:58.314Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:58.631Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:59.164Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:59.968Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:47:01.623Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:50:39.272Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-02T05:51:44.377Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T05:52:03.560Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:507:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T07:59:26.661Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T07:59:54.375Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)

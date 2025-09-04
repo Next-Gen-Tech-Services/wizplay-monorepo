@@ -1,7 +1,12 @@
 import crypto from "crypto";
 
 export function generateOTPUtil(): string {
-  const buffer = crypto.randomInt(100000, 1000000);
+  let buffer: string | number | bigint = "";
+  if (process.env.NODE_ENV === "development") {
+    buffer = 1234;
+    return buffer.toString();
+  }
+  buffer = crypto.randomInt(1000, 9999);
   return buffer.toString();
 }
 

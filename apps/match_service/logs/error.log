@@ -131,87 +131,138 @@
 2025-08-25T14:36:02.170Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
 2025-08-25T16:14:07.795Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
 2025-08-25T16:14:08.419Z error: Error connecting database: SequelizeHostNotFoundError: getaddrinfo ENOTFOUND user_db_server 
-2025-08-31T08:38:22.189Z error: Error: read ETIMEDOUT
+2025-08-31T08:14:39.681Z error: Invalid request parameters | Req-ID:8900ad98-fe38-4324-9f5a-af8ca1258467 | URL:/api/v1/auth/generate_otp
+2025-08-31T08:38:40.459Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
-2025-09-01T12:10:12.365Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-01T12:38:31.625Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T04:37:57.865Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T04:38:13.491Z error: KafkaJSNonRetriableError
-  Caused by: KafkaJSConnectionError: Connection error: 
-    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
-    at Socket.emit (node:events:507:28)
-    at emitErrorNT (node:internal/streams/destroy:170:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+2025-08-31T11:29:07.278Z error: Invalid request parameters | Req-ID:e2cb74cd-a91a-49a7-9804-7fad4ca37137 | URL:/api/v1/auth/generate_otp
+2025-08-31T11:29:35.179Z error: Invalid request parameters | Req-ID:dd20add2-7697-4640-83cb-c579aa635961 | URL:/api/v1/auth/generate_otp
+2025-08-31T11:30:32.653Z error: Cannot read properties of undefined (reading 'userService') | Req-ID:422a9666-1ce3-4b5f-9b25-76f0d3631a13 | URL:/api/v1/auth/generate_otp
+2025-08-31T11:52:30.540Z error: Cannot read properties of undefined (reading 'userService') | Req-ID:617cd9a4-82a1-40a9-aa49-08b965480489 | URL:/api/v1/auth/generate_otp
+2025-08-31T11:54:18.819Z error: Cannot read properties of undefined (reading 'userService') | Req-ID:c500c6e3-563d-409b-a340-5b16e6f7c0ab | URL:/api/v1/auth/generate_otp
+2025-08-31T11:55:25.363Z error: Database Error: SequelizeDatabaseError: relation "auths" does not exist
+2025-08-31T11:55:25.364Z error: Database Error | Req-ID:49286e78-7bba-4a0a-81cc-9e72c446ed40 | URL:/api/v1/auth/generate_otp
+2025-08-31T11:58:34.311Z error: Database Error: SequelizeDatabaseError: relation "auths" does not exist
+2025-08-31T11:58:34.320Z error: Database Error | Req-ID:6b29e080-0b2a-4202-a3fd-13c0452248bb | URL:/api/v1/auth/generate_otp
+2025-08-31T12:00:33.647Z error: Database Error: SequelizeDatabaseError: relation "auths" does not exist
+2025-08-31T12:00:33.647Z error: Database Error | Req-ID:2ae6274f-5e08-43d2-a633-59442c19caa5 | URL:/api/v1/auth/generate_otp
+2025-08-31T12:00:35.882Z error: Database Error: SequelizeDatabaseError: relation "auths" does not exist
+2025-08-31T12:00:35.883Z error: Database Error | Req-ID:722fa944-790c-490c-9810-b0aef84d4fee | URL:/api/v1/auth/generate_otp
+2025-08-31T12:03:19.898Z error: logger is not defined | Req-ID:e0a19e4b-900b-4791-a1e9-6c8193417de8 | URL:/api/v1/auth/generate_otp
+2025-08-31T12:03:49.216Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-08-31T12:05:55.969Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-08-31T12:06:45.539Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:38:31.702Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:39:43.436Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:53:24.337Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:53:58.674Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:54:39.471Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:55:00.466Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:04.352Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:12.871Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:24.531Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:56:41.873Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:59:11.808Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T12:59:17.885Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T13:00:07.140Z error: Invalid request parameters | Req-ID:8516306e-afd1-47b6-adec-933b7fe44a5a | URL:/api/v1/auth/verify-otp
+2025-09-01T13:00:32.437Z error: Invalid request parameters | Req-ID:4898ef78-a90a-48cf-b804-91079b17d1df | URL:/api/v1/auth/verify-otp
+2025-09-01T13:00:45.028Z error: Invalid request parameters | Req-ID:a8cd6d3b-83b6-4305-9f11-92036d55725c | URL:/api/v1/auth/verify-otp
+2025-09-01T13:01:01.310Z error: Database Error: SequelizeDatabaseError: column Auth.otpExpiresAt does not exist
+2025-09-01T13:01:32.323Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T13:01:35.428Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T13:15:51.688Z error: Error connecting database: SequelizeDatabaseError: syntax error at or near "UNIQUE" 
+2025-09-01T13:20:50.430Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-01T13:52:39.187Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-01T13:52:39.192Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:52:39.247Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:52:39.509Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:52:39.781Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:52:40.278Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:52:41.206Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:52:42.933Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:53:34.456Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:53:36.518Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-01T13:58:46.469Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-01T15:29:56.934Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-01T15:30:05.956Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-01T15:36:44.806Z error: Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-01T15:39:58.262Z error: Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T04:37:57.857Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T04:38:16.829Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionClosedError: Closed connection
+    at Socket.onEnd (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:197:13)
+    at Socket.emit (node:events:519:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
-2025-09-02T04:48:41.831Z error: Error: read ETIMEDOUT
+2025-09-02T04:48:41.832Z error: Error: read ETIMEDOUT
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
 2025-09-02T04:48:42.123Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:42.209Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:42.323Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:42.344Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:42.476Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:42.695Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:42.782Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:43.255Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:43.306Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:44.076Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:44.284Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:45.840Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:46.044Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:48.036Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:48.237Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:50.099Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:50.361Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:52.267Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:52.427Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:48:54.339Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T04:48:54.552Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T04:54:08.009Z error: Error: read ETIMEDOUT
+2025-09-02T04:54:10.085Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
-2025-09-02T05:12:14.502Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T05:12:15.310Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T05:45:45.194Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T05:45:45.986Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T05:46:01.579Z error: KafkaJSNonRetriableError
-  Caused by: KafkaJSConnectionError: Connection error: read ECONNRESET
-    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
-    at Socket.emit (node:events:507:28)
-    at emitErrorNT (node:internal/streams/destroy:170:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
-    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T04:55:04.968Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-02T05:14:19.590Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-02T05:16:15.495Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-02T05:17:07.400Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-02T05:45:45.185Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T05:45:45.999Z error: Error connecting database: SequelizeConnectionRefusedError 
 2025-09-02T05:46:57.940Z error: Error: read ETIMEDOUT
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
 2025-09-02T05:46:57.943Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:46:58.181Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T05:46:58.115Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:46:58.423Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T05:46:58.245Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:46:58.661Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T05:46:58.571Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:46:59.245Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T05:46:59.112Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:47:00.200Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T05:47:00.111Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:47:01.898Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-02T05:47:01.762Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
-2025-09-02T05:51:44.379Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
-2025-09-02T05:51:58.661Z error: KafkaJSNonRetriableError
+2025-09-02T05:51:44.377Z error: Error connecting database: SequelizeConnectionRefusedError 
+2025-09-02T05:52:01.963Z error: KafkaJSNonRetriableError
   Caused by: KafkaJSConnectionError: Connection error: 
     at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
     at Socket.emit (node:events:507:28)
     at emitErrorNT (node:internal/streams/destroy:170:8)
     at emitErrorCloseNT (node:internal/streams/destroy:129:3)
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
-2025-09-02T05:52:19.693Z error: KafkaJSNonRetriableError
-  Caused by: KafkaJSConnectionError: Connection error: read ECONNRESET
-    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
-    at Socket.emit (node:events:507:28)
-    at emitErrorNT (node:internal/streams/destroy:170:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
-    at processTicksAndRejections (node:internal/process/task_queues:90:21)
-2025-09-02T07:59:26.661Z error: Error: read ETIMEDOUT
+2025-09-02T07:59:26.662Z error: Error: read ETIMEDOUT
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
-2025-09-02T08:00:05.539Z error: Error: read ETIMEDOUT
+2025-09-02T08:00:20.292Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)

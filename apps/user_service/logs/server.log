@@ -565,3 +565,214 @@
 2025-08-31T12:04:17.124Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-08-31T12:06:22.533Z info: Received message:
 2025-08-31T12:06:22.533Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:10:12.365Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-01T12:10:12.974Z info: Redis client is ready to use
+2025-09-01T12:10:14.345Z info: Rabbit client is connected
+2025-09-01T12:10:14.346Z info: Waiting for Kafka to be ready...
+2025-09-01T12:10:19.363Z info: Successfully created topics
+2025-09-01T12:10:22.411Z info: Successfully subscribed to user events
+2025-09-01T12:10:22.411Z warn: Producer already connected!
+2025-09-01T12:10:22.431Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"5","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-01T12:10:22.432Z info: Test event published successfully
+2025-09-01T12:10:22.433Z info: Server started at PORT: 4001
+2025-09-01T12:10:22.445Z info: Received message:
+2025-09-01T12:10:22.445Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:38:31.625Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-01T12:38:32.047Z info: Redis client is ready to use
+2025-09-01T12:38:33.463Z info: Rabbit client is connected
+2025-09-01T12:38:33.464Z info: Waiting for Kafka to be ready...
+2025-09-01T12:38:38.480Z info: Successfully created topics
+2025-09-01T12:38:41.501Z info: Successfully subscribed to user events
+2025-09-01T12:38:41.501Z warn: Producer already connected!
+2025-09-01T12:38:41.507Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"7","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-01T12:38:41.507Z info: Test event published successfully
+2025-09-01T12:38:41.508Z info: Server started at PORT: 4001
+2025-09-01T12:38:41.514Z info: Received message:
+2025-09-01T12:38:41.514Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:38:41.521Z info: Received message:
+2025-09-01T12:38:41.521Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:40:09.578Z info: Received message:
+2025-09-01T12:40:09.578Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:53:50.781Z info: Received message:
+2025-09-01T12:53:50.781Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:54:25.861Z info: Received message:
+2025-09-01T12:54:25.861Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:55:35.962Z info: Received message:
+2025-09-01T12:55:35.962Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:57:31.364Z info: Received message:
+2025-09-01T12:57:31.364Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T12:59:36.549Z info: Received message:
+2025-09-01T12:59:36.550Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-01T13:02:01.768Z info: Received message:
+2025-09-01T13:02:01.768Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:37:57.865Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-02T04:37:58.331Z info: Redis client is ready to use
+2025-09-02T04:37:59.928Z info: Rabbit client is connected
+2025-09-02T04:37:59.931Z info: Waiting for Kafka to be ready...
+2025-09-02T04:38:13.491Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:507:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T04:38:13.495Z info: Server started at PORT: 4001
+2025-09-02T04:38:23.493Z info: Retrying Kafka initialization...
+2025-09-02T04:38:23.494Z info: Waiting for Kafka to be ready...
+2025-09-02T04:38:32.997Z info: Successfully created topics
+2025-09-02T04:38:36.036Z info: Successfully subscribed to user events
+2025-09-02T04:38:36.037Z warn: Producer already connected!
+2025-09-02T04:38:36.047Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"19","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-02T04:38:36.047Z info: Test event published successfully
+2025-09-02T04:38:36.053Z info: Received message:
+2025-09-02T04:38:36.053Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:38:36.061Z info: Received message:
+2025-09-02T04:38:36.061Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:38:36.069Z info: Received message:
+2025-09-02T04:38:36.069Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:38:36.092Z info: Received message:
+2025-09-02T04:38:36.092Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:38:36.102Z info: Received message:
+2025-09-02T04:38:36.102Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:38:37.343Z info: Received message:
+2025-09-02T04:38:37.343Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:41:32.665Z info: Received message:
+2025-09-02T04:41:32.665Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:48:41.831Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T04:48:42.123Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:42.209Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:42.344Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:42.695Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:43.255Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:44.076Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:45.840Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:48.036Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:50.099Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:52.267Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:54.339Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T04:48:57.079Z info: Redis client is ready to use
+2025-09-02T04:54:00.789Z info: Received message:
+2025-09-02T04:54:00.790Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T04:54:08.009Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T05:12:14.502Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-02T05:12:15.310Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-02T05:12:15.461Z info: Redis client is ready to use
+2025-09-02T05:12:18.336Z info: Rabbit client is connected
+2025-09-02T05:12:18.337Z info: Waiting for Kafka to be ready...
+2025-09-02T05:12:23.372Z info: Successfully created topics
+2025-09-02T05:12:26.420Z info: Successfully subscribed to user events
+2025-09-02T05:12:26.420Z warn: Producer already connected!
+2025-09-02T05:12:26.441Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"27","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-02T05:12:26.441Z info: Test event published successfully
+2025-09-02T05:12:26.444Z info: Server started at PORT: 4001
+2025-09-02T05:12:26.455Z info: Received message:
+2025-09-02T05:12:26.455Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:12:26.467Z info: Received message:
+2025-09-02T05:12:26.467Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:12:26.476Z info: Received message:
+2025-09-02T05:12:26.476Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:12:26.483Z info: Received message:
+2025-09-02T05:12:26.483Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:12:26.492Z info: Received message:
+2025-09-02T05:12:26.492Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:45:45.194Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-02T05:45:45.986Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-02T05:45:46.157Z info: Redis client is ready to use
+2025-09-02T05:45:48.219Z info: Rabbit client is connected
+2025-09-02T05:45:48.222Z info: Waiting for Kafka to be ready...
+2025-09-02T05:46:01.579Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: read ECONNRESET
+    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:507:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T05:46:01.583Z info: Server started at PORT: 4001
+2025-09-02T05:46:11.581Z info: Retrying Kafka initialization...
+2025-09-02T05:46:11.581Z info: Waiting for Kafka to be ready...
+2025-09-02T05:46:16.613Z info: Successfully created topics
+2025-09-02T05:46:19.666Z info: Successfully subscribed to user events
+2025-09-02T05:46:19.667Z warn: Producer already connected!
+2025-09-02T05:46:19.686Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"32","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-02T05:46:19.686Z info: Test event published successfully
+2025-09-02T05:46:19.695Z info: Received message:
+2025-09-02T05:46:19.695Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:46:19.707Z info: Received message:
+2025-09-02T05:46:19.707Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:46:19.717Z info: Received message:
+2025-09-02T05:46:19.717Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:46:19.726Z info: Received message:
+2025-09-02T05:46:19.726Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:46:19.737Z info: Received message:
+2025-09-02T05:46:19.737Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:46:32.594Z info: Received message:
+2025-09-02T05:46:32.595Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:46:57.940Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T05:46:57.943Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:58.181Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:58.423Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:58.661Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:46:59.245Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:47:00.200Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:47:01.898Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-02T05:47:04.208Z info: Redis client is ready to use
+2025-09-02T05:51:44.379Z error: Error connecting database: SequelizeConnectionError: role "user_db" does not exist 
+2025-09-02T05:51:44.811Z info: Redis client is ready to use
+2025-09-02T05:51:46.148Z info: Rabbit client is connected
+2025-09-02T05:51:46.151Z info: Waiting for Kafka to be ready...
+2025-09-02T05:51:58.661Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:507:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T05:51:58.662Z info: Server started at PORT: 4001
+2025-09-02T05:52:08.662Z info: Retrying Kafka initialization...
+2025-09-02T05:52:08.662Z info: Waiting for Kafka to be ready...
+2025-09-02T05:52:19.693Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: read ECONNRESET
+    at Socket.onError (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/kafkajs@2.2.4/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:507:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-02T05:52:29.695Z info: Retrying Kafka initialization...
+2025-09-02T05:52:29.695Z info: Waiting for Kafka to be ready...
+2025-09-02T05:52:34.729Z info: Successfully created topics
+2025-09-02T05:52:51.341Z info: Successfully subscribed to user events
+2025-09-02T05:52:51.341Z warn: Producer already connected!
+2025-09-02T05:52:51.361Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"35","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-02T05:52:51.361Z info: Test event published successfully
+2025-09-02T05:52:51.379Z info: Received message:
+2025-09-02T05:52:51.380Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:52:51.396Z info: Received message:
+2025-09-02T05:52:51.397Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T05:52:51.403Z info: Received message:
+2025-09-02T05:52:51.403Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-02T07:59:26.661Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-02T07:59:27.596Z info: Redis client is ready to use
+2025-09-02T08:00:05.539Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
