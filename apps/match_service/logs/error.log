@@ -285,3 +285,15 @@
     at processTimers (node:internal/timers:543:7)
 2025-09-07T14:12:25.975Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
 2025-09-07T14:12:35.401Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-07T18:25:02.750Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-07T18:25:12.392Z error: KafkaJSNonRetriableError: Invalid topics array, it cannot have multiple entries for the same topic
+    at Object.createTopics (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\kafkajs@2.2.4\node_modules\kafkajs\src\admin\index.js:129:13)
+    at KafkaClient.createTopics (M:\Programming\NGTS\wizplay-monorepo\packages\common\dist\broker\kafka-client.js:33:25)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at KafkaClient.connectProducer (M:\Programming\NGTS\wizplay-monorepo\packages\common\dist\broker\kafka-client.js:41:17)
+    at connectProducer (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\utils\kafka.ts:14:20)
+    at BrokerInit (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\app.ts:20:22)
+    at AppInit (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\app.ts:49:3)
+    at startServer (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\server.ts:18:22)
+2025-09-07T18:44:01.838Z error: Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)

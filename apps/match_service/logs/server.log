@@ -2072,3 +2072,44 @@
 2025-09-07T14:19:16.825Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-09-07T14:32:02.060Z info: Received message:
 2025-09-07T14:32:02.064Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:25:02.750Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-07T18:25:02.872Z info: Redis client is ready to use
+2025-09-07T18:25:07.349Z info: Rabbit client is connected
+2025-09-07T18:25:07.351Z info: Waiting for Kafka to be ready...
+2025-09-07T18:25:12.392Z error: KafkaJSNonRetriableError: Invalid topics array, it cannot have multiple entries for the same topic
+    at Object.createTopics (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\kafkajs@2.2.4\node_modules\kafkajs\src\admin\index.js:129:13)
+    at KafkaClient.createTopics (M:\Programming\NGTS\wizplay-monorepo\packages\common\dist\broker\kafka-client.js:33:25)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at KafkaClient.connectProducer (M:\Programming\NGTS\wizplay-monorepo\packages\common\dist\broker\kafka-client.js:41:17)
+    at connectProducer (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\utils\kafka.ts:14:20)
+    at BrokerInit (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\app.ts:20:22)
+    at AppInit (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\app.ts:49:3)
+    at startServer (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\server.ts:18:22)
+2025-09-07T18:25:12.395Z info: Server started at PORT: 4003
+2025-09-07T18:25:22.405Z info: Retrying Kafka initialization...
+2025-09-07T18:25:22.406Z info: Waiting for Kafka to be ready...
+2025-09-07T18:25:27.440Z info: Successfully created topics
+2025-09-07T18:25:30.498Z info: Successfully subscribed to user events
+2025-09-07T18:25:30.499Z warn: Producer already connected!
+2025-09-07T18:25:30.552Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"2","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-07T18:25:30.553Z info: Test event published successfully
+2025-09-07T18:25:30.562Z info: Received message:
+2025-09-07T18:25:30.562Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:25:30.587Z info: Received message:
+2025-09-07T18:25:30.588Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:25:30.597Z info: Received message:
+2025-09-07T18:25:30.597Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:28:42.121Z info: Received message:
+2025-09-07T18:28:42.121Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:30:45.553Z info: Received message:
+2025-09-07T18:30:45.554Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:32:40.769Z info: Received message:
+2025-09-07T18:32:40.769Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:34:03.994Z info: Received message:
+2025-09-07T18:34:03.994Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:34:48.791Z info: Received message:
+2025-09-07T18:34:48.792Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:35:48.907Z info: Received message:
+2025-09-07T18:35:48.907Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:44:01.838Z error: Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)

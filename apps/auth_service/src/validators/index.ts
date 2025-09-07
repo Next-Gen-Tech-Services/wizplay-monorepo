@@ -20,3 +20,7 @@ export const emailPassValidator = () => {
     body("password").trim().exists().withMessage("invalid credentials"),
   ];
 };
+
+export const emailValidator = () => {
+  return [body("email").trim().isEmail().withMessage("invalid email")];
+};

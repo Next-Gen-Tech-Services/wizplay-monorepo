@@ -1,18 +1,27 @@
 import {
+  BadRequestError,
+  encryptPassword,
   generateToken,
   logger,
+  ServerError,
   UnAuthorizError,
   validatePassword,
 } from "@repo/common";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
+import Redis from "../configs/redis.config";
 import ServerConfigs from "../configs/server.config";
 import AuthRepository from "../repositories/auth.repository";
+import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
 
 @autoInjectable()
 export default class Service {
-  constructor(private readonly userRepository: AuthRepository) {}
+  private redis: any;
+
+  constructor(private readonly userRepository: AuthRepository) {
+    this.redis = Redis;
+  }
 
   public async fetchTestData() {
     const result = await this.userRepository.getTestData();
@@ -130,5 +139,27 @@ export default class Service {
       },
       message: "admin login successfull",
     };
+  }
+
+  public async sendForgerPassLink(email: string): Promise<any> {
+    try {
+      const user = await this.userRepository.userExistWithEmail(email);
+      if (!user || !user.email) {
+        throw new BadRequestError("Invalid credentials");
+      }
+
+      const resetToken = encryptPassword(user.email).toString();
+      const setCache = await this.redis.setter(user.email, resetToken);
+      logger.info(`[auth-service] Adding reset token: ${setCache}`);
+
+      const resetLink = `${ServerConfigs.CLIENT_HOST}/reset-password?token=${resetToken}`;
+      sendResetLinkMail(user.email, resetLink);
+      return {
+        data: true,
+        message: "Reset link sent successfully",
+      };
+    } catch (error: any) {
+      throw new ServerError(error?.message);
+    }
   }
 }

@@ -897,3 +897,36 @@
 2025-09-07T14:19:16.825Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-09-07T14:32:02.067Z info: Received message:
 2025-09-07T14:32:02.068Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:25:02.631Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "user_db" 
+2025-09-07T18:25:02.870Z info: Redis client is ready to use
+2025-09-07T18:25:07.460Z info: Rabbit client is connected
+2025-09-07T18:25:07.462Z info: Waiting for Kafka to be ready...
+2025-09-07T18:25:12.560Z info: Created Topics: user_signup, user_login, user_send_otp
+2025-09-07T18:25:12.573Z info: Successfully created topics
+2025-09-07T18:25:17.676Z info: Successfully subscribed to user events
+2025-09-07T18:25:17.677Z warn: Producer already connected!
+2025-09-07T18:25:17.728Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"0","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-07T18:25:17.729Z info: Test event published successfully
+2025-09-07T18:25:17.733Z info: Server started at PORT: 4001
+2025-09-07T18:25:17.798Z info: Received message:
+2025-09-07T18:25:17.798Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:25:18.348Z info: Received message:
+2025-09-07T18:25:18.348Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:25:30.536Z info: Received message:
+2025-09-07T18:25:30.537Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:28:42.120Z info: Received message:
+2025-09-07T18:28:42.121Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:30:45.552Z info: Received message:
+2025-09-07T18:30:45.553Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:32:40.769Z info: Received message:
+2025-09-07T18:32:40.769Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:34:03.997Z info: Received message:
+2025-09-07T18:34:03.998Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:34:48.793Z info: Received message:
+2025-09-07T18:34:48.794Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:35:48.908Z info: Received message:
+2025-09-07T18:35:48.908Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T18:44:01.837Z error: Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T18:44:01.871Z error: Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)

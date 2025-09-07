@@ -23,6 +23,11 @@ class ServerConfigs {
   static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
   static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
+  static SMPT_USER: string = process.env.SMPT_USER as string;
+  static SMPT_PASS: string = process.env.SMPT_PASS as string;
+  static SMTP_HOST: string = process.env.SMTP_HOST as string;
+  static SMPT_PORT: string = process.env.SMPT_PORT as string;
+  static CLIENT_HOST: string = process.env.CLIENT_HOST as string;
   private constructor() {}
 }
 

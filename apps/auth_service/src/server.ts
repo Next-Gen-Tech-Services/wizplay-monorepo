@@ -3,14 +3,13 @@ import { logger } from "@repo/common";
 import AppInit from "./app";
 import { connectDatabase } from "./configs/database.config";
 import rabbitmqInstance from "./configs/rabbitmq.config";
-import Redis, { IRedis } from "./configs/redis.config";
+import redis from "./configs/redis.config";
 import ServerConfigs from "./configs/server.config";
 import { shutDown } from "./utils/shutdown";
 
 async function startServer() {
   await connectDatabase();
 
-  const redis: IRedis = new Redis();
   await redis.connectClient();
 
   await rabbitmqInstance.connectClient();

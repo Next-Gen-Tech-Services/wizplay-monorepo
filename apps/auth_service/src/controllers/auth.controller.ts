@@ -77,4 +77,18 @@ export default class AuthController {
       timestamp: new Date().toISOString(),
     });
   }
+
+  public async forgetPassword(req: Request, res: Response) {
+    const { email } = req.body;
+
+    const result = await this.authService.sendForgerPassLink(email);
+
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      data: result.data,
+      message: result.message,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
 }

@@ -227,3 +227,6 @@
     at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
     at listOnTimeout (node:internal/timers:608:17)
     at processTimers (node:internal/timers:543:7)
+2025-09-07T18:25:02.631Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "user_db" 
+2025-09-07T18:44:01.837Z error: Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)

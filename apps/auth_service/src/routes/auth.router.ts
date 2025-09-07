@@ -4,7 +4,11 @@ import { body } from "express-validator";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import AuthController from "../controllers/auth.controller";
-import { emailPassValidator, phoneValidator } from "../validators";
+import {
+  emailPassValidator,
+  emailValidator,
+  phoneValidator,
+} from "../validators";
 
 const router = Router();
 const controller: AuthController = container.resolve(AuthController);
@@ -65,6 +69,18 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const result = await controller.loginWithEmailPass(req, res);
+    return result;
+  }
+);
+
+// FORGET PASSWORD ROUTE
+
+router.post(
+  "/auth/forget",
+  emailValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const result = await controller.forgetPassword(req, res);
     return result;
   }
 );

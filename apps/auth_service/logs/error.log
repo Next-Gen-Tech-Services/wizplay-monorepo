@@ -1249,3 +1249,69 @@
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
 2025-09-07T13:49:33.368Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:29:25.845Z error: Error: Connection timeout
+    at Socket.onTimeout (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\@redis+client@5.8.2\node_modules\@redis\client\lib\client\socket.ts:246:40)
+    at Object.onceWrapper (node:events:622:28)
+    at Socket.emit (node:events:508:28)
+    at Socket._onTimeout (node:net:604:8)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T18:44:01.896Z error: Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T18:44:23.400Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:23.571Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:23.736Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:23.978Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:24.543Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:28.689Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:28.847Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:29.132Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:29.445Z error: Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-09-07T18:44:47.664Z error: Error: Connection timeout
+    at Socket.onTimeout (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\@redis+client@5.8.2\node_modules\@redis\client\lib\client\socket.ts:246:40)
+    at Object.onceWrapper (node:events:622:28)
+    at Socket.emit (node:events:508:28)
+    at Socket._onTimeout (node:net:604:8)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T18:44:52.838Z error: Error: Connection timeout
+    at Socket.onTimeout (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\@redis+client@5.8.2\node_modules\@redis\client\lib\client\socket.ts:246:40)
+    at Object.onceWrapper (node:events:622:28)
+    at Socket.emit (node:events:508:28)
+    at Socket._onTimeout (node:net:604:8)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T18:44:58.072Z error: Error: Connection timeout
+    at Socket.onTimeout (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\@redis+client@5.8.2\node_modules\@redis\client\lib\client\socket.ts:246:40)
+    at Object.onceWrapper (node:events:622:28)
+    at Socket.emit (node:events:508:28)
+    at Socket._onTimeout (node:net:604:8)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T18:45:20.842Z error: Error: Connection timeout
+    at Socket.onTimeout (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\@redis+client@5.8.2\node_modules\@redis\client\lib\client\socket.ts:246:40)
+    at Object.onceWrapper (node:events:622:28)
+    at Socket.emit (node:events:508:28)
+    at Socket._onTimeout (node:net:604:8)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T18:45:25.922Z error: Error: Connection timeout
+    at Socket.onTimeout (M:\Programming\NGTS\wizplay-monorepo\node_modules\.pnpm\@redis+client@5.8.2\node_modules\@redis\client\lib\client\socket.ts:246:40)
+    at Object.onceWrapper (node:events:622:28)
+    at Socket.emit (node:events:508:28)
+    at Socket._onTimeout (node:net:604:8)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T19:43:38.891Z error: Invalid credentials | Req-ID:f8d2ffa6-ac5e-4e87-b1a5-15ac35f7bbe7 | URL:/api/v1/auth/forget
+2025-09-07T19:50:15.657Z error: The client is closed
+2025-09-07T19:57:29.901Z error: The client is closed
+2025-09-07T19:59:13.049Z error: [redis-client]The client is closed
