@@ -215,3 +215,15 @@
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
 2025-09-02T08:00:05.539Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:23:17.164Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:32:15.129Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:41:19.538Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:45:48.597Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)

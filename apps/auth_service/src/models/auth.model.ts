@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional, Sequelize, UUIDV4 } from "sequelize";
+import { DataTypes, Model, Op, Optional, Sequelize, UUIDV4 } from "sequelize";
 import { IAuthAtters } from "../dtos/auth.dto";
 
 interface AuthCreationAttributes
@@ -9,6 +9,7 @@ interface AuthCreationAttributes
     | "updatedAt"
     | "onboarded"
     | "otpCode"
+    | "password"
     | "lastLoginAt"
     | "phoneNumber"
     | "email"
@@ -23,7 +24,9 @@ export class Auth
   public userId!: string;
   public email!: string | null;
   public phoneNumber!: string | null;
-  public provider!: "local" | "google" | "apple";
+  public provider!: "local" | "google" | "apple" | "email";
+  public type!: "user" | "admin";
+  public password?: string | null;
   public otpCode!: string | null;
   public otpExpiresAt!: Date | null;
   public lastLoginAt!: Date | null;
@@ -48,19 +51,22 @@ export default function (sequelize: Sequelize) {
       email: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
         defaultValue: null,
       },
       phoneNumber: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
         defaultValue: null,
       },
       provider: {
-        type: DataTypes.ENUM("local", "google", "apple"),
+        type: DataTypes.ENUM("local", "google", "apple", "email"),
         allowNull: false,
         defaultValue: "local",
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
       },
       otpCode: {
         type: DataTypes.STRING,
@@ -77,12 +83,42 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
         defaultValue: false,
       },
+      otpExpiresAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null,
+      },
+      type: {
+        type: DataTypes.ENUM("user", "admin"),
+        allowNull: false,
+        defaultValue: "user",
+      },
     },
     {
       sequelize,
       modelName: "Auth",
       timestamps: true,
       underscored: true,
+      indexes: [
+        {
+          unique: true,
+          fields: ["email"],
+          where: {
+            email: {
+              [Op.ne]: null,
+            },
+          },
+        },
+        {
+          unique: true,
+          fields: ["phone_number"], // Note: underscored naming
+          where: {
+            phone_number: {
+              [Op.ne]: null,
+            },
+          },
+        },
+      ],
     }
   );
 

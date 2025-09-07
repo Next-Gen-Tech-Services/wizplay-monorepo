@@ -1,6 +1,12 @@
-import { logger } from "@repo/common";
+import {
+  generateToken,
+  logger,
+  UnAuthorizError,
+  validatePassword,
+} from "@repo/common";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
+import ServerConfigs from "../configs/server.config";
 import AuthRepository from "../repositories/auth.repository";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
 
@@ -90,6 +96,39 @@ export default class Service {
       userId: verified.userId,
       userStatus,
       onboarded: !!verified.onboarded,
+    };
+  }
+
+  public async loginWithPass(email: string, password: string): Promise<any> {
+    const user = await this.userRepository.userExistWithEmail(email);
+
+    if (!user) {
+      throw new UnAuthorizError();
+    }
+
+    const userPass = user?.password;
+    const isValidPassword = validatePassword(password, userPass);
+
+    if (!isValidPassword) {
+      throw new UnAuthorizError();
+    }
+
+    const token = generateToken(
+      {
+        auth_id: user.id,
+        email: user.email,
+      },
+      ServerConfigs.TOKEN_SECRET
+    );
+
+    user.password = null;
+
+    return {
+      data: {
+        token: token,
+        user: user,
+      },
+      message: "admin login successfull",
     };
   }
 }

@@ -7,6 +7,7 @@ dotenv.config({
 class ServerConfigs {
   static NODE_ENV: string = process.env.NODE_ENV as string;
   static APP_PORT: string = process.env.APP_PORT as string;
+  static TOKEN_SECRET: string = process.env.TOKEN_SECRET as string;
   static LOG_LEVEL: string = process.env.LOG_LEVEL as string;
   static API_VERSION: string = process.env.API_VERSION as string;
   static DATABASE_NAME: string = process.env.DATABASE_NAME as string;
@@ -22,7 +23,7 @@ class ServerConfigs {
   static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
   static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
-  private constructor() { }
+  private constructor() {}
 }
 
 export default ServerConfigs;

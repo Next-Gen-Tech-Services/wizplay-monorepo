@@ -776,3 +776,124 @@
 2025-09-02T07:59:27.596Z info: Redis client is ready to use
 2025-09-02T08:00:05.539Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T11:29:45.685Z info: Database connection established ✅
+2025-09-07T11:29:46.299Z info: Database connection established ✅
+2025-09-07T11:29:46.358Z info: Redis client is ready to use
+2025-09-07T11:29:48.646Z info: Rabbit client is connected
+2025-09-07T11:29:48.652Z info: Waiting for Kafka to be ready...
+2025-09-07T11:29:53.668Z info: Successfully created topics
+2025-09-07T11:29:56.699Z info: Successfully subscribed to user events
+2025-09-07T11:29:56.699Z warn: Producer already connected!
+2025-09-07T11:29:56.709Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"62","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-07T11:29:56.709Z info: Test event published successfully
+2025-09-07T11:29:56.710Z info: Server started at PORT: 4001
+2025-09-07T11:29:56.714Z info: Received message:
+2025-09-07T11:29:56.714Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:29:56.724Z info: Received message:
+2025-09-07T11:29:56.725Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:29:56.782Z info: Received message:
+2025-09-07T11:29:56.782Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:31:01.957Z info: Received message:
+2025-09-07T11:31:01.958Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:32:47.304Z info: Received message:
+2025-09-07T11:32:47.304Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:33:47.485Z info: Received message:
+2025-09-07T11:33:47.485Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:36:28.000Z info: Received message:
+2025-09-07T11:36:28.001Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T11:38:08.302Z info: Received message:
+2025-09-07T11:38:08.304Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:01:11.606Z info: Received message:
+2025-09-07T12:01:11.607Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:03:23.005Z info: Database connection established ✅
+2025-09-07T12:03:23.215Z info: Redis client is ready to use
+2025-09-07T12:03:25.543Z info: Rabbit client is connected
+2025-09-07T12:03:25.545Z info: Waiting for Kafka to be ready...
+2025-09-07T12:03:30.560Z info: Successfully created topics
+2025-09-07T12:03:52.046Z info: Successfully subscribed to user events
+2025-09-07T12:03:52.047Z warn: Producer already connected!
+2025-09-07T12:03:52.071Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"71","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-07T12:03:52.072Z info: Test event published successfully
+2025-09-07T12:03:52.073Z info: Server started at PORT: 4001
+2025-09-07T12:03:52.090Z info: Received message:
+2025-09-07T12:03:52.090Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:03:52.104Z info: Received message:
+2025-09-07T12:03:52.104Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:03:52.111Z info: Received message:
+2025-09-07T12:03:52.111Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:04:30.751Z info: Database connection established ✅
+2025-09-07T12:04:30.950Z info: Redis client is ready to use
+2025-09-07T12:04:33.228Z info: Rabbit client is connected
+2025-09-07T12:04:33.233Z info: Waiting for Kafka to be ready...
+2025-09-07T12:04:38.258Z info: Successfully created topics
+2025-09-07T12:04:43.805Z info: Database connection established ✅
+2025-09-07T12:04:43.876Z info: Redis client is ready to use
+2025-09-07T12:04:46.245Z info: Rabbit client is connected
+2025-09-07T12:04:46.248Z info: Waiting for Kafka to be ready...
+2025-09-07T12:04:51.309Z info: Successfully created topics
+2025-09-07T12:05:27.255Z info: Successfully subscribed to user events
+2025-09-07T12:05:27.255Z warn: Producer already connected!
+2025-09-07T12:05:27.280Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"73","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-07T12:05:27.280Z info: Test event published successfully
+2025-09-07T12:05:27.285Z info: Server started at PORT: 4001
+2025-09-07T12:05:57.337Z info: Received message:
+2025-09-07T12:05:57.337Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:05:57.363Z info: Received message:
+2025-09-07T12:05:57.363Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:05:57.376Z info: Received message:
+2025-09-07T12:05:57.376Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:12:13.467Z info: Received message:
+2025-09-07T12:12:13.467Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:14:57.852Z info: Received message:
+2025-09-07T12:14:57.852Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:16:12.973Z info: Received message:
+2025-09-07T12:16:12.973Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:18:18.260Z info: Received message:
+2025-09-07T12:18:18.260Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T12:23:17.164Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:23:17.395Z info: Redis client is ready to use
+2025-09-07T12:32:15.129Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:32:15.177Z info: Redis client is ready to use
+2025-09-07T12:41:19.538Z error: Error: read ETIMEDOUT
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-07T12:41:19.800Z info: Redis client is ready to use
+2025-09-07T12:45:48.597Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-07T14:12:26.005Z info: Database connection established ✅
+2025-09-07T14:12:26.633Z info: Redis client is ready to use
+2025-09-07T14:12:30.517Z info: Rabbit client is connected
+2025-09-07T14:12:30.522Z info: Waiting for Kafka to be ready...
+2025-09-07T14:12:35.423Z info: Database connection established ✅
+2025-09-07T14:12:35.625Z info: Redis client is ready to use
+2025-09-07T14:12:39.185Z info: Rabbit client is connected
+2025-09-07T14:12:39.186Z info: Waiting for Kafka to be ready...
+2025-09-07T14:12:44.214Z info: Successfully created topics
+2025-09-07T14:12:47.253Z info: Successfully subscribed to user events
+2025-09-07T14:12:47.253Z warn: Producer already connected!
+2025-09-07T14:12:47.265Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"85","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-07T14:12:47.265Z info: Test event published successfully
+2025-09-07T14:12:47.266Z info: Server started at PORT: 4001
+2025-09-07T14:12:47.279Z info: Received message:
+2025-09-07T14:12:47.279Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:12:47.289Z info: Received message:
+2025-09-07T14:12:47.289Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:12:47.297Z info: Received message:
+2025-09-07T14:12:47.297Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:12:47.305Z info: Received message:
+2025-09-07T14:12:47.305Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:12:47.313Z info: Received message:
+2025-09-07T14:12:47.313Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:12:47.321Z info: Received message:
+2025-09-07T14:12:47.321Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:12:51.004Z info: Received message:
+2025-09-07T14:12:51.004Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:19:16.825Z info: Received message:
+2025-09-07T14:19:16.825Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-07T14:32:02.067Z info: Received message:
+2025-09-07T14:32:02.068Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}

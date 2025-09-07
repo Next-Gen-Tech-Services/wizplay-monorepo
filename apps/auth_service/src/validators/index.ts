@@ -13,3 +13,10 @@ export const phoneValidator = () => {
       .withMessage("invalid phone number"),
   ];
 };
+
+export const emailPassValidator = () => {
+  return [
+    body("email").trim().isEmail().withMessage("invalid credentials"),
+    body("password").trim().exists().withMessage("invalid credentials"),
+  ];
+};

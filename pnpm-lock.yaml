@@ -337,7 +337,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       '@types/jsonwebtoken':
-        specifier: ^9.0.7
+        specifier: ^9.0.10
         version: 9.0.10
       '@types/node':
         specifier: ^24.1.0

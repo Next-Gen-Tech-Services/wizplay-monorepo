@@ -57,6 +57,7 @@ export default class MatchRepository {
     try {
       const result = await this._DB.Auth.create({
         ...data,
+        type: "user",
       });
       if (!result) {
         throw new ServerError("Database Error");
@@ -102,6 +103,21 @@ export default class MatchRepository {
       if (count === 0) {
         throw new ServerError("Update failed");
       }
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
+  public async userExistWithEmail(email: string): Promise<any> {
+    try {
+      const user = await this._DB.Auth.findOne({
+        where: {
+          email: email,
+        },
+      });
+
+      return user;
     } catch (error: any) {
       logger.error(`Database Error: ${error}`);
       throw new ServerError("Database Error");

@@ -4,7 +4,7 @@ import { body } from "express-validator";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import AuthController from "../controllers/auth.controller";
-import { phoneValidator } from "../validators";
+import { emailPassValidator, phoneValidator } from "../validators";
 
 const router = Router();
 const controller: AuthController = container.resolve(AuthController);
@@ -39,6 +39,7 @@ router.post(
   }
 );
 
+//  VERIFY OTP ROUTE
 router.post(
   "/auth/verify-otp",
   [
@@ -54,6 +55,18 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) =>
     controller.verifyOtpController(req, res)
+);
+
+// EMAIL-PASS-LOFIN ROUTE
+
+router.post(
+  "/auth/login",
+  emailPassValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const result = await controller.loginWithEmailPass(req, res);
+    return result;
+  }
 );
 
 export default router;
