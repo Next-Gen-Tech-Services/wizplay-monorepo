@@ -122,5 +122,17 @@ export default function (sequelize: Sequelize) {
     }
   );
 
+  Auth.addHook("beforeValidate", (auth: Auth) => {
+    if (auth.provider === "email" && !auth.email) {
+      throw new Error("Email is required when provider is email");
+    }
+  });
+
+  Auth.addHook("beforeValidate", (auth: Auth) => {
+    if (auth.provider === "email" && !auth.password) {
+      throw new Error("Password is required when provider is email");
+    }
+  });
+
   return Auth;
 }

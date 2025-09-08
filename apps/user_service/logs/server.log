@@ -930,3 +930,61 @@
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
 2025-09-07T18:44:01.871Z error: Error: read ECONNRESET
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T03:44:31.980Z info: Database connection established ✅
+2025-09-08T03:44:32.250Z info: Redis client is ready to use
+2025-09-08T03:44:32.886Z info: Database connection established ✅
+2025-09-08T03:44:32.945Z info: Redis client is ready to use
+2025-09-08T03:44:35.012Z info: Rabbit client is connected
+2025-09-08T03:44:35.016Z info: Waiting for Kafka to be ready...
+2025-09-08T03:44:40.031Z info: Successfully created topics
+2025-09-08T03:44:43.059Z info: Successfully subscribed to user events
+2025-09-08T03:44:43.060Z warn: Producer already connected!
+2025-09-08T03:44:43.075Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"93","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T03:44:43.075Z info: Test event published successfully
+2025-09-08T03:44:43.078Z info: Server started at PORT: 4001
+2025-09-08T03:44:43.090Z info: Received message:
+2025-09-08T03:44:43.090Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T03:44:43.099Z info: Received message:
+2025-09-08T03:44:43.099Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T03:44:43.106Z info: Received message:
+2025-09-08T03:44:43.106Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T03:44:43.114Z info: Received message:
+2025-09-08T03:44:43.114Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T03:44:43.122Z info: Received message:
+2025-09-08T03:44:43.122Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T03:44:43.129Z info: Received message:
+2025-09-08T03:44:43.129Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T03:59:14.899Z info: Received message:
+2025-09-08T03:59:14.901Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:01:40.562Z info: Received message:
+2025-09-08T04:01:40.563Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:02:45.678Z info: Received message:
+2025-09-08T04:02:45.679Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:06:19.777Z info: Received message:
+2025-09-08T04:06:19.777Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:10:10.324Z info: Received message:
+2025-09-08T04:10:10.325Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:11:10.437Z info: Received message:
+2025-09-08T04:11:10.437Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:11:40.532Z info: Received message:
+2025-09-08T04:11:40.533Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:14:50.800Z info: Received message:
+2025-09-08T04:14:50.801Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:16:05.969Z info: Received message:
+2025-09-08T04:16:05.971Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:16:46.112Z info: Received message:
+2025-09-08T04:16:46.112Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:19:51.506Z info: Received message:
+2025-09-08T04:19:51.507Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:20:26.616Z info: Received message:
+2025-09-08T04:20:26.619Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:24:02.469Z info: Received message:
+2025-09-08T04:24:02.470Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:25:52.711Z info: Received message:
+2025-09-08T04:25:52.711Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:26:22.786Z info: Received message:
+2025-09-08T04:26:22.786Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:27:22.850Z info: Received message:
+2025-09-08T04:27:22.851Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T04:27:57.919Z info: Received message:
+2025-09-08T04:27:57.919Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}

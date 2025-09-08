@@ -123,4 +123,23 @@ export default class MatchRepository {
       throw new ServerError("Database Error");
     }
   }
+
+  public async updatePassword(email: string, password: string): Promise<any> {
+    try {
+      const result = await this._DB.Auth.update(
+        {
+          password: password,
+        },
+        {
+          where: {
+            email: email,
+          },
+        }
+      );
+      return result;
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
 }

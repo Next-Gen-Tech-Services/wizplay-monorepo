@@ -8,6 +8,7 @@ import {
   emailPassValidator,
   emailValidator,
   phoneValidator,
+  resetPassValidator,
 } from "../validators";
 
 const router = Router();
@@ -61,8 +62,7 @@ router.post(
     controller.verifyOtpController(req, res)
 );
 
-// EMAIL-PASS-LOFIN ROUTE
-
+// EMAIL-PASS-LOGIN ROUTE
 router.post(
   "/auth/login",
   emailPassValidator(),
@@ -74,13 +74,23 @@ router.post(
 );
 
 // FORGET PASSWORD ROUTE
-
 router.post(
   "/auth/forget",
   emailValidator(),
   validateRequest,
   async (req: Request, res: Response) => {
     const result = await controller.forgetPassword(req, res);
+    return result;
+  }
+);
+
+// RESET PASSWORD ROUTE
+router.patch(
+  "/auth/reset",
+  resetPassValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const result = await controller.resetPassword(req, res);
     return result;
   }
 );

@@ -297,3 +297,5 @@
     at startServer (M:\Programming\NGTS\wizplay-monorepo\apps\match_service\src\server.ts:18:22)
 2025-09-07T18:44:01.838Z error: Error: read ECONNRESET
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T03:44:31.944Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T03:44:32.851Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 

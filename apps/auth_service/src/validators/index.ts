@@ -24,3 +24,11 @@ export const emailPassValidator = () => {
 export const emailValidator = () => {
   return [body("email").trim().isEmail().withMessage("invalid email")];
 };
+
+export const resetPassValidator = () => {
+  return [
+    body("email").trim().isEmail().withMessage("invalid email"),
+    body("password").trim().exists().withMessage("invalid password"),
+    body("token").trim().exists().withMessage("invalid reset token"),
+  ];
+};

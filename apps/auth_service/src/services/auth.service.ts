@@ -9,7 +9,7 @@ import {
 } from "@repo/common";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
-import Redis from "../configs/redis.config";
+import Redis, { IRedis } from "../configs/redis.config";
 import ServerConfigs from "../configs/server.config";
 import AuthRepository from "../repositories/auth.repository";
 import { sendResetLinkMail } from "../utils/smtp";
@@ -17,7 +17,7 @@ import { generateOTPUtil, generateUUID } from "../utils/utils";
 
 @autoInjectable()
 export default class Service {
-  private redis: any;
+  private redis: IRedis;
 
   constructor(private readonly userRepository: AuthRepository) {
     this.redis = Redis;
@@ -157,6 +157,40 @@ export default class Service {
       return {
         data: true,
         message: "Reset link sent successfully",
+      };
+    } catch (error: any) {
+      throw new ServerError(error?.message);
+    }
+  }
+
+  public async resetPassword(
+    email: string,
+    password: string,
+    token: string
+  ): Promise<any> {
+    try {
+      const user = await this.userRepository.userExistWithEmail(email);
+      if (!user || !user.email) {
+        throw new BadRequestError("Invalid credentials");
+      }
+
+      const cachedToken = await this.redis.getter(user.email);
+      logger.info(`Cached token : ${cachedToken}`);
+      if (!cachedToken || token !== cachedToken) {
+        throw new BadRequestError("Invalid reset request");
+      }
+
+      const encryptedPassword = encryptPassword(password);
+      const updatePassword = this.userRepository.updatePassword(
+        user.email,
+        encryptedPassword
+      );
+
+      logger.info(`Password updated: ${updatePassword}`);
+
+      return {
+        data: true,
+        message: "password updated successfully. please login!",
       };
     } catch (error: any) {
       throw new ServerError(error?.message);
