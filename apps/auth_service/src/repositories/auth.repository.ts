@@ -1,14 +1,14 @@
+import { logger, ServerError } from "@repo/common";
+import { DB, IDatabase } from "../configs/database.config";
 import {
   IClearOtpPayload,
   ICreatePhoneAuthUser,
   IUpdateOTP,
   IVerifyOtpPayload,
-} from "@/dtos/authRepo.dto";
-import { Auth } from "@/models/auth.model";
-import { logger, ServerError } from "@repo/common";
-import { DB, IDatabase } from "../configs/database.config";
+} from "../dtos/authRepo.dto";
+import { Auth } from "../models/auth.model";
 
-export default class MatchRepository {
+export default class AuthRepository {
   private _DB: IDatabase = DB;
   constructor() {
     this._DB = DB;
@@ -74,13 +74,13 @@ export default class MatchRepository {
     otpCode,
   }: IVerifyOtpPayload): Promise<Auth | null> {
     try {
-      const record = await this._DB.Auth.findOne({
+      const user = await this._DB.Auth.findOne({
         where: {
           phoneNumber,
           otpCode,
         },
       });
-      return record ? (record.toJSON() as Auth) : null;
+      return user ? (user.toJSON() as Auth) : null;
     } catch (error: any) {
       logger.error(`Database Error: ${error}`);
       throw new ServerError("Database Error");

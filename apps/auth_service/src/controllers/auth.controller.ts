@@ -44,12 +44,8 @@ export default class AuthController {
       const result = await this.authService.verifyOtp(phoneNumber, otp);
       return res.status(STATUS_CODE.SUCCESS).json({
         success: true,
-        data: {
-          userId: result.userId,
-          userStatus: result.userStatus, // "new" | "existing"
-          onboarded: result.onboarded,
-        },
-        message: "otp verified",
+        data: result.data,
+        message: result.message,
         errors: null,
         timestamp: new Date().toISOString(),
       });

@@ -2167,3 +2167,234 @@
 2025-09-08T04:27:22.851Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-09-08T04:27:57.920Z info: Received message:
 2025-09-08T04:27:57.920Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:01:58.674Z info: Received message:
+2025-09-08T06:01:58.675Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:02:33.779Z info: Received message:
+2025-09-08T06:02:33.779Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:03:23.942Z info: Received message:
+2025-09-08T06:03:23.943Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:04:54.103Z info: Received message:
+2025-09-08T06:04:54.104Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:05:54.206Z info: Received message:
+2025-09-08T06:05:54.207Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:06:34.295Z info: Received message:
+2025-09-08T06:06:34.295Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:08:24.410Z info: Received message:
+2025-09-08T06:08:24.410Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:09:49.811Z info: Received message:
+2025-09-08T06:09:49.811Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:11:05.004Z info: Received message:
+2025-09-08T06:11:05.004Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:14:26.499Z error [logform/combine.js:20]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:14:26.869Z info [logform/combine.js:20]: Redis client is ready to use
+2025-09-08T06:14:29.277Z info [logform/combine.js:20]: Rabbit client is connected
+2025-09-08T06:14:29.281Z info [logform/combine.js:20]: Waiting for Kafka to be ready...
+2025-09-08T06:14:34.307Z info [logform/combine.js:20]: Successfully created topics
+2025-09-08T06:14:38.571Z error [logform/combine.js:20]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:14:38.649Z info [logform/combine.js:20]: Redis client is ready to use
+2025-09-08T06:14:43.666Z info [logform/combine.js:20]: Rabbit client is connected
+2025-09-08T06:14:43.669Z info [logform/combine.js:20]: Waiting for Kafka to be ready...
+2025-09-08T06:14:48.708Z info [logform/combine.js:20]: Successfully created topics
+2025-09-08T06:14:55.460Z info [logform/combine.js:20]: Successfully subscribed to user events
+2025-09-08T06:14:55.463Z warn [logform/combine.js:20]: Producer already connected!
+2025-09-08T06:14:55.502Z info [logform/combine.js:20]: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"121","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:14:55.503Z info [logform/combine.js:20]: Test event published successfully
+2025-09-08T06:14:55.506Z info [logform/combine.js:20]: Server started at PORT: 4003
+2025-09-08T06:14:55.523Z info [logform/combine.js:20]: Received message:
+2025-09-08T06:14:55.524Z info [logform/combine.js:20]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:15:25.717Z info [logform/combine.js:20]: Received message:
+2025-09-08T06:15:25.718Z info [logform/combine.js:20]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:15:25.735Z info [logform/combine.js:20]: Received message:
+2025-09-08T06:15:25.736Z info [logform/combine.js:20]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:16:35.877Z error []: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:16:36.214Z info []: Redis client is ready to use
+2025-09-08T06:16:37.888Z error []: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:16:37.958Z info []: Redis client is ready to use
+2025-09-08T06:16:40.094Z info []: Rabbit client is connected
+2025-09-08T06:16:40.098Z info []: Waiting for Kafka to be ready...
+2025-09-08T06:16:45.115Z info []: Successfully created topics
+2025-09-08T06:17:00.916Z info []: Successfully subscribed to user events
+2025-09-08T06:17:00.917Z warn []: Producer already connected!
+2025-09-08T06:17:00.938Z info []: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"124","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:17:00.938Z info []: Test event published successfully
+2025-09-08T06:17:00.940Z info []: Server started at PORT: 4003
+2025-09-08T06:17:00.961Z info []: Received message:
+2025-09-08T06:17:00.962Z info []: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:17:00.978Z info []: Received message:
+2025-09-08T06:17:00.978Z info []: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:17:30.946Z info []: Received message:
+2025-09-08T06:17:30.947Z info []: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:17:36.399Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:17:36.701Z info [unknown:0]: Redis client is ready to use
+2025-09-08T06:17:39.134Z info [unknown:0]: Rabbit client is connected
+2025-09-08T06:17:39.138Z info [unknown:0]: Waiting for Kafka to be ready...
+2025-09-08T06:17:44.176Z info [unknown:0]: Successfully created topics
+2025-09-08T06:18:01.006Z info [unknown:0]: Successfully subscribed to user events
+2025-09-08T06:18:01.007Z warn [unknown:0]: Producer already connected!
+2025-09-08T06:18:01.025Z info [unknown:0]: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"127","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:18:01.025Z info [unknown:0]: Test event published successfully
+2025-09-08T06:18:01.027Z info [unknown:0]: Server started at PORT: 4003
+2025-09-08T06:18:01.047Z info [unknown:0]: Received message:
+2025-09-08T06:18:01.047Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:18:01.059Z info [unknown:0]: Received message:
+2025-09-08T06:18:01.060Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:18:01.068Z info [unknown:0]: Received message:
+2025-09-08T06:18:01.069Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:18:19.925Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:18:20.201Z info [unknown:0]: Redis client is ready to use
+2025-09-08T06:18:22.529Z info [unknown:0]: Rabbit client is connected
+2025-09-08T06:18:22.541Z info [unknown:0]: Waiting for Kafka to be ready...
+2025-09-08T06:18:27.565Z info [unknown:0]: Successfully created topics
+2025-09-08T06:18:36.116Z info [unknown:0]: Successfully subscribed to user events
+2025-09-08T06:18:36.117Z warn [unknown:0]: Producer already connected!
+2025-09-08T06:18:36.134Z info [unknown:0]: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"130","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:18:36.134Z info [unknown:0]: Test event published successfully
+2025-09-08T06:18:36.136Z info [unknown:0]: Server started at PORT: 4003
+2025-09-08T06:18:36.149Z info [unknown:0]: Received message:
+2025-09-08T06:18:36.150Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:18:36.163Z info [unknown:0]: Received message:
+2025-09-08T06:18:36.163Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:18:36.172Z info [unknown:0]: Received message:
+2025-09-08T06:18:36.172Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:19:43.301Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:19:43.598Z info [unknown:0]: Redis client is ready to use
+2025-09-08T06:19:47.130Z info [unknown:0]: Rabbit client is connected
+2025-09-08T06:19:47.135Z info [unknown:0]: Waiting for Kafka to be ready...
+2025-09-08T06:19:52.157Z info [unknown:0]: Successfully created topics
+2025-09-08T06:20:11.359Z info [unknown:0]: Successfully subscribed to user events
+2025-09-08T06:20:11.364Z warn [unknown:0]: Producer already connected!
+2025-09-08T06:20:11.395Z info [unknown:0]: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"133","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:20:11.396Z info [unknown:0]: Test event published successfully
+2025-09-08T06:20:11.397Z info [unknown:0]: Server started at PORT: 4003
+2025-09-08T06:20:11.406Z info [unknown:0]: Received message:
+2025-09-08T06:20:11.406Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:20:11.420Z info [unknown:0]: Received message:
+2025-09-08T06:20:11.420Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:20:11.429Z info [unknown:0]: Received message:
+2025-09-08T06:20:11.429Z info [unknown:0]: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:20:44.543Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:20:44.822Z info [unknown:0]: Redis client is ready to use
+2025-09-08T06:20:48.010Z info [unknown:0]: Rabbit client is connected
+2025-09-08T06:20:48.012Z info [unknown:0]: Waiting for Kafka to be ready...
+2025-09-08T06:20:53.044Z info [unknown:0]: Successfully created topics
+2025-09-08T06:20:55.961Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:20:56.025Z info: Redis client is ready to use
+2025-09-08T06:20:58.036Z info: Rabbit client is connected
+2025-09-08T06:20:58.041Z info: Waiting for Kafka to be ready...
+2025-09-08T06:21:03.089Z info: Successfully created topics
+2025-09-08T06:21:41.822Z info: Successfully subscribed to user events
+2025-09-08T06:21:41.823Z warn: Producer already connected!
+2025-09-08T06:21:41.854Z info: Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"137","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:21:41.854Z info: Test event published successfully
+2025-09-08T06:21:41.856Z info: Server started at PORT: 4003
+2025-09-08T06:21:41.862Z info: Received message:
+2025-09-08T06:21:41.862Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:21:41.870Z info: Received message:
+2025-09-08T06:21:41.870Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:21:41.912Z info: Received message:
+2025-09-08T06:21:41.912Z info: Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:23:10.112Z error: [packages/common/dist/utils/globalLogger.js:14] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:23:10.412Z info: [packages/common/dist/utils/globalLogger.js:14] Redis client is ready to use
+2025-09-08T06:23:12.508Z info: [packages/common/dist/utils/globalLogger.js:14] Rabbit client is connected
+2025-09-08T06:23:12.513Z info: [packages/common/dist/utils/globalLogger.js:14] Waiting for Kafka to be ready...
+2025-09-08T06:23:17.567Z info: [packages/common/dist/utils/globalLogger.js:14] Successfully created topics
+2025-09-08T06:23:35.741Z error: [packages/common/dist/utils/globalLogger.js:14] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:23:36.001Z info: [packages/common/dist/utils/globalLogger.js:14] Redis client is ready to use
+2025-09-08T06:23:38.172Z info: [packages/common/dist/utils/globalLogger.js:14] Rabbit client is connected
+2025-09-08T06:23:38.177Z info: [packages/common/dist/utils/globalLogger.js:14] Waiting for Kafka to be ready...
+2025-09-08T06:23:43.212Z info: [packages/common/dist/utils/globalLogger.js:14] Successfully created topics
+2025-09-08T06:24:07.155Z info: [packages/common/dist/utils/globalLogger.js:14] Successfully subscribed to user events
+2025-09-08T06:24:07.156Z warn: [packages/common/dist/utils/globalLogger.js:14] Producer already connected!
+2025-09-08T06:24:07.180Z info: [packages/common/dist/utils/globalLogger.js:14] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"140","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:24:07.181Z info: [packages/common/dist/utils/globalLogger.js:14] Test event published successfully
+2025-09-08T06:24:07.183Z info: [packages/common/dist/utils/globalLogger.js:14] Server started at PORT: 4003
+2025-09-08T06:24:07.200Z info: [packages/common/dist/utils/globalLogger.js:14] Received message:
+2025-09-08T06:24:07.201Z info: [packages/common/dist/utils/globalLogger.js:14] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:24:07.211Z info: [packages/common/dist/utils/globalLogger.js:14] Received message:
+2025-09-08T06:24:07.211Z info: [packages/common/dist/utils/globalLogger.js:14] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:24:07.221Z info: [packages/common/dist/utils/globalLogger.js:14] Received message:
+2025-09-08T06:24:07.221Z info: [packages/common/dist/utils/globalLogger.js:14] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:26:25.328Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:26:25.613Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T06:26:28.582Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T06:26:28.585Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T06:26:33.616Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-08T06:26:36.658Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T06:26:36.659Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T06:26:36.675Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"144","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:26:36.675Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-08T06:26:36.678Z info: [apps/match_service/src/server.ts:20] Server started at PORT: 4003
+2025-09-08T06:26:36.693Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:26:36.693Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:26:36.703Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:26:36.703Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:26:36.711Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:26:36.711Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:29:22.293Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:29:22.294Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:32:18.235Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:32:18.236Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:46:13.332Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T06:46:13.611Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T06:50:48.825Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T06:50:48.870Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T06:53:37.323Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-08T06:56:26.049Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:56:26.374Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T06:56:26.882Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:56:26.954Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T06:56:29.070Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T06:56:29.073Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T06:56:34.094Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-08T06:56:37.143Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T06:56:37.145Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T06:56:37.173Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"147","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:56:37.173Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-08T06:56:37.176Z info: [apps/match_service/src/server.ts:20] Server started at PORT: 4003
+2025-09-08T06:56:37.190Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:56:37.191Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:56:37.699Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:56:37.705Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:56:37.984Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:56:37.984Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:57:19.186Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:57:19.531Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T06:57:21.737Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T06:57:21.740Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T06:57:26.768Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-08T06:57:48.158Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T06:57:48.162Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T06:57:48.208Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"152","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T06:57:48.208Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-08T06:57:48.210Z info: [apps/match_service/src/server.ts:20] Server started at PORT: 4003
+2025-09-08T06:57:48.229Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:57:48.229Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:57:48.242Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:57:48.243Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T06:57:48.251Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T06:57:48.252Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:03:34.001Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:03:34.001Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:14:09.062Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:14:09.062Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authID":"2a461534-e78d-4260-8cec-1b13fe3f9d6b"}
+2025-09-08T07:38:42.919Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:38:42.922Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:40:03.466Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:40:03.468Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:40:53.605Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:40:53.606Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:43:08.968Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:43:08.970Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:44:09.138Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T07:44:09.139Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T07:58:04.557Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T07:58:04.814Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T08:02:44.298Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T08:02:44.348Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T08:07:18.874Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)

@@ -230,3 +230,43 @@
 2025-09-07T18:25:02.631Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "user_db" 
 2025-09-07T18:44:01.837Z error: Error: read ECONNRESET
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T06:46:13.333Z error: [apps/user_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T06:50:48.223Z error: [apps/user_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T06:55:46.755Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T07:58:08.935Z error: [apps/user_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T08:02:43.441Z error: [apps/user_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T08:07:18.562Z error: [apps/user_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T08:07:30.562Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-08T09:40:21.244Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:24:32)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:49:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/user_service/src/server.ts:17:22)
+2025-09-08T09:50:44.171Z error: TypeError: Cannot read properties of undefined (reading 'USER_SIGNUP')
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:24:39)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:45:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/user_service/src/server.ts:17:22)
+2025-09-08T09:51:02.226Z error: TypeError: Cannot read properties of undefined (reading 'USER_SIGNUP')
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:24:39)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:33:7)
+2025-09-08T09:51:20.310Z error: TypeError: Cannot read properties of undefined (reading 'USER_SIGNUP')
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:24:39)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:33:7)
+2025-09-08T09:51:38.411Z error: TypeError: Cannot read properties of undefined (reading 'USER_SIGNUP')
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:24:39)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:33:7)
+2025-09-08T09:51:59.716Z error: TypeError: Cannot read properties of undefined (reading 'USER_SIGNUP')
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:24:39)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/user_service/src/app.ts:45:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/user_service/src/server.ts:17:22)

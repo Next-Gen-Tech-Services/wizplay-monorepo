@@ -11,7 +11,7 @@ class Rabbitmq implements IRabbitmq {
   public channel: any;
   private static instance: Rabbitmq;
 
-  constructor() { }
+  constructor() {}
 
   static getInstance(): Rabbitmq {
     if (!Rabbitmq.instance) {

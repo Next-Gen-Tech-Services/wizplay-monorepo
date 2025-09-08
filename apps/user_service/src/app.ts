@@ -3,27 +3,30 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import UserRouter from "./routes/user.router";
-import { UserEvents } from "./utils/events/user.events";
-import { connectProducer, publishUserEvent, subscribeToUserEvents } from "./utils/kafka";
+import { KAFKA_EVENTS } from "./types";
+import userEventHandler from "./utils/events/user.events";
+import { connectProducer, publishUserEvent } from "./utils/kafka";
 
 const BrokerInit = async () => {
   try {
     // Wait for Kafka to be ready
     logger.info("Waiting for Kafka to be ready...");
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     // create producer to create topics
-    const producer = await connectProducer();
+    await connectProducer();
     logger.info("Successfully created topics");
 
     // start consuming events
-    await subscribeToUserEvents();
+    await userEventHandler.handle();
     logger.info("Successfully subscribed to user events");
 
     // Example publishing event (maybe move this to after server starts)
-    await publishUserEvent(UserEvents.USER_SIGNUP, { userId: "123", email: "abc@test.com" });
+    await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
+      userId: "123",
+      email: "abc@test.com",
+    });
     logger.info("Test event published successfully");
-
   } catch (error) {
     logger.error("Failed to initialize Kafka broker:", error);
     setTimeout(async () => {
@@ -31,7 +34,7 @@ const BrokerInit = async () => {
       await BrokerInit();
     }, 10000);
   }
-}
+};
 
 const AppInit = async () => {
   const expressApp: Express = express();
@@ -42,7 +45,7 @@ const AppInit = async () => {
 
   await BrokerInit();
 
-  expressApp.use(ServerConfigs.API_VERSION, UserRouter);
+  expressApp.use("/api/v1", UserRouter);
   expressApp.get(
     `/${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {
@@ -50,14 +53,11 @@ const AppInit = async () => {
       return res.status(200).json({
         message: "server running...",
       });
-    },
+    }
   );
 
   expressApp.use(ErrorMiddleware.handleError);
   return expressApp;
-}
+};
 
 export default AppInit;
-
-
-

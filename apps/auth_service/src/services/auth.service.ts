@@ -12,6 +12,8 @@ import { autoInjectable } from "tsyringe";
 import Redis, { IRedis } from "../configs/redis.config";
 import ServerConfigs from "../configs/server.config";
 import AuthRepository from "../repositories/auth.repository";
+import { UserEvents } from "../utils/events/user.events";
+import { publishUserEvent } from "../utils/kafka";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
 
@@ -31,15 +33,16 @@ export default class Service {
   public async generateOtp(phoneNumber: string): Promise<any> {
     const userExist =
       await this.userRepository.userWithPhoneExistRepo(phoneNumber);
+
     const otpCode: string = generateOTPUtil();
     logger.warn(`OTP Code : ${otpCode}`);
+
     if (userExist) {
       const updateOtp = await this.userRepository.updateRecentOtp({
         phoneNumber,
         otpCode,
       });
       logger.warn(`Update OTP: ${updateOtp}`);
-      // SEND OTP HERE
 
       return {
         data: {
@@ -60,6 +63,7 @@ export default class Service {
         otpCode,
       });
 
+      logger.warn(`updated OTP: ${updateOtp}`);
       // SEND OTP HERE
       return {
         data: {
@@ -70,42 +74,41 @@ export default class Service {
     }
   }
 
-  public async verifyOtp(
-    phoneNumber: string,
-    otpCode: string
-  ): Promise<{
-    userId: string;
-    userStatus: "new" | "existing";
-    onboarded: boolean;
-  }> {
-    // Find record with valid (non-expired) OTP
-    const verified = await this.userRepository.verifyOtpRepo({
-      phoneNumber,
-      otpCode,
-    });
-    if (!verified) {
-      // Could be wrong OTP, expired OTP, or no record
-      throw new Error("Invalid or expired OTP");
+  public async verifyOtp(phoneNumber: string, otpCode: string): Promise<any> {
+    try {
+      const verifiedUser = await this.userRepository.verifyOtpRepo({
+        phoneNumber,
+        otpCode,
+      });
+
+      if (!verifiedUser) {
+        throw new BadRequestError("invalid or expired OTP");
+      }
+
+      await this.userRepository.clearOtpAndMarkLoginRepo({
+        phoneNumber,
+        lastLoginAt: new Date(),
+      });
+
+      verifiedUser.password = null;
+      verifiedUser.otpCode = null;
+
+      if (!verifiedUser.onboarded) {
+        // create user inside user-service
+        await publishUserEvent(UserEvents.USER_SIGNUP, {
+          userId: verifiedUser.userId,
+          authId: verifiedUser.id,
+        });
+        logger.debug("signup event published");
+      }
+
+      return {
+        data: verifiedUser,
+        messsage: "OTP verification successfull",
+      };
+    } catch (error: any) {
+      throw new ServerError(error?.message);
     }
-
-    // Clear OTP + mark login time
-    await this.userRepository.clearOtpAndMarkLoginRepo({
-      phoneNumber,
-      lastLoginAt: new Date(),
-    });
-
-    // Determine user status
-    // If the profile isn't onboarded yet, treat this as a new user.
-    // Otherwise, it's an existing user.
-    const userStatus: "new" | "existing" = verified.onboarded
-      ? "existing"
-      : "new";
-
-    return {
-      userId: verified.userId,
-      userStatus,
-      onboarded: !!verified.onboarded,
-    };
   }
 
   public async loginWithPass(email: string, password: string): Promise<any> {
@@ -152,7 +155,7 @@ export default class Service {
       const setCache = await this.redis.setter(user.email, resetToken);
       logger.info(`[auth-service] Adding reset token: ${setCache}`);
 
-      const resetLink = `${ServerConfigs.CLIENT_HOST}/reset-password?token=${resetToken}`;
+      const resetLink = `${ServerConfigs.CLIENT_HOST}/reset-password?token=${resetToken}&email=${email}`;
       sendResetLinkMail(user.email, resetLink);
       return {
         data: true,

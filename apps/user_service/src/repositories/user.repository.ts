@@ -1,23 +1,16 @@
-
+import { DB, IDatabase } from "../configs/database.config";
 
 export default class UserRepository {
-  // private _prisma: PrismaClient = prisma;
+  private _DB: IDatabase = DB;
   constructor() {
-    // this._prisma = prisma;
+    this._DB = DB;
   }
 
-  public async getTestData(): Promise<any> {
-    // const result = await this._prisma.testSchema.create({
-    //   data: {
-    //     one: "1",
-    //     two: "2",
-    //     three: "3",
-    //     four: "4",
-    //   },
-    // });
-    // if (!result) {
-    //   throw new ServerError("Error saving data to database");
-    // }
-    // return result;
-  }
+  public async getTestData(): Promise<any> {}
+
+  public async createUser(
+    userId: string,
+    authId: string,
+    userName: string
+  ): Promise<any> {}
 }

@@ -1322,3 +1322,16 @@
     at Socket._onTimeout (node:net:604:8)
     at listOnTimeout (node:internal/timers:608:17)
     at processTimers (node:internal/timers:543:7)
+2025-09-08T06:50:47.443Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T06:55:51.747Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T07:01:51.801Z error: [packages/common/dist/middlewares/error.middleware.js:22] Invalid request parameters | Req-ID:a8772a7f-b015-464d-81c0-591e8896a90b | URL:/api/v1/auth/reset
+2025-09-08T07:04:21.282Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a5aeaad7-8276-4815-b037-94f76ab5a719 | URL:/api/v1/auth/login
+2025-09-08T07:58:08.071Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T08:02:42.643Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T08:03:09.374Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)

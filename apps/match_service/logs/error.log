@@ -299,3 +299,30 @@
     at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
 2025-09-08T03:44:31.944Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
 2025-09-08T03:44:32.851Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:14:26.499Z error [logform/combine.js:20]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:14:38.571Z error [logform/combine.js:20]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:16:35.877Z error []: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:16:37.888Z error []: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:17:36.399Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:18:19.925Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:19:43.301Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:20:44.543Z error [unknown:0]: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:20:55.961Z error: Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:23:10.112Z error: [packages/common/dist/utils/globalLogger.js:14] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:23:35.741Z error: [packages/common/dist/utils/globalLogger.js:14] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:26:25.328Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:46:13.332Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T06:50:48.825Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T06:53:37.323Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)
+2025-09-08T06:56:26.049Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:56:26.882Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T06:57:19.186Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T07:58:04.557Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T08:02:44.298Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
+2025-09-08T08:07:18.874Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
