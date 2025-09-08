@@ -11,7 +11,6 @@ export interface IRedis {
 
 class Redis implements IRedis {
   private client: RedisClientType;
-
   constructor() {
     this.client = createClient({
       username: ServerConfigs.REDIS_USERNAME,
@@ -52,7 +51,7 @@ class Redis implements IRedis {
         return false;
       }
     } catch (err: any) {
-      logger.error(err.message);
+      logger.error(`[redis-client]${err.message}`);
       return false;
     }
   }
@@ -68,4 +67,4 @@ class Redis implements IRedis {
   }
 }
 
-export default Redis;
+export default new Redis();

@@ -2398,3 +2398,108 @@
 2025-09-08T08:02:44.348Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
 2025-09-08T08:07:18.874Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T09:59:15.948Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T09:59:16.279Z info: [apps/match_service/src/configs/redis.config.ts:24] Redis client is ready to use
+2025-09-08T09:59:18.669Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T09:59:18.680Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T09:59:23.727Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-08T09:59:26.832Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T09:59:26.835Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T09:59:26.855Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"185","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T09:59:26.855Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-08T09:59:26.857Z info: [apps/match_service/src/server.ts:20] Server started at PORT: 4003
+2025-09-08T09:59:26.872Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.872Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.881Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.881Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.890Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.890Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.899Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.899Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.907Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.907Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.915Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.915Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.923Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.923Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.931Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.931Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.938Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.938Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.946Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.946Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.954Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.954Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.962Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.963Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.971Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.971Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.979Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.979Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:26.990Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.991Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.001Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.001Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.008Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.008Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.016Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.017Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.024Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.024Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.036Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.036Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.046Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.046Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.055Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.055Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authID":"2a461534-e78d-4260-8cec-1b13fe3f9d6b"}
+2025-09-08T09:59:27.064Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.064Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.076Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.077Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T09:59:27.090Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.090Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b"}
+2025-09-08T09:59:27.099Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:27.099Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:00:49.680Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-08T10:01:01.557Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-08T10:01:01.876Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T10:01:04.186Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T10:01:04.193Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T10:01:09.254Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-08T10:01:17.322Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T10:01:17.327Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T10:01:17.361Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"186","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T10:01:17.362Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-08T10:01:17.364Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-08T10:01:17.368Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:01:17.368Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:08:22.342Z info: [apps/match_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-08T10:08:22.636Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T10:08:23.755Z info: [apps/match_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-08T10:08:23.807Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T10:08:25.830Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T10:08:25.832Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T10:08:30.936Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-08T10:08:34.077Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T10:08:34.080Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T10:08:34.131Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"188","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T10:08:34.131Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-08T10:08:34.134Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-08T10:08:34.165Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:08:34.165Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:08:34.202Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:08:34.202Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:08:34.308Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:08:34.308Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T11:38:20.381Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:38:21.030Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T11:42:55.725Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:42:56.086Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T11:47:31.411Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:47:31.724Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T11:48:25.531Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)

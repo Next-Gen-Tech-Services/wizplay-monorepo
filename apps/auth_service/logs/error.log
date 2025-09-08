@@ -1335,3 +1335,8 @@
     at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
     at listOnTimeout (node:internal/timers:608:17)
     at processTimers (node:internal/timers:543:7)
+2025-09-08T11:38:20.935Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:42:55.725Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:47:31.409Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:47:47.185Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)

@@ -79,6 +79,28 @@ services:
       timeout: 5s
       retries: 5
 
+  match_db_server:
+    image: "postgres:15-alpine"
+    container_name: match_db_server
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: match_db
+      POSTGRES_PASSWORD: match_db
+      POSTGRES_DB: match_service
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    volumes:
+      - match_db_data:/var/lib/postgresql/data
+      - ./database/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U match_db -d match_service"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Kafka with improved configuration
   kafka:
     image: bitnami/kafka:latest
@@ -137,6 +159,8 @@ volumes:
   user_db_data:
     driver: local
   auth_db_data:
+    driver: local
+  match_db_data:
     driver: local
   redis_data:
     driver: local

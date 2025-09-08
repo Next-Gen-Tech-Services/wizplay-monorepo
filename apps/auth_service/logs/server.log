@@ -4661,3 +4661,33 @@
 2025-09-08T09:57:15.708Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"184","logAppendTime":"-1","logStartOffset":"61"}]
 2025-09-08T09:57:15.711Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
 2025-09-08T09:57:15.711Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b"}
+2025-09-08T09:59:26.858Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T09:59:26.859Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:01:17.359Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:01:17.360Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:08:22.402Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-08T10:08:22.642Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T10:08:23.731Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-08T10:08:23.791Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T10:08:26.208Z info: [apps/auth_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-08T10:08:26.214Z info: [apps/auth_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-08T10:08:31.260Z info: [apps/auth_service/src/app.ts:21] Successfully created topics
+2025-09-08T10:08:34.293Z info: [apps/auth_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-08T10:08:34.294Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-08T10:08:34.309Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"189","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-08T10:08:34.309Z info: [apps/auth_service/src/app.ts:32] Test event published successfully
+2025-09-08T10:08:34.311Z info: [apps/auth_service/src/server.ts:19] Server started at PORT: 4002
+2025-09-08T10:08:34.320Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:08:34.320Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:08:34.331Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:08:34.332Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T10:08:34.341Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-08T10:08:34.341Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-08T11:38:20.935Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:38:21.028Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T11:42:55.725Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:42:56.088Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T11:47:31.409Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:47:31.729Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-08T11:47:47.185Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)

@@ -326,3 +326,15 @@
 2025-09-08T08:02:44.298Z error: [apps/match_service/src/configs/redis.config.ts:25] Error: read ETIMEDOUT
 2025-09-08T08:07:18.874Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-08T09:59:15.948Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionError: password authentication failed for user "match_db" 
+2025-09-08T10:00:49.680Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-08T10:01:01.557Z error: [apps/match_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-08T11:38:20.381Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:42:55.725Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:47:31.411Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-08T11:48:25.531Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:508:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)

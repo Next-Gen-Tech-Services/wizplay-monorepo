@@ -43,5 +43,7 @@ database
 
 .DS_Store
 
-logs
-*.log
+# Ignore all logs folders anywhere in the repo
+logs/
+# Ignore all logs folders everywhere in monorepo
+**/logs/
