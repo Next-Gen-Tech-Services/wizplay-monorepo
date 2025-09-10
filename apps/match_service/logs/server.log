@@ -2503,3 +2503,262 @@
     at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
     at listOnTimeout (node:internal/timers:608:17)
     at processTimers (node:internal/timers:543:7)
+2025-09-09T08:04:53.940Z info: [apps/match_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-09T08:04:54.305Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-09T08:04:56.811Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-09T08:04:56.812Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-09T08:05:01.852Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-09T08:05:04.918Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-09T08:05:04.919Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-09T08:05:04.948Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"190","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-09T08:05:04.948Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-09T08:05:04.950Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-09T08:05:04.979Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-09T08:05:04.979Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-09T10:30:01.635Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:511:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:573:17)
+    at processTimers (node:internal/timers:514:7)
+2025-09-10T10:44:30.508Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T10:44:30.572Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T10:44:34.572Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T10:44:34.577Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-10T10:44:39.600Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-10T10:44:42.652Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-10T10:44:42.654Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T10:44:42.673Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"193","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T10:44:42.674Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-10T10:44:42.676Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T10:44:42.689Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T10:44:42.690Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T10:44:42.699Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T10:44:42.700Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T10:44:42.707Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T10:44:42.708Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:14:31.808Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:14:32.479Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:14:35.423Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:14:35.430Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-10T11:14:40.458Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-10T11:14:57.018Z info: [apps/match_service/src/app.ts:25] Successfully subscribed to user events
+2025-09-10T11:14:57.031Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:14:57.055Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"194","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:14:57.056Z info: [apps/match_service/src/app.ts:32] Test event published successfully
+2025-09-10T11:14:57.060Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:14:57.074Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:14:57.074Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:39:54.416Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:39:54.728Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:39:56.961Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:39:56.968Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-10T11:40:02.011Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-10T11:40:14.438Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:40:14.757Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:40:17.552Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:40:17.563Z info: [apps/match_service/src/app.ts:16] Waiting for Kafka to be ready...
+2025-09-10T11:40:22.622Z info: [apps/match_service/src/app.ts:21] Successfully created topics
+2025-09-10T11:47:33.959Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:47:34.324Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:47:37.127Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:47:37.142Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:47:42.197Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:47:45.279Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:47:45.281Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:47:45.301Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"197","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:47:45.302Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T11:47:45.304Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:47:45.318Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:47:45.319Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:47:45.329Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:47:45.329Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:47:45.336Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:47:45.337Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:47:52.164Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:47:52.394Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:47:54.510Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:47:54.512Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:47:59.560Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:48:12.460Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:48:12.683Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:48:15.413Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:48:15.418Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:48:20.460Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:48:50.400Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:48:50.402Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:48:50.422Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"198","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:49:47.599Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:49:47.938Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:49:50.646Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:49:50.655Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:49:55.687Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:49:58.745Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:49:58.748Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:49:58.790Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"199","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:49:58.791Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T11:49:58.791Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T11:49:58.811Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T11:49:58.813Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:49:58.826Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:49:58.827Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:49:58.838Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:49:58.839Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:50:29.970Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:50:30.232Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:50:33.976Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:50:33.988Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:50:39.041Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:50:58.955Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:50:58.959Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:50:58.993Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"200","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:50:58.993Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T11:50:58.993Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T11:50:59.007Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T11:50:59.009Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:50:59.022Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:50:59.023Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:51:00.028Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:51:00.042Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T11:51:00.971Z error: [apps/match_service/src/utils/jobs/match.ts:35] [MATCH-CRON] Error in auth api Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'res' -> object with constructor 'IncomingMessage'
+    --- property 'req' closes the circle
+2025-09-10T11:52:00.049Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:52:00.055Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T11:52:00.316Z error: [apps/match_service/src/utils/jobs/match.ts:35] [MATCH-CRON] Error in auth api Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'res' -> object with constructor 'IncomingMessage'
+    --- property 'req' closes the circle
+2025-09-10T11:52:49.812Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:52:50.162Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:52:52.705Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:52:52.714Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:52:57.771Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:53:14.303Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:53:14.305Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:53:14.326Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"201","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:53:14.326Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T11:53:14.327Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T11:53:14.344Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T11:53:14.346Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:53:14.359Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:53:14.360Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:54:00.046Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:54:00.053Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T11:54:00.494Z info: [apps/match_service/src/utils/jobs/match.ts:29] [MATCH-CRON] auth response: {
+  "data": {
+    "token": "v5sRS_P_1953059256576118792s1966063484798128889",
+    "expires": 1757581037.126315
+  },
+  "cache": null,
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null,
+  "http_status_code": 200
+}
+2025-09-10T11:54:43.759Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:54:44.048Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:54:46.519Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:54:46.523Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:54:51.560Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:55:09.530Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:55:09.531Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:55:09.555Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"202","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:55:09.555Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T11:55:09.556Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T11:55:09.572Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T11:55:09.574Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:55:09.587Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:55:09.587Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:56:00.022Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:56:00.032Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T11:56:00.381Z info: [apps/match_service/src/utils/jobs/match.ts:29] [MATCH-CRON] auth response: {
+  "data": {
+    "token": "v5sRS_P_1953059256576118792s1966063484798128889",
+    "expires": 1757581037.126315
+  },
+  "cache": null,
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null,
+  "http_status_code": 200
+}
+2025-09-10T11:57:00.037Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:57:00.043Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T11:57:00.262Z info: [apps/match_service/src/utils/jobs/match.ts:29] [MATCH-CRON] auth response: {
+  "data": {
+    "token": "v5sRS_P_1953059256576118792s1966063484798128889",
+    "expires": 1757581037.126315
+  },
+  "cache": null,
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null,
+  "http_status_code": 200
+}
+2025-09-10T11:57:18.078Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T11:57:18.390Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T11:57:20.877Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T11:57:20.880Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T11:57:25.933Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T11:57:44.866Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T11:57:44.871Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T11:57:44.895Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"203","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T11:57:44.896Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T11:57:44.896Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T11:57:44.916Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T11:57:44.919Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T11:57:44.930Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T11:57:44.930Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T11:58:00.031Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:58:00.438Z info: [apps/match_service/src/utils/jobs/match.ts:29] [MATCH-CRON] auth response: {
+  "data": {
+    "token": "v5sRS_P_1953059256576118792s1966063484798128889",
+    "expires": 1757581037.126315
+  },
+  "cache": null,
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null,
+  "http_status_code": 200
+}
+2025-09-10T11:58:00.439Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T11:59:00.036Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T11:59:00.296Z info: [apps/match_service/src/utils/jobs/match.ts:29] [MATCH-CRON] auth response: {
+  "data": {
+    "token": "v5sRS_P_1953059256576118792s1966063484798128889",
+    "expires": 1757581037.126315
+  },
+  "cache": null,
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null,
+  "http_status_code": 200
+}
+2025-09-10T11:59:00.299Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T12:00:00.036Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] cron job scheduled
+2025-09-10T12:00:00.365Z info: [apps/match_service/src/utils/jobs/match.ts:29] [MATCH-CRON] auth response: {
+  "data": {
+    "token": "v5sRS_P_1953059256576118792s1966063484798128889",
+    "expires": 1757581037.126315
+  },
+  "cache": null,
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null,
+  "http_status_code": 200
+}
+2025-09-10T12:00:00.366Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed

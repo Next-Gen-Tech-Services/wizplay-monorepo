@@ -1,12 +1,14 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
 import matchModel, { Match } from "../models/match.model";
+import tournamentModel, { Tournament } from "../models/tournament.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
   Sequelize: any;
   sequelize: Sequelize;
   Match: typeof Match;
+  Tournament: typeof Tournament;
 }
 
 const sequelize = new Sequelize({
@@ -25,6 +27,7 @@ const sequelize = new Sequelize({
 });
 
 const MatchInstance = matchModel(sequelize);
+const TournamentInstance = tournamentModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -40,4 +43,5 @@ export const DB: IDatabase = {
   Sequelize,
   sequelize,
   Match: MatchInstance,
+  Tournament: TournamentInstance,
 };

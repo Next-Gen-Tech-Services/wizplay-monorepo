@@ -1,2541 +1,381 @@
-[
-  {
-    "match_key": "a-rz--cricket--iy1961025717248606211",
-    "raw": {
-      "key": "a-rz--cricket--iy1961025717248606211",
-      "name": "Kamle Knights vs Dirang Daredevils",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--kc-98S3",
-          "code": "KK",
-          "name": "Kamle Knights",
-          "gender_name": "Kamle Knights Men",
-          "country_code": "IND",
-          "alternate_code": "KK",
-          "alternate_name": "Kamle Knights"
+{
+  "data": {
+    "month": {
+      "month": "2025-09",
+      "current_month": true,
+      "days": [
+        {
+          "day": 9,
+          "current_day": true,
+          "matches": [
+            {
+              "key": "a-rz--cricket--cK1950503425125007364",
+              "name": "Afghanistan vs Hong Kong",
+              "short_name": "AFG vs HKG",
+              "sub_title": "1st Match",
+              "status": "completed",
+              "start_at": 1757428200.0,
+              "tournament": {
+                "key": "a-rz--cricket--icc--asc--2025-f1Br",
+                "name": "Asia Cup, 2025",
+                "short_name": "ASC",
+                "alternate_name": "Asia Cup, 2025",
+                "alternate_short_name": "ASC"
+              },
+              "metric_group": "MG100",
+              "sport": "cricket",
+              "winner": "a",
+              "teams": {
+                "a": {
+                  "key": "afg",
+                  "code": "AFG",
+                  "name": "Afghanistan",
+                  "alternate_name": "Afghanistan",
+                  "alternate_code": "AFG",
+                  "gender_name": "Afghanistan Men",
+                  "country_code": "AFG"
+                },
+                "b": {
+                  "key": "hkg",
+                  "code": "HKG",
+                  "name": "Hong Kong",
+                  "alternate_name": "Hong Kong",
+                  "alternate_code": "HKG",
+                  "gender_name": "Hong Kong Men",
+                  "country_code": "HKG"
+                }
+              },
+              "venue": {
+                "key": "c__stadium__sheikh_zayed_stadium_nursery_2__e933e",
+                "name": "Zayed Cricket Stadium",
+                "city": "Abu Dhabi",
+                "country": {
+                  "short_code": "AE",
+                  "code": "ARE",
+                  "name": "United Arab Emirates",
+                  "official_name": "United Arab Emirates",
+                  "is_region": false
+                },
+                "geolocation": "24.3966996,54.5407903"
+              },
+              "expected_start_at": null,
+              "association": {
+                "key": "c__board__icc__c2ab7ee61",
+                "code": "ICC",
+                "name": "International Cricket Council",
+                "country": null,
+                "parent": null
+              },
+              "messages": [],
+              "gender": "male",
+              "tour_key": null,
+              "format": "t20",
+              "estimated_end_date": 1757442600.0,
+              "completed_date_approximate": 1757442370.235697
+            }
+          ]
         },
-        "b": {
-          "key": "a-rz--cricket--dd-sQ2s",
-          "code": "DRD",
-          "name": "Dirang Daredevils",
-          "gender_name": "Dirang Daredevils Men",
-          "country_code": "IND",
-          "alternate_code": "DRD",
-          "alternate_name": "Dirang Daredevils"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__mangaldoi_sports_association_ground__100ab",
-        "city": "Darrang",
-        "name": "Mangaldoi Sports Association Ground",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
+        {
+          "day": 10,
+          "current_day": false,
+          "matches": [
+            {
+              "key": "a-rz--cricket--fd1916785846657364001",
+              "name": "England vs South Africa",
+              "short_name": "ENG vs SA",
+              "sub_title": "1st Match",
+              "status": "not_started",
+              "start_at": 1757525400.0,
+              "tournament": {
+                "key": "a-rz--cricket--icc--tour-menglannx4qzo-msafricac4ivno-T20--2025-tTLp",
+                "name": "South Africa tour of England, 2025",
+                "short_name": "ENG vs SA 2025",
+                "alternate_name": "South Africa tour of England, 2025",
+                "alternate_short_name": "ENG vs SA 2025"
+              },
+              "metric_group": "MG100",
+              "sport": "cricket",
+              "winner": null,
+              "teams": {
+                "a": {
+                  "key": "eng",
+                  "code": "ENG",
+                  "name": "England",
+                  "alternate_name": "England",
+                  "alternate_code": "ENG",
+                  "gender_name": "England Men",
+                  "country_code": "GBR"
+                },
+                "b": {
+                  "key": "rsa",
+                  "code": "SA",
+                  "name": "South Africa",
+                  "alternate_name": "South Africa",
+                  "alternate_code": "SA",
+                  "gender_name": "South Africa Men",
+                  "country_code": "ZAF"
+                }
+              },
+              "venue": {
+                "key": "c__stadium__sophia_gardens__39f34",
+                "name": "Sophia Gardens, Cardiff",
+                "city": "United Kingdom",
+                "country": {
+                  "short_code": "GB",
+                  "code": "GBR",
+                  "name": "United Kingdom",
+                  "official_name": "United Kingdom of Great Britain and Northern Ireland",
+                  "is_region": false
+                },
+                "geolocation": "51.48528450000001,-3.189754"
+              },
+              "expected_start_at": null,
+              "association": {
+                "key": "c__board__icc__c2ab7ee61",
+                "code": "ICC",
+                "name": "International Cricket Council",
+                "country": null,
+                "parent": null
+              },
+              "messages": [],
+              "gender": "male",
+              "tour_key": "a-rz--cricket--icc--menglannx4qzomsafricac4ivno-tAta",
+              "format": "t20",
+              "estimated_end_date": 1757539800.0,
+              "completed_date_approximate": null
+            },
+            {
+              "key": "a-rz--cricket--tr1950502003742486535",
+              "name": "India vs United Arab Emirates",
+              "short_name": "IND vs UAE",
+              "sub_title": "2nd Match",
+              "status": "not_started",
+              "start_at": 1757514600.0,
+              "tournament": {
+                "key": "a-rz--cricket--icc--asc--2025-f1Br",
+                "name": "Asia Cup, 2025",
+                "short_name": "ASC",
+                "alternate_name": "Asia Cup, 2025",
+                "alternate_short_name": "ASC"
+              },
+              "metric_group": "MG100",
+              "sport": "cricket",
+              "winner": null,
+              "teams": {
+                "a": {
+                  "key": "ind",
+                  "code": "IND",
+                  "name": "India",
+                  "alternate_name": "India",
+                  "alternate_code": "IND",
+                  "gender_name": "India Men",
+                  "country_code": "IND"
+                },
+                "b": {
+                  "key": "uae",
+                  "code": "UAE",
+                  "name": "United Arab Emirates",
+                  "alternate_name": "United Arab Emirates",
+                  "alternate_code": "UAE",
+                  "gender_name": "United Arab Emirates Men",
+                  "country_code": "ARE"
+                }
+              },
+              "venue": {
+                "key": "c__stadium__dubai_international_cricket_stadium__dubai__32515",
+                "name": "Dubai International Cricket Stadium",
+                "city": "Dubai",
+                "country": {
+                  "short_code": "AE",
+                  "code": "ARE",
+                  "name": "United Arab Emirates",
+                  "official_name": "United Arab Emirates",
+                  "is_region": false
+                },
+                "geolocation": "25.0459724,55.2183558"
+              },
+              "expected_start_at": null,
+              "association": {
+                "key": "c__board__icc__c2ab7ee61",
+                "code": "ICC",
+                "name": "International Cricket Council",
+                "country": null,
+                "parent": null
+              },
+              "messages": [],
+              "gender": "male",
+              "tour_key": null,
+              "format": "t20",
+              "estimated_end_date": 1757529000.0,
+              "completed_date_approximate": null
+            },
+            {
+              "key": "a-rz--cricket--Dy1939590675905519626",
+              "name": "Barbados Royals vs Trinbago Knight Riders",
+              "short_name": "BR-W vs TKR-W",
+              "sub_title": "3rd Match",
+              "status": "not_started",
+              "start_at": 1757527200.0,
+              "tournament": {
+                "key": "a-rz--cricket--cwi--wcplt20--2025-4Vwd",
+                "name": "Women's Caribbean Premier League, 2025",
+                "short_name": "WCPLT20",
+                "alternate_name": "Women's Caribbean Premier League, 2025",
+                "alternate_short_name": "WCPLT20"
+              },
+              "metric_group": "MG100",
+              "sport": "cricket",
+              "winner": null,
+              "teams": {
+                "a": {
+                  "key": "c__team__brw__a9e8e",
+                  "code": "BR-W",
+                  "name": "Barbados Royals",
+                  "alternate_name": "Barbados Royals",
+                  "alternate_code": "BR-W",
+                  "gender_name": "Barbados Royals Women",
+                  "country_code": "WIN"
+                },
+                "b": {
+                  "key": "c__team__tkrw__31834",
+                  "code": "TKR-W",
+                  "name": "Trinbago Knight Riders",
+                  "alternate_name": "Trinbago Knight Riders",
+                  "alternate_code": "TKR-W",
+                  "gender_name": "Trinbago Knight Riders Women",
+                  "country_code": "WIN"
+                }
+              },
+              "venue": {
+                "key": "c__stadium__providence_stadium__24f4d",
+                "name": "Providence Stadium",
+                "city": "Georgetown",
+                "country": {
+                  "short_code": "GY",
+                  "code": "GUY",
+                  "name": "Guyana",
+                  "official_name": "Republic of Guyana",
+                  "is_region": false
+                },
+                "geolocation": "6.7577088,-58.1779457"
+              },
+              "expected_start_at": null,
+              "association": {
+                "key": "c__board__cwi__b3ce9",
+                "code": "CWI",
+                "name": "Cricket West Indies",
+                "country": {
+                  "short_code": "WI",
+                  "code": "WIN",
+                  "name": "West Indies",
+                  "official_name": null,
+                  "is_region": true
+                },
+                "parent": null
+              },
+              "messages": [],
+              "gender": "female",
+              "tour_key": null,
+              "format": "t20",
+              "estimated_end_date": 1757541600.0,
+              "completed_date_approximate": null
+            },
+            {
+              "key": "a-rz--cricket--AQ1923722493403730005",
+              "name": "Guyana Amazon Warriors vs Antigua and Barbuda Falcons",
+              "short_name": "GAW vs ABF",
+              "sub_title": "26th Match",
+              "status": "not_started",
+              "start_at": 1757545200.0,
+              "tournament": {
+                "key": "a-rz--cricket--cwi--cplt20--2025-rbVl",
+                "name": "Caribbean Premier League, 2025",
+                "short_name": "CPLT20",
+                "alternate_name": "Caribbean Premier League, 2025",
+                "alternate_short_name": "CPLT20"
+              },
+              "metric_group": "MG100",
+              "sport": "cricket",
+              "winner": null,
+              "teams": {
+                "a": {
+                  "key": "gaw",
+                  "code": "GAW",
+                  "name": "Guyana Amazon Warriors",
+                  "alternate_name": "Guyana Amazon Warriors",
+                  "alternate_code": "GAW",
+                  "gender_name": "Guyana Amazon Warriors Men",
+                  "country_code": "WIN"
+                },
+                "b": {
+                  "key": "a-rz--cricket--aabf-2P0m",
+                  "code": "ABF",
+                  "name": "Antigua and Barbuda Falcons",
+                  "alternate_name": "Antigua and Barbuda Falcons",
+                  "alternate_code": "ABF",
+                  "gender_name": "Antigua and Barbuda Falcons Men",
+                  "country_code": "WIN"
+                }
+              },
+              "venue": {
+                "key": "c__stadium__providence_stadium__24f4d",
+                "name": "Providence Stadium",
+                "city": "Georgetown",
+                "country": {
+                  "short_code": "GY",
+                  "code": "GUY",
+                  "name": "Guyana",
+                  "official_name": "Republic of Guyana",
+                  "is_region": false
+                },
+                "geolocation": "6.7577088,-58.1779457"
+              },
+              "expected_start_at": null,
+              "association": {
+                "key": "c__board__cwi__b3ce9",
+                "code": "CWI",
+                "name": "Cricket West Indies",
+                "country": {
+                  "short_code": "WI",
+                  "code": "WIN",
+                  "name": "West Indies",
+                  "official_name": null,
+                  "is_region": true
+                },
+                "parent": null
+              },
+              "messages": [],
+              "gender": "male",
+              "tour_key": null,
+              "format": "t20",
+              "estimated_end_date": 1757559600.0,
+              "completed_date_approximate": null
+            }
+          ]
         },
-        "geolocation": "26.4437232,92.037361"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756783800,
-      "tour_key": null,
-      "sub_title": "3rd Match",
-      "short_name": "KK vs DRD",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-        "name": "Arunachal T20 Championship , 2025",
-        "short_name": "ATC",
-        "alternate_name": "Arunachal T20 Championship , 2025",
-        "alternate_short_name": "ATC"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
+        {
+          "day": 29,
+          "current_day": false,
+          "matches": []
         }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756798200,
-      "completed_date_approximate": null
+      ]
     },
-    "start_at": 1756783800,
-    "short_name": "KK vs DRD",
-    "tournament_key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Kamle Knights vs Dirang Daredevils",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Mangaldoi Sports Association Ground",
-    "team_a": "Kamle Knights",
-    "team_b": "Dirang Daredevils",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
+    "prev_month": "2025-08",
+    "next_month": "2025-10",
+    "current_month": "2025-09",
+    "previous_page_key": null,
+    "next_page_key": null
   },
-  {
-    "match_key": "a-rz--cricket--Op1961025718309765124",
-    "raw": {
-      "key": "a-rz--cricket--Op1961025718309765124",
-      "name": "Pare Panthers vs Tawang Titans",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--pw-blT7",
-          "code": "PP",
-          "name": "Pare Panthers",
-          "gender_name": "Pare Panthers Men",
-          "country_code": "IND",
-          "alternate_code": "PP",
-          "alternate_name": "Pare Panthers"
-        },
-        "b": {
-          "key": "a-rz--cricket--tt-LpO6",
-          "code": "TWT",
-          "name": "Tawang Titans",
-          "gender_name": "Tawang Titans Men",
-          "country_code": "IND",
-          "alternate_code": "TWT",
-          "alternate_name": "Tawang Titans"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__mangaldoi_sports_association_ground__100ab",
-        "city": "Darrang",
-        "name": "Mangaldoi Sports Association Ground",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "26.4437232,92.037361"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756799100,
-      "tour_key": null,
-      "sub_title": "4th Match",
-      "short_name": "PP vs TWT",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-        "name": "Arunachal T20 Championship , 2025",
-        "short_name": "ATC",
-        "alternate_name": "Arunachal T20 Championship , 2025",
-        "alternate_short_name": "ATC"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756813500,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756799100,
-    "short_name": "PP vs TWT",
-    "tournament_key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Pare Panthers vs Tawang Titans",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Mangaldoi Sports Association Ground",
-    "team_a": "Pare Panthers",
-    "team_b": "Tawang Titans",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
+  "cache": {
+    "key": "api:rz:v5_cricket_fixtures:2025-09",
+    "expires": 1757534429.539794,
+    "etag": "ET:Qq13048350017851625511:0",
+    "max_age": 300
   },
-  {
-    "match_key": "a-rz--cricket--aj1957701345825931303",
-    "raw": {
-      "key": "a-rz--cricket--aj1957701345825931303",
-      "name": "Toombul vs Sunshine Coast",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__tmb__89458",
-          "code": "TMB",
-          "name": "Toombul",
-          "gender_name": "Toombul Men",
-          "country_code": "AUS",
-          "alternate_code": "TMB",
-          "alternate_name": "Toombul"
-        },
-        "b": {
-          "key": "c__team__ssc__038fa",
-          "code": "SSC",
-          "name": "Sunshine Coast",
-          "gender_name": "Sunshine Coast Men",
-          "country_code": "AUS",
-          "alternate_code": "SSC",
-          "alternate_name": "Sunshine Coast"
-        }
-      },
-      "venue": {
-        "key": "a-rz--tdcc-pAgD",
-        "city": "Australia",
-        "name": "Ken Mackay Oval Nundah, Brisbane, Australia",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.4017483,153.0623804"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756800000,
-      "tour_key": null,
-      "sub_title": "39th Match",
-      "short_name": "TMB vs SSC",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756814400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756800000,
-    "short_name": "TMB vs SSC",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Toombul vs Sunshine Coast",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Ken Mackay Oval Nundah, Brisbane, Australia",
-    "team_a": "Toombul",
-    "team_b": "Sunshine Coast",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
   },
-  {
-    "match_key": "a-rz--cricket--Aq1957701342432739364",
-    "raw": {
-      "key": "a-rz--cricket--Aq1957701342432739364",
-      "name": "Gold Coast vs South Brisbane",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__gct__9fc0f",
-          "code": "GCT",
-          "name": "Gold Coast",
-          "gender_name": "Gold Coast Men",
-          "country_code": "AUS",
-          "alternate_code": "GCT",
-          "alternate_name": "Gold Coast"
-        },
-        "b": {
-          "key": "c__team__sbb__dd9c5",
-          "code": "SBB",
-          "name": "South Brisbane",
-          "gender_name": "South Brisbane Men",
-          "country_code": "AUS",
-          "alternate_code": "SBB",
-          "alternate_name": "South Brisbane"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__allan_border_field__5fb24",
-        "city": "Albion",
-        "name": "Allan Border Field",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.4350993,153.0452434"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756800000,
-      "tour_key": null,
-      "sub_title": "36th Match",
-      "short_name": "GCT vs SBB",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756814400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756800000,
-    "short_name": "GCT vs SBB",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Gold Coast vs South Brisbane",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Allan Border Field",
-    "team_a": "Gold Coast",
-    "team_b": "South Brisbane",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--Ke1957701344605388838",
-    "raw": {
-      "key": "a-rz--cricket--Ke1957701344605388838",
-      "name": "Ipswich vs Wynnum Manly",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__ips__a4f16",
-          "code": "IPS",
-          "name": "Ipswich",
-          "gender_name": "Ipswich Men",
-          "country_code": "AUS",
-          "alternate_code": "IPS",
-          "alternate_name": "Ipswich"
-        },
-        "b": {
-          "key": "c__team__wyn__a2ada",
-          "code": "WYN",
-          "name": "Wynnum Manly",
-          "gender_name": "Wynnum Manly Men",
-          "country_code": "AUS",
-          "alternate_code": "WYN",
-          "alternate_name": "Wynnum Manly"
-        }
-      },
-      "venue": {
-        "key": "a-rz--ipsw-6Qzu",
-        "city": "Australia",
-        "name": "Baxter Oval, Leichhardt, Queensland, Australia",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.614614,152.7608421"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756800000,
-      "tour_key": null,
-      "sub_title": "38th Match",
-      "short_name": "IPS vs WYN",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756814400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756800000,
-    "short_name": "IPS vs WYN",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Ipswich vs Wynnum Manly",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Baxter Oval, Leichhardt, Queensland, Australia",
-    "team_a": "Ipswich",
-    "team_b": "Wynnum Manly",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--CA1957701343544229925",
-    "raw": {
-      "key": "a-rz--cricket--CA1957701343544229925",
-      "name": "University of Queensland vs Redlands",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__uoq__12b8c",
-          "code": "UOQ",
-          "name": "University of Queensland",
-          "gender_name": "University of Queensland Men",
-          "country_code": "AUS",
-          "alternate_code": "UOQ",
-          "alternate_name": "University of Queensland"
-        },
-        "b": {
-          "key": "c__team__rls__974cd",
-          "code": "RLS",
-          "name": "Redlands",
-          "gender_name": "Redlands Men",
-          "country_code": "AUS",
-          "alternate_code": "RLS",
-          "alternate_name": "Redlands"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__ian_healy_oval__d661e",
-        "city": "Wooloowin",
-        "name": "Ian Healy Oval",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.4052289,153.044203"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756800000,
-      "tour_key": null,
-      "sub_title": "37th Match",
-      "short_name": "UOQ vs RLS",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756814400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756800000,
-    "short_name": "UOQ vs RLS",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "University of Queensland vs Redlands",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Ian Healy Oval",
-    "team_a": "University of Queensland",
-    "team_b": "Redlands",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--am1953314636539510809",
-    "raw": {
-      "key": "a-rz--cricket--am1953314636539510809",
-      "name": "Kochi Blue Tigers vs Calicut Globstars",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--kbt-9st4",
-          "code": "KBTS",
-          "name": "Kochi Blue Tigers",
-          "gender_name": "Kochi Blue Tigers Men",
-          "country_code": "IND",
-          "alternate_code": "KBTS",
-          "alternate_name": "Kochi Blue Tigers"
-        },
-        "b": {
-          "key": "a-rz--cricket--cg-UXc6",
-          "code": "CAGS",
-          "name": "Calicut Globstars",
-          "gender_name": "Calicut Globstars Men",
-          "country_code": "IND",
-          "alternate_code": "CAGS",
-          "alternate_name": "Calicut Globstars"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__greenfield_stadium__ad7d2",
-        "city": "Thiruvananthapuram",
-        "name": "Greenfield International Stadium",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "8.5715674,76.8843885"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756803600,
-      "tour_key": null,
-      "sub_title": "25th Match",
-      "short_name": "KBTS vs CAGS",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-        "name": "Kerala Cricket League , 2025",
-        "short_name": "KCLT20",
-        "alternate_name": "Kerala Cricket League , 2025",
-        "alternate_short_name": "KCLT20"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756818000,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756803600,
-    "short_name": "KBTS vs CAGS",
-    "tournament_key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Kochi Blue Tigers vs Calicut Globstars",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Greenfield International Stadium",
-    "team_a": "Kochi Blue Tigers",
-    "team_b": "Calicut Globstars",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--Fp1916784912992702507",
-    "raw": {
-      "key": "a-rz--cricket--Fp1916784912992702507",
-      "name": "England vs South Africa",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "eng",
-          "code": "ENG",
-          "name": "England",
-          "gender_name": "England Men",
-          "country_code": "GBR",
-          "alternate_code": "ENG",
-          "alternate_name": "England"
-        },
-        "b": {
-          "key": "rsa",
-          "code": "SA",
-          "name": "South Africa",
-          "gender_name": "South Africa Men",
-          "country_code": "ZAF",
-          "alternate_code": "SA",
-          "alternate_name": "South Africa"
-        }
-      },
-      "venue": {
-        "key": "a-rz--headinv6wlv9",
-        "city": "Leeds",
-        "name": "Headingley Cricket Ground",
-        "country": {
-          "code": "GBR",
-          "name": "United Kingdom",
-          "is_region": false,
-          "short_code": "GB",
-          "official_name": "United Kingdom of Great Britain and Northern Ireland"
-        },
-        "geolocation": "53.8215574,-1.5757947"
-      },
-      "format": "oneday",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756814400,
-      "tour_key": "a-rz--cricket--icc--menglannx4qzomsafricac4ivno-tAta",
-      "sub_title": "1st Match",
-      "short_name": "ENG vs SA",
-      "tournament": {
-        "key": "a-rz--cricket--icc--tour-menglannx4qzo-msafricac4ivno-Oneday--2025-RGfq",
-        "name": "South Africa tour of England, 2025",
-        "short_name": "ENG vs SA 2025",
-        "alternate_name": "South Africa tour of England, 2025",
-        "alternate_short_name": "ENG vs SA 2025"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756846800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756814400,
-    "short_name": "ENG vs SA",
-    "tournament_key": "a-rz--cricket--icc--tour-menglannx4qzo-msafricac4ivno-Oneday--2025-RGfq",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "England vs South Africa",
-    "metric_group": "MG100",
-    "format": "oneday",
-    "venue_name": "Headingley Cricket Ground",
-    "team_a": "England",
-    "team_b": "South Africa",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--KA1958409385608880144",
-    "raw": {
-      "key": "a-rz--cricket--KA1958409385608880144",
-      "name": "TBC vs TBC",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        },
-        "b": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__icc_academy_dubai__6013e",
-        "city": "دبي",
-        "name": "ICC Academy Dubai",
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        },
-        "geolocation": "25.037467,55.2266644"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756818000,
-      "tour_key": null,
-      "sub_title": "1st Semi Final Match",
-      "short_name": "TBC vs TBC",
-      "tournament": {
-        "key": "a-rz--cricket--ecb-uae--id-ByqW--2025-2A2R",
-        "name": "DP World ILT20 Development Tournament, 2025",
-        "short_name": "ID",
-        "alternate_name": "DP World ILT20 Development Tournament, 2025",
-        "alternate_short_name": "ID"
-      },
-      "association": {
-        "key": "c__board__ecb__df9f3",
-        "code": "ECB",
-        "name": "Emirates Cricket Board",
-        "parent": null,
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756832400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756818000,
-    "short_name": "TBC vs TBC",
-    "tournament_key": "a-rz--cricket--ecb-uae--id-ByqW--2025-2A2R",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "TBC vs TBC",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "ICC Academy Dubai",
-    "team_a": "TBC",
-    "team_b": "TBC",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--K11953314637495812122",
-    "raw": {
-      "key": "a-rz--cricket--K11953314637495812122",
-      "name": "Thrissur Titans vs Adani Trivandrum Royals",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--tt-XhQP",
-          "code": "TTS",
-          "name": "Thrissur Titans",
-          "gender_name": "Thrissur Titans Men",
-          "country_code": "IND",
-          "alternate_code": "TTS",
-          "alternate_name": "Thrissur Titans"
-        },
-        "b": {
-          "key": "a-rz--cricket--atr-GUT9",
-          "code": "ATR",
-          "name": "Adani Trivandrum Royals",
-          "gender_name": "Adani Trivandrum Royals Men",
-          "country_code": "IND",
-          "alternate_code": "ATR",
-          "alternate_name": "Adani Trivandrum Royals"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__greenfield_stadium__ad7d2",
-        "city": "Thiruvananthapuram",
-        "name": "Greenfield International Stadium",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "8.5715674,76.8843885"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756818900,
-      "tour_key": null,
-      "sub_title": "26th Match",
-      "short_name": "TTS vs ATR",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-        "name": "Kerala Cricket League , 2025",
-        "short_name": "KCLT20",
-        "alternate_name": "Kerala Cricket League , 2025",
-        "alternate_short_name": "KCLT20"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756833300,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756818900,
-    "short_name": "TTS vs ATR",
-    "tournament_key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Thrissur Titans vs Adani Trivandrum Royals",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Greenfield International Stadium",
-    "team_a": "Thrissur Titans",
-    "team_b": "Adani Trivandrum Royals",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--bj1960239227665006602",
-    "raw": {
-      "key": "a-rz--cricket--bj1960239227665006602",
-      "name": "West Indies U19 vs Sri Lanka U19",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__west_indies_u19__067a5",
-          "code": "WIU19",
-          "name": "West Indies U19",
-          "gender_name": "West Indies U19 Men",
-          "country_code": "WIN",
-          "alternate_code": "WIU19",
-          "alternate_name": "West Indies U19"
-        },
-        "b": {
-          "key": "c__team__sri_lanka_under_19__bdca7",
-          "code": "SLU19",
-          "name": "Sri Lanka U19",
-          "gender_name": "Sri Lanka U19 Men",
-          "country_code": null,
-          "alternate_code": "SLU19",
-          "alternate_name": "Sri Lanka U19"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__coolidge_cricket_ground__49f83",
-        "city": "Osbourn",
-        "name": "Coolidge Cricket Ground",
-        "country": {
-          "code": "ATG",
-          "name": "Antigua and Barbuda",
-          "is_region": false,
-          "short_code": "AG",
-          "official_name": "Antigua and Barbuda"
-        },
-        "geolocation": "17.1406809,-61.7944887"
-      },
-      "format": "oneday",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756819800,
-      "tour_key": "a-rz--cricket--icc--westindiesu19067a5srilankaunder19bdca7-HXKx",
-      "sub_title": "2nd Match",
-      "short_name": "WIU19 vs SLU19",
-      "tournament": {
-        "key": "a-rz--cricket--icc--tour-west-indies-u19-067a5-sri-lanka-under-19-bdca7-Oneday-MG101--2025-M6ql",
-        "name": "Sri Lanka Under-19 tour of West Indies, 2025",
-        "short_name": "SLU19 vs WIU19 2025",
-        "alternate_name": "Sri Lanka Under-19 tour of West Indies, 2025",
-        "alternate_short_name": "SLU19 vs WIU19 2025"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756852200,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756819800,
-    "short_name": "WIU19 vs SLU19",
-    "tournament_key": "a-rz--cricket--icc--tour-west-indies-u19-067a5-sri-lanka-under-19-bdca7-Oneday-MG101--2025-M6ql",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "West Indies U19 vs Sri Lanka U19",
-    "metric_group": "MG101",
-    "format": "oneday",
-    "venue_name": "Coolidge Cricket Ground",
-    "team_a": "West Indies U19",
-    "team_b": "Sri Lanka U19",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--0B1959217444304326660",
-    "raw": {
-      "key": "a-rz--cricket--0B1959217444304326660",
-      "name": "Canada vs Namibia",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "can",
-          "code": "CAN",
-          "name": "Canada",
-          "gender_name": "Canada Men",
-          "country_code": "CAN",
-          "alternate_code": "CAN",
-          "alternate_name": "Canada"
-        },
-        "b": {
-          "key": "nam",
-          "code": "NAM",
-          "name": "Namibia",
-          "gender_name": "Namibia Men",
-          "country_code": "NAM",
-          "alternate_code": "NAM",
-          "alternate_name": "Namibia"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__maple_leaf_cricket_ground__aa4eb",
-        "city": "King",
-        "name": "Maple Leaf Cricket Ground",
-        "country": {
-          "code": "CAN",
-          "name": "Canada",
-          "is_region": false,
-          "short_code": "CA",
-          "official_name": "Canada"
-        },
-        "geolocation": "43.95411259999999,-79.5074607"
-      },
-      "format": "oneday",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756823400,
-      "tour_key": null,
-      "sub_title": "83rd Match",
-      "short_name": "CAN vs NAM",
-      "tournament": {
-        "key": "a-rz--cricket--icc--icccwclt--2023-27-8JlY",
-        "name": "ICC Cricket World Cup League Two, 2023-27",
-        "short_name": "ICCCWCLT",
-        "alternate_name": "ICC Cricket World Cup League Two, 2023-27",
-        "alternate_short_name": "ICCCWCLT"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756855800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756823400,
-    "short_name": "CAN vs NAM",
-    "tournament_key": "a-rz--cricket--icc--icccwclt--2023-27-8JlY",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Canada vs Namibia",
-    "metric_group": "MG100",
-    "format": "oneday",
-    "venue_name": "Maple Leaf Cricket Ground",
-    "team_a": "Canada",
-    "team_b": "Namibia",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--Dv1952596057812770823",
-    "raw": {
-      "key": "a-rz--cricket--Dv1952596057812770823",
-      "name": "Pakistan vs Afghanistan",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "pak",
-          "code": "PAK",
-          "name": "Pakistan",
-          "gender_name": "Pakistan Men",
-          "country_code": "PAK",
-          "alternate_code": "PAK",
-          "alternate_name": "Pakistan"
-        },
-        "b": {
-          "key": "afg",
-          "code": "AFG",
-          "name": "Afghanistan",
-          "gender_name": "Afghanistan Men",
-          "country_code": "AFG",
-          "alternate_code": "AFG",
-          "alternate_name": "Afghanistan"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__sharjah_cricket_stadium__3cf76",
-        "city": "Sharjah",
-        "name": "Sharjah Cricket Stadium",
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        },
-        "geolocation": "25.3309057,55.4210129"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756825200,
-      "tour_key": null,
-      "sub_title": "4th Match",
-      "short_name": "PAK vs AFG",
-      "tournament": {
-        "key": "a-rz--cricket--icc--uaett-vhaa--2025-6rVR",
-        "name": "United Arab Emirates T20I Tri-Series, 2025",
-        "short_name": "UAETT",
-        "alternate_name": "United Arab Emirates T20I Tri-Series, 2025",
-        "alternate_short_name": "UAETT"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756839600,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756825200,
-    "short_name": "PAK vs AFG",
-    "tournament_key": "a-rz--cricket--icc--uaett-vhaa--2025-6rVR",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Pakistan vs Afghanistan",
-    "metric_group": "MG100",
-    "format": "t20",
-    "venue_name": "Sharjah Cricket Stadium",
-    "team_a": "Pakistan",
-    "team_b": "Afghanistan",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--vk1958409386753925137",
-    "raw": {
-      "key": "a-rz--cricket--vk1958409386753925137",
-      "name": "TBC vs TBC",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        },
-        "b": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__icc_academy_dubai__6013e",
-        "city": "دبي",
-        "name": "ICC Academy Dubai",
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        },
-        "geolocation": "25.037467,55.2266644"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756832400,
-      "tour_key": null,
-      "sub_title": "2nd Semi Final Match",
-      "short_name": "TBC vs TBC",
-      "tournament": {
-        "key": "a-rz--cricket--ecb-uae--id-ByqW--2025-2A2R",
-        "name": "DP World ILT20 Development Tournament, 2025",
-        "short_name": "ID",
-        "alternate_name": "DP World ILT20 Development Tournament, 2025",
-        "alternate_short_name": "ID"
-      },
-      "association": {
-        "key": "c__board__ecb__df9f3",
-        "code": "ECB",
-        "name": "Emirates Cricket Board",
-        "parent": null,
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756846800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756832400,
-    "short_name": "TBC vs TBC",
-    "tournament_key": "a-rz--cricket--ecb-uae--id-ByqW--2025-2A2R",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "TBC vs TBC",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "ICC Academy Dubai",
-    "team_a": "TBC",
-    "team_b": "TBC",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--9P1961025722189496325",
-    "raw": {
-      "key": "a-rz--cricket--9P1961025722189496325",
-      "name": "Siang Storm vs Pare Panthers",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--ss-sxKf",
-          "code": "SAS",
-          "name": "Siang Storm",
-          "gender_name": "Siang Storm Men",
-          "country_code": "IND",
-          "alternate_code": "SAS",
-          "alternate_name": "Siang Storm"
-        },
-        "b": {
-          "key": "a-rz--cricket--pw-blT7",
-          "code": "PP",
-          "name": "Pare Panthers",
-          "gender_name": "Pare Panthers Men",
-          "country_code": "IND",
-          "alternate_code": "PP",
-          "alternate_name": "Pare Panthers"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__mangaldoi_sports_association_ground__100ab",
-        "city": "Darrang",
-        "name": "Mangaldoi Sports Association Ground",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "26.4437232,92.037361"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756870200,
-      "tour_key": null,
-      "sub_title": "5th Match",
-      "short_name": "SAS vs PP",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-        "name": "Arunachal T20 Championship , 2025",
-        "short_name": "ATC",
-        "alternate_name": "Arunachal T20 Championship , 2025",
-        "alternate_short_name": "ATC"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756884600,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756870200,
-    "short_name": "SAS vs PP",
-    "tournament_key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Siang Storm vs Pare Panthers",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Mangaldoi Sports Association Ground",
-    "team_a": "Siang Storm",
-    "team_b": "Pare Panthers",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--Jt1961025723183546374",
-    "raw": {
-      "key": "a-rz--cricket--Jt1961025723183546374",
-      "name": "Dirang Daredevils vs KRA Dominators",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--dd-sQ2s",
-          "code": "DRD",
-          "name": "Dirang Daredevils",
-          "gender_name": "Dirang Daredevils Men",
-          "country_code": "IND",
-          "alternate_code": "DRD",
-          "alternate_name": "Dirang Daredevils"
-        },
-        "b": {
-          "key": "a-rz--cricket--kd-ESoQ",
-          "code": "KRA",
-          "name": "KRA Dominators",
-          "gender_name": "KRA Dominators Men",
-          "country_code": "IND",
-          "alternate_code": "KRA",
-          "alternate_name": "KRA Dominators"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__mangaldoi_sports_association_ground__100ab",
-        "city": "Darrang",
-        "name": "Mangaldoi Sports Association Ground",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "26.4437232,92.037361"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756885500,
-      "tour_key": null,
-      "sub_title": "6th Match",
-      "short_name": "DRD vs KRA",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-        "name": "Arunachal T20 Championship , 2025",
-        "short_name": "ATC",
-        "alternate_name": "Arunachal T20 Championship , 2025",
-        "alternate_short_name": "ATC"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756899900,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756885500,
-    "short_name": "DRD vs KRA",
-    "tournament_key": "a-rz--cricket--bcci--atc-4lgY--2025-fIwT",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Dirang Daredevils vs KRA Dominators",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Mangaldoi Sports Association Ground",
-    "team_a": "Dirang Daredevils",
-    "team_b": "KRA Dominators",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--R01957701347990192169",
-    "raw": {
-      "key": "a-rz--cricket--R01957701347990192169",
-      "name": "Western Suburbs vs Sandgate Redcliffe",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__wss__67fa3",
-          "code": "WSS",
-          "name": "Western Suburbs",
-          "gender_name": "Western Suburbs Men",
-          "country_code": "AUS",
-          "alternate_code": "WSS",
-          "alternate_name": "Western Suburbs"
-        },
-        "b": {
-          "key": "c__team__sgr__83360",
-          "code": "SGR",
-          "name": "Sandgate Redcliffe",
-          "gender_name": "Sandgate Redcliffe Men",
-          "country_code": "AUS",
-          "alternate_code": "SGR",
-          "alternate_name": "Sandgate Redcliffe"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__ian_healy_oval__d661e",
-        "city": "Wooloowin",
-        "name": "Ian Healy Oval",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.4052289,153.044203"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756886400,
-      "tour_key": null,
-      "sub_title": "41st Match",
-      "short_name": "WSS vs SGR",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756900800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756886400,
-    "short_name": "WSS vs SGR",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Western Suburbs vs Sandgate Redcliffe",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Ian Healy Oval",
-    "team_a": "Western Suburbs",
-    "team_b": "Sandgate Redcliffe",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--HI1957701346849341480",
-    "raw": {
-      "key": "a-rz--cricket--HI1957701346849341480",
-      "name": "Valley vs Redlands",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__vlly__c8384",
-          "code": "VLLY",
-          "name": "Valley",
-          "gender_name": "Valley Men",
-          "country_code": "AUS",
-          "alternate_code": "VLLY",
-          "alternate_name": "Valley"
-        },
-        "b": {
-          "key": "c__team__rls__974cd",
-          "code": "RLS",
-          "name": "Redlands",
-          "gender_name": "Redlands Men",
-          "country_code": "AUS",
-          "alternate_code": "RLS",
-          "alternate_name": "Redlands"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__allan_border_field__5fb24",
-        "city": "Albion",
-        "name": "Allan Border Field",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.4350993,153.0452434"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756886400,
-      "tour_key": null,
-      "sub_title": "40th Match",
-      "short_name": "VLLY vs RLS",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756900800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756886400,
-    "short_name": "VLLY vs RLS",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Valley vs Redlands",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Allan Border Field",
-    "team_a": "Valley",
-    "team_b": "Redlands",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--nh1957701349160402986",
-    "raw": {
-      "key": "a-rz--cricket--nh1957701349160402986",
-      "name": "Toombul vs University of Queensland",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__tmb__89458",
-          "code": "TMB",
-          "name": "Toombul",
-          "gender_name": "Toombul Men",
-          "country_code": "AUS",
-          "alternate_code": "TMB",
-          "alternate_name": "Toombul"
-        },
-        "b": {
-          "key": "c__team__uoq__12b8c",
-          "code": "UOQ",
-          "name": "University of Queensland",
-          "gender_name": "University of Queensland Men",
-          "country_code": "AUS",
-          "alternate_code": "UOQ",
-          "alternate_name": "University of Queensland"
-        }
-      },
-      "venue": {
-        "key": "a-rz--tdcc-pAgD",
-        "city": "Australia",
-        "name": "Ken Mackay Oval Nundah, Brisbane, Australia",
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        },
-        "geolocation": "-27.4017483,153.0623804"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756886400,
-      "tour_key": null,
-      "sub_title": "42nd Match",
-      "short_name": "TMB vs UOQ",
-      "tournament": {
-        "key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-        "name": "T20 Max Competition, 2025",
-        "short_name": "T20MC",
-        "alternate_name": "T20 Max Competition, 2025",
-        "alternate_short_name": "T20MC"
-      },
-      "association": {
-        "key": "c__board__ca__58678",
-        "code": "CA",
-        "name": "Cricket Australia",
-        "parent": null,
-        "country": {
-          "code": "AUS",
-          "name": "Australia",
-          "is_region": false,
-          "short_code": "AU",
-          "official_name": "the Commonwealth of Australia"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756900800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756886400,
-    "short_name": "TMB vs UOQ",
-    "tournament_key": "a-rz--cricket--ca--t20-max-competition-84be0--2025-2WnZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Toombul vs University of Queensland",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Ken Mackay Oval Nundah, Brisbane, Australia",
-    "team_a": "Toombul",
-    "team_b": "University of Queensland",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--gi1959964140751691779",
-    "raw": {
-      "key": "a-rz--cricket--gi1959964140751691779",
-      "name": "South Africa A vs New Zealand A",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "c__team__rsaa__deee3",
-          "code": "RSAA",
-          "name": "South Africa A",
-          "gender_name": "South Africa A Men",
-          "country_code": "ZAF",
-          "alternate_code": "RSAA",
-          "alternate_name": "South Africa A"
-        },
-        "b": {
-          "key": "c__team__nza__bd0eb",
-          "code": "NZA",
-          "name": "New Zealand A",
-          "gender_name": "New Zealand A Men",
-          "country_code": "NZL",
-          "alternate_code": "NZA",
-          "alternate_name": "New Zealand A"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__tshwane_university_of_technology_oval__e08c7",
-        "city": "Pretoria",
-        "name": "Tshwane University of Technology",
-        "country": {
-          "code": "ZAF",
-          "name": "South Africa",
-          "is_region": false,
-          "short_code": "ZA",
-          "official_name": "Republic of South Africa"
-        },
-        "geolocation": "-25.7322075,28.1618717"
-      },
-      "format": "oneday",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756886400,
-      "tour_key": "a-rz--cricket--icc--rsaadeee3nzabd0eb-2OW9",
-      "sub_title": "3rd Match",
-      "short_name": "RSAA vs NZA",
-      "tournament": {
-        "key": "a-rz--cricket--icc--tour-rsaa-deee3-nza-bd0eb-Oneday-MG101--2025-ojJK",
-        "name": "New Zealand A tour of South Africa, 2025",
-        "short_name": "RSAA vs NZA 2025",
-        "alternate_name": "New Zealand A tour of South Africa, 2025",
-        "alternate_short_name": "RSAA vs NZA 2025"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756918800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756886400,
-    "short_name": "RSAA vs NZA",
-    "tournament_key": "a-rz--cricket--icc--tour-rsaa-deee3-nza-bd0eb-Oneday-MG101--2025-ojJK",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "South Africa A vs New Zealand A",
-    "metric_group": "MG101",
-    "format": "oneday",
-    "venue_name": "Tshwane University of Technology",
-    "team_a": "South Africa A",
-    "team_b": "New Zealand A",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--S91953314638460502043",
-    "raw": {
-      "key": "a-rz--cricket--S91953314638460502043",
-      "name": "Adani Trivandrum Royals vs Alleppey Ripples",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--atr-GUT9",
-          "code": "ATR",
-          "name": "Adani Trivandrum Royals",
-          "gender_name": "Adani Trivandrum Royals Men",
-          "country_code": "IND",
-          "alternate_code": "ATR",
-          "alternate_name": "Adani Trivandrum Royals"
-        },
-        "b": {
-          "key": "a-rz--cricket--ar-sjdb",
-          "code": "ALRS",
-          "name": "Alleppey Ripples",
-          "gender_name": "Alleppey Ripples Men",
-          "country_code": "IND",
-          "alternate_code": "ALRS",
-          "alternate_name": "Alleppey Ripples"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__greenfield_stadium__ad7d2",
-        "city": "Thiruvananthapuram",
-        "name": "Greenfield International Stadium",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "8.5715674,76.8843885"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756890000,
-      "tour_key": null,
-      "sub_title": "27th Match",
-      "short_name": "ATR vs ALRS",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-        "name": "Kerala Cricket League , 2025",
-        "short_name": "KCLT20",
-        "alternate_name": "Kerala Cricket League , 2025",
-        "alternate_short_name": "KCLT20"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756904400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756890000,
-    "short_name": "ATR vs ALRS",
-    "tournament_key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Adani Trivandrum Royals vs Alleppey Ripples",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Greenfield International Stadium",
-    "team_a": "Adani Trivandrum Royals",
-    "team_b": "Alleppey Ripples",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--w71955986216230989825",
-    "raw": {
-      "key": "a-rz--cricket--w71955986216230989825",
-      "name": "TBC vs TBC",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        },
-        "b": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__bharat_ratna_shri_atalbihari_vajpayee_ekana_cricket_stadium__121e9",
-        "city": "Lucknow",
-        "name": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "26.8113358,81.0153562"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756891800,
-      "tour_key": null,
-      "sub_title": "1st Match",
-      "short_name": "TBC vs TBC",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--uttar-pradesh-t20-league-8d183--2025-sX11",
-        "name": "Uttar Pradesh T20 League, 2025",
-        "short_name": "UPT20L",
-        "alternate_name": "Uttar Pradesh T20 League, 2025",
-        "alternate_short_name": "UPT20L"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756906200,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756891800,
-    "short_name": "TBC vs TBC",
-    "tournament_key": "a-rz--cricket--bcci--uttar-pradesh-t20-league-8d183--2025-sX11",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "TBC vs TBC",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
-    "team_a": "TBC",
-    "team_b": "TBC",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--KR1939599403287461901",
-    "raw": {
-      "key": "a-rz--cricket--KR1939599403287461901",
-      "name": "Zimbabwe vs Sri Lanka",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "zim",
-          "code": "ZIM",
-          "name": "Zimbabwe",
-          "gender_name": "Zimbabwe Men",
-          "country_code": "ZWE",
-          "alternate_code": "ZIM",
-          "alternate_name": "Zimbabwe"
-        },
-        "b": {
-          "key": "sl",
-          "code": "SL",
-          "name": "Sri Lanka",
-          "gender_name": "Sri Lanka Men",
-          "country_code": "LKA",
-          "alternate_code": "SL",
-          "alternate_name": "Sri Lanka"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__harare_sports_club__305c2",
-        "city": "Harare",
-        "name": "Harare Sports Club",
-        "country": {
-          "code": "ZWE",
-          "name": "Zimbabwe",
-          "is_region": false,
-          "short_code": "ZW",
-          "official_name": "Republic of Zimbabwe"
-        },
-        "geolocation": "-17.8140511,31.0508853"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756899000,
-      "tour_key": "a-rz--cricket--icc--mzimbab1swzwamslankaik60q4-LL6y",
-      "sub_title": "1st Match",
-      "short_name": "ZIM vs SL",
-      "tournament": {
-        "key": "a-rz--cricket--icc--tour-mzimbab1swzwa-mslankaik60q4-T20--2025-4CGZ",
-        "name": "Sri Lanka tour of Zimbabwe, 2025",
-        "short_name": "ZIM vs SL",
-        "alternate_name": "Sri Lanka tour of Zimbabwe, 2025",
-        "alternate_short_name": "ZIM vs SL"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756913400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756899000,
-    "short_name": "ZIM vs SL",
-    "tournament_key": "a-rz--cricket--icc--tour-mzimbab1swzwa-mslankaik60q4-T20--2025-4CGZ",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Zimbabwe vs Sri Lanka",
-    "metric_group": "MG100",
-    "format": "t20",
-    "venue_name": "Harare Sports Club",
-    "team_a": "Zimbabwe",
-    "team_b": "Sri Lanka",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--341954871611429625859",
-    "raw": {
-      "key": "a-rz--cricket--341954871611429625859",
-      "name": "Bangladesh vs Netherlands",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "ban",
-          "code": "BAN",
-          "name": "Bangladesh",
-          "gender_name": "Bangladesh Men",
-          "country_code": "BGD",
-          "alternate_code": "BAN",
-          "alternate_name": "Bangladesh"
-        },
-        "b": {
-          "key": "nl",
-          "code": "NED",
-          "name": "Netherlands",
-          "gender_name": "Netherlands Men",
-          "country_code": "NLD",
-          "alternate_code": "NED",
-          "alternate_name": "Netherlands"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__sylhet_international_cricket_stadium__dca95",
-        "city": "Sylhet",
-        "name": "Sylhet International Cricket Stadium",
-        "country": {
-          "code": "BGD",
-          "name": "Bangladesh",
-          "is_region": false,
-          "short_code": "BD",
-          "official_name": "People's Republic of Bangladesh"
-        },
-        "geolocation": "24.920976,91.8686125"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756900800,
-      "tour_key": "a-rz--cricket--icc--mbanglaefrnrqmnetherfcej6b-nRdr",
-      "sub_title": "3rd Match",
-      "short_name": "BAN vs NED",
-      "tournament": {
-        "key": "a-rz--cricket--icc--tour-mbanglaefrnrq-mnetherfcej6b-T20--2025-1sIT",
-        "name": "Netherlands tour of Bangladesh 2025",
-        "short_name": "BAN vs NED 2025",
-        "alternate_name": "Netherlands tour of Bangladesh 2025",
-        "alternate_short_name": "BAN vs NED 2025"
-      },
-      "association": {
-        "key": "c__board__icc__c2ab7ee61",
-        "code": "ICC",
-        "name": "International Cricket Council",
-        "parent": null,
-        "country": null
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756915200,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756900800,
-    "short_name": "BAN vs NED",
-    "tournament_key": "a-rz--cricket--icc--tour-mbanglaefrnrq-mnetherfcej6b-T20--2025-1sIT",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Bangladesh vs Netherlands",
-    "metric_group": "MG100",
-    "format": "t20",
-    "venue_name": "Sylhet International Cricket Stadium",
-    "team_a": "Bangladesh",
-    "team_b": "Netherlands",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--r01953314639412609052",
-    "raw": {
-      "key": "a-rz--cricket--r01953314639412609052",
-      "name": "Aries Kollam Sailors vs Kochi Blue Tigers",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "a-rz--cricket--aks-Xkhi",
-          "code": "ARKS",
-          "name": "Aries Kollam Sailors",
-          "gender_name": "Aries Kollam Sailors Men",
-          "country_code": "IND",
-          "alternate_code": "ARKS",
-          "alternate_name": "Aries Kollam Sailors"
-        },
-        "b": {
-          "key": "a-rz--cricket--kbt-9st4",
-          "code": "KBTS",
-          "name": "Kochi Blue Tigers",
-          "gender_name": "Kochi Blue Tigers Men",
-          "country_code": "IND",
-          "alternate_code": "KBTS",
-          "alternate_name": "Kochi Blue Tigers"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__greenfield_stadium__ad7d2",
-        "city": "Thiruvananthapuram",
-        "name": "Greenfield International Stadium",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "8.5715674,76.8843885"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756905300,
-      "tour_key": null,
-      "sub_title": "28th Match",
-      "short_name": "ARKS vs KBTS",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-        "name": "Kerala Cricket League , 2025",
-        "short_name": "KCLT20",
-        "alternate_name": "Kerala Cricket League , 2025",
-        "alternate_short_name": "KCLT20"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756919700,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756905300,
-    "short_name": "ARKS vs KBTS",
-    "tournament_key": "a-rz--cricket--bcci--kclt2-4hbn--2025-30CI",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Aries Kollam Sailors vs Kochi Blue Tigers",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Greenfield International Stadium",
-    "team_a": "Aries Kollam Sailors",
-    "team_b": "Kochi Blue Tigers",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--zM1955986786027188227",
-    "raw": {
-      "key": "a-rz--cricket--zM1955986786027188227",
-      "name": "TBC vs TBC",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        },
-        "b": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__bharat_ratna_shri_atalbihari_vajpayee_ekana_cricket_stadium__121e9",
-        "city": "Lucknow",
-        "name": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        },
-        "geolocation": "26.8113358,81.0153562"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756908000,
-      "tour_key": null,
-      "sub_title": "2nd Match",
-      "short_name": "TBC vs TBC",
-      "tournament": {
-        "key": "a-rz--cricket--bcci--uttar-pradesh-t20-league-8d183--2025-sX11",
-        "name": "Uttar Pradesh T20 League, 2025",
-        "short_name": "UPT20L",
-        "alternate_name": "Uttar Pradesh T20 League, 2025",
-        "alternate_short_name": "UPT20L"
-      },
-      "association": {
-        "key": "c__board__bcci__b13f0",
-        "code": "BCCI",
-        "name": "Board of Control for Cricket in India",
-        "parent": null,
-        "country": {
-          "code": "IND",
-          "name": "India",
-          "is_region": false,
-          "short_code": "IN",
-          "official_name": "Republic of India"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756922400,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756908000,
-    "short_name": "TBC vs TBC",
-    "tournament_key": "a-rz--cricket--bcci--uttar-pradesh-t20-league-8d183--2025-sX11",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "TBC vs TBC",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
-    "team_a": "TBC",
-    "team_b": "TBC",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--g11958409529163141121",
-    "raw": {
-      "key": "a-rz--cricket--g11958409529163141121",
-      "name": "TBC vs TBC",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        },
-        "b": {
-          "key": "tbc",
-          "code": "TBC",
-          "name": "TBC",
-          "gender_name": "TBC Men",
-          "country_code": null,
-          "alternate_code": "TBC",
-          "alternate_name": "TBC"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__icc_academy_dubai__6013e",
-        "city": "دبي",
-        "name": "ICC Academy Dubai",
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        },
-        "geolocation": "25.037467,55.2266644"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756911600,
-      "tour_key": null,
-      "sub_title": "Final Match",
-      "short_name": "TBC vs TBC",
-      "tournament": {
-        "key": "a-rz--cricket--ecb-uae--id-ByqW--2025-2A2R",
-        "name": "DP World ILT20 Development Tournament, 2025",
-        "short_name": "ID",
-        "alternate_name": "DP World ILT20 Development Tournament, 2025",
-        "alternate_short_name": "ID"
-      },
-      "association": {
-        "key": "c__board__ecb__df9f3",
-        "code": "ECB",
-        "name": "Emirates Cricket Board",
-        "parent": null,
-        "country": {
-          "code": "ARE",
-          "name": "United Arab Emirates",
-          "is_region": false,
-          "short_code": "AE",
-          "official_name": "United Arab Emirates"
-        }
-      },
-      "metric_group": "MG101",
-      "expected_start_at": null,
-      "estimated_end_date": 1756926000,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756911600,
-    "short_name": "TBC vs TBC",
-    "tournament_key": "a-rz--cricket--ecb-uae--id-ByqW--2025-2A2R",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "TBC vs TBC",
-    "metric_group": "MG101",
-    "format": "t20",
-    "venue_name": "ICC Academy Dubai",
-    "team_a": "TBC",
-    "team_b": "TBC",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--xW1880195448447369278",
-    "raw": {
-      "key": "a-rz--cricket--xW1880195448447369278",
-      "name": "Surrey vs Northamptonshire",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "sur",
-          "code": "SURR",
-          "name": "Surrey",
-          "gender_name": "Surrey Men",
-          "country_code": "GBR",
-          "alternate_code": "SURR",
-          "alternate_name": "Surrey"
-        },
-        "b": {
-          "key": "nor",
-          "code": "NOR",
-          "name": "Northamptonshire",
-          "gender_name": "Northamptonshire Men",
-          "country_code": "GBR",
-          "alternate_code": "NOR",
-          "alternate_name": "Northamptonshire"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__kennington_oval__d4dbd",
-        "city": "London",
-        "name": "Kennington Oval",
-        "country": {
-          "code": "GBR",
-          "name": "United Kingdom",
-          "is_region": false,
-          "short_code": "GB",
-          "official_name": "United Kingdom of Great Britain and Northern Ireland"
-        },
-        "geolocation": "51.4830078,-0.1157218"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756920600,
-      "tour_key": null,
-      "sub_title": "Quarter Final 1",
-      "short_name": "SURR vs NOR",
-      "tournament": {
-        "key": "a-rz--cricket--ecb--t20blast--2025-cB0d",
-        "name": "Vitality T20 Blast, 2025",
-        "short_name": "T20BLAST",
-        "alternate_name": "Vitality T20 Blast, 2025",
-        "alternate_short_name": "T20BLAST"
-      },
-      "association": {
-        "key": "c__board__england_and_wales_cricket_board__2e965",
-        "code": "ECB",
-        "name": "England and Wales Cricket Board",
-        "parent": null,
-        "country": {
-          "code": "GBR",
-          "name": "United Kingdom",
-          "is_region": false,
-          "short_code": "GB",
-          "official_name": "United Kingdom of Great Britain and Northern Ireland"
-        }
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756935000,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756920600,
-    "short_name": "SURR vs NOR",
-    "tournament_key": "a-rz--cricket--ecb--t20blast--2025-cB0d",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Surrey vs Northamptonshire",
-    "metric_group": "MG100",
-    "format": "t20",
-    "venue_name": "Kennington Oval",
-    "team_a": "Surrey",
-    "team_b": "Northamptonshire",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  },
-  {
-    "match_key": "a-rz--cricket--s91923722486944501839",
-    "raw": {
-      "key": "a-rz--cricket--s91923722486944501839",
-      "name": "Trinbago Knight Riders vs Saint Lucia Kings",
-      "sport": "cricket",
-      "teams": {
-        "a": {
-          "key": "tkr",
-          "code": "TKR",
-          "name": "Trinbago Knight Riders",
-          "gender_name": "Trinbago Knight Riders Men",
-          "country_code": "WIN",
-          "alternate_code": "TKR",
-          "alternate_name": "Trinbago Knight Riders"
-        },
-        "b": {
-          "key": "sls",
-          "code": "SLK",
-          "name": "Saint Lucia Kings",
-          "gender_name": "Saint Lucia Kings Men",
-          "country_code": "WIN",
-          "alternate_code": "SLK",
-          "alternate_name": "Saint Lucia Kings"
-        }
-      },
-      "venue": {
-        "key": "c__stadium__the_brian_lara_cricket_academy__d80f6",
-        "city": "San Fernando",
-        "name": "Brian Lara Cricket Academy",
-        "country": {
-          "code": "TTO",
-          "name": "Trinidad and Tobago",
-          "is_region": false,
-          "short_code": "TT",
-          "official_name": "Republic of Trinidad and Tobago"
-        },
-        "geolocation": "10.2961531,-61.431192"
-      },
-      "format": "t20",
-      "gender": "male",
-      "status": "not_started",
-      "winner": null,
-      "messages": [],
-      "start_at": 1756940400,
-      "tour_key": null,
-      "sub_title": "20th Match",
-      "short_name": "TKR vs SLK",
-      "tournament": {
-        "key": "a-rz--cricket--cwi--cplt20--2025-rbVl",
-        "name": "Caribbean Premier League, 2025",
-        "short_name": "CPLT20",
-        "alternate_name": "Caribbean Premier League, 2025",
-        "alternate_short_name": "CPLT20"
-      },
-      "association": {
-        "key": "c__board__cwi__b3ce9",
-        "code": "CWI",
-        "name": "Cricket West Indies",
-        "parent": null,
-        "country": {
-          "code": "WIN",
-          "name": "West Indies",
-          "is_region": true,
-          "short_code": "WI",
-          "official_name": null
-        }
-      },
-      "metric_group": "MG100",
-      "expected_start_at": null,
-      "estimated_end_date": 1756954800,
-      "completed_date_approximate": null
-    },
-    "start_at": 1756940400,
-    "short_name": "TKR vs SLK",
-    "tournament_key": "a-rz--cricket--cwi--cplt20--2025-rbVl",
-    "created_at": "2025-09-01T07:59:28.086254+00:00",
-    "name": "Trinbago Knight Riders vs Saint Lucia Kings",
-    "metric_group": "MG100",
-    "format": "t20",
-    "venue_name": "Brian Lara Cricket Academy",
-    "team_a": "Trinbago Knight Riders",
-    "team_b": "Saint Lucia Kings",
-    "status": "not_started",
-    "result_msg": null,
-    "display_on_frontend": false,
-    "contests_generated": false,
-    "contests_updated_at": null
-  }
-]
+  "error": null,
+  "http_status_code": 200
+}

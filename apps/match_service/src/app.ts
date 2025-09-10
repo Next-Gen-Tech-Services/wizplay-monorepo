@@ -4,6 +4,8 @@ import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import AuthRouter from "./routes/match.router";
 import { UserEvents } from "./utils/events/user.events";
+import matchCrons from "./utils/jobs/match";
+
 import {
   connectProducer,
   publishUserEvent,
@@ -39,6 +41,16 @@ const BrokerInit = async () => {
   }
 };
 
+const CronsInit = async () => {
+  try {
+    logger.info("Waiting for crons to be initialized...");
+    await matchCrons.scheduleJob();
+    logger.info("Cron jobs scheduled successfully");
+  } catch (error) {
+    logger.error("Failed to initialize cron jobs:", error);
+  }
+};
+
 const AppInit = async () => {
   const expressApp: Express = express();
 
@@ -47,6 +59,7 @@ const AppInit = async () => {
   expressApp.use(attachRequestId);
 
   await BrokerInit();
+  await CronsInit();
 
   expressApp.use("/api/v1", AuthRouter);
   expressApp.get(

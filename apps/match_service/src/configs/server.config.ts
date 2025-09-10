@@ -22,7 +22,9 @@ class ServerConfigs {
   static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
   static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
-  private constructor() { }
+  static ROANUZ_PK: string = process.env.ROANUZ_PK as string;
+  static ROANUZ_AK: string = process.env.ROANUZ_AK as string;
+  private constructor() {}
 }
 
 export default ServerConfigs;

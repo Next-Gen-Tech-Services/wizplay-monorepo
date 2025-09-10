@@ -338,3 +338,28 @@
     at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
     at listOnTimeout (node:internal/timers:608:17)
     at processTimers (node:internal/timers:543:7)
+2025-09-09T10:30:01.635Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:511:28)
+    at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:573:17)
+    at processTimers (node:internal/timers:514:7)
+2025-09-10T11:48:50.452Z error: RangeError: Invalid time value
+    at DateTimeFormat.formatToParts (<anonymous>)
+    at buildDateParts (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/time/localized-time.ts:69:28)
+    at LocalizedTime.set (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/time/localized-time.ts:48:18)
+    at findNextDateIgnoringWeekday (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/time/matcher-walker.ts:39:14)
+    at MatcherWalker.matchNext (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/time/matcher-walker.ts:94:18)
+    at TimeMatcher.getNextMatch (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/time/time-matcher.ts:37:27)
+    at getDelay (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/scheduler/runner.ts:226:31)
+    at Runner.start (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/scheduler/runner.ts:169:8)
+    at InlineScheduledTask.start (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/tasks/inline-scheduled-task.ts:89:19)
+    at Object.schedule (/Users/mihirverma/office_space/wizplay/node_modules/node-cron/src/node-cron.ts:46:10)
+2025-09-10T11:51:00.971Z error: [apps/match_service/src/utils/jobs/match.ts:35] [MATCH-CRON] Error in auth api Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'res' -> object with constructor 'IncomingMessage'
+    --- property 'req' closes the circle
+2025-09-10T11:52:00.316Z error: [apps/match_service/src/utils/jobs/match.ts:35] [MATCH-CRON] Error in auth api Converting circular structure to JSON
+    --> starting at object with constructor 'ClientRequest'
+    |     property 'res' -> object with constructor 'IncomingMessage'
+    --- property 'req' closes the circle
