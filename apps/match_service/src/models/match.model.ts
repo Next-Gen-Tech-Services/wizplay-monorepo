@@ -8,6 +8,7 @@ interface MatchCreationAttrs
     | "createdAt"
     | "updatedAt"
     | "tournamentKey"
+    | "subTitle"
     | "endedAt"
     | "expectedStartedAt"
   > {}
@@ -16,6 +17,7 @@ export class Match
   extends Model<IMatchAttrs, MatchCreationAttrs>
   implements IMatchAttrs
 {
+  subTitle: string | null;
   public id!: string;
   public key!: string;
   public sport!: string;
@@ -84,6 +86,11 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
       },
       winner: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+      },
+      subTitle: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,

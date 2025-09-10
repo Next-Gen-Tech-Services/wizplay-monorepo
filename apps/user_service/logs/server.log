@@ -1811,3 +1811,24 @@
 2025-09-10T11:57:44.899Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
 2025-09-10T11:57:44.900Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"123","email":"abc@test.com"}
 2025-09-10T11:57:44.900Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 123 | undefined
+2025-09-10T18:30:07.401Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-10T18:30:07.706Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T18:30:08.594Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-10T18:30:08.674Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T18:30:11.295Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T18:30:11.302Z info: [apps/user_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-10T18:30:16.339Z info: [apps/user_service/src/app.ts:18] Successfully created topics
+2025-09-10T18:30:19.368Z info: [apps/user_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-10T18:30:19.368Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T18:30:19.389Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"206","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T18:30:19.389Z info: [apps/user_service/src/app.ts:29] Test event published successfully
+2025-09-10T18:30:19.391Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-10T18:30:19.408Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-10T18:30:19.408Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T18:30:19.409Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 123 | undefined
+2025-09-10T18:30:19.420Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-10T18:30:19.420Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T18:30:19.420Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 123 | undefined
+2025-09-10T18:30:19.429Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-10T18:30:19.430Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T18:30:19.430Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 123 | undefined

@@ -5,7 +5,7 @@ export interface ITeamSide {
   alternate_name?: string;
   alternate_code?: string;
   gender_name?: string;
-  country_code?: string;
+  country_code?: string | null;
 }
 
 export interface ITeams {
@@ -22,6 +22,7 @@ export interface IMatchAttrs {
   tournamentKey?: string | null;
   name: string;
   shortName: string;
+  subTitle: string | null;
   status: string;
   metricGroup: string;
   teams: ITeams;

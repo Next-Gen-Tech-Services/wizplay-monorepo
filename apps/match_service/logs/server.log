@@ -2762,3 +2762,52 @@
   "http_status_code": 200
 }
 2025-09-10T12:00:00.366Z info: [apps/match_service/src/utils/jobs/match.ts:43] [MATCH-CRON] cron job executed
+2025-09-10T18:30:07.414Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T18:30:07.706Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T18:30:08.971Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T18:30:09.023Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T18:30:11.177Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T18:30:11.181Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T18:30:16.217Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T18:30:19.263Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T18:30:19.265Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T18:30:19.280Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"205","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T18:30:19.280Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T18:30:19.281Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T18:30:19.299Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T18:30:19.301Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T18:30:19.305Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T18:30:19.306Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T18:30:19.317Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T18:30:19.317Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T18:30:19.387Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T18:30:19.387Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T18:31:00.036Z info: [apps/match_service/src/utils/jobs/match.ts:84] [MATCH-CRON] cron job scheduled
+2025-09-10T18:31:00.493Z info: [apps/match_service/src/utils/jobs/match.ts:35] [MATCH-CRON] auth response: 200
+2025-09-10T18:31:01.002Z info: [apps/match_service/src/utils/jobs/match.ts:58] [MATCH-CRON] match response: 200
+2025-09-10T18:31:01.052Z info: [apps/match_service/src/utils/jobs/match.ts:87] [MATCH-CRON] cron job executed
+2025-09-10T19:17:23.806Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T19:17:24.051Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T19:17:26.263Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T19:17:26.264Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T19:17:31.295Z info: [apps/match_service/src/app.ts:23] Successfully created topics
+2025-09-10T19:17:34.371Z info: [apps/match_service/src/app.ts:27] Successfully subscribed to user events
+2025-09-10T19:17:34.372Z warn: [packages/common/dist/broker/kafka-client.js:53] Producer already connected!
+2025-09-10T19:17:34.391Z info: [packages/common/dist/broker/kafka-client.js:97] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"207","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-10T19:17:34.392Z info: [apps/match_service/src/app.ts:34] Test event published successfully
+2025-09-10T19:17:34.392Z info: [apps/match_service/src/app.ts:46] Waiting for crons to be initialized...
+2025-09-10T19:17:34.406Z info: [apps/match_service/src/app.ts:48] Cron jobs scheduled successfully
+2025-09-10T19:17:34.409Z info: [apps/match_service/src/server.ts:19] Server started at PORT: 4003
+2025-09-10T19:17:34.431Z info: [apps/match_service/src/utils/kafka.ts:31] Received message:
+2025-09-10T19:17:34.431Z info: [apps/match_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"123","email":"abc@test.com"}
+2025-09-10T19:18:00.019Z info: [apps/match_service/src/utils/jobs/match.ts:87] [MATCH-CRON] cron job scheduled
+2025-09-10T19:18:00.501Z info: [apps/match_service/src/utils/jobs/match.ts:38] [MATCH-CRON] auth response: 200
+2025-09-10T19:18:01.020Z info: [apps/match_service/src/utils/jobs/match.ts:61] [MATCH-CRON] match response: 200
+2025-09-10T19:18:01.134Z info: [apps/match_service/src/repositories/match.repository.ts:26] Inserted bulk data inside matches
+2025-09-10T19:18:01.134Z info: [apps/match_service/src/utils/jobs/match.ts:93] Data inserted successfully: [object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match],[object SequelizeInstance:Match]
+2025-09-10T19:18:01.134Z info: [apps/match_service/src/utils/jobs/match.ts:94] [MATCH-CRON] cron job executed
+2025-09-10T19:18:21.475Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-10T19:18:21.714Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-10T19:18:25.676Z info: [apps/match_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-10T19:18:25.681Z info: [apps/match_service/src/app.ts:18] Waiting for Kafka to be ready...
+2025-09-10T19:18:30.720Z info: [apps/match_service/src/app.ts:23] Successfully created topics
