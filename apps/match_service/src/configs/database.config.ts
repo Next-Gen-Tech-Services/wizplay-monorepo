@@ -32,12 +32,25 @@ const TournamentInstance = tournamentModel(sequelize);
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ force: true });
     logger.info("Database connection established ✅");
   } catch (error: any) {
     logger.error(`Error connecting database: ${error} `);
   }
 }
+
+// associations declared here
+TournamentInstance.hasMany(MatchInstance, {
+  foreignKey: "tournamentKey",
+  sourceKey: "key",
+  as: "matches",
+});
+
+MatchInstance.belongsTo(Tournament, {
+  foreignKey: "tournamentKey",
+  targetKey: "key",
+  as: "tournaments",
+});
 
 export const DB: IDatabase = {
   Sequelize,

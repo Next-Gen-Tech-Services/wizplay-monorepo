@@ -5,6 +5,7 @@ import { URLSearchParams } from "url";
 import redis from "../../configs/redis.config";
 import ServerConfigs from "../../configs/server.config";
 import MatchRepository from "../../repositories/match.repository";
+import TournamentRepository from "../../repositories/tournament.repository";
 import { extractMatches, formatMatchData } from "../formatMatchData";
 
 class MatchCrons {
@@ -12,12 +13,14 @@ class MatchCrons {
   private roanuzPK: string;
   private roanuzAK: string;
   private matchRepository: MatchRepository;
+  private tournamentRepository: TournamentRepository;
 
   constructor() {
     this.authToken = null;
     this.roanuzAK = ServerConfigs.ROANUZ_AK;
     this.roanuzPK = ServerConfigs.ROANUZ_PK;
     this.matchRepository = new MatchRepository();
+    this.tournamentRepository = new TournamentRepository();
   }
 
   async generateApiToken() {
@@ -83,13 +86,13 @@ class MatchCrons {
   }
 
   async scheduleJob() {
-    cron.schedule("* * * * *", async () => {
+    cron.schedule("0 0 * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
       const token = await this.generateApiToken();
       const { matches, tournaments } = await this.getMatchData();
-      const insertResult =
-        await this.matchRepository.createBulkMatches(matches);
 
+      await this.tournamentRepository.createBulkTournaments(tournaments);
+      await this.matchRepository.createBulkMatches(matches);
       logger.info("[MATCH-CRON] cron job executed");
     });
   }

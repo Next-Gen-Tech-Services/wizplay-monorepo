@@ -98,13 +98,14 @@ export default class Service {
         await publishUserEvent(UserEvents.USER_SIGNUP, {
           userId: verifiedUser.userId,
           authId: verifiedUser.id,
+          email: verifiedUser.email,
         });
         logger.debug("signup event published");
       }
 
       return {
         data: verifiedUser,
-        messsage: "OTP verification successfull",
+        message: "OTP verification successfull",
       };
     } catch (error: any) {
       throw new ServerError(error?.message);

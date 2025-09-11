@@ -2,7 +2,6 @@
 import { logger } from "@repo/common";
 import AppInit from "./app";
 import { connectDatabase } from "./configs/database.config";
-import rabbitmqInstance from "./configs/rabbitmq.config";
 import redis from "./configs/redis.config";
 import ServerConfigs from "./configs/server.config";
 import { shutDown } from "./utils/shutdown";
@@ -12,7 +11,7 @@ async function startServer() {
 
   await redis.connectClient();
 
-  await rabbitmqInstance.connectClient();
+  // await rabbitmqInstance.connectClient();
 
   const ExpressApp = await AppInit();
   const server = ExpressApp.listen(Number(ServerConfigs.APP_PORT), () => {

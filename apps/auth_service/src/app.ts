@@ -3,12 +3,7 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import AuthRouter from "./routes/auth.router";
-import { UserEvents } from "./utils/events/user.events";
-import {
-  connectProducer,
-  publishUserEvent,
-  subscribeToUserEvents,
-} from "./utils/kafka";
+import { connectProducer, subscribeToUserEvents } from "./utils/kafka";
 
 const BrokerInit = async () => {
   try {
@@ -23,13 +18,6 @@ const BrokerInit = async () => {
     // start consuming events
     await subscribeToUserEvents();
     logger.info("Successfully subscribed to user events");
-
-    // Example publishing event (maybe move this to after server starts)
-    await publishUserEvent(UserEvents.USER_SIGNUP, {
-      userId: "123",
-      email: "abc@test.com",
-    });
-    logger.info("Test event published successfully");
   } catch (error) {
     logger.error("Failed to initialize Kafka broker:", error);
     setTimeout(async () => {

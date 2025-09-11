@@ -1,6 +1,7 @@
 import { logger } from "@repo/common";
 import { randomUUID } from "node:crypto";
 import { IMatchAttrs } from "../dtos/match.dto";
+import { ITournamentAtters } from "../dtos/tournament.dto";
 import { IMatch, IScheduleResponse } from "../interfaces/match";
 
 export function extractMatches(data: IScheduleResponse): any {
@@ -54,7 +55,15 @@ export function formatMatchData(data: IMatch[]): any {
       allMatches.push(tempMatchObject);
 
       if (Object.keys(currMatch.tournament).length) {
-        allTournaments[currMatch.tournament.key] = currMatch.tournament;
+        let tempTourObject: ITournamentAtters = {
+          id: randomUUID(),
+          key: currMatch.tournament.key,
+          name: currMatch.tournament.name,
+          shortName: currMatch?.tournament?.short_name,
+          alternateName: currMatch?.tournament?.alternate_name,
+          alternateShortName: currMatch?.tournament?.alternate_short_name,
+        };
+        allTournaments[currMatch?.tournament?.key] = tempTourObject;
       }
     }
 

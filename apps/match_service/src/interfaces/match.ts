@@ -77,3 +77,20 @@ export interface IAssociation {
   country: ICountry | null;
   parent: any | null; // adjust if you know the structure
 }
+
+export interface IMatchFilters {
+  sport?: string | undefined;
+  format?: string | undefined;
+  gender?: string | undefined;
+  status?: string | undefined;
+  tournamentKey?: string | undefined;
+  winner?: string | undefined;
+  name?: string | undefined;
+  shortName?: string | undefined;
+  metricGroup?: string | undefined;
+  startedAfter?: string | undefined;
+  startedBefore?: string | undefined;
+  teamName?: string | undefined;
+  limit?: number;
+  offset?: number;
+}

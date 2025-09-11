@@ -275,3 +275,11 @@
 2025-09-08T11:47:31.413Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
 2025-09-08T11:48:23.300Z error: Error: read ETIMEDOUT
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-11T06:11:07.887Z error: [apps/user_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-11T06:11:08.540Z error: [apps/user_service/src/configs/database.config.ts:35] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-11T06:49:46.309Z error: Error: read EHOSTUNREACH
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2025-09-11T08:21:52.342Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2025-09-11T08:44:01.151Z error: [apps/user_service/src/repositories/user.repository.ts:35] [Error creating new user: notNull Violation: User.authId cannot be null]
+2025-09-11T08:46:26.641Z error: [apps/user_service/src/repositories/user.repository.ts:35] [Error creating new user: notNull Violation: User.authId cannot be null]

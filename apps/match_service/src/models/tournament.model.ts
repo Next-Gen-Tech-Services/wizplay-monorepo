@@ -11,7 +11,7 @@ export class Tournament
   public id!: string;
   public key!: string;
   public name!: string;
-  public shortName!: string;
+  public shortName!: string | null;
   public alternateName!: string;
   public alternateShortName!: string;
 
@@ -38,7 +38,8 @@ export default function (sequelize: Sequelize) {
       },
       shortName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
       },
       alternateName: {
         type: DataTypes.STRING,

@@ -36,7 +36,7 @@ class UserEventHandler {
 
   private async handleUserSignup(message: any): Promise<boolean> {
     const { userId, email, authId } = message.data;
-
+    const result = await this.userRepository.createUser(userId, authId);
     logger.info(
       `User signup processed successfully for userId: ${userId} | ${authId}`
     );

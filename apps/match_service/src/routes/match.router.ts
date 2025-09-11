@@ -10,15 +10,13 @@ const controller: MatchController = container.resolve(MatchController);
 
 // GET /matches
 router.get(
-  "match/get-all-matches",
+  "/matches",
   listMatchesValidator(),
   validateRequest,
-  async (req: Request, res: Response) => controller.getAll(req, res)
-);
-
-// GET /get-match/:match_key
-router.get("match/get-match/:match_key", async (req: Request, res: Response) =>
-  controller.getById(req, res)
+  async (req: Request, res: Response) => {
+    const result = await controller.getAllMatches(req, res);
+    return result;
+  }
 );
 
 export default router;

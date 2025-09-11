@@ -1,39 +1,20 @@
-import { MatchListQuery } from "@/types/subscription.type";
+import { BadRequestError } from "@repo/common";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
+import { IMatchFilters } from "../interfaces/match";
 import MatchRepository from "../repositories/match.repository";
 
 @autoInjectable()
 export default class MatchService {
-  constructor(private readonly repo?: MatchRepository) {}
+  constructor(private readonly matchRepository: MatchRepository) {}
 
-  public async getAll(query: MatchListQuery) {
-    const { count, rows } = await this.repo!.list(query);
-    const items = rows.map((m: any) => {
-      const plain = m.toJSON();
-      return {
-        ...plain,
-        start_at_iso: plain.start_at
-          ? new Date(plain.start_at).toISOString()
-          : null,
-      };
-    });
-    return { count, items };
-  }
+  public async fetchAllMatchesWithFilters(query: IMatchFilters) {
+    try {
+      const matches = await this.matchRepository.fetchAllMatches(query);
 
-  public async getByMatchKey(match_key: string) {
-    const found = await this.repo!.findByKey(match_key);
-    if (!found) {
-      const err: any = new Error("Match not found");
-      err.statusCode = 404;
-      throw err;
+      return matches;
+    } catch (error: any) {
+      throw new BadRequestError(error.message);
     }
-    const plain = found.toJSON();
-    return {
-      ...plain,
-      start_at_iso: plain.start_at
-        ? new Date(plain.start_at).toISOString()
-        : null,
-    };
   }
 }

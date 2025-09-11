@@ -363,3 +363,22 @@
     --> starting at object with constructor 'ClientRequest'
     |     property 'res' -> object with constructor 'IncomingMessage'
     --- property 'req' closes the circle
+2025-09-11T06:11:07.901Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-11T06:11:08.556Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-11T06:13:21.770Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:13:22.616Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:18:16.792Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:18:18.894Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:18:30.262Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:19:02.482Z error: [apps/match_service/src/repositories/tournament.repository.ts:32] Database Error: SequelizeDatabaseError: null value in column "short_name" of relation "tournaments" violates not-null constraint
+2025-09-11T06:20:52.725Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:20:53.542Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T06:24:06.828Z error: [apps/match_service/src/repositories/tournament.repository.ts:32] Database Error: SequelizeDatabaseError: null value in column "short_name" of relation "tournaments" violates not-null constraint
+2025-09-11T06:29:54.558Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-11T07:18:57.682Z error: [packages/common/dist/middlewares/error.middleware.js:22] No matches found | Req-ID:240a7a71-17ff-4d77-881c-3e555fa23d5c | URL:/api/v1/matches?sport=cricket&limit=10&offset=20&unknownField=123
+2025-09-11T07:20:04.275Z error: [packages/common/dist/middlewares/error.middleware.js:22] No matches found | Req-ID:b3720974-d544-4b9c-94f2-5c6ff170f65a | URL:/api/v1/matches?sport=cricket&limit=10&offset=20
+2025-09-11T07:26:32.391Z error: [packages/common/dist/middlewares/error.middleware.js:22] No matches found | Req-ID:332b7797-d865-46ee-84aa-e4a71a65b80c | URL:/api/v1/matches?sport=cricket&limit=10&offset=20
+2025-09-11T07:27:40.033Z error: [packages/common/dist/middlewares/error.middleware.js:22] No matches found | Req-ID:6c27daf2-6a19-42df-a258-14f20c5f0483 | URL:/api/v1/matches?sport=cricket&limit=10&offset=20
+2025-09-11T07:33:04.630Z error: [packages/common/dist/middlewares/error.middleware.js:22] No matches found | Req-ID:c757697e-c0eb-476f-a9d7-afebfe784a14 | URL:/api/v1/matches?sport=cricket&limit=10&offset=20
+2025-09-11T08:21:42.997Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
