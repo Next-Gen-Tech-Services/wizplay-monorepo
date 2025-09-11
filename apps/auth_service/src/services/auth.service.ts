@@ -12,7 +12,7 @@ import { autoInjectable } from "tsyringe";
 import Redis, { IRedis } from "../configs/redis.config";
 import ServerConfigs from "../configs/server.config";
 import AuthRepository from "../repositories/auth.repository";
-import { UserEvents } from "../utils/events/user.events";
+import { KAFKA_EVENTS } from "../types";
 import { publishUserEvent } from "../utils/kafka";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
@@ -95,16 +95,26 @@ export default class Service {
 
       if (!verifiedUser.onboarded) {
         // create user inside user-service
-        await publishUserEvent(UserEvents.USER_SIGNUP, {
+        await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
           userId: verifiedUser.userId,
           authId: verifiedUser.id,
-          email: verifiedUser.email,
+          phoneNumber: verifiedUser.phoneNumber,
         });
         logger.debug("signup event published");
+      } else {
+        logger.warn("user is already onboarded");
       }
+
+      const token = generateToken(
+        {
+          session_id: `${verifiedUser.id}:${verifiedUser.userId}:${verifiedUser.phoneNumber}`,
+        },
+        ServerConfigs.TOKEN_SECRET
+      );
 
       return {
         data: verifiedUser,
+        token: token,
         message: "OTP verification successfull",
       };
     } catch (error: any) {

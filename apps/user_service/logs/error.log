@@ -283,3 +283,17 @@
     at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
 2025-09-11T08:44:01.151Z error: [apps/user_service/src/repositories/user.repository.ts:35] [Error creating new user: notNull Violation: User.authId cannot be null]
 2025-09-11T08:46:26.641Z error: [apps/user_service/src/repositories/user.repository.ts:35] [Error creating new user: notNull Violation: User.authId cannot be null]
+2025-09-11T13:51:39.211Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2025-09-11T15:37:29.634Z error: [packages/common/dist/middlewares/error.middleware.js:22] Unauthorized access | Req-ID:ee49b75e-d28d-4ed0-b57d-27338aa070f8 | URL:/api/v1/user
+2025-09-11T15:38:48.147Z error: [packages/common/dist/middlewares/error.middleware.js:22] Unauthorized access | Req-ID:9ee81dbe-aea7-4669-9e2b-4e5f3cfcbfdf | URL:/api/v1/user
+2025-09-11T15:40:32.944Z error: [apps/user_service/src/middlewares/auth.middleware.ts:54] [MIDDLEWARE]: JsonWebTokenError: invalid signature
+2025-09-11T15:40:32.945Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:17b17564-580e-4caf-800f-213cb888a2bc | URL:/api/v1/user
+2025-09-11T15:42:24.567Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: TypeError: Cannot read properties of undefined (reading 'split')
+2025-09-11T15:42:24.568Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:385f21d3-301e-48b2-a670-418dbcb75de5 | URL:/api/v1/user
+2025-09-11T15:43:41.836Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: TypeError: Cannot read properties of undefined (reading 'split')
+2025-09-11T15:43:41.836Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a6d8724d-9eeb-4794-9d05-9241d2a18043 | URL:/api/v1/user
+2025-09-11T15:46:02.241Z error: [apps/user_service/src/repositories/user.repository.ts:66] [Error creating new user: invalid input syntax for type uuid: "lakshay versane"]
+2025-09-11T15:46:02.242Z error: [packages/common/dist/middlewares/error.middleware.js:22] error updating user name | Req-ID:cc56b57c-cd26-44d1-b2b0-deb6cce87212 | URL:/api/v1/user
+2025-09-11T15:56:05.967Z error: Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)

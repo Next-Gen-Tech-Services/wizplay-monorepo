@@ -5,6 +5,7 @@ export interface IUserAtters {
   userId: string;
   authId: string;
   email?: string | null;
+  name?: string | null;
   userName: string;
   phoneNumber?: string | null;
   onboarded: boolean;

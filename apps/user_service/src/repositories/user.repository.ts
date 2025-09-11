@@ -1,6 +1,7 @@
 import { logger } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
-import { Language } from "../types";
+import { KAFKA_EVENTS, Language } from "../types";
+import { publishUserEvent } from "../utils/kafka";
 import { generateUniqueUsername } from "../utils/username";
 
 export default class UserRepository {
@@ -8,8 +9,6 @@ export default class UserRepository {
   constructor() {
     this._DB = DB;
   }
-
-  public async getTestData(): Promise<any> {}
 
   public async createUser(
     userId: string,
@@ -30,9 +29,49 @@ export default class UserRepository {
           returning: true,
         }
       );
+
+      if (newUser) {
+        await publishUserEvent(KAFKA_EVENTS.USER_ONBOARDED, {
+          userId: newUser.userId,
+          authId: newUser.authId,
+        });
+      }
       return newUser;
     } catch (error: any) {
       logger.error(`[Error creating new user: ${error.message}]`);
+    }
+  }
+
+  public async getUserWithId(userId: string, authId: string): Promise<any> {
+    try {
+      const user = await this._DB.User.findOne({
+        where: {
+          userId: userId,
+          authId: authId,
+        },
+      });
+      return user;
+    } catch (error: any) {
+      logger.error(`[Error creating new user: ${error.message}]`);
+    }
+  }
+
+  public async updateNameWithId(userId: string, name: string): Promise<any> {
+    try {
+      const user = await this._DB.User.update(
+        {
+          name: name,
+        },
+        {
+          where: {
+            userId: userId,
+          },
+          returning: true,
+        }
+      );
+      return user;
+    } catch (error: any) {
+      logger.error(`[Error updating user name: ${error.message}]`);
     }
   }
 }

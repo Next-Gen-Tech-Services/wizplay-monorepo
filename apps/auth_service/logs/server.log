@@ -5071,3 +5071,775 @@
 2025-09-11T09:02:39.329Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
 2025-09-11T09:02:53.036Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
 2025-09-11T09:02:53.040Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T13:31:10.002Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T13:31:10.945Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T13:31:10.998Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T13:31:10.999Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T13:31:16.014Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T13:31:19.069Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T13:31:19.073Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T13:32:55.926Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T13:32:55.934Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T13:32:59.522Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T13:32:59.539Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"283","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T13:32:59.542Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-11T13:32:59.542Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T13:32:59.561Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T13:51:55.486Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T13:51:55.783Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T13:51:55.784Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T13:52:00.804Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T13:52:21.234Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T13:52:21.238Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:01:44.089Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:01:44.398Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:01:44.399Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:01:49.416Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:01:52.347Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:01:52.406Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:01:52.408Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:01:57.424Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:04:35.295Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:04:36.249Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:04:36.311Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:04:36.313Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:04:41.329Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:04:44.357Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:04:44.359Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:04:47.631Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T14:04:47.637Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T14:04:51.005Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T14:04:51.022Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"284","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T14:04:51.027Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-11T14:04:51.027Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T14:04:51.036Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T14:05:48.690Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:05:48.952Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:05:48.953Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:05:53.973Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:06:16.193Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:06:16.197Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:06:42.754Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T14:06:42.762Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T14:06:53.411Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T14:06:53.426Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"285","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T14:06:53.429Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-11T14:06:53.429Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T14:06:53.447Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T14:07:30.207Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:07:30.506Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:07:30.508Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:07:35.541Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:07:58.528Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:07:58.532Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:08:07.548Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T14:08:07.555Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T14:08:09.816Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T14:08:09.835Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"286","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T14:08:09.838Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-11T14:08:09.838Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T14:08:09.852Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T14:08:58.322Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:08:58.588Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:08:58.590Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:09:03.632Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:09:24.995Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:09:25.014Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:09:33.021Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:09:33.454Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:09:33.457Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:09:38.523Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:10:00.089Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:10:00.107Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:15:06.635Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:15:06.956Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:15:06.959Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:15:11.996Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:15:35.558Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:15:35.563Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:15:38.692Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:15:39.002Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:15:39.005Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:15:44.035Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:16:05.580Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:16:05.585Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:17:15.239Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:17:15.570Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:17:15.572Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:17:20.612Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:17:40.770Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:17:40.777Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:17:42.433Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:17:42.662Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:17:42.664Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:17:47.696Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:18:01.164Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:18:02.114Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:18:02.116Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:18:07.153Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:18:12.298Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:18:12.359Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:18:12.360Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:18:17.391Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:18:47.466Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:18:47.475Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:18:49.187Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:18:49.513Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:18:49.519Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:18:54.561Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:19:17.490Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:19:17.505Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T14:21:40.544Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:21:40.823Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:21:40.824Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:21:45.860Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:22:03.827Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:22:04.073Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:22:04.074Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:22:09.112Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:22:35.786Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:22:36.040Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:22:36.042Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T14:22:41.141Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T14:23:07.732Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T14:23:07.740Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T15:31:24.547Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:31:24.979Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:31:24.997Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T15:31:26.578Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:31:26.631Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:31:26.632Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T15:31:31.675Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T15:31:34.724Z info: [apps/auth_service/src/app.ts:20] Successfully subscribed to user events
+2025-09-11T15:31:34.728Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T15:31:56.942Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T15:31:56.959Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T15:32:01.875Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T15:32:01.899Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"287","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T15:32:01.910Z info: [apps/auth_service/src/utils/kafka.ts:31] Received message:
+2025-09-11T15:32:01.910Z info: [apps/auth_service/src/utils/kafka.ts:34] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T15:32:01.931Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T16:03:33.757Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:03:34.021Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:03:34.023Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:03:39.061Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:03:39.062Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:03:39.063Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:03:49.063Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:03:49.064Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:03:54.067Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:03:54.070Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:03:54.072Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:04:04.072Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:04:04.073Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:04:09.075Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:04:09.075Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:04:09.076Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:04:19.010Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:04:19.368Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:04:19.372Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:04:21.667Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:04:21.739Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:04:21.741Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:04:26.774Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:04:26.774Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:04:26.776Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:04:36.777Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:04:36.778Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:04:41.782Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:04:41.783Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:04:41.783Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:04:51.787Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:04:51.788Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:04:56.789Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:04:56.790Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:04:56.790Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:05:05.395Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:05:05.735Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:05:05.736Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:05:08.134Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:05:08.186Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:05:08.187Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:05:13.224Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:05:13.224Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:05:13.226Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:05:23.230Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:05:23.231Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:05:28.233Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:05:28.235Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:05:28.236Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:05:38.245Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:05:38.248Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:05:43.250Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:05:43.251Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:05:43.253Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:05:53.255Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:05:53.256Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:05:58.257Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:05:58.259Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:05:58.260Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:08.261Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:06:08.263Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:06:13.264Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:06:13.265Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:06:13.269Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:23.271Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:06:23.272Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:06:28.272Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:06:28.273Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:06:28.274Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:38.274Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:06:38.275Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:06:43.278Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:06:43.281Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:06:43.282Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:53.282Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:06:53.284Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:06:58.284Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:06:58.285Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:06:58.285Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:08.287Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:07:08.290Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:07:13.292Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:07:13.293Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:07:13.294Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:23.295Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:07:23.296Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:07:28.297Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:07:28.298Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:07:28.299Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:38.300Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:07:38.300Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:07:43.303Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:07:43.305Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:07:43.306Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:53.311Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:07:53.311Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:07:58.313Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:07:58.314Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:07:58.314Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:08:08.317Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:08:08.319Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:08:13.321Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:08:13.322Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:08:13.323Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:08:23.323Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:08:23.325Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:08:28.326Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:08:28.330Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:08:28.330Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:08:36.976Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:08:37.291Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:08:37.293Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:08:42.342Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:08:42.342Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:08:42.344Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:08:52.345Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:08:52.345Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:08:57.357Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:08:57.362Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:08:57.364Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:07.369Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:09:07.369Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:09:12.373Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:09:12.374Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:09:12.375Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:22.376Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:09:22.376Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:09:27.378Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:09:27.379Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:09:27.381Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:37.385Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:09:37.387Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:09:42.389Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:09:42.389Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:09:42.390Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:52.391Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:09:52.393Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:09:57.395Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:09:57.395Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:09:57.396Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:07.397Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:10:07.397Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:10:12.398Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:10:12.400Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:10:12.400Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:22.403Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:10:22.404Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:10:27.405Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:10:27.405Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:10:27.410Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:37.411Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:10:37.414Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:10:42.416Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:10:42.416Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:10:42.417Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:52.419Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:10:52.421Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:10:57.424Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:10:57.425Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:10:57.426Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:07.427Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:11:07.433Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:11:12.434Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:11:12.434Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:11:12.435Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:22.438Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:11:22.444Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:11:27.445Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:11:27.446Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:11:27.446Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:37.447Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:11:37.448Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:11:42.449Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:11:42.449Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:11:42.450Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:52.451Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:11:52.451Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:11:57.452Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:11:57.453Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:11:57.454Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:07.454Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:12:07.456Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:12:12.457Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:12:12.457Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:12:12.458Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:22.460Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:12:22.461Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:12:27.463Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:12:27.464Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:12:27.467Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:37.479Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:12:37.479Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:12:42.481Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:12:42.482Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:12:42.483Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:52.486Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:12:52.486Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:12:54.048Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T16:12:54.060Z warn: [apps/auth_service/src/services/auth.service.ts:66] updated OTP: 1
+2025-09-11T16:12:57.488Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:12:57.488Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:12:57.489Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:07.492Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:13:07.493Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:13:12.494Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:13:12.495Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:13:12.496Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:22.496Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:13:22.497Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:13:27.498Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:13:27.498Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:13:27.499Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:37.500Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:13:37.500Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:13:42.501Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:13:42.502Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:13:42.502Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:52.503Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:13:52.504Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:13:57.504Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:13:57.504Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:13:57.505Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:07.506Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:14:07.507Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:14:12.509Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:14:12.509Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:14:12.510Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:22.512Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:14:22.514Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:14:27.514Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:14:27.515Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:14:27.515Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:37.516Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:14:37.516Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:14:42.518Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:14:42.518Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:14:42.528Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:52.531Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:14:52.532Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:14:57.533Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:14:57.533Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:14:57.533Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:07.539Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:15:07.539Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:15:12.540Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:15:12.541Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:15:12.542Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:22.533Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:15:22.534Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:15:24.457Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:15:24.484Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"288","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T16:15:27.531Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:15:27.532Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:15:27.532Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:37.530Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:15:37.530Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:15:42.531Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:15:42.532Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:15:42.532Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:52.532Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:15:52.533Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:15:57.533Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:15:57.533Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:15:57.533Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:16:07.536Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:16:07.537Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:16:12.872Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:16:13.156Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:16:13.157Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:16:18.207Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:16:18.207Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:16:18.209Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:16:28.209Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:16:28.210Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:16:33.215Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:16:33.217Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:16:33.220Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:16:34.837Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:16:35.108Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:16:35.110Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:16:40.244Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:16:40.247Z error: ReferenceError: subscribeToUserEvents is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:16:40.251Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:16:50.250Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:16:50.251Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:16:51.634Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:16:51.863Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:16:51.864Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:16:56.905Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:16:56.905Z info: [apps/auth_service/src/app.ts:18] Successfully subscribed to user events
+2025-09-11T16:16:56.907Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:17:00.227Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:17:00.280Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:17:00.282Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:17:05.292Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:17:05.294Z info: [apps/auth_service/src/app.ts:18] Successfully subscribed to user events
+2025-09-11T16:17:05.308Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:17:07.068Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:17:07.255Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:17:07.257Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:17:12.300Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:17:12.301Z info: [apps/auth_service/src/app.ts:18] Successfully subscribed to user events
+2025-09-11T16:17:12.302Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:17:27.218Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:17:27.535Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:17:27.537Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:17:32.574Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:17:32.574Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:17:32.577Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:17:42.577Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:17:42.579Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:17:47.585Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:17:47.589Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:17:47.590Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:17:57.592Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:17:57.592Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:18:02.593Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:18:02.594Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:18:02.598Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:12.604Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:18:12.606Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:18:17.606Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:18:17.607Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:18:17.608Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:27.614Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:18:27.653Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:18:32.654Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:18:32.655Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:18:32.656Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:42.674Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:18:42.675Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:18:47.675Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:18:47.676Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:18:47.678Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:55.686Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:18:55.949Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:18:55.951Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:19:00.990Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:19:00.991Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:19:00.992Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:19:10.992Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:19:10.993Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:19:15.997Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:19:15.998Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:19:15.999Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:19:26.003Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:19:26.005Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:19:31.007Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:19:31.007Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:19:31.008Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:19:41.021Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:19:41.023Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:19:46.026Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:19:46.027Z info: [apps/auth_service/src/app.ts:16] Successfully created topics
+2025-09-11T16:19:46.033Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:19:56.039Z info: [apps/auth_service/src/app.ts:24] Retrying Kafka initialization...
+2025-09-11T16:19:56.041Z info: [apps/auth_service/src/app.ts:11] Waiting for Kafka to be ready...
+2025-09-11T16:21:25.070Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:21:26.094Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:21:26.097Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:21:31.122Z info: [apps/auth_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:21:34.162Z info: [apps/auth_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:21:34.167Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:21:34.181Z info: [apps/auth_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:21:34.182Z info: [apps/auth_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-11T16:21:34.194Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T16:21:34.205Z info: [apps/auth_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:21:34.205Z info: [apps/auth_service/src/utils/events/user.events.ts:18] Handle onboarding:, {"userId":"216c9a1a-b323-4a5f-9f06-8fd1688af517","authId":"14293a58-2108-438e-aee9-c064cc671abf"}
+2025-09-11T16:21:34.218Z info: [apps/auth_service/src/utils/events/user.events.ts:43] User onboarding successfully for userId: 216c9a1a-b323-4a5f-9f06-8fd1688af517 | 14293a58-2108-438e-aee9-c064cc671abf
+2025-09-11T16:21:34.225Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-11T16:22:57.947Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T16:22:57.951Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T16:23:13.639Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T16:23:13.663Z warn: [apps/auth_service/src/services/auth.service.ts:66] updated OTP: 1
+2025-09-11T16:23:28.777Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:23:28.812Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_signup | user_signup | [{"topicName":"user_signup","partition":0,"errorCode":0,"baseOffset":"289","logAppendTime":"-1","logStartOffset":"61"}]
+2025-09-11T16:23:28.819Z info: [apps/auth_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:23:28.820Z info: [apps/auth_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-11T16:23:28.838Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T16:23:28.922Z info: [apps/auth_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:23:28.922Z info: [apps/auth_service/src/utils/events/user.events.ts:18] Handle onboarding:, {"userId":"c1d1b6c0-bbcf-4a0c-9300-cd90993c0d55","authId":"8bb4ee33-65ee-4421-ac5f-5da4b9cb309b"}
+2025-09-11T16:23:28.926Z info: [apps/auth_service/src/utils/events/user.events.ts:43] User onboarding successfully for userId: c1d1b6c0-bbcf-4a0c-9300-cd90993c0d55 | 8bb4ee33-65ee-4421-ac5f-5da4b9cb309b
+2025-09-11T16:23:28.934Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-11T16:24:39.041Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:24:39.300Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:24:39.302Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:24:44.324Z info: [apps/auth_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:25:04.041Z info: [apps/auth_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:25:04.046Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-11T16:25:23.904Z warn: [apps/auth_service/src/services/auth.service.ts:38] OTP Code : 1234
+2025-09-11T16:25:23.914Z warn: [apps/auth_service/src/services/auth.service.ts:45] Update OTP: 1
+2025-09-11T16:25:28.091Z warn: [apps/auth_service/src/services/auth.service.ts:105] user is already onboarded

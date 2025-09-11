@@ -142,4 +142,32 @@ export default class AuthRepository {
       throw new ServerError("Database Error");
     }
   }
+
+  public async updateOnboardingStatus(
+    userId: string,
+    authId: string
+  ): Promise<any> {
+    try {
+      const result = await this._DB.Auth.update(
+        {
+          onboarded: true,
+        },
+        {
+          where: {
+            userId: userId,
+            id: authId,
+          },
+          returning: true,
+        }
+      );
+      if (result[0] === 1) {
+        return true;
+      } else {
+        throw new ServerError("Error updating onboarding status");
+      }
+    } catch (error) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
 }

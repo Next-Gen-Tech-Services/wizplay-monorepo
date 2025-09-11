@@ -5,7 +5,13 @@ import { Language } from "../types";
 interface UserCreationAttributes
   extends Optional<
     IUserAtters,
-    "id" | "createdAt" | "updatedAt" | "onboarded" | "phoneNumber" | "email"
+    | "id"
+    | "createdAt"
+    | "updatedAt"
+    | "onboarded"
+    | "phoneNumber"
+    | "email"
+    | "name"
   > {}
 
 export class User
@@ -16,6 +22,7 @@ export class User
   userId!: string;
   authId!: string;
   email?: string | null;
+  name?: string | null;
   phoneNumber?: string | null;
   onboarded!: boolean;
   userName!: string;
@@ -48,6 +55,11 @@ export default function (sequelize: Sequelize) {
         unique: true,
       },
       email: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+      },
+      name: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,

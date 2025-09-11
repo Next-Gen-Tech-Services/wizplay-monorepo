@@ -2339,3 +2339,292 @@
 2025-09-11T09:02:41.369Z info: [apps/user_service/src/app.ts:17] Successfully created topics
 2025-09-11T09:02:53.035Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
 2025-09-11T09:02:53.040Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T13:31:10.028Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T13:31:10.989Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T13:31:11.052Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T13:31:13.420Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T13:31:13.422Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T13:31:18.436Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T13:31:21.485Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T13:31:21.494Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T13:32:59.544Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T13:32:59.545Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T13:32:59.577Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: c5406045-5cc3-416e-8bf8-0a86db0cc191 | 2a461534-e78d-4260-8cec-1b13fe3f9d6b
+2025-09-11T13:32:59.589Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T13:51:39.211Z error: Error: read ETIMEDOUT
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2025-09-11T14:02:15.814Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:02:16.448Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:02:16.521Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:02:19.017Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:02:19.018Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:02:24.039Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:02:27.107Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:02:27.113Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:04:35.334Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:04:36.313Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:04:36.382Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:04:38.763Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:04:38.766Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:04:43.781Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:04:57.240Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:04:57.245Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:04:57.259Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T14:04:57.259Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T14:04:57.285Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: c5406045-5cc3-416e-8bf8-0a86db0cc191 | 2a461534-e78d-4260-8cec-1b13fe3f9d6b
+2025-09-11T14:04:57.294Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T14:06:53.428Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T14:06:53.429Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T14:06:53.466Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: c5406045-5cc3-416e-8bf8-0a86db0cc191 | 2a461534-e78d-4260-8cec-1b13fe3f9d6b
+2025-09-11T14:06:53.475Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T14:08:09.838Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T14:08:09.839Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T14:08:09.870Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: c5406045-5cc3-416e-8bf8-0a86db0cc191 | 2a461534-e78d-4260-8cec-1b13fe3f9d6b
+2025-09-11T14:08:09.881Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T14:15:06.678Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:15:06.949Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:15:09.432Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:15:09.440Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:15:14.481Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:15:35.438Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:15:35.453Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:15:38.727Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:15:38.995Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:15:41.146Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:15:41.157Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:15:46.200Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:16:05.493Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:16:05.504Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:17:15.270Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:17:15.567Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:17:18.167Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:17:18.182Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:17:23.202Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:17:40.736Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:17:40.747Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:17:42.466Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:17:42.646Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:17:45.480Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:17:45.484Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:17:50.519Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:18:01.201Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:18:02.118Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:18:04.554Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:18:04.563Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:18:09.597Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:18:10.757Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:18:10.770Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:18:12.346Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:18:12.404Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:18:14.748Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:18:14.765Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:18:19.804Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:18:40.804Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:18:40.815Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:18:49.234Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:18:49.512Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:18:51.691Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:18:51.695Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:18:56.740Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:19:15.926Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:19:15.939Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T14:21:40.580Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:21:40.817Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:21:43.208Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:21:43.215Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:21:48.246Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:22:03.862Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:22:04.072Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:22:06.102Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:22:06.110Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:22:11.150Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:22:35.830Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T14:22:36.042Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T14:22:38.408Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T14:22:38.413Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T14:22:43.442Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T14:23:06.276Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T14:23:06.286Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:35:57.816Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:35:58.111Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:36:05.095Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:36:05.097Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:36:10.116Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:36:13.169Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:36:13.173Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:36:13.196Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T15:36:13.196Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"c5406045-5cc3-416e-8bf8-0a86db0cc191","authId":"2a461534-e78d-4260-8cec-1b13fe3f9d6b","email":null}
+2025-09-11T15:36:13.218Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: c5406045-5cc3-416e-8bf8-0a86db0cc191 | 2a461534-e78d-4260-8cec-1b13fe3f9d6b
+2025-09-11T15:36:13.228Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T15:37:29.634Z error: [packages/common/dist/middlewares/error.middleware.js:22] Unauthorized access | Req-ID:ee49b75e-d28d-4ed0-b57d-27338aa070f8 | URL:/api/v1/user
+2025-09-11T15:38:16.731Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:38:16.998Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:38:21.000Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:38:21.003Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:38:26.023Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:38:43.570Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:38:43.574Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:38:48.147Z error: [packages/common/dist/middlewares/error.middleware.js:22] Unauthorized access | Req-ID:9ee81dbe-aea7-4669-9e2b-4e5f3cfcbfdf | URL:/api/v1/user
+2025-09-11T15:39:56.934Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:39:57.234Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:39:59.390Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:39:59.392Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:40:04.410Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:40:23.715Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:40:23.719Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:40:32.944Z error: [apps/user_service/src/middlewares/auth.middleware.ts:54] [MIDDLEWARE]: JsonWebTokenError: invalid signature
+2025-09-11T15:40:32.945Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:17b17564-580e-4caf-800f-213cb888a2bc | URL:/api/v1/user
+2025-09-11T15:41:51.911Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:41:52.134Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:41:56.598Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:41:56.611Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:42:01.649Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:42:18.847Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:42:18.851Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:42:24.567Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: TypeError: Cannot read properties of undefined (reading 'split')
+2025-09-11T15:42:24.568Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:385f21d3-301e-48b2-a670-418dbcb75de5 | URL:/api/v1/user
+2025-09-11T15:43:11.435Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:43:11.708Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:43:15.252Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:43:15.255Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:43:20.274Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:43:38.983Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:43:38.988Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:43:41.836Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: TypeError: Cannot read properties of undefined (reading 'split')
+2025-09-11T15:43:41.836Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a6d8724d-9eeb-4794-9d05-9241d2a18043 | URL:/api/v1/user
+2025-09-11T15:44:30.755Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:44:31.027Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:44:33.934Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:44:33.940Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:44:38.980Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:44:40.460Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:44:40.522Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:44:42.904Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:44:42.906Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:44:47.927Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:45:29.452Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:45:29.459Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:46:02.172Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:2a461534-e78d-4260-8cec-1b13fe3f9d6b,c5406045-5cc3-416e-8bf8-0a86db0cc191,+919876543211 
+2025-09-11T15:46:02.241Z error: [apps/user_service/src/repositories/user.repository.ts:66] [Error creating new user: invalid input syntax for type uuid: "lakshay versane"]
+2025-09-11T15:46:02.242Z error: [packages/common/dist/middlewares/error.middleware.js:22] error updating user name | Req-ID:cc56b57c-cd26-44d1-b2b0-deb6cce87212 | URL:/api/v1/user
+2025-09-11T15:48:43.191Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:48:43.542Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:48:47.788Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:48:47.790Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:48:49.384Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:48:49.450Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:48:53.451Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:48:53.455Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:48:58.473Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:49:09.705Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:49:09.709Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:49:21.194Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:2a461534-e78d-4260-8cec-1b13fe3f9d6b,c5406045-5cc3-416e-8bf8-0a86db0cc191,+919876543211 
+2025-09-11T15:50:14.905Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:50:15.145Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:50:18.087Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:50:18.088Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:50:23.107Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:50:39.831Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:50:39.836Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:50:58.962Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:2a461534-e78d-4260-8cec-1b13fe3f9d6b,c5406045-5cc3-416e-8bf8-0a86db0cc191,+919876543211 
+2025-09-11T15:51:31.560Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:51:31.856Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:51:35.386Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:51:35.390Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:51:40.426Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:52:00.057Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:52:00.072Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:52:09.212Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:2a461534-e78d-4260-8cec-1b13fe3f9d6b,c5406045-5cc3-416e-8bf8-0a86db0cc191,+919876543211 
+2025-09-11T15:52:30.578Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:52:31.500Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:52:33.838Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:52:33.840Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:52:38.862Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:52:55.142Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:52:55.147Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:52:59.286Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:2a461534-e78d-4260-8cec-1b13fe3f9d6b,c5406045-5cc3-416e-8bf8-0a86db0cc191,+919876543211 
+2025-09-11T15:53:10.207Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:53:10.480Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:53:14.218Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:53:14.229Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:53:19.283Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:53:35.218Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:53:35.230Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:54:02.780Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T15:54:03.049Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T15:54:06.281Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T15:54:06.284Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T15:54:11.320Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T15:54:30.338Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T15:54:30.360Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T15:56:05.967Z error: Error: read ECONNRESET
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+2025-09-11T16:07:33.842Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:07:34.176Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:07:37.811Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:07:37.822Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:07:42.861Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:07:45.963Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:07:45.978Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:07:59.601Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:07:59.829Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:08:10.199Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:08:10.210Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:08:15.477Z info: [packages/common/dist/broker/kafka-client.js:34] Created Topics: user_onboarded
+2025-09-11T16:08:15.490Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:08:26.050Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:08:26.062Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:09:36.234Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:09:36.452Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:09:41.390Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:09:41.403Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:09:46.437Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:10:01.234Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:10:01.240Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:15:24.494Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:15:24.494Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"216c9a1a-b323-4a5f-9f06-8fd1688af517","authId":"14293a58-2108-438e-aee9-c064cc671abf","phoneNumber":"+919876543210"}
+2025-09-11T16:15:24.548Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:15:24.564Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"0","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-11T16:15:24.569Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 216c9a1a-b323-4a5f-9f06-8fd1688af517 | 14293a58-2108-438e-aee9-c064cc671abf
+2025-09-11T16:15:24.583Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T16:15:24.601Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:15:24.601Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-11T16:15:24.609Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-11T16:16:12.927Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:16:13.154Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:16:17.001Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:16:17.008Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:16:22.042Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:16:39.708Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:16:39.712Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:18:20.998Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:18:21.305Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:18:26.029Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:18:26.032Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:18:31.069Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:18:49.989Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:18:50.012Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:19:29.125Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:19:29.509Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:19:32.171Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:19:32.179Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:19:37.225Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:19:55.144Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:19:55.161Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:21:00.746Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-11T16:21:01.025Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-11T16:21:04.343Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-11T16:21:04.345Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-11T16:21:09.376Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-11T16:21:25.308Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-11T16:21:25.314Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-11T16:23:28.823Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:23:28.824Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"c1d1b6c0-bbcf-4a0c-9300-cd90993c0d55","authId":"8bb4ee33-65ee-4421-ac5f-5da4b9cb309b","phoneNumber":"+919876543210"}
+2025-09-11T16:23:28.906Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-11T16:23:28.922Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"1","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-11T16:23:28.922Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: c1d1b6c0-bbcf-4a0c-9300-cd90993c0d55 | 8bb4ee33-65ee-4421-ac5f-5da4b9cb309b
+2025-09-11T16:23:28.932Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-11T16:23:28.943Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-11T16:23:28.943Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-11T16:23:28.952Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-11T16:25:55.244Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:8bb4ee33-65ee-4421-ac5f-5da4b9cb309b,c1d1b6c0-bbcf-4a0c-9300-cd90993c0d55,+919876543210 

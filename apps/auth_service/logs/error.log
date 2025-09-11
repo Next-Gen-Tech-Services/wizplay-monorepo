@@ -1350,3 +1350,298 @@
     at Heart.runHeartbeat (/Users/mihirverma/office_space/wizplay/node_modules/amqplib/lib/heartbeat.js:88:7)
     at listOnTimeout (node:internal/timers:573:17)
     at processTimers (node:internal/timers:514:7)
+2025-09-11T16:03:39.062Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:03:54.072Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:04:09.076Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:04:26.774Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:04:41.783Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:04:56.790Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:05:13.224Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:05:28.236Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:05:43.253Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:05:58.260Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:13.269Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:28.274Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:43.282Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:06:58.285Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:13.294Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:28.299Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:43.306Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:07:58.314Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:08:13.323Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:08:28.330Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:08:42.342Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:08:57.364Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:12.375Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:27.381Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:42.390Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:09:57.396Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:12.400Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:27.410Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:42.417Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:10:57.426Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:12.435Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:27.446Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:42.450Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:11:57.454Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:12.458Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:27.467Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:42.483Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:12:57.489Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:12.496Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:27.499Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:42.502Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:13:57.505Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:12.510Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:27.515Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:42.528Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:14:57.533Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:12.542Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:27.532Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:42.532Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:15:57.533Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:16:18.207Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:16:33.220Z error: TypeError: (0 , kafka_1.subscribeToUserEvents) is not a function
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:32)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:16:40.247Z error: ReferenceError: subscribeToUserEvents is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:17:32.574Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:17:47.590Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:02.598Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:17.608Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:32.656Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:18:47.678Z error: ReferenceError: userEventHandler is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:19:00.991Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at AppInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:37:3)
+    at startServer (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/server.ts:16:22)
+2025-09-11T16:19:15.999Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:19:31.008Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
+2025-09-11T16:19:46.033Z error: ReferenceError: authEventHande is not defined
+    at BrokerInit (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:19:5)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at processTimers (node:internal/timers:511:9)
+    at Timeout._onTimeout (/Users/mihirverma/office_space/wizplay/apps/auth_service/src/app.ts:25:7)
