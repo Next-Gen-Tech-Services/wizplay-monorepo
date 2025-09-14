@@ -1,12 +1,12 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
-import userModel, { User } from "../models/user.model";
+import couponModel, { Coupon } from "../models/coupon.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
   Sequelize: any;
   sequelize: Sequelize;
-  User: typeof User;
+  Coupon: typeof Coupon;
 }
 
 const sequelize = new Sequelize({
@@ -24,7 +24,7 @@ const sequelize = new Sequelize({
   },
 });
 
-const UserInstance = userModel(sequelize);
+const CouponInstance = couponModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -39,5 +39,5 @@ export async function connectDatabase() {
 export const DB: IDatabase = {
   Sequelize,
   sequelize,
-  User: UserInstance,
+  Coupon: CouponInstance,
 };

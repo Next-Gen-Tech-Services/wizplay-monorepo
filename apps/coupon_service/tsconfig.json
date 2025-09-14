@@ -3,12 +3,16 @@
     "baseUrl": "./src",
     "module": "nodenext",
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "*"
+      ]
     },
     "rootDir": "./src",
     "outDir": "./dist",
     "target": "es2018",
-    "lib": ["es2018"],
+    "lib": [
+      "es2018"
+    ],
     "resolveJsonModule": true,
     "moduleResolution": "nodenext",
     "declaration": true,
@@ -19,8 +23,16 @@
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
   },
-  "include": ["src/**/*.ts", "src/types/global.d.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "src/types/global.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
