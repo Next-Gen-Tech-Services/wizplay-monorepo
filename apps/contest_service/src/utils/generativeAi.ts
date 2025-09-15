@@ -34,57 +34,56 @@ export class GenerativeAi {
       const response = await this.openApiInstance.responses.create({
         model: "gpt-4.1",
         input: `
-You are a cricket match analyst and contest designer.  
-Your task is to generate multiple trivia contests for a future T20 cricket match.  
+You are a cricket contest generator.  
+Your job is to create multiple trivia contests for an upcoming cricket match.  
+The match format can be **Test, ODI, T20, or T10**.  
 
-### Instructions:
-1. Each contest should represent a different section of the match:
-   - Pre-match (general predictions before the game starts)
-   - Powerplay (first 6 overs of each innings)
-   - Middle overs (7–15 overs)
-   - Death overs (16–20 overs)
-   - Full match summary contest
+### Contest Design Rules:
+1. Generate contests based on match format and phases:
+   - **Test Matches** → Sessions (Morning, Afternoon, Evening), Day-wise contests, Innings summaries.
+   - **ODI (50 overs)** → Pre-match, Powerplay (1–10 overs), Middle overs (11–40), Death overs (41–50), Full match.
+   - **T20 (20 overs)** → Pre-match, Powerplay (1–6), Middle overs (7–15), Death overs (16–20), Full match.
+   - **T10 (10 overs)** → Pre-match, Powerplay (1–3), Middle overs (4–7), Death overs (8–10), Full match.
 
-2. Each contest should include:
+2. Each contest must include:
    - id (UUID)
-   - description
-   - type (e.g., "pre-match", "powerplay_innings_1", "death_overs_innings_2")
-   - difficulty (Beginner, Intermediate, Advanced)
-   - entry_fee (e.g., "100 Points")
-   - prize_pool (e.g., "10,000 Points")
-   - points_per_question (integer)
+   - description (string)
+   - type (e.g., "pre-match", "powerplay_innings_1", "session_day1_morning")
+   - difficulty (Beginner | Intermediate | Advanced)
+   - entryFee (number)
+   - prizePool (number)
+   - pointsPerQuestion (number)
    - contest_display_enabled (boolean)
-   - total_spots (integer)
-   - filled_spots (integer, initially 0)
+   - totalSpots (integer)
+   - filledSpots (integer, always 0)
    - questions_count (integer)
-   - join_deadline (e.g., "Before match")
-   - result_time (e.g., "End of match")
-   - time_commitment (string, e.g., "10 minutes")
-   - is_popular (boolean)
+   - joinDeadline (string, e.g., "Before match")
+   - resultTime (string, e.g., "End of match" or "End of Day 1")
+   - timeCommitment (string, e.g., "10 minutes")
+   - isPopular (boolean)
    - questions (array)
 
-3. Each contest should have 10–25 questions.
-4. Each question should include:
-   - question_number
-   - question_text
-   - question_type (one of: match_winner, runs_range, wickets, yes_no, player_performance, boundaries)
+3. Each contest should have **10–25 questions**.
+4. Each question must include:
+   - question_number (integer)
+   - question_text (string)
+   - question_type (one of: match_winner, runs_range, wickets, yes_no, player_performance, boundaries, partnerships, session_score)
    - options (4–6 relevant options)
-   - correct_answer (always null at generation time)
+   - correct_answer (always null)
 
 5. Use the following match data for context:
 ${matchData}
 
 ### Output:
-Return the result strictly as a **JSON array of contests**, no markdown formatting, no explanation.  
-Each contest must follow this schema exactly.  
+Return only a **JSON array of contests**, no markdown, no explanation.  
+Each contest must follow the schema exactly.  
 
-Example top-level output:
+Example:
 [
   { ...contest1 },
   { ...contest2 },
   { ...contest3 }
-]
-      `,
+]`,
       });
 
       const result = JSON.parse(
