@@ -10,9 +10,12 @@ export default class UserService {
     this.redis = redis;
   }
 
-  public async updateName(name: string, userId: string) {
+  public async update(
+    payload: { name: string; email: string },
+    userId: string
+  ) {
     try {
-      const result = await this.userRepository.updateNameWithId(userId, name);
+      const result = await this.userRepository.updateWithId(userId, payload);
       if (!result) {
         throw new BadRequestError("error updating user name");
       }

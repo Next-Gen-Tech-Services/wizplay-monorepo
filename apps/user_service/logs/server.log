@@ -995,6 +995,7 @@
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
 2025-09-15T08:36:56.011Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
 2025-09-15T08:36:56.011Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+<<<<<<< HEAD
 2025-09-15T10:51:41.104Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
 2025-09-15T10:51:41.303Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
 2025-09-15T10:51:42.289Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
@@ -1132,3 +1133,271 @@
 2025-09-15T13:27:36.851Z info: [apps/user_service/src/app.ts:17] Successfully created topics
 2025-09-15T13:27:39.896Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
 2025-09-15T13:27:39.902Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+=======
+2025-09-15T12:09:59.230Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:09:59.620Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:10:03.714Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:10:03.718Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:10:08.783Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:10:11.849Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:10:11.859Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:10:11.892Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:11.893Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"3526d314-3097-4da6-b4b3-1559c6cbcb31","authId":"7b57adb1-eeff-413a-b8a1-7a19e0bf5125","phoneNumber":"+919635284710"}
+2025-09-15T12:10:11.917Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:11.933Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"2","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:11.934Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 3526d314-3097-4da6-b4b3-1559c6cbcb31 | 7b57adb1-eeff-413a-b8a1-7a19e0bf5125
+2025-09-15T12:10:11.946Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:11.946Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:11.946Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"af7f8e58-c904-47d7-b1ba-e5d51f91f5dc","authId":"2c115d12-43da-4a0f-b987-6a30b28c6bb8","phoneNumber":"+917089870460"}
+2025-09-15T12:10:11.949Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:11.951Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"3","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:11.951Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: af7f8e58-c904-47d7-b1ba-e5d51f91f5dc | 2c115d12-43da-4a0f-b987-6a30b28c6bb8
+2025-09-15T12:10:11.958Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:11.958Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:11.958Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:11.960Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:11.966Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"4","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:11.966Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:11.976Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:11.977Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:11.977Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:11.979Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:11.982Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"5","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:11.982Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:11.990Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:11.991Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:11.991Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"ccd84718-d58c-411e-85e7-8910aca613db","authId":"703c14dd-90c1-40ed-a311-0b520a7a38ce","phoneNumber":"+917089887460"}
+2025-09-15T12:10:11.993Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:11.996Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"6","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:11.996Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: ccd84718-d58c-411e-85e7-8910aca613db | 703c14dd-90c1-40ed-a311-0b520a7a38ce
+2025-09-15T12:10:12.004Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.004Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.004Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:12.007Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.008Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"7","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.008Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:12.017Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.018Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.018Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"ccd84718-d58c-411e-85e7-8910aca613db","authId":"703c14dd-90c1-40ed-a311-0b520a7a38ce","phoneNumber":"+917089887460"}
+2025-09-15T12:10:12.023Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.026Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"8","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.027Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: ccd84718-d58c-411e-85e7-8910aca613db | 703c14dd-90c1-40ed-a311-0b520a7a38ce
+2025-09-15T12:10:12.035Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.035Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.035Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"014116a0-0e56-479c-8eb2-e61dce44a3f6","authId":"e33e9e66-0660-42dc-9082-5c912fd61c28","phoneNumber":"+917795020428"}
+2025-09-15T12:10:12.038Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.039Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"9","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.040Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 014116a0-0e56-479c-8eb2-e61dce44a3f6 | e33e9e66-0660-42dc-9082-5c912fd61c28
+2025-09-15T12:10:12.047Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.047Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.047Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"fe68f1fa-ddc5-4d63-8b8c-a373550a23a8","authId":"89a16abf-22ce-478d-88fb-b6ad36505b27","phoneNumber":"+91-9131300390"}
+2025-09-15T12:10:12.050Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.052Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"10","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.052Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: fe68f1fa-ddc5-4d63-8b8c-a373550a23a8 | 89a16abf-22ce-478d-88fb-b6ad36505b27
+2025-09-15T12:10:12.060Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.060Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.060Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"26e98036-8415-4297-9017-76d82030ad06","authId":"adf67162-e52f-4fa6-a32c-72e9480e2855","phoneNumber":"+918000467959"}
+2025-09-15T12:10:12.063Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.065Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"11","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.065Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 26e98036-8415-4297-9017-76d82030ad06 | adf67162-e52f-4fa6-a32c-72e9480e2855
+2025-09-15T12:10:12.071Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.072Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.072Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"ccd84718-d58c-411e-85e7-8910aca613db","authId":"703c14dd-90c1-40ed-a311-0b520a7a38ce","phoneNumber":"+917089887460"}
+2025-09-15T12:10:12.074Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.075Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"12","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.075Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: ccd84718-d58c-411e-85e7-8910aca613db | 703c14dd-90c1-40ed-a311-0b520a7a38ce
+2025-09-15T12:10:12.081Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.082Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.082Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:12.084Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.085Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"13","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.085Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:12.091Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.091Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.091Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"5f67d9a2-4579-4a84-a471-801e2311d730","authId":"0b412dd2-9717-4acf-a164-eac14b8e1b06","phoneNumber":"+919131300390"}
+2025-09-15T12:10:12.092Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.093Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"14","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.093Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 5f67d9a2-4579-4a84-a471-801e2311d730 | 0b412dd2-9717-4acf-a164-eac14b8e1b06
+2025-09-15T12:10:12.100Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.100Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.100Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"5f67d9a2-4579-4a84-a471-801e2311d730","authId":"0b412dd2-9717-4acf-a164-eac14b8e1b06","phoneNumber":"+919131300390"}
+2025-09-15T12:10:12.102Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.103Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"15","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.103Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 5f67d9a2-4579-4a84-a471-801e2311d730 | 0b412dd2-9717-4acf-a164-eac14b8e1b06
+2025-09-15T12:10:12.109Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.109Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.110Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:12.111Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.112Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"16","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.112Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:12.119Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.120Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.120Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"24020071-28d4-456f-a754-59d6da117b8a","authId":"8bee3136-ed0e-42ac-b903-2623e036f7db","phoneNumber":"+919023543944"}
+2025-09-15T12:10:12.122Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.123Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"17","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.123Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 24020071-28d4-456f-a754-59d6da117b8a | 8bee3136-ed0e-42ac-b903-2623e036f7db
+2025-09-15T12:10:12.129Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.129Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.130Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:12.131Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.133Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"18","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.133Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:12.140Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.141Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.141Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:12.142Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.143Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"19","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.143Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:12.149Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.149Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.149Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"615370dd-8a27-485d-8fa3-fd005be7ebb7","authId":"ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164","phoneNumber":"+918000467659"}
+2025-09-15T12:10:12.151Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:10:12.151Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"20","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:10:12.151Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 615370dd-8a27-485d-8fa3-fd005be7ebb7 | ffe73aa9-d37d-4f8c-96f4-8ea6b3c8c164
+2025-09-15T12:10:12.157Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:10:12.165Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.165Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.172Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.172Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.172Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.180Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.180Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.180Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.188Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.188Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.188Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.195Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.195Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.195Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.202Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.202Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.203Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.209Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.209Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.209Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.216Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.216Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.216Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.223Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.223Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.223Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.231Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.231Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.231Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.238Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.238Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.238Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.246Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.246Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.246Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.252Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.252Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.252Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.260Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.260Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.260Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.268Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.269Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.269Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.277Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.277Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.277Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.285Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.285Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.285Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.292Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.292Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.292Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.300Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:12.300Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:10:12.301Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:10:12.307Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:10:16.289Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:e3acd239-28e1-426b-8b03-c9cb341cabc3,cb6725c1-4c28-44e6-9ee9-537ee4be8602,+919876543210 
+2025-09-15T12:10:16.298Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:10:16.299Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a49517ee-b88c-43b8-bfa0-97d79ea88eb3 | URL:/api/v1/user
+2025-09-15T12:10:43.860Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:e3acd239-28e1-426b-8b03-c9cb341cabc3,cb6725c1-4c28-44e6-9ee9-537ee4be8602,+919876543210 
+2025-09-15T12:10:43.880Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:10:43.881Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:153600e0-f2e2-4ead-9fc0-3906a1c959fe | URL:/api/v1/user
+2025-09-15T12:10:46.877Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:e3acd239-28e1-426b-8b03-c9cb341cabc3,cb6725c1-4c28-44e6-9ee9-537ee4be8602,+919876543210 
+2025-09-15T12:10:46.880Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:10:46.881Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a28db502-3f53-4566-a9db-650b0522d3bb | URL:/api/v1/user
+2025-09-15T12:11:03.517Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:e3acd239-28e1-426b-8b03-c9cb341cabc3,cb6725c1-4c28-44e6-9ee9-537ee4be8602,+919876543210 
+2025-09-15T12:11:03.532Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:11:03.533Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:c940c004-8bb0-4aac-ae6b-a7acbdb9e512 | URL:/api/v1/user
+2025-09-15T12:17:46.689Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:17:47.261Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:17:51.637Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:17:51.639Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:17:56.677Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:18:12.990Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:18:12.997Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:18:32.058Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:e3acd239-28e1-426b-8b03-c9cb341cabc3,cb6725c1-4c28-44e6-9ee9-537ee4be8602,+919876543210 
+2025-09-15T12:18:32.082Z error: [apps/user_service/src/middlewares/auth.middleware.ts:54] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:18:32.082Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a43d8bc8-af58-4c34-b8a0-24d46d1d763d | URL:/api/v1/user
+2025-09-15T12:19:57.816Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:19:57.817Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"e220115a-30df-4351-bf28-f6ead0513b75","authId":"aedbcadd-de3e-4a6a-bea2-231f397948b7","phoneNumber":"+919876543210"}
+2025-09-15T12:19:57.836Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:19:57.845Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"21","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:19:57.845Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: e220115a-30df-4351-bf28-f6ead0513b75 | aedbcadd-de3e-4a6a-bea2-231f397948b7
+2025-09-15T12:19:57.856Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:19:57.866Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:19:57.867Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:19:57.876Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:20:22.720Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:aedbcadd-de3e-4a6a-bea2-231f397948b7,e220115a-30df-4351-bf28-f6ead0513b75,+919876543210 
+2025-09-15T12:20:44.678Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:aedbcadd-de3e-4a6a-bea2-231f397948b7,e220115a-30df-4351-bf28-f6ead0513b75,+919876543210 
+2025-09-15T12:23:18.582Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:23:19.283Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:23:23.972Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:23:23.974Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:23:28.993Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:23:43.220Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:23:43.231Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:25:10.818Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:25:11.221Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:25:13.192Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:25:13.195Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:25:18.232Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:25:38.422Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:25:38.429Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:35:43.682Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:35:44.141Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:35:46.174Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:35:46.180Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:35:51.219Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:36:04.347Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:36:04.525Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:36:06.217Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:36:06.264Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:36:07.508Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:36:07.554Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:36:09.337Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:36:09.339Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:36:14.360Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:36:39.374Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:36:39.385Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:41:08.196Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:aedbcadd-de3e-4a6a-bea2-231f397948b7,e220115a-30df-4351-bf28-f6ead0513b75,+919876543210 
+2025-09-15T12:41:08.216Z error: [apps/user_service/src/middlewares/auth.middleware.ts:50] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:41:08.217Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:c45ce9d2-a892-4bf7-905c-c937d93f2c29 | URL:/api/v1/user
+2025-09-15T12:42:23.085Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:42:23.545Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:42:27.944Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:42:27.948Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:42:32.980Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:42:46.806Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:42:46.867Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:42:50.130Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:42:50.133Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:42:55.170Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:43:19.895Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:43:19.900Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:43:19.917Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:43:19.917Z info: [apps/user_service/src/utils/events/user.events.ts:18] Handle signup:, {"userId":"1ca6ff35-0053-440d-9d0c-9b8d2ada2d05","authId":"cf777865-b983-4986-9814-1c4143e66c52","phoneNumber":"+919876543210"}
+2025-09-15T12:43:19.933Z warn: [packages/common/dist/broker/kafka-client.js:55] Producer already connected!
+2025-09-15T12:43:19.942Z info: [packages/common/dist/broker/kafka-client.js:99] Event Published: user_onboarded | user_onboarded | [{"topicName":"user_onboarded","partition":0,"errorCode":0,"baseOffset":"22","logAppendTime":"-1","logStartOffset":"0"}]
+2025-09-15T12:43:19.942Z info: [apps/user_service/src/utils/events/user.events.ts:40] User signup processed successfully for userId: 1ca6ff35-0053-440d-9d0c-9b8d2ada2d05 | cf777865-b983-4986-9814-1c4143e66c52
+2025-09-15T12:43:19.952Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_signup from user_signup
+2025-09-15T12:43:19.963Z info: [apps/user_service/src/utils/events/user.events.ts:15] Received message:
+2025-09-15T12:43:19.963Z info: [apps/user_service/src/utils/events/user.events.ts:28] Unknown event:
+2025-09-15T12:43:19.972Z info: [packages/common/dist/broker/kafka-client.js:144] Successfully processed message: user_onboarded from user_onboarded
+2025-09-15T12:43:22.025Z info: [apps/user_service/src/middlewares/auth.middleware.ts:34] Keys=====:cf777865-b983-4986-9814-1c4143e66c52,1ca6ff35-0053-440d-9d0c-9b8d2ada2d05,+919876543210 
+>>>>>>> bea75bc72c7f086d34feeeadb8cef2b52df9ca80

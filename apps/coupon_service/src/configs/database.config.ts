@@ -29,7 +29,7 @@ const CouponInstance = couponModel(sequelize);
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     logger.info("Database connection established ✅");
   } catch (error: any) {
     logger.error(`Error connecting database: ${error} `);

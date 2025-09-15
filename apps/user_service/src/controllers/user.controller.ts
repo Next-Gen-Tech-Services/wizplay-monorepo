@@ -7,14 +7,14 @@ import UserService from "../services/user.service";
 export default class UserController {
   constructor(private readonly userService: UserService) {}
 
-  public async updateName(req: Request, res: Response) {
-    const { name } = req.body;
+  public async update(req: Request, res: Response) {
+    const payload = req.body;
     if (!req?.currentUser?.userId) {
       throw new BadRequestError();
     }
 
-    const result = await this.userService.updateName(
-      name,
+    const result = await this.userService.update(
+      payload,
       req.currentUser?.userId!
     );
 

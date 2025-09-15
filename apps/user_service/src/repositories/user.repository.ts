@@ -56,19 +56,17 @@ export default class UserRepository {
     }
   }
 
-  public async updateNameWithId(userId: string, name: string): Promise<any> {
+  public async updateWithId(
+    userId: string,
+    payload: { name: string; email: string }
+  ): Promise<any> {
     try {
-      const user = await this._DB.User.update(
-        {
-          name: name,
+      const user = await this._DB.User.update(payload, {
+        where: {
+          userId: userId,
         },
-        {
-          where: {
-            userId: userId,
-          },
-          returning: true,
-        }
-      );
+        returning: true,
+      });
       return user;
     } catch (error: any) {
       logger.error(`[Error updating user name: ${error.message}]`);

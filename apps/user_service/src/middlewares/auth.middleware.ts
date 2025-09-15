@@ -40,7 +40,6 @@ export const requireAuth = async (
       payloadKeys[1],
       payloadKeys[0]
     );
-
     if (!user) {
       throw new UnAuthorizError();
     }

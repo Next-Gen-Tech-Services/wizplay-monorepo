@@ -15,7 +15,7 @@ router.patch(
   updateNameValidator(),
   validateRequest,
   async (req: Request, res: Response) => {
-    const result = await controller.updateName(req, res);
+    const result = await controller.update(req, res);
     return result;
   }
 );

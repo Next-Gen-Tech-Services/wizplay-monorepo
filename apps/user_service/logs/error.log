@@ -748,6 +748,7 @@
     at emitErrorNT (node:internal/streams/destroy:170:8)
     at emitErrorCloseNT (node:internal/streams/destroy:129:3)
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
+<<<<<<< HEAD
 2025-09-15T13:08:29.949Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
 2025-09-15T13:08:34.956Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
 2025-09-15T13:08:40.054Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
@@ -849,3 +850,17 @@
 2025-09-15T13:22:34.237Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T13:22:36.405Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T13:22:38.593Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+=======
+2025-09-15T12:10:16.298Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:10:16.299Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a49517ee-b88c-43b8-bfa0-97d79ea88eb3 | URL:/api/v1/user
+2025-09-15T12:10:43.880Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:10:43.881Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:153600e0-f2e2-4ead-9fc0-3906a1c959fe | URL:/api/v1/user
+2025-09-15T12:10:46.880Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:10:46.881Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a28db502-3f53-4566-a9db-650b0522d3bb | URL:/api/v1/user
+2025-09-15T12:11:03.532Z error: [apps/user_service/src/middlewares/auth.middleware.ts:51] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:11:03.533Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:c940c004-8bb0-4aac-ae6b-a7acbdb9e512 | URL:/api/v1/user
+2025-09-15T12:18:32.082Z error: [apps/user_service/src/middlewares/auth.middleware.ts:54] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:18:32.082Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:a43d8bc8-af58-4c34-b8a0-24d46d1d763d | URL:/api/v1/user
+2025-09-15T12:41:08.216Z error: [apps/user_service/src/middlewares/auth.middleware.ts:50] [MIDDLEWARE]: UNAUTHORIZED ERROR: Un Authorized
+2025-09-15T12:41:08.217Z error: [packages/common/dist/middlewares/error.middleware.js:22] Un Authorized | Req-ID:c45ce9d2-a892-4bf7-905c-c937d93f2c29 | URL:/api/v1/user
+>>>>>>> bea75bc72c7f086d34feeeadb8cef2b52df9ca80
