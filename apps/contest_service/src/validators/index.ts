@@ -32,3 +32,13 @@ export const resetPassValidator = () => {
     body("token").trim().exists().withMessage("invalid reset token"),
   ];
 };
+
+export const generateQuestionsValidator = () => {
+  return [
+    body("matchData").exists().withMessage("invalid match data"),
+    body("contestDescription")
+      .exists()
+      .withMessage("invalid contest description"),
+    body("contestId").exists().withMessage("invalid contest id"),
+  ];
+};

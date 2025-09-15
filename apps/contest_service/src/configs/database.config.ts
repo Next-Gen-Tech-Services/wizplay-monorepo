@@ -36,6 +36,7 @@ ContestInstance.hasMany(QuestionInstance, {
   foreignKey: "contestId",
   as: "questions",
 });
+
 QuestionInstance.belongsTo(ContestInstance, {
   foreignKey: "contestId",
   as: "contest",

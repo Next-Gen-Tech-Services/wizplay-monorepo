@@ -1,5 +1,5 @@
 // src/repositories/contest.repository.ts
-import { logger, ServerError } from "@repo/common";
+import { BadRequestError, logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
 import {
   CreateContestPayload,
@@ -78,7 +78,7 @@ export default class ContestRepository {
   }
 
   /* Questions */
-  public async createQuestion(data: CreateQuestionPayload) {
+  public async createQuestion(data: any) {
     try {
       const created = await this._DB.Question.create(data);
       return created.toJSON() as Question;
@@ -119,4 +119,17 @@ export default class ContestRepository {
       throw new ServerError("Database error");
     }
   }
+
+  /** questions */
+
+  public async saveBulkQuestions(data: any) {
+     if (!data.length) {
+        throw new BadRequestError("invalid matches value");
+      }
+
+      const result = await this._DB.Question.bulkCreate(data);
+      logger.info(`Inserted bulk data inside matches`);
+
+      return result;
+  };
 }

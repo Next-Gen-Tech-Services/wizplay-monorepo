@@ -995,3 +995,140 @@
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
 2025-09-15T08:36:56.011Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
 2025-09-15T08:36:56.011Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T10:51:41.104Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T10:51:41.303Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T10:51:42.289Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T10:51:42.334Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T10:51:46.621Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T10:51:46.626Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T10:51:51.670Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T10:51:54.705Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T10:51:54.709Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T12:50:16.531Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:50:16.807Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:50:18.130Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T12:50:18.182Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T12:50:20.545Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T12:50:20.549Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T12:50:25.615Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T12:50:28.663Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T12:50:28.667Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T13:08:29.949Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T13:08:34.956Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:08:40.054Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:08:45.270Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:08:47.240Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:47.792Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:48.716Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:50.408Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:52.437Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:54.591Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:56.787Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:58.986Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:01.091Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:03.233Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:05.360Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:07.481Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:09.635Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:11.834Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:13.899Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:15.965Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:18.144Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:20.227Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:22.432Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:24.512Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:26.708Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:28.815Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:30.936Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:33.057Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:35.214Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:37.230Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:39.325Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:46.408Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:09:53.495Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:00.540Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:07.603Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:14.773Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:21.825Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:25.432Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:10:27.611Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:10:29.760Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:10:31.875Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T13:13:11.299Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T13:13:16.311Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:21.397Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:26.673Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:31.941Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:37.385Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:43.248Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:49.921Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:56.997Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:04.086Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:11.279Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:18.453Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:25.665Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:32.713Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:39.838Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:46.853Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:53.986Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:01.130Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:08.237Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:15.330Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:22.353Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:29.437Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:36.555Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:43.608Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:49.402Z error: Error: read EADDRNOTAVAIL
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20)
+2025-09-15T13:18:22.319Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T13:18:53.156Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T13:18:58.167Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:03.304Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:08.517Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:13.856Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:19.444Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:25.326Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:31.978Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:39.127Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:46.329Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:53.474Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:00.538Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:07.596Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:14.643Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:21.842Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:28.988Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:36.116Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:43.288Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:50.433Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:57.506Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:04.714Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:11.725Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:18.755Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:25.855Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:33.065Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:40.117Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:47.170Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:54.236Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:01.317Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:08.349Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:15.537Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:22.730Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:29.751Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:34.237Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:22:36.405Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:22:38.593Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:22:41.202Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T13:22:47.127Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T13:22:47.129Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T13:22:52.189Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T13:22:55.362Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T13:22:55.372Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001
+2025-09-15T13:27:27.410Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T13:27:27.569Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T13:27:28.635Z info: [apps/user_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T13:27:28.680Z info: [apps/user_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T13:27:31.822Z info: [apps/user_service/src/configs/rabbitmq.config.ts:27] Rabbit client is connected
+2025-09-15T13:27:31.825Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T13:27:36.851Z info: [apps/user_service/src/app.ts:17] Successfully created topics
+2025-09-15T13:27:39.896Z info: [apps/user_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T13:27:39.902Z info: [apps/user_service/src/server.ts:19] Server started at PORT: 4001

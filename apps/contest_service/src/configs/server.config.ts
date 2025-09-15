@@ -28,6 +28,7 @@ class ServerConfigs {
   static SMTP_HOST: string = process.env.SMTP_HOST as string;
   static SMTP_PORT: string = process.env.SMTP_PORT as string;
   static CLIENT_HOST: string = process.env.CLIENT_HOST as string;
+  static OPEN_API_KEY: string = process.env.OPEN_API_KEY as string;
   private constructor() {}
 }
 

@@ -84,4 +84,34 @@ export default class ContestController {
     const ok = await this.contestService.deleteQuestion(id);
     return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: ok });
   }
+
+  /** generative ai */
+
+  public async generateQuestions(req: Request, res: Response) {
+    const { matchData, contestDescription, contestId } = req.body;
+
+    try {
+      const result = await this.contestService.generateAIQuestions(
+        matchData,
+        contestDescription,
+        contestId
+      );
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result?.data,
+        message: result?.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: err?.message || "Error generating contest",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

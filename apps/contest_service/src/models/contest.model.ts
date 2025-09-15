@@ -102,7 +102,7 @@ export class Contest
   public readonly updatedAt?: Date;
 }
 
-export default function initContestModel(sequelize: Sequelize) {
+export default function (sequelize: Sequelize) {
   Contest.init(
     {
       id: {

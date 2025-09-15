@@ -62,3 +62,138 @@
 2025-09-15T07:48:18.028Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T07:48:19.751Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T07:48:21.758Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:30.726Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T13:08:35.739Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:08:40.968Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:08:46.275Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:08:47.221Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:47.749Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:48.573Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:50.266Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:52.347Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:54.431Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:56.503Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:08:58.507Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:00.595Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:02.681Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:04.754Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:06.839Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:09.023Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:11.085Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:13.156Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:15.334Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:17.375Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:19.525Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:21.541Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:23.570Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:25.636Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:27.807Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:29.858Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:31.939Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:34.081Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:36.237Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:38.347Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:09:45.380Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:09:52.449Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:09:59.469Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:06.612Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:13.629Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:20.649Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:10:25.429Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:10:27.481Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:10:29.505Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:13:11.300Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T13:13:16.314Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:21.555Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:26.678Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:31.914Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:37.420Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:43.346Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:50.036Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:13:57.134Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:04.164Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:11.236Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:18.272Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:25.452Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:32.616Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:39.716Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:46.834Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:14:53.943Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:01.032Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:08.163Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:15.263Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:22.446Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:29.502Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:36.653Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:43.704Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:50.790Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:15:57.908Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:05.073Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:12.151Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:19.251Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:26.357Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:33.362Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:40.519Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:47.645Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:16:54.828Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:17:02.018Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:17:09.096Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:17:16.250Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:17:23.387Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:17:27.567Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:29.707Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:31.839Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:33.943Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:36.008Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:38.025Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:40.205Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:42.390Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:44.526Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:46.559Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:48.767Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:50.882Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:53.026Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:55.068Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:57.135Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:17:59.198Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:01.363Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:03.470Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:05.572Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:07.758Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:09.782Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:11.883Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:18:58.177Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:03.243Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:08.424Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:13.797Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:19.308Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:25.259Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:31.978Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:39.058Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:46.109Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:19:53.308Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:00.344Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:07.465Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:14.528Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:21.729Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:28.886Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:35.906Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:42.935Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:50.124Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:20:57.247Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:04.390Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:11.576Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:18.586Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:25.775Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:32.939Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:40.106Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:47.297Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:21:54.351Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:01.556Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:08.664Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:15.724Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:22.809Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:29.910Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T13:22:34.237Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:22:36.374Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T13:22:38.437Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com

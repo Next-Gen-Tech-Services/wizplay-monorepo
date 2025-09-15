@@ -1,5 +1,5 @@
 // src/services/contest.service.ts
-import { BadRequestError, logger } from "@repo/common";
+import { BadRequestError, logger, ServerError } from "@repo/common";
 import { autoInjectable } from "tsyringe";
 import {
   CreateContestPayload,
@@ -7,10 +7,15 @@ import {
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import ContestRepository from "../repositories/contest.repository";
+import { GenerativeAi } from "../utils/generativeAi";
+import { formatQuestions } from "../utils/questionsFormatter";
 
 @autoInjectable()
 export default class ContestService {
-  constructor(private readonly repo: ContestRepository) {}
+  private generativeAI: GenerativeAi;
+  constructor(private readonly repo: ContestRepository) {
+    this.generativeAI = new GenerativeAi();
+  }
 
   public async createContest(payload: CreateContestPayload) {
     if (!payload.matchId) throw new BadRequestError("matchId required");
@@ -66,5 +71,38 @@ export default class ContestService {
 
   public async deleteQuestion(id: string) {
     return this.repo.deleteQuestion(id);
+  }
+
+  public async generateAIQuestions(
+    matchData: any,
+    contestDescription: any,
+    contestId: any
+  ) {
+    try {
+      const generatedQuestions = await this.generativeAI.generateQuestions(
+        JSON.stringify(matchData),
+        contestDescription
+      );
+
+      const key = Object.keys(generatedQuestions)[0];
+      const formattedData = formatQuestions(
+        generatedQuestions[key],
+        contestId,
+        matchData.key
+      );
+
+      const insertQuestions = await this.repo.saveBulkQuestions(formattedData);
+      if (!insertQuestions) {
+        throw new ServerError(
+          "Something went wrong while generating the questions"
+        );
+      }
+      return {
+        data: insertQuestions,
+        message: "questions generated successfully",
+      };
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE ERROR]: ${error.message}`);
+    }
   }
 }

@@ -4,9 +4,10 @@ import { DataTypes, Model, Optional, Sequelize, UUIDV4 } from "sequelize";
 export interface IQuestionAttrs {
   id: string;
   contestId: string;
-  text: string;
-  options: string[]; // stored as JSON
-  correctIndex: number;
+  matchId: string;
+  question: string;
+  options: any[];
+  ansKey?: string;
   points?: number;
   createdAt?: Date;
   updatedAt?: Date;
@@ -15,7 +16,7 @@ export interface IQuestionAttrs {
 interface QuestionCreationAttributes
   extends Optional<
     IQuestionAttrs,
-    "id" | "points" | "createdAt" | "updatedAt"
+    "id" | "points" | "ansKey" | "createdAt" | "updatedAt"
   > {}
 
 export class Question
@@ -24,15 +25,16 @@ export class Question
 {
   public id!: string;
   public contestId!: string;
-  public text!: string;
-  public options!: string[];
-  public correctIndex!: number;
+  public matchId!: string;
+  public question!: string;
+  public options!: any[];
+  public ansKey: string;
   public points!: number | undefined;
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
 
-export default function initQuestionModel(sequelize: Sequelize) {
+export default function (sequelize: Sequelize) {
   Question.init(
     {
       id: {
@@ -45,7 +47,11 @@ export default function initQuestionModel(sequelize: Sequelize) {
         type: DataTypes.UUID,
         allowNull: false,
       },
-      text: {
+      matchId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      question: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
@@ -54,10 +60,10 @@ export default function initQuestionModel(sequelize: Sequelize) {
         allowNull: false,
         defaultValue: [],
       },
-      correctIndex: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
+      ansKey: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
       },
       points: {
         type: DataTypes.INTEGER,
