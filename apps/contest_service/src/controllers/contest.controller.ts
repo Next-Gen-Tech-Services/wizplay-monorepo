@@ -1,5 +1,5 @@
 // src/controllers/contest.controller.ts
-import { STATUS_CODE } from "@repo/common";
+import { logger, STATUS_CODE } from "@repo/common";
 import { Request, Response } from "express";
 import { autoInjectable } from "tsyringe";
 import ContestService from "../services/contest.service";
@@ -34,7 +34,7 @@ export default class ContestController {
 
       return res
         .status(STATUS_CODE.SUCCESS)
-        .json({ success: true, data: result });
+        .json({ success: true, data: result.items, total: result.total });
     } catch (err: any) {
       logger.error(
         `ContestController.listByMatch error: ${err?.message ?? err}`

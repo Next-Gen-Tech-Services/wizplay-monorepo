@@ -7,7 +7,6 @@ import {
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import ContestRepository from "../repositories/contest.repository";
-import { filterMatchById, getMatches } from "../utils/getFromCache";
 
 @autoInjectable()
 export default class ContestService {
@@ -22,25 +21,8 @@ export default class ContestService {
   }
 
   public async listContests(matchId?: string, limit = 20, offset = 0) {
-    try {
-      let filteredMatch = {};
-      if (matchId) {
-        const matches = await getMatches();
-        const parsedMatches = JSON.parse(matches);
-        filteredMatch = await filterMatchById(parsedMatches, matchId);
-      }
-      const contests = await this.repo.listContestsByMatch(
-        matchId,
-        limit,
-        offset
-      );
-      return {
-        contests: contests,
-        match: Object.keys(filteredMatch).length ? filteredMatch : {},
-      };
-    } catch (error: any) {
-      throw new BadRequestError(error.message);
-    }
+    // pass through to repository
+    return this.repo.listContestsByMatch(matchId, limit, offset);
   }
 
   public async getContest(id: string) {
