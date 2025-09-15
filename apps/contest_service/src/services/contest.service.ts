@@ -21,11 +21,14 @@ export default class ContestService {
     return created;
   }
 
-  public async listContests(matchId: string, limit = 20, offset = 0) {
+  public async listContests(matchId?: string, limit = 20, offset = 0) {
     try {
-      const matches = await getMatches();
-      const parsedMatches = JSON.parse(matches);
-      const filteredMatch = await filterMatchById(parsedMatches, matchId);
+      let filteredMatch = {};
+      if (matchId) {
+        const matches = await getMatches();
+        const parsedMatches = JSON.parse(matches);
+        filteredMatch = await filterMatchById(parsedMatches, matchId);
+      }
       const contests = await this.repo.listContestsByMatch(
         matchId,
         limit,
@@ -33,7 +36,7 @@ export default class ContestService {
       );
       return {
         contests: contests,
-        match: filteredMatch,
+        match: Object.keys(filteredMatch).length ? filteredMatch : {},
       };
     } catch (error: any) {
       throw new BadRequestError(error.message);

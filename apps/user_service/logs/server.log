@@ -959,3 +959,39 @@
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
 2025-09-15T08:35:19.443Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
 2025-09-15T08:35:19.445Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T08:35:33.821Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:35:43.823Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
+2025-09-15T08:35:43.824Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T08:35:56.574Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:36:06.576Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
+2025-09-15T08:36:06.577Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T08:36:21.978Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:36:31.979Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
+2025-09-15T08:36:31.980Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T08:36:46.008Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:36:56.011Z info: [apps/user_service/src/app.ts:25] Retrying Kafka initialization...
+2025-09-15T08:36:56.011Z info: [apps/user_service/src/app.ts:12] Waiting for Kafka to be ready...
