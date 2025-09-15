@@ -1,488 +1,750 @@
-2025-09-14T09:19:10.738Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
-2025-09-14T09:19:11.284Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
-2025-09-14T09:19:11.285Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
-2025-09-14T09:19:16.325Z info: [apps/match_service/src/app.ts:18] Successfully created topics
-2025-09-14T09:19:19.391Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
-2025-09-14T09:19:19.392Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
-2025-09-14T09:19:19.410Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
-2025-09-14T09:19:19.412Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
-2025-09-14T09:20:00.015Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:20:00.779Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:20:01.431Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:20:01.681Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:20:01.697Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:20:01.697Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:21:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:21:00.509Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:21:01.150Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:21:01.332Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:21:01.364Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:21:01.364Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:22:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:22:00.342Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:22:00.952Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:22:01.042Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:22:01.062Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:22:01.062Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:23:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:23:00.270Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:23:00.983Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:23:01.164Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:23:01.177Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:23:01.177Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:24:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:24:00.340Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:24:01.021Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:24:01.308Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:24:01.332Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:24:01.332Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:25:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:25:00.231Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:25:00.891Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:25:01.173Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:25:01.189Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:25:01.190Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:26:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:26:00.383Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:26:01.079Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:26:01.277Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:26:01.301Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:26:01.302Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:27:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:27:00.262Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:27:00.882Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:27:00.981Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:27:00.994Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:27:00.994Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:28:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:28:00.344Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:28:00.990Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:28:01.081Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:28:01.095Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:28:01.095Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:29:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:29:00.239Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:29:00.911Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:29:01.195Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:29:01.217Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:29:01.217Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:30:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:30:00.462Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:30:01.107Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:30:01.457Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:30:01.480Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:30:01.481Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:31:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:31:00.260Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:31:00.921Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:31:01.070Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:31:01.082Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:31:01.082Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:32:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:32:00.313Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:32:00.947Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:32:01.333Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:32:01.352Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:32:01.352Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:33:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:33:00.238Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:33:00.878Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:33:01.190Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:33:01.206Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:33:01.206Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:34:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:34:00.338Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:34:00.956Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:34:01.100Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:34:01.110Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:34:01.110Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:35:00.019Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:35:00.319Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:35:01.306Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:35:02.288Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:35:02.301Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:35:02.301Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:36:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:36:00.349Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:36:01.018Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:36:02.221Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:36:02.246Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:36:02.246Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:37:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:37:00.260Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:37:00.960Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:37:02.218Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:37:02.239Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:37:02.239Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:38:00.016Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:38:00.341Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:38:00.990Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:38:01.846Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:38:01.871Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:38:01.872Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:39:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:39:00.261Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:39:00.903Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:39:01.933Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:39:01.943Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:39:01.943Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:40:00.002Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:40:00.348Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:40:00.970Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:40:01.339Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:40:01.352Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:40:01.352Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:41:00.014Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:41:00.263Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:41:00.865Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:41:01.149Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:41:01.164Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:41:01.165Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:42:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:42:00.314Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:42:00.951Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:42:01.235Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:42:01.255Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:42:01.255Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:43:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:43:00.243Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:43:00.888Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:43:01.151Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:43:01.169Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:43:01.170Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:44:00.002Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:44:00.306Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:44:01.150Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:44:01.573Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:44:01.585Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:44:01.585Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:45:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:45:00.247Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:45:00.879Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:45:01.302Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:45:01.338Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:45:01.339Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:46:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:46:00.475Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:46:01.238Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:46:01.635Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:46:01.652Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:46:01.652Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:47:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:47:00.235Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:47:00.893Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:47:01.314Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:47:01.331Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:47:01.331Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:48:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:48:00.423Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:48:01.044Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:48:02.269Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:48:02.283Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:48:02.283Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:49:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:49:00.246Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:49:00.890Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:49:01.276Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:49:01.289Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:49:01.289Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:50:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:50:00.337Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:50:00.985Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:50:01.375Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:50:01.395Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:50:01.396Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:51:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:51:00.247Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:51:00.882Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:51:01.611Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:51:01.627Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:51:01.627Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:52:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:52:00.315Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:52:00.955Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:52:01.386Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:52:01.408Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:52:01.409Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:53:00.015Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:53:00.274Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:53:00.922Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:53:01.501Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:53:01.524Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:53:01.524Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:54:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:54:00.334Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:54:01.043Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:54:01.398Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:54:01.415Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:54:01.415Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:55:00.025Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:55:00.257Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:55:00.898Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:55:01.234Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:55:01.251Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:55:01.251Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:56:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:56:00.320Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:56:00.936Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:56:01.366Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:56:01.382Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:56:01.382Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:57:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:57:00.486Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:57:01.119Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:57:01.442Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:57:01.458Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:57:01.458Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:58:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:58:00.316Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:58:00.949Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:58:01.252Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:58:01.268Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:58:01.269Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T09:59:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T09:59:00.232Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T09:59:00.858Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T09:59:01.203Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T09:59:01.221Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T09:59:01.221Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:00:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:00:00.317Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:00:00.922Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:00:01.225Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:00:01.237Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:00:01.237Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:01:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:01:00.316Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:01:00.939Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:01:01.284Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:01:01.297Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:01:01.297Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:02:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:02:00.478Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:02:01.156Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:02:01.461Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:02:01.495Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:02:01.495Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:03:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:03:00.231Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:03:00.858Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:03:01.155Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:03:01.166Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:03:01.166Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:04:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:04:00.339Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:04:01.033Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:04:01.566Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:04:01.586Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:04:01.586Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:05:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:05:00.240Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:05:00.898Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:05:01.274Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:05:01.289Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:05:01.289Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:06:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:06:00.337Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:06:00.974Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:06:01.360Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:06:01.372Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:06:01.372Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:07:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:07:00.435Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:07:01.214Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:07:01.662Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:07:01.681Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:07:01.681Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:08:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:08:00.326Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:08:00.945Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:08:01.384Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:08:01.401Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:08:01.402Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:09:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:09:00.237Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:09:00.852Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:09:01.236Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:09:01.255Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:09:01.256Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:10:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:10:00.317Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:10:00.950Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:10:01.347Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:10:01.364Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:10:01.365Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:11:00.016Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:11:00.239Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:11:00.943Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:11:01.334Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:11:01.345Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:11:01.345Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:12:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:12:00.328Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:12:00.979Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:12:01.381Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:12:01.397Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:12:01.397Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:13:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:13:00.344Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:13:00.982Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:13:01.415Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:13:01.431Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:13:01.431Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:14:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:14:00.347Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:14:01.004Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:14:01.436Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:14:01.457Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:14:01.457Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:15:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:15:00.224Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:15:00.850Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:15:01.262Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:15:01.274Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:15:01.274Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:16:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:16:00.360Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:16:01.022Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:16:01.436Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:16:01.459Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:16:01.459Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:17:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:17:00.257Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:17:00.897Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:17:01.306Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:17:01.325Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:17:01.325Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:18:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:18:00.634Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:18:01.379Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:18:01.841Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:18:01.857Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:18:01.857Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:19:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:19:00.291Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:19:00.922Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:19:01.316Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:19:01.340Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:19:01.341Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:20:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:20:00.363Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:20:01.017Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:20:01.458Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:20:01.479Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:20:01.479Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:21:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:21:00.224Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:21:00.851Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:21:01.234Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:21:01.248Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:21:01.248Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:22:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:22:00.333Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:22:00.985Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:22:01.367Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:22:01.384Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:22:01.384Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:23:00.004Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:23:00.221Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:23:00.830Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:23:01.279Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:23:01.296Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:23:01.296Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:24:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:24:00.341Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:24:00.984Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:24:01.370Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:24:01.389Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:24:01.389Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:25:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:25:00.247Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:25:00.941Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:25:01.429Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:25:01.459Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:25:01.459Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:26:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:26:00.318Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:26:00.961Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:26:01.383Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:26:01.400Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:26:01.400Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:27:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:27:00.245Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:27:00.926Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:27:01.364Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:27:01.382Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:27:01.382Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:28:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:28:00.327Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:28:00.950Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:28:01.434Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:28:01.456Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:28:01.456Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:29:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:29:00.272Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:29:01.037Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:29:01.387Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:29:01.399Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:29:01.400Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:30:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:30:00.339Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:30:01.027Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:30:01.376Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:30:01.392Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:30:01.392Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:31:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:31:00.237Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:31:00.874Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:31:01.211Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:31:01.236Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:31:01.236Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:32:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:32:00.321Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:32:00.962Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:32:01.274Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:32:01.292Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:32:01.292Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:33:00.017Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:33:00.247Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:33:00.887Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:33:01.201Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:33:01.216Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:33:01.216Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:34:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:34:00.610Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:34:01.298Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:34:01.742Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:34:01.753Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:34:01.753Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:35:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:35:00.255Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:35:00.918Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:35:01.257Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:35:01.276Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:35:01.276Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:36:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:36:00.327Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:36:00.971Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:36:01.269Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:36:01.292Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:36:01.292Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:37:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:37:00.235Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:37:00.855Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:37:01.154Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:37:01.170Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:37:01.170Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:38:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:38:01.450Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:38:02.080Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:38:02.934Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:38:02.955Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:38:02.956Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
-2025-09-14T10:39:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
-2025-09-14T10:39:00.791Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
-2025-09-14T10:39:01.735Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
-2025-09-14T10:39:09.164Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
-2025-09-14T10:39:09.184Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
-2025-09-14T10:39:09.185Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:21:56.395Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-15T02:21:56.456Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:21:56.457Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:22:01.500Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:22:04.555Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:22:04.556Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:22:04.576Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:22:04.578Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:23:00.029Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:23:00.490Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:23:01.085Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:23:01.179Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:23:01.198Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:23:01.198Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:24:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:24:00.253Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:24:00.844Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:24:00.914Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:24:00.931Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:24:00.931Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:24:05.499Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-15T02:24:05.567Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:24:05.568Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:24:10.600Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:24:34.793Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:24:34.794Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:24:34.816Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:24:34.817Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:24:54.366Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-15T02:24:54.437Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:24:54.438Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:24:59.459Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:25:19.886Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:25:19.888Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:25:19.914Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:25:19.917Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:25:34.908Z info: [apps/match_service/src/configs/database.config.ts:36] Database connection established ✅
+2025-09-15T02:25:34.963Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:25:34.964Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:25:39.996Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:25:59.975Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:25:59.975Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:25:59.988Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:25:59.990Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:26:23.279Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:26:23.343Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:26:23.344Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:26:28.372Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:26:50.071Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:26:50.072Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:26:50.093Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:26:50.095Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:28:18.694Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:28:18.860Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:28:18.862Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:28:23.894Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:28:45.269Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:28:45.271Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:28:45.295Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:28:45.297Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:29:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:29:00.292Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:29:00.860Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:29:00.942Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:29:00.967Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:29:00.967Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:30:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:30:00.358Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:30:00.929Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:30:00.994Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:30:01.019Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:30:01.019Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:31:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:31:00.323Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:31:00.959Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:31:01.019Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:31:01.037Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:31:01.037Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:32:00.020Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:32:00.292Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:32:00.922Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:32:01.047Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:32:01.062Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:32:01.062Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:33:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:33:00.263Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:33:00.823Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:33:00.886Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:33:00.906Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:33:00.907Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:34:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:34:00.285Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:34:00.866Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:34:00.937Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:34:00.965Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:34:00.965Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:35:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:35:00.246Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:35:00.794Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:35:00.852Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:35:00.881Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:35:00.881Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:36:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:36:00.303Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:36:00.848Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:36:00.906Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:36:00.925Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:36:00.926Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:37:00.019Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:37:00.251Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:37:00.805Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:37:00.866Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:37:00.880Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:37:00.880Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:38:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:38:00.261Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:38:00.832Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:38:00.895Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:38:00.914Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:38:00.915Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:39:00.004Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:39:00.303Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:39:00.931Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:39:00.989Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:39:01.005Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:39:01.005Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:40:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:40:00.282Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:40:00.880Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:40:00.942Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:40:00.959Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:40:00.959Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:41:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:41:00.239Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:41:00.785Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:41:00.840Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:41:00.854Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:41:00.854Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:42:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:42:00.322Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:42:00.960Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:42:01.020Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:42:01.039Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:42:01.039Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:43:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:43:00.314Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:43:00.925Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:43:00.991Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:43:01.014Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:43:01.015Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:44:00.029Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:44:00.271Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:44:00.846Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:44:00.911Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:44:00.933Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:44:00.933Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:45:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:45:00.304Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:45:00.931Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:45:00.992Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:45:01.006Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:45:01.006Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:45:26.660Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:45:26.745Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:45:26.746Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:45:31.777Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:45:48.011Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:45:48.081Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:45:48.082Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:45:53.105Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:46:21.688Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:46:21.690Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:46:21.715Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:46:21.717Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:47:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:47:00.314Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:47:00.903Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:47:01.007Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:47:01.033Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:47:01.033Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:47:36.074Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:47:36.289Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:47:36.291Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:47:41.310Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:47:42.057Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:47:42.114Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:47:42.115Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:47:47.130Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:48:01.879Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:48:01.880Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:48:01.907Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:48:01.909Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:49:00.017Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:49:00.311Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:49:00.882Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:49:00.979Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:49:00.998Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:49:00.998Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:50:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:50:00.285Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:50:00.888Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:50:00.953Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:50:00.972Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:50:00.973Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:50:37.050Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:50:37.111Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:50:37.112Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:50:42.159Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:51:02.176Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:51:02.178Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:51:02.203Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:51:02.205Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:52:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:52:00.312Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:52:00.902Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:52:00.998Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:52:01.019Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:52:01.020Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:53:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:53:00.413Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:53:01.008Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:53:01.065Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:53:01.086Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:53:01.086Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:54:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:54:00.254Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:54:00.838Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:54:00.898Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:54:00.923Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:54:00.923Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:55:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:55:00.310Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:55:00.904Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:55:00.969Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:55:00.990Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:55:00.990Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:55:37.154Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:55:37.474Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:55:37.476Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:55:42.502Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:55:54.857Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T02:55:54.929Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T02:55:54.930Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T02:55:59.962Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T02:56:32.787Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T02:56:32.788Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T02:56:32.821Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T02:56:32.823Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T02:57:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:57:00.298Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:57:00.893Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:57:00.985Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:57:01.008Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:57:01.009Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:58:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:58:00.283Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:58:00.914Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:58:00.976Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:58:00.998Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:58:00.998Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T02:59:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T02:59:00.281Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T02:59:00.892Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T02:59:00.954Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T02:59:00.978Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T02:59:00.978Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:00:00.014Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:00:00.261Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:00:00.854Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:00:00.923Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:00:00.947Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:00:00.947Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:01:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:01:00.300Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:01:00.884Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:01:00.950Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:01:00.978Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:01:00.979Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:02:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:02:00.294Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:02:00.913Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:02:00.987Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:02:01.023Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:02:01.023Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:03:00.013Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:03:00.302Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:03:00.933Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:03:00.999Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:03:01.020Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:03:01.020Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:03:13.968Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T03:03:14.032Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T03:03:14.033Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T03:03:19.083Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T03:03:43.331Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T03:03:43.332Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T03:03:43.359Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T03:03:43.361Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T03:04:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:04:00.302Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:04:00.901Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:04:01.001Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:04:01.020Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:04:01.020Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:05:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:05:00.459Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:05:01.066Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:05:01.126Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:05:01.155Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:05:01.155Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:06:00.004Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:06:00.269Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:06:00.887Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:06:00.947Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:06:00.967Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:06:00.967Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:07:00.021Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:07:00.291Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:07:00.896Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:07:00.968Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:07:00.995Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:07:00.995Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:07:33.114Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T03:07:33.182Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T03:07:33.183Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T03:07:38.216Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T03:07:58.695Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T03:07:58.696Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T03:07:58.723Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T03:07:58.725Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T03:08:00.012Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:08:00.311Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:08:00.914Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:08:01.040Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:08:01.067Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:08:01.067Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:09:00.006Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:09:00.264Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:09:00.862Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:09:00.934Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:09:00.962Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:09:00.962Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:09:27.120Z error: [apps/match_service/src/repositories/match.repository.ts:166] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T03:09:28.300Z error: [apps/match_service/src/repositories/match.repository.ts:166] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T03:09:55.321Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T03:09:55.391Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T03:09:55.392Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T03:10:00.409Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T03:10:21.356Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T03:10:21.570Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T03:10:21.572Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T03:10:26.593Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T03:10:53.939Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T03:10:53.940Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T03:10:53.965Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T03:10:53.966Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T03:10:57.195Z error: [apps/match_service/src/repositories/match.repository.ts:166] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T03:11:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:11:00.296Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:11:00.898Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:11:00.976Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:11:00.997Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:11:00.997Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:11:12.510Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T03:11:12.583Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T03:11:12.584Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T03:11:17.620Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T03:11:39.035Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T03:11:39.036Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T03:11:39.062Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T03:11:39.064Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T03:12:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:12:00.354Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:12:00.982Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:12:01.086Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:12:01.104Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:12:01.104Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:13:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:13:00.422Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:13:01.020Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:13:01.083Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:13:01.097Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:13:01.097Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:14:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:14:00.306Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:14:00.886Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:14:00.957Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:14:00.990Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:14:00.990Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:15:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:15:00.300Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:15:00.884Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:15:00.959Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:15:00.988Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:15:00.988Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:16:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:16:00.243Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:16:00.827Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:16:00.893Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:16:00.912Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:16:00.912Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:17:00.010Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:17:00.294Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:17:00.922Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:17:00.988Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:17:01.019Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:17:01.019Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:18:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:18:00.280Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:18:00.877Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:18:00.939Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:18:00.956Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:18:00.956Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:19:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:19:00.302Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:19:00.929Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:19:00.996Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:19:01.021Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:19:01.021Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:20:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:20:00.294Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:20:00.906Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:20:00.959Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:20:00.973Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:20:00.973Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:21:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:21:00.249Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:21:00.826Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:21:00.887Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:21:00.905Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:21:00.905Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:22:00.015Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:22:00.521Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:22:01.536Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:22:01.714Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:22:01.746Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:22:01.746Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:23:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:23:00.295Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T03:23:00.921Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T03:23:00.988Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T03:23:01.016Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T03:23:01.016Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T03:28:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:28:00.045Z error: [apps/match_service/src/utils/jobs/match.ts:49] [MATCH-CRON] Error in auth api getaddrinfo ENOTFOUND api.sports.roanuz.com
+2025-09-15T03:28:06.621Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read EADDRNOTAVAIL
+2025-09-15T03:28:06.622Z error: [apps/match_service/src/configs/redis.config.ts:65] read EADDRNOTAVAIL
+2025-09-15T03:28:06.625Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:06.626Z error: [apps/match_service/src/utils/jobs/match.ts:84] [MATCH-CRON] Error in match data api getaddrinfo ENOTFOUND api.sports.roanuz.com
+2025-09-15T03:28:06.874Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:07.056Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:07.293Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:07.872Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:08.693Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:10.373Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:05.863Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:07.984Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:10.070Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:12.227Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:28.646Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:30.783Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:32.890Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:34.986Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:37.087Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:42:44.206Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:42:46.216Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:42:48.293Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:42:50.339Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:42:57.349Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:42:59.374Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:43:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T03:43:00.010Z error: [apps/match_service/src/utils/jobs/match.ts:49] [MATCH-CRON] Error in auth api getaddrinfo ENOTFOUND api.sports.roanuz.com
+2025-09-15T03:43:01.469Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:43:03.488Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:43:47.172Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:43:49.373Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:43:51.563Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:43:53.651Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:44:43.358Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:44:45.491Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:44:47.583Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:44:49.766Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:33.909Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:36.071Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:38.169Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:40.234Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:42.396Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:44.523Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:54:46.561Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:55:06.273Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:55:08.322Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:55:10.499Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:55:12.644Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T04:07:58.662Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T04:08:00.003Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:08:00.006Z error: [apps/match_service/src/utils/jobs/match.ts:49] [MATCH-CRON] Error in auth api getaddrinfo ENOTFOUND api.sports.roanuz.com
+2025-09-15T04:08:00.734Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T04:08:02.896Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T04:08:05.327Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T04:08:07.531Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:08:08.473Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:08:08.636Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:08:08.788Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:08:08.812Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:08:08.812Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:08:08.814Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:08:08.836Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:08:08.836Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:12:11.539Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T04:12:12.074Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:13:58.920Z error: [apps/match_service/src/repositories/match.repository.ts:166] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T04:14:00.004Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:14:00.498Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:14:01.084Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:14:01.183Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:14:01.215Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:14:01.215Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:14:21.955Z error: [apps/match_service/src/repositories/match.repository.ts:166] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T04:15:00.005Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:15:00.245Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:15:00.818Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:15:00.958Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:15:00.973Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:15:00.973Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:16:00.033Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:16:00.438Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:16:01.015Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:16:01.172Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:16:01.191Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:16:01.191Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:16:43.485Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:16:43.976Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:16:43.978Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:16:49.011Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:17:08.173Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:17:08.175Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:17:08.215Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:17:08.217Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:17:27.537Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:17:27.799Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:17:27.801Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:17:32.829Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:17:53.292Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:17:53.294Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:17:53.324Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:17:53.326Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:18:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:18:00.466Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:18:01.088Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:18:01.205Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:18:01.229Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:18:01.229Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:19:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:19:00.507Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:19:01.082Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:19:01.157Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:19:01.169Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:19:01.169Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:20:00.002Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:20:00.358Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:20:00.938Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:20:00.994Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:20:01.016Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:20:01.016Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:20:05.345Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:20:05.717Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:20:05.718Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:20:10.742Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:20:19.143Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:20:19.218Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:20:19.219Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:20:24.249Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:21:03.800Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:21:03.801Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:21:03.824Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:21:03.826Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:22:00.017Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:22:00.489Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:22:01.139Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:22:01.267Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:22:01.298Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:22:01.298Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:23:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:23:00.258Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:23:00.840Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:23:00.924Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:23:00.970Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:23:00.971Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:24:00.007Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:24:00.371Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:24:00.960Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:24:01.020Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:24:01.050Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:24:01.050Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:25:17.437Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:25:17.873Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:25:17.875Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:25:22.890Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:25:25.920Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:25:25.921Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:25:25.933Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:25:25.934Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:25:28.343Z error: [apps/match_service/src/repositories/match.repository.ts:176] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T04:25:29.132Z error: [apps/match_service/src/repositories/match.repository.ts:176] match.repository.updateMatch DB error: Cannot read properties of null (reading 'update')
+2025-09-15T04:26:00.014Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:26:00.407Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:26:00.993Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:26:01.123Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:26:01.144Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:26:01.144Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:27:00.014Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:27:00.232Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:27:00.783Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:27:00.860Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:27:00.884Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:27:00.884Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:28:00.011Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:28:00.370Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:28:00.917Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:28:00.969Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:28:00.991Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:28:00.992Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:28:05.203Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:28:06.127Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:28:06.128Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:28:11.148Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:28:14.834Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:28:14.876Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:28:14.878Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:28:18.910Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:28:18.983Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:28:18.984Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:28:24.011Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:29:01.454Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:29:01.455Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:29:01.478Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:29:01.481Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:30:00.008Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:30:00.473Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:30:01.097Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:30:01.207Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:30:01.232Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:30:01.232Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:31:00.015Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:31:00.230Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:31:00.779Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:31:00.833Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:31:00.864Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:31:00.864Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:32:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:32:00.356Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:32:00.890Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:32:00.916Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:32:00.941Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:32:00.941Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:33:00.009Z info: [apps/match_service/src/utils/jobs/match.ts:90] [MATCH-CRON] cron job scheduled
+2025-09-15T04:33:00.312Z info: [apps/match_service/src/utils/jobs/match.ts:41] [MATCH-CRON] auth response: 200
+2025-09-15T04:33:00.849Z info: [apps/match_service/src/utils/jobs/match.ts:64] [MATCH-CRON] match response: 200
+2025-09-15T04:33:00.888Z info: [apps/match_service/src/repositories/tournament.repository.ts:28] Inserted bulk data inside tournaments
+2025-09-15T04:33:00.921Z info: [apps/match_service/src/repositories/match.repository.ts:28] Inserted bulk data inside matches
+2025-09-15T04:33:00.921Z info: [apps/match_service/src/utils/jobs/match.ts:96] [MATCH-CRON] cron job executed
+2025-09-15T04:33:54.064Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:33:54.397Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:33:54.399Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:33:59.422Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:34:21.924Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:34:21.926Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:34:21.951Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:34:21.954Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:40:28.056Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:40:28.417Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:40:28.420Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:40:33.225Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:40:33.294Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:40:33.294Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:40:38.340Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:40:57.464Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:40:57.465Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:40:57.491Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:40:57.493Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:41:40.426Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:41:40.748Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:41:40.753Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:41:45.765Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:42:07.590Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:42:07.591Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:42:07.607Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:42:07.608Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:42:44.534Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:42:44.951Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:42:44.952Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:42:49.973Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:43:12.696Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:43:12.697Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:43:12.722Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:43:12.724Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:44:05.020Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:44:05.365Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:44:05.367Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:44:10.389Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:44:32.838Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:44:32.838Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:44:32.854Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:44:32.856Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:44:36.578Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:44:36.913Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:44:36.914Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:44:41.942Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:45:02.865Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:45:02.866Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:45:02.893Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:45:02.895Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:45:34.402Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:45:35.132Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:45:35.134Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:45:40.155Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:46:02.979Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:46:02.980Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:46:03.004Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:46:03.005Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:46:27.416Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:46:27.659Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:46:27.661Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:46:32.684Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:46:43.908Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:46:44.098Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:46:44.099Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:46:49.147Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:46:53.097Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:46:53.098Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:46:53.120Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:46:53.121Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T04:47:22.439Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:47:22.716Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:47:22.718Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:47:27.748Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:47:32.634Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T04:47:32.676Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T04:47:32.677Z info: [apps/match_service/src/app.ts:13] Waiting for Kafka to be ready...
+2025-09-15T04:47:37.707Z info: [apps/match_service/src/app.ts:18] Successfully created topics
+2025-09-15T04:48:18.551Z info: [apps/match_service/src/app.ts:22] Successfully subscribed to user events
+2025-09-15T04:48:18.552Z info: [apps/match_service/src/app.ts:34] Waiting for crons to be initialized...
+2025-09-15T04:48:18.581Z info: [apps/match_service/src/app.ts:36] Cron jobs scheduled successfully
+2025-09-15T04:48:18.583Z info: [apps/match_service/src/server.ts:18] Server started at PORT: 4003
+2025-09-15T07:16:16.558Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T07:16:21.572Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T07:16:26.751Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: Connection timeout
+2025-09-15T07:16:29.252Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T07:16:29.506Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T07:16:30.112Z info: [apps/match_service/src/configs/redis.config.ts:23] Redis client is ready to use

@@ -1,0 +1,14 @@
+2025-09-15T03:28:05.862Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: read ETIMEDOUT
+2025-09-15T03:28:05.866Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:06.095Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:06.393Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:06.650Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:07.206Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:08.055Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:28:09.674Z error: [apps/user_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T03:36:05.914Z error: Error: Heartbeat timeout
+    at Heart.<anonymous> (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/amqplib@0.10.9/node_modules/amqplib/lib/connection.js:379:21)
+    at Heart.emit (node:events:507:28)
+    at Heart.runHeartbeat (/Users/ankitchawda/Desktop/NGTS/wizplay-monorepo/node_modules/.pnpm/amqplib@0.10.9/node_modules/amqplib/lib/heartbeat.js:88:7)
+    at listOnTimeout (node:internal/timers:608:17)
+    at processTimers (node:internal/timers:543:7)

@@ -12,6 +12,7 @@ export const listMatchesValidator = () => {
     query("name").optional().isString().trim(),
     query("shortName").optional().isString().trim(),
     query("metricGroup").optional().isString().trim(),
+    query("showOnFrontend").optional().isString().trim(),
     query("teamName").optional().isString().trim(),
 
     // Dates (timestamps passed as strings → cast later)

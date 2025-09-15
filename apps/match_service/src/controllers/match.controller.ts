@@ -21,4 +21,16 @@ export default class MatchController {
       timestamp: new Date().toISOString(),
     });
   }
+  async updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const { showOnFrontend } = req.body;
+
+    try {
+      const result = await this.matchService.updateMatch(id, showOnFrontend);
+      return res.status(200).json({ success: true, data: result });
+    } catch (err: any) {
+      // better error mapping with your STATUS_CODE if available
+      return res.status(500).json({ success: false, message: err.message });
+    }
+  }
 }

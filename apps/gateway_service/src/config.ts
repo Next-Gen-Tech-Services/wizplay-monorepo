@@ -32,6 +32,15 @@ export const ROUTES: ProxyRoute[] = [
     timeoutMs: 15000,
   },
   {
+    name: "contests",
+    mountPath: "/api/v1/contests",
+    target: process.env.CONTEST_SERVICE_URL ?? "http://localhost:4007",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/contests": "/api/v1/contests" },
+    timeoutMs: 15000,
+  },
+  {
     name: "auth",
     mountPath: "/api/v1/auth",
     target: process.env.AUTH_SERVICE_URL ?? "http://localhost:4002",

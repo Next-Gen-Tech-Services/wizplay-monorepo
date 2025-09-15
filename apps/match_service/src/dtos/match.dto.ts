@@ -31,6 +31,7 @@ export interface IMatchAttrs {
   endedAt?: number | null;
   expectedStartedAt?: number | null;
   expectedEndedAt: number;
+  showOnFrontend: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

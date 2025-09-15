@@ -17,4 +17,20 @@ export default class MatchService {
       throw new BadRequestError(error.message);
     }
   }
+  public async updateMatch(matchId: string, showOnFrontend: boolean) {
+    try {
+      if (!matchId) {
+        throw new BadRequestError("Missing match id");
+      }
+
+      const updated = await this.matchRepository.updateMatch(
+        matchId,
+        showOnFrontend
+      );
+
+      return updated;
+    } catch (error: any) {
+      throw new BadRequestError(error?.message || "Failed to update match");
+    }
+  }
 }

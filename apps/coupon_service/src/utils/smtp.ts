@@ -90,10 +90,10 @@ const htmlTemplate = ({
 
 const transport = nodemailer.createTransport({
   host: ServerConfigs.SMTP_HOST,
-  port: ServerConfigs.SMPT_PORT,
+  port: ServerConfigs.SMTP_PORT,
   auth: {
-    user: ServerConfigs.SMPT_USER,
-    pass: ServerConfigs.SMPT_PASS,
+    user: ServerConfigs.SMTP_USER,
+    pass: ServerConfigs.SMTP_PASS,
   },
 } as unknown as SMTPTransport.Options);
 

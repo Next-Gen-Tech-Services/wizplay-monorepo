@@ -14,7 +14,16 @@ router.get(
   listMatchesValidator(),
   validateRequest,
   async (req: Request, res: Response) => {
-    const result = await controller.getAllMatches(req, res);
+    return controller.getAllMatches(req, res);
+  }
+);
+
+// PATCH /matches/:id
+router.patch(
+  "/matches/:id",
+  validateRequest, // optional validators
+  async (req: Request, res: Response) => {
+    const result = await controller.updateMatch(req, res);
     return result;
   }
 );

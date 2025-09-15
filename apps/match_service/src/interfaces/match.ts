@@ -91,6 +91,7 @@ export interface IMatchFilters {
   startedAfter?: string | undefined;
   startedBefore?: string | undefined;
   teamName?: string | undefined;
+  showOnFrontend?: boolean | undefined;
   limit?: number;
   offset?: number;
 }

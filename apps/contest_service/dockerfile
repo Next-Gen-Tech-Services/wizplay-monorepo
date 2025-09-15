@@ -1,0 +1,27 @@
+FROM node:alpine
+
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package.json .
+COPY pnpm-lock.yaml .
+
+# Install pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN npm install -g pnpm
+
+# Install dependencies
+RUN pnpm install
+
+# Install ts-node-dev globally for development
+RUN pnpm add -g ts-node-dev
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 4001
+
+# Use the Docker-optimized dev command
+CMD ["pnpm", "run", "dev:docker"]

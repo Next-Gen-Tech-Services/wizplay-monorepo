@@ -1,0 +1,52 @@
+{
+  "name": "contest_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "pnpm run clean && tsc -p tsconfig.json",
+    "dev": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules -- ./src/server.ts",
+    "dev:docker": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --poll ./src/server.ts",
+    "start": "node ./build/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@repo/common": "workspace:*",
+    "amqplib": "^0.10.8",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "kafkajs": "^2.2.4",
+    "nodemailer": "^7.0.6",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "redis": "^5.6.1",
+    "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.7",
+    "tsyringe": "^4.10.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@repo/typescript-config": "workspace:*",
+    "@types/amqplib": "^0.10.7",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/express-serve-static-core": "^5.0.7",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "@types/nodemailer": "^7.0.1",
+    "@types/rosie": "^0.0.45",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.0.5",
+    "rosie": "^2.1.1",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -55,6 +55,8 @@ export default class MatchRepository {
       if (filters.status) where["status"] = filters.status;
       if (filters.tournamentKey) where["tournamentKey"] = filters.tournamentKey;
       if (filters.winner) where["winner"] = filters.winner;
+      if (filters.showOnFrontend)
+        where["showOnFrontend"] = Boolean(filters.showOnFrontend);
 
       // string search (case-insensitive)
       if (filters.name) where["name"] = { [Op.iLike]: `%${filters.name}%` };
@@ -71,7 +73,6 @@ export default class MatchRepository {
         if (filters.startedBefore)
           where["startedAt"][Op.lte] = filters.startedBefore;
       }
-
       const limit = filters.limit ?? 20;
       const offset = filters.offset ?? 0;
       const page = Math.floor(offset / limit) + 1;
@@ -101,6 +102,38 @@ export default class MatchRepository {
     } catch (error) {
       logger.error(`Database Error: ${error}`);
       throw new ServerError("Database Error");
+    }
+  }
+
+  public async updateMatch(
+    matchId: string,
+    showOnFrontend: boolean
+  ): Promise<any> {
+    try {
+      if (!matchId) {
+        throw new ServerError("Missing match id");
+      }
+
+      const match = await this._DB.Match.update(
+        {
+          showOnFrontend: showOnFrontend,
+        },
+        {
+          where: {
+            id: matchId,
+          },
+          returning: true,
+        }
+      );
+      return match;
+    } catch (error: any) {
+      logger.error(
+        `match.repository.updateMatch DB error: ${error?.message ?? error}`
+      );
+      // bubble as ServerError for upper layers
+      throw new ServerError(
+        error?.message || "Database error while updating match"
+      );
     }
   }
 }
