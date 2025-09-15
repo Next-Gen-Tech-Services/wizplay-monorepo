@@ -3,7 +3,6 @@ import { BadRequestError, logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
 import {
   CreateContestPayload,
-  CreateQuestionPayload,
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import { Contest } from "../models/contest.model";
@@ -123,13 +122,24 @@ export default class ContestRepository {
   /** questions */
 
   public async saveBulkQuestions(data: any) {
-     if (!data.length) {
-        throw new BadRequestError("invalid matches value");
-      }
+    if (!data.length) {
+      throw new BadRequestError("invalid matches value");
+    }
 
-      const result = await this._DB.Question.bulkCreate(data);
-      logger.info(`Inserted bulk data inside matches`);
+    const result = await this._DB.Question.bulkCreate(data);
+    logger.info(`Inserted bulk data inside matches`);
 
-      return result;
-  };
+    return result;
+  }
+
+  public async saveBulkContests(data: any) {
+    if (!data.length) {
+      throw new BadRequestError("invalid contests value");
+    }
+
+    const result = await this._DB.Contest.bulkCreate(data);
+    logger.info(`Inserted bulk data inside contests`);
+
+    return result;
+  }
 }

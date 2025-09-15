@@ -8,7 +8,11 @@ import {
 } from "../dtos/contest.dto";
 import ContestRepository from "../repositories/contest.repository";
 import { GenerativeAi } from "../utils/generativeAi";
-import { formatQuestions } from "../utils/questionsFormatter";
+import {
+  formatContestsForBulkInsert,
+  formatQuestions,
+  formatQuestionsForBulkInsert,
+} from "../utils/questionsFormatter";
 
 @autoInjectable()
 export default class ContestService {
@@ -100,6 +104,36 @@ export default class ContestService {
       return {
         data: insertQuestions,
         message: "questions generated successfully",
+      };
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE ERROR]: ${error.message}`);
+    }
+  }
+
+  public async generateContests(matchData: any) {
+    try {
+      const contests = await this.generativeAI.generateContest(
+        JSON.stringify(matchData)
+      );
+
+      const contestRecords = formatContestsForBulkInsert(
+        contests,
+        matchData.id
+      );
+      const questionRecords = formatQuestionsForBulkInsert(
+        contests,
+        matchData.id
+      );
+
+      const bulkContests = await this.repo.saveBulkContests(contestRecords);
+      const bulkQuestions = await this.repo.saveBulkQuestions(questionRecords);
+
+      return {
+        data: {
+          contests: bulkContests,
+          questions: bulkQuestions,
+        },
+        message: "generated contests successfully",
       };
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE ERROR]: ${error.message}`);

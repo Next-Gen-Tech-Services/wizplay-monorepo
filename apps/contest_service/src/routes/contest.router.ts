@@ -60,8 +60,13 @@ router.delete("/contests/questions/:id", async (req, res) => {
  * Generative AI
  */
 
+router.post("/contest/generate", async (req: Request, res: Response) => {
+  const result = await contestController.generateContests(req, res);
+  return result;
+});
+
 router.post(
-  "/contests/ai/generate",
+  "/contests/generate/questions",
   generateQuestionsValidator(),
   validateRequest,
   async (req: Request, res: Response) => {

@@ -114,4 +114,28 @@ export default class ContestController {
       });
     }
   }
+
+  public async generateContests(req: Request, res: Response) {
+    const { matchData } = req.body;
+
+    try {
+      const result = await this.contestService.generateContests(matchData);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result?.data,
+        message: result?.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: err?.message || "Error generating contest",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }
