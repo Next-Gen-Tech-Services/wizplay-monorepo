@@ -97,7 +97,7 @@ services:
     environment:
       POSTGRES_USER: contest_db
       POSTGRES_PASSWORD: contest_db
-      POSTGRES_DB: contest_db
+      POSTGRES_DB: contest_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
       - contest_db_data:/var/lib/postgresql/data

@@ -37,19 +37,9 @@ export default class ContestRepository {
 
   public async listContestsByMatch(matchId?: string, limit = 20, offset = 0) {
     try {
-      // build where clause conditionally
       const where = matchId ? { matchId } : {};
-
       const { rows, count } = await this._DB.Contest.findAndCountAll({
         where,
-        // include: [
-        //   {
-        //     model: this._DB.Match,
-        //     as: "match", // adjust alias to whatever association alias you used
-        //     required: false, // if you want only contests that have matches, set to true
-        //     attributes: ["id", "title", "start_at", "end_at"],
-        //   },
-        // ],
         order: [["start_at", "ASC"]],
         limit,
         offset,

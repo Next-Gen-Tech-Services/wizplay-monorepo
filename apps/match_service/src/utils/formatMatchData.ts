@@ -51,6 +51,7 @@ export function formatMatchData(data: IMatch[]): any {
         endedAt: currMatch.completed_date_approximate,
         expectedEndedAt: currMatch.estimated_end_date,
         expectedStartedAt: currMatch.expected_start_at,
+        showOnFrontend: false,
       };
       allMatches.push(tempMatchObject);
 

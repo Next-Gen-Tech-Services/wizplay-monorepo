@@ -1,11 +1,9 @@
 export enum ContestEvents {
-  CONTEST_CREATED = "contest_created",
-  CONTEST_UPDATED = "contest_updated",
-  CONTEST_CANCELLED = "contest_cancelled",
-  CONTEST_COMPLETED = "contest_completed",
+  CONTEST_FETCH = "contest_fetch",
+  CONTEST_FETCH_RESP = "match_fetch_resp",
 }
 
-export type TOPIC_TYPE = "ContestEvents" | "NotificationEvents";
+export type TOPIC_TYPE = "ContestEvents";
 
 export interface MessageType {
   headers?: Record<string, any>;

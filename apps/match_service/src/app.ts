@@ -3,9 +3,9 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import MatchRouter from "./routes/match.router";
+import matchEventHandler from "./utils/events/match.events";
 import matchCrons from "./utils/jobs/match";
-
-import { connectProducer, subscribeToUserEvents } from "./utils/kafka";
+import { connectProducer } from "./utils/kafka";
 
 const BrokerInit = async () => {
   try {
@@ -14,11 +14,11 @@ const BrokerInit = async () => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
     // create producer to create topics
-    const producer = await connectProducer();
+    await connectProducer();
     logger.info("Successfully created topics");
 
     // start consuming events
-    await subscribeToUserEvents();
+    await matchEventHandler.handle();
     logger.info("Successfully subscribed to user events");
   } catch (error) {
     logger.error("Failed to initialize Kafka broker:", error);

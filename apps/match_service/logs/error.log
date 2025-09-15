@@ -98,3 +98,838 @@
 2025-09-15T07:16:26.751Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: Connection timeout
 2025-09-15T07:16:29.252Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T07:16:29.506Z error: [apps/match_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
+2025-09-15T07:35:39.093Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T07:35:40.258Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T07:39:50.763Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T07:39:52.014Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T07:40:52.380Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T07:40:53.562Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeDatabaseError: syntax error at or near "REFERENCES" 
+2025-09-15T07:46:19.741Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:46:32.068Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:46:47.452Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:47:04.064Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:47:06.808Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:47:08.780Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:47:21.119Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:47:45.694Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:47:50.332Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:48:05.168Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:48:06.301Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:48:13.945Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:48:28.843Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:48:56.786Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:49:20.774Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:49:44.676Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:50:07.967Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:50:29.507Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:50:51.315Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:51:04.684Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:51:28.915Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:51:52.359Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:52:14.000Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:54:10.076Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:54:27.942Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:54:28.828Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:54:44.662Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:55:08.368Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:55:31.649Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:55:54.531Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:56:16.563Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:56:40.777Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:57:02.749Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:57:14.961Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:57:27.052Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:57:49.482Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:57:57.272Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:58:14.753Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:58:40.020Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:58:41.683Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:58:47.882Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:03.527Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T07:59:12.355Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:13.536Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:19.302Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:29.613Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:41.090Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:44.189Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T07:59:46.457Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:00:00.292Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:00:09.035Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:00:22.978Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:00:34.890Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:00:44.406Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:00:51.394Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:01:04.477Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:01:27.876Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:01:29.631Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:01:41.373Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:01:45.456Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:01:59.868Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:02:25.418Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:02:48.031Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:03:13.696Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:03:39.314Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:04:03.509Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:04:24.915Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:04:31.861Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:04:37.403Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:04:50.635Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:04:54.259Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:00.478Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:16.699Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:24.478Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:32.636Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:42.555Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:51.838Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:05:55.800Z error: [apps/match_service/src/configs/database.config.ts:38] Error connecting database: SequelizeConnectionRefusedError 
+2025-09-15T08:06:10.667Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:06:34.773Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:06:58.192Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:07:24.580Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:07:49.205Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:08:13.781Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:08:39.791Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:09:07.070Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:09:31.203Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:09:55.701Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:10:19.390Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:10:41.868Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:11:10.310Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:11:33.129Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:11:57.310Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:12:21.461Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:12:41.972Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:13:05.519Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:13:29.203Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:13:52.619Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:14:19.988Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:14:48.578Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:15:10.151Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:15:33.157Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:15:57.766Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:16:20.124Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:16:43.365Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:17:08.453Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:17:33.774Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:17:55.759Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:18:19.816Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:18:44.113Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:19:07.319Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:19:30.620Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:19:54.359Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:20:17.009Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:20:38.178Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:20:59.775Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:21:25.031Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:21:54.121Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:22:17.550Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:22:42.166Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:23:06.465Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:23:28.466Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:23:52.226Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:24:13.919Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:24:39.130Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:25:02.720Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:25:24.457Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:25:47.163Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:26:10.219Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:26:39.186Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:27:03.393Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:27:26.172Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:27:51.460Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:28:13.676Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:28:35.980Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:28:58.470Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:29:24.645Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:29:50.614Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:30:13.782Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:30:39.860Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:31:07.040Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:31:32.597Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:31:57.863Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:32:21.153Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:32:47.087Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:33:12.967Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:33:35.727Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:33:59.868Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:34:30.037Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:34:59.505Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-09-15T08:35:21.334Z error: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (/Users/mihirverma/office_space/wizplay/node_modules/kafkajs/src/network/connection.js:210:23)
+    at Socket.emit (node:events:508:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)

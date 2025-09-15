@@ -136,4 +136,23 @@ export default class MatchRepository {
       );
     }
   }
+
+  public async getMatchWithId(matchId: string): Promise<any> {
+    try {
+      if (!matchId) {
+        throw new BadRequestError("invalid match id");
+      }
+
+      const matchData = await this._DB.Match.findOne({
+        where: {
+          key: matchId,
+        },
+        include: [{ association: "tournaments" }],
+      });
+
+      return matchData;
+    } catch (error: any) {
+      logger.error(error.message);
+    }
+  }
 }

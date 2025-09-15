@@ -65,3 +65,28 @@
 2025-09-15T07:16:29.251Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T07:16:29.725Z error: [apps/auth_service/src/configs/redis.config.ts:24] Error: getaddrinfo ENOTFOUND redis-11570.c212.ap-south-1-1.ec2.redns.redis-cloud.com
 2025-09-15T07:16:30.686Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T07:35:39.122Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T07:35:39.379Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T07:35:39.380Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T07:35:40.215Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T07:35:40.272Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T07:35:40.273Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T07:35:45.307Z info: [apps/auth_service/src/app.ts:17] Successfully created topics
+2025-09-15T07:35:48.427Z info: [apps/auth_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T07:35:48.433Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-15T07:39:50.780Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T07:39:51.946Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T07:39:52.001Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T07:39:52.004Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T07:39:57.062Z info: [apps/auth_service/src/app.ts:17] Successfully created topics
+2025-09-15T07:40:00.127Z info: [apps/auth_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T07:40:00.131Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
+2025-09-15T07:40:52.371Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T07:40:52.603Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T07:40:52.604Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T07:40:53.540Z info: [apps/auth_service/src/configs/database.config.ts:33] Database connection established ✅
+2025-09-15T07:40:53.593Z info: [apps/auth_service/src/configs/redis.config.ts:23] Redis client is ready to use
+2025-09-15T07:40:53.594Z info: [apps/auth_service/src/app.ts:12] Waiting for Kafka to be ready...
+2025-09-15T07:40:58.627Z info: [apps/auth_service/src/app.ts:17] Successfully created topics
+2025-09-15T07:41:10.296Z info: [apps/auth_service/src/app.ts:21] Successfully subscribed to user events
+2025-09-15T07:41:10.304Z info: [apps/auth_service/src/server.ts:18] Server started at PORT: 4002
