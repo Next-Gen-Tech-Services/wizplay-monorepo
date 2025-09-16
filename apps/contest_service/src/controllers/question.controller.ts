@@ -48,6 +48,26 @@ export default class QuestionController {
         .json({ success: false, message: "Failed to list questions" });
     }
   }
+
+  public async updateQuestion(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      const updates = req.body; // may include ansKey, points, status etc.
+      const q = await this.questionService.updateQuestion(id, updates);
+      if (!q) {
+        return res
+          .status(STATUS_CODE.NOT_FOUND)
+          .json({ success: false, message: "Question not found" });
+      }
+      return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: q });
+    } catch (err: any) {
+      logger.error(`updateQuestion controller error: ${err?.message ?? err}`);
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: "Failed to update question" });
+    }
+  }
+
   public async deleteQuestion(req: Request, res: Response) {
     const id = req.params.id;
     const ok = await this.questionService.deleteQuestion(id);

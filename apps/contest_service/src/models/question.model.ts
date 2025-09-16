@@ -9,6 +9,7 @@ export interface IQuestionAttrs {
   options: any[];
   ansKey?: string;
   points?: number;
+  displayOnFrontend?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -30,6 +31,7 @@ export class Question
   public options!: any[];
   public ansKey: string;
   public points!: number | undefined;
+  public displayOnFrontend?: boolean;
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
@@ -69,6 +71,11 @@ export default function (sequelize: Sequelize) {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0,
+      },
+      displayOnFrontend: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     },
     {

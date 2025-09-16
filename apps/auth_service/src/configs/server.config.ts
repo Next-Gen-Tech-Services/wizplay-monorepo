@@ -28,6 +28,9 @@ class ServerConfigs {
   static SMTP_HOST: string = process.env.SMTP_HOST as string;
   static SMTP_PORT: string = process.env.SMTP_PORT as string;
   static CLIENT_HOST: string = process.env.CLIENT_HOST as string;
+  static MSG91_BASE_URL: string = process.env.MSG91_BASE_URL as string;
+  static MSG91_AUTH_KEY: string = process.env.MSG91_AUTH_KEY as string;
+  static MSG91_TEMPLATE_ID: string = process.env.MSG91_TEMPLATE_ID as string;
   private constructor() {}
 }
 

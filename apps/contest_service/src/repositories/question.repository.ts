@@ -1,7 +1,7 @@
 // src/repositories/contest.repository.ts
 import { logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
-import { Question } from "../models/question.model";
+import { IQuestionAttrs, Question } from "../models/question.model";
 
 export default class QuestionRepository {
   private _DB: IDatabase = DB;
@@ -71,6 +71,19 @@ export default class QuestionRepository {
     } catch (err: any) {
       logger.error(`getQuestionById DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
+    }
+  }
+
+  public async updateQuestion(id: string, updates: Partial<IQuestionAttrs>) {
+    try {
+      const [affected, rows] = await this._DB.Question.update(updates, {
+        where: { id },
+        returning: true,
+      });
+      return affected > 0 ? (rows[0].toJSON() as Question) : null;
+    } catch (err: any) {
+      logger.error(`updateQuestion DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error updating question");
     }
   }
 

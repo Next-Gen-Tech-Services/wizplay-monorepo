@@ -14,6 +14,7 @@ import ServerConfigs from "../configs/server.config";
 import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
 import { publishUserEvent } from "../utils/kafka";
+import { sendOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
 
@@ -65,6 +66,11 @@ export default class Service {
 
       logger.warn(`updated OTP: ${updateOtp}`);
       // SEND OTP HERE
+
+      if (ServerConfigs.MSG91_BASE_URL) {
+        await sendOtpUtil(phoneNumber, otpCode);
+      }
+
       return {
         data: {
           userId: createUser.userId,

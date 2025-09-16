@@ -26,4 +26,21 @@ export default class UserController {
       timestamp: new Date().toISOString(),
     });
   }
+
+  public async getUser(req: Request, res: Response) {
+    const payload = req.body;
+    if (!req?.currentUser?.userId) {
+      throw new BadRequestError();
+    }
+
+    const result = await this.userService.getUser(req.currentUser?.userId!);
+
+    res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      message: result.message,
+      data: result.data,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
 }

@@ -72,4 +72,16 @@ export default class UserRepository {
       logger.error(`[Error updating user name: ${error.message}]`);
     }
   }
+  public async findById(userId: string): Promise<any> {
+    try {
+      const user = await this._DB.User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+      return user;
+    } catch (error: any) {
+      logger.error(`[Error fetching user details: ${error.message}]`);
+    }
+  }
 }

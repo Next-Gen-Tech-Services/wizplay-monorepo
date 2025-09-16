@@ -18,6 +18,11 @@ router.get("/questions", async (req, res) => {
   return result;
 });
 
+router.patch("/questions/:id", async (req, res) => {
+  const result = await questionController.updateQuestion(req, res);
+  return result;
+});
+
 router.delete("/questions/:id", async (req, res) => {
   const result = await questionController.deleteQuestion(req, res);
   return result;

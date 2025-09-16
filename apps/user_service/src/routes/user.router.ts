@@ -20,4 +20,9 @@ router.patch(
   }
 );
 
+router.get("/user", requireAuth, async (req: Request, res: Response) => {
+  const result = await controller.getUser(req, res);
+  return result;
+});
+
 export default router;

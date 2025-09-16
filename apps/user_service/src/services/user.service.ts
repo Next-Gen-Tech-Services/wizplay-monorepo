@@ -24,4 +24,15 @@ export default class UserService {
       throw new BadRequestError(error.message);
     }
   }
+  public async getUser(userId: string) {
+    try {
+      const result = await this.userRepository.findById(userId);
+      if (!result) {
+        throw new BadRequestError("error fetching user details");
+      }
+      return { data: result, message: "user details fetched successfully" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message);
+    }
+  }
 }

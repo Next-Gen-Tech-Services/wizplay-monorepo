@@ -2,6 +2,7 @@
 import { BadRequestError } from "@repo/common";
 import { autoInjectable } from "tsyringe";
 
+import { IQuestionAttrs } from "@/models/question.model";
 import { CreateQuestionPayload } from "../dtos/question.dto";
 import QuestionRepository from "../repositories/question.repository";
 
@@ -42,6 +43,11 @@ export default class QuestionService {
     const q = await this.questionRepository.getQuestionById(id);
     if (!q) throw new BadRequestError("Question not found");
     return q;
+  }
+
+  public async updateQuestion(id: string, updates: Partial<IQuestionAttrs>) {
+    if (!id) throw new BadRequestError("id is required");
+    return this.questionRepository.updateQuestion(id, updates);
   }
 
   public async deleteQuestion(id: string) {
