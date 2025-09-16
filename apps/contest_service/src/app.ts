@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import ContestRouter from "./routes/contest.router";
+import QuestionRouter from "./routes/question.router";
 import userEventHandler from "./utils/events/contest.events";
 import { connectProducer } from "./utils/kafka";
 
@@ -38,6 +39,7 @@ const AppInit = async () => {
   await BrokerInit();
 
   expressApp.use("/api/v1", ContestRouter);
+  expressApp.use("/api/v1", QuestionRouter);
   expressApp.get(
     `/${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {

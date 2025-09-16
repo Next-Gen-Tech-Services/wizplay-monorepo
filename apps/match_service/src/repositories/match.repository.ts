@@ -155,4 +155,19 @@ export default class MatchRepository {
       logger.error(error.message);
     }
   }
+
+  public async addToWishlist(userId: string, matchId: string): Promise<any> {
+    try {
+      if (!userId || !matchId) {
+        throw new BadRequestError("invalid user id or match id");
+      }
+      const wishlistEntry = await this._DB.Wishlist.create({
+        userId,
+        matchId,
+      });
+      return wishlistEntry;
+    } catch (error: any) {
+      logger.error(error.message);
+    }
+  }
 }

@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import UserRouter from "./routes/user.router";
+import WishlistRouter from "./routes/wishlist.router";
 import userEventHandler from "./utils/events/user.events";
 import { connectProducer } from "./utils/kafka";
 
@@ -38,6 +39,7 @@ const AppInit = async () => {
   await BrokerInit();
 
   expressApp.use("/api/v1", UserRouter);
+  expressApp.use("/api/v1/wishlist", WishlistRouter);
   expressApp.get(
     `/${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {

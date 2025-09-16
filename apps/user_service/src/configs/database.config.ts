@@ -1,12 +1,14 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
 import userModel, { User } from "../models/user.model";
+import wishlistModel, { Wishlist } from "../models/wishlist.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
   Sequelize: any;
   sequelize: Sequelize;
   User: typeof User;
+  Wishlist: typeof Wishlist;
 }
 
 const sequelize = new Sequelize({
@@ -25,6 +27,7 @@ const sequelize = new Sequelize({
 });
 
 const UserInstance = userModel(sequelize);
+const WishlistInstance = wishlistModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -40,4 +43,5 @@ export const DB: IDatabase = {
   Sequelize,
   sequelize,
   User: UserInstance,
+  Wishlist: WishlistInstance,
 };

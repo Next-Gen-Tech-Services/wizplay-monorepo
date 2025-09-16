@@ -5,4 +5,5 @@ export enum KAFKA_EVENTS {
   USER_ONBOARDED = "user_onboarded",
   CONTEST_FETCH = "contest_fetch",
   CONTEST_FETCH_RESP = "match_fetch_resp",
+  USER_ADD_TO_WISHLIST = "user_add_to_wishlist",
 }

@@ -1,5 +1,6 @@
 // src/routes/contest.routes.ts
 import { validateRequest } from "@repo/common";
+import timeout from "connect-timeout";
 import { Request, Response, Router } from "express";
 import "reflect-metadata";
 import { container } from "tsyringe";
@@ -39,34 +40,17 @@ router.get("/contests", async (req, res) => {
 });
 
 /**
- * Questions
- */
-router.post("/contests/questions", async (req, res) => {
-  const result = await contestController.createQuestion(req, res);
-  return result;
-});
-
-router.get("/contests/:contestId/questions", async (req, res) => {
-  const result = await contestController.listQuestions(req, res);
-  return result;
-});
-
-router.delete("/contests/questions/:id", async (req, res) => {
-  const result = await contestController.deleteQuestion(req, res);
-  return result;
-});
-
-/**
  * Generative AI
  */
 
-router.post("/contest/generate", async (req: Request, res: Response) => {
+router.post("/contests/generate", async (req: Request, res: Response) => {
   const result = await contestController.generateContests(req, res);
   return result;
 });
 
 router.post(
   "/contests/generate/questions",
+  timeout("120s"),
   generateQuestionsValidator(),
   validateRequest,
   async (req: Request, res: Response) => {

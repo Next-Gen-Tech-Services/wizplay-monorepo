@@ -47,6 +47,7 @@ The match format can be **Test, ODI, T20, or T10**.
 
 2. Each contest must include:
    - id (UUID)
+   - title (string)
    - description (string)
    - type (e.g., "pre-match", "powerplay_innings_1", "session_day1_morning")
    - difficulty (Beginner | Intermediate | Advanced)

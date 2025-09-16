@@ -23,8 +23,18 @@ export default class ContestController {
         String(req.params.matchId ?? req.query.matchId ?? "").trim() ||
         undefined;
 
-      const limit = Number(req.query.limit ?? 20);
-      const offset = Number(req.query.offset ?? 0);
+      // parse limit/offset defensively (avoid NaN)
+      const parsedLimit = Number(req.query.limit ?? 20);
+      const parsedOffset = Number(req.query.offset ?? 0);
+
+      const limit =
+        Number.isFinite(parsedLimit) && parsedLimit > 0
+          ? Math.min(1000, Math.floor(parsedLimit))
+          : 20;
+      const offset =
+        Number.isFinite(parsedOffset) && parsedOffset >= 0
+          ? Math.floor(parsedOffset)
+          : 0;
 
       const result = await this.contestService.listContests(
         matchId,
@@ -63,25 +73,6 @@ export default class ContestController {
   public async deleteContest(req: Request, res: Response) {
     const id = req.params.id;
     const ok = await this.contestService.deleteContest(id);
-    return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: ok });
-  }
-
-  /* questions */
-  public async createQuestion(req: Request, res: Response) {
-    const payload = req.body;
-    const q = await this.contestService.createQuestion(payload);
-    return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: q });
-  }
-
-  public async listQuestions(req: Request, res: Response) {
-    const contestId = req.params.contestId || req.query.contestId;
-    const items = await this.contestService.listQuestions(String(contestId));
-    return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: items });
-  }
-
-  public async deleteQuestion(req: Request, res: Response) {
-    const id = req.params.id;
-    const ok = await this.contestService.deleteQuestion(id);
     return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: ok });
   }
 

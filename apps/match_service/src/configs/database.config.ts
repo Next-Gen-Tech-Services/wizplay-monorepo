@@ -2,6 +2,7 @@ import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
 import matchModel, { Match } from "../models/match.model";
 import tournamentModel, { Tournament } from "../models/tournament.model";
+import wishlistModel, { Wishlist } from "../models/wishlist.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
@@ -9,6 +10,7 @@ export interface IDatabase {
   sequelize: Sequelize;
   Match: typeof Match;
   Tournament: typeof Tournament;
+  Wishlist: typeof Wishlist;
 }
 
 const sequelize = new Sequelize({
@@ -28,6 +30,7 @@ const sequelize = new Sequelize({
 
 const MatchInstance = matchModel(sequelize);
 const TournamentInstance = tournamentModel(sequelize);
+const WishlistInstance = wishlistModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -46,10 +49,22 @@ TournamentInstance.hasMany(MatchInstance, {
   as: "matches",
 });
 
-MatchInstance.belongsTo(Tournament, {
+MatchInstance.belongsTo(TournamentInstance, {
   foreignKey: "tournamentKey",
   targetKey: "key",
   as: "tournaments",
+});
+
+MatchInstance.hasMany(WishlistInstance, {
+  foreignKey: "matchId",
+  sourceKey: "id",
+  as: "wishlists",
+});
+
+WishlistInstance.belongsTo(MatchInstance, {
+  foreignKey: "matchId",
+  targetKey: "id",
+  as: "match",
 });
 
 export const DB: IDatabase = {
@@ -57,4 +72,5 @@ export const DB: IDatabase = {
   sequelize,
   Match: MatchInstance,
   Tournament: TournamentInstance,
+  Wishlist: WishlistInstance,
 };

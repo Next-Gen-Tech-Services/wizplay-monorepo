@@ -32,6 +32,7 @@ export interface IMatchAttrs {
   expectedStartedAt?: number | null;
   expectedEndedAt: number;
   showOnFrontend: boolean;
+  contestGenerated: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

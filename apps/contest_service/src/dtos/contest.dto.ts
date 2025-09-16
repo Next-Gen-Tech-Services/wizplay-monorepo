@@ -33,12 +33,3 @@ export interface CreateContestPayload {
 }
 
 export interface UpdateContestPayload extends Partial<CreateContestPayload> {}
-
-export interface CreateQuestionPayload {
-  id?: string;
-  contestId: string;
-  text: string;
-  options: string[];
-  correctIndex: number;
-  points?: number; // defaults to contest.pointsPerQuestion if not provided
-}

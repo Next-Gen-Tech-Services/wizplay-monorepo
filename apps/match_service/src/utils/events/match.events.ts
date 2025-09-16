@@ -20,6 +20,14 @@ class MatchEventHandler {
             );
             await this.handleContestFetch(message);
             break;
+
+          case KAFKA_EVENTS.USER_ADD_TO_WISHLIST:
+            logger.info(
+              `Handle user_add_to_wishlist:, ${JSON.stringify(message.data)}`
+            );
+            await this.handleUserAddToWishlist(message);
+            break;
+
           default:
             logger.info("Unknown event:", message.event);
             break;
@@ -42,6 +50,15 @@ class MatchEventHandler {
       await publishUserEvent(KAFKA_EVENTS.CONTEST_FETCH_RESP, {
         match: result,
       });
+      return true;
+    }
+  }
+  private async handleUserAddToWishlist(message: any): Promise<boolean> {
+    const { userId, matchId } = message.data;
+    const result = await this.matchRepository.addToWishlist(userId, matchId);
+    if (!result) {
+      return false;
+    } else {
       return true;
     }
   }

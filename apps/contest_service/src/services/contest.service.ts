@@ -3,7 +3,6 @@ import { BadRequestError, logger, ServerError } from "@repo/common";
 import { autoInjectable } from "tsyringe";
 import {
   CreateContestPayload,
-  CreateQuestionPayload,
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import ContestRepository from "../repositories/contest.repository";
@@ -46,35 +45,6 @@ export default class ContestService {
 
   public async deleteContest(id: string) {
     return this.repo.deleteContest(id);
-  }
-
-  /* Questions */
-  public async createQuestion(payload: CreateQuestionPayload) {
-    // validate
-    if (!payload.contestId) throw new BadRequestError("contestId required");
-    if (!payload.options || payload.options.length < 2)
-      throw new BadRequestError("Options required");
-    if (
-      payload.correctIndex < 0 ||
-      payload.correctIndex >= payload.options.length
-    )
-      throw new BadRequestError("correctIndex invalid");
-    const q = await this.repo.createQuestion(payload);
-    return q;
-  }
-
-  public async listQuestions(contestId: string) {
-    return this.repo.listQuestionsForContest(contestId);
-  }
-
-  public async getQuestion(id: string) {
-    const q = await this.repo.getQuestionById(id);
-    if (!q) throw new BadRequestError("Question not found");
-    return q;
-  }
-
-  public async deleteQuestion(id: string) {
-    return this.repo.deleteQuestion(id);
   }
 
   public async generateAIQuestions(
