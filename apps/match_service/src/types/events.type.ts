@@ -6,4 +6,5 @@ export enum KAFKA_EVENTS {
   CONTEST_FETCH = "contest_fetch",
   CONTEST_FETCH_RESP = "match_fetch_resp",
   USER_ADD_TO_WISHLIST = "user_add_to_wishlist",
+  GENERATE_CONTEST = "generate_contest",
 }

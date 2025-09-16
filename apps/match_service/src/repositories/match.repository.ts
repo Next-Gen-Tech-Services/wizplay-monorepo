@@ -137,6 +137,38 @@ export default class MatchRepository {
     }
   }
 
+  public async updateGeneratedStatus(
+    matchId: string,
+    data: { contestGenerated: boolean }
+  ): Promise<any> {
+    try {
+      if (!matchId) {
+        throw new ServerError("Missing match id");
+      }
+
+      const match = await this._DB.Match.update(
+        {
+          ...data,
+        },
+        {
+          where: {
+            id: matchId,
+          },
+          returning: true,
+        }
+      );
+      return match;
+    } catch (error: any) {
+      logger.error(
+        `match.repository.updateMatch DB error: ${error?.message ?? error}`
+      );
+      // bubble as ServerError for upper layers
+      throw new ServerError(
+        error?.message || "Database error while updating match"
+      );
+    }
+  }
+
   public async getMatchWithId(matchId: string): Promise<any> {
     try {
       if (!matchId) {

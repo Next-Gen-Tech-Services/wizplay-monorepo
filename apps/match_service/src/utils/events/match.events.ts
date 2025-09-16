@@ -28,6 +28,13 @@ class MatchEventHandler {
             await this.handleUserAddToWishlist(message);
             break;
 
+          case KAFKA_EVENTS.GENERATE_CONTEST:
+            logger.info(
+              `Handle generate_contest:, ${JSON.stringify(message.data)}`
+            );
+            await this.handleGenerateContest(message);
+            break;
+
           default:
             logger.info("Unknown event:", message.event);
             break;
@@ -56,6 +63,17 @@ class MatchEventHandler {
   private async handleUserAddToWishlist(message: any): Promise<boolean> {
     const { userId, matchId } = message.data;
     const result = await this.matchRepository.addToWishlist(userId, matchId);
+    if (!result) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  private async handleGenerateContest(message: any): Promise<boolean> {
+    const { matchId } = message.data;
+    const result = await this.matchRepository.updateGeneratedStatus(matchId, {
+      contestGenerated: true,
+    });
     if (!result) {
       return false;
     } else {

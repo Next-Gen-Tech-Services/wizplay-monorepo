@@ -6,7 +6,9 @@ import {
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import ContestRepository from "../repositories/contest.repository";
+import { KAFKA_EVENTS } from "../types";
 import { GenerativeAi } from "../utils/generativeAi";
+import { publishUserEvent } from "../utils/kafka";
 import {
   formatContestsForBulkInsert,
   formatQuestions,
@@ -97,6 +99,13 @@ export default class ContestService {
 
       const bulkContests = await this.repo.saveBulkContests(contestRecords);
       const bulkQuestions = await this.repo.saveBulkQuestions(questionRecords);
+
+      if (bulkQuestions) {
+        await publishUserEvent(KAFKA_EVENTS.GENERATE_CONTEST, {
+          matchId: matchData.id,
+        });
+        logger.debug("generate contest event published");
+      }
 
       return {
         data: {
