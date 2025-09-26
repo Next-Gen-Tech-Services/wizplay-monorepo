@@ -102,4 +102,17 @@ export default class AuthController {
       timestamp: new Date().toISOString(),
     });
   }
+
+  public async authWithGoogle(req: Request, res: Response) {
+    const { auth_code } = req.body;
+    const result = await this.authService.googleAuth(auth_code);
+
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      data: result.data,
+      message: result.message,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
 }

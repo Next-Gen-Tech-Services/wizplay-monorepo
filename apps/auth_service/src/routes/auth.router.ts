@@ -5,6 +5,7 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import AuthController from "../controllers/auth.controller";
 import {
+  authCodeValidator,
   emailPassValidator,
   emailValidator,
   phoneValidator,
@@ -91,6 +92,17 @@ router.patch(
   validateRequest,
   async (req: Request, res: Response) => {
     const result = await controller.resetPassword(req, res);
+    return result;
+  }
+);
+
+// GOOGLE LOGIN ROUTE
+router.post(
+  "/auth/google",
+  authCodeValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const result = await controller.authWithGoogle(req, res);
     return result;
   }
 );

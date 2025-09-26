@@ -30,7 +30,10 @@ class ServerConfigs {
   static CLIENT_HOST: string = process.env.CLIENT_HOST as string;
   static MSG91_BASE_URL: string = process.env.MSG91_BASE_URL as string;
   static MSG91_AUTH_KEY: string = process.env.MSG91_AUTH_KEY as string;
-  static MSG91_TEMPLATE_ID: string = process.env.MSG91_TEMPLATE_ID as string;
+  static GOOGLE_OAUTH_CLIENT_ID: string = process.env
+    .GOOGLE_OAUTH_CLIENT_ID as string;
+  static GOOGLE_OAUTH_CLIENT_SECRET: string = process.env
+    .GOOGLE_OAUTH_CLIENT_SECRET as string;
   private constructor() {}
 }
 

@@ -9,6 +9,12 @@ export interface ICreatePhoneAuthUser {
   provider: "local";
 }
 
+export interface ICreateGoogleAuthUser {
+  email: string;
+  userId: string;
+  provider: "google";
+}
+
 export interface IVerifyOtpPayload {
   phoneNumber: string;
   otpCode: string;

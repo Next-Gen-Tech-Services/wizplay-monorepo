@@ -7,12 +7,15 @@ import {
   UnAuthorizError,
   validatePassword,
 } from "@repo/common";
+import axios from "axios";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
 import Redis, { IRedis } from "../configs/redis.config";
 import ServerConfigs from "../configs/server.config";
+import { IGoogleResponse } from "../interfaces/user.interface";
 import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
+import { oauth2client } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
@@ -121,7 +124,7 @@ export default class Service {
       return {
         data: verifiedUser,
         token: token,
-        message: "OTP verification successfull",
+        message: "OTP verification successful",
       };
     } catch (error: any) {
       throw new ServerError(error?.message);
@@ -214,6 +217,86 @@ export default class Service {
       };
     } catch (error: any) {
       throw new ServerError(error?.message);
+    }
+  }
+
+  public async googleAuth(authCode: string) {
+    const googleResponse = await oauth2client.getToken(authCode);
+    oauth2client.setCredentials(googleResponse.tokens);
+
+    const googleAccountData = await axios.get(
+      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleResponse?.tokens?.access_token}`
+    );
+
+    const { email, name, picture } = googleAccountData.data;
+    const nameSplit = name.split(" ");
+    let userInput: IGoogleResponse = {
+      firstName: nameSplit[0],
+      lastName: nameSplit[nameSplit.length - 1],
+      email: email,
+      profileImage: picture as string,
+    };
+
+    const userExists = await this.userRepository.userExistWithEmail(
+      userInput.email
+    );
+
+    if (userExists && userInput.firstName && userInput.email) {
+      if (!userExists.onboarded) {
+        // create user inside user-service
+        await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
+          userId: userExists.userId,
+          authId: userExists.id,
+          email: userExists.email,
+        });
+        logger.debug("signup event published");
+      } else {
+        logger.warn("user is already onboarded");
+      }
+      const token = generateToken(
+        {
+          session_id: `${userExists.id}:${userExists.userId}:${userExists.email}`,
+        },
+        ServerConfigs.TOKEN_SECRET
+      );
+
+      return {
+        data: userExists,
+        token: token,
+        message: "Authentication successful",
+      };
+    } else {
+      const userId = generateUUID();
+      const createUser = await this.userRepository.createAuthUserWithGoogle({
+        email,
+        userId,
+        provider: "google",
+      });
+
+      if (!createUser.onboarded) {
+        // create user inside user-service
+        await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
+          userId: createUser.userId,
+          authId: createUser.id,
+          email: createUser.email,
+        });
+        logger.debug("signup event published");
+      } else {
+        logger.warn("user is already onboarded");
+      }
+
+      const token = generateToken(
+        {
+          session_id: `${createUser.id}:${createUser.userId}:${createUser.phoneNumber}`,
+        },
+        ServerConfigs.TOKEN_SECRET
+      );
+
+      return {
+        data: createUser,
+        token: token,
+        message: "OTP verification successful",
+      };
     }
   }
 }

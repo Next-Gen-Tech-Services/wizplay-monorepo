@@ -23,6 +23,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
+    "googleapis": "^160.0.0",
     "kafkajs": "^2.2.4",
     "nodemailer": "^7.0.6",
     "pg": "^8.16.3",

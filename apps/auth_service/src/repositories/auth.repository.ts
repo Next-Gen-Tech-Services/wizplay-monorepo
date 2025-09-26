@@ -2,6 +2,7 @@ import { logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
 import {
   IClearOtpPayload,
+  ICreateGoogleAuthUser,
   ICreatePhoneAuthUser,
   IUpdateOTP,
   IVerifyOtpPayload,
@@ -53,6 +54,24 @@ export default class AuthRepository {
 
   public async createAuthUserWithPhone(
     data: ICreatePhoneAuthUser
+  ): Promise<any> {
+    try {
+      const result = await this._DB.Auth.create({
+        ...data,
+        type: "user",
+      });
+      if (!result) {
+        throw new ServerError("Database Error");
+      }
+      return result.toJSON();
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
+  public async createAuthUserWithGoogle(
+    data: ICreateGoogleAuthUser
   ): Promise<any> {
     try {
       const result = await this._DB.Auth.create({
