@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@repo/common": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/uuid": "^10.0.0",
     "amqplib": "^0.10.8",
     "connect-timeout": "^1.9.1",
@@ -22,6 +23,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
     "kafkajs": "^2.2.4",
     "nodemailer": "^7.0.6",
     "openai": "^5.20.2",

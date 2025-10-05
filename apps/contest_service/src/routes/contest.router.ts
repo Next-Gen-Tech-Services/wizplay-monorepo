@@ -40,6 +40,15 @@ router.get("/contests", async (req, res) => {
 });
 
 /**
+ * User Contests
+ */
+
+router.post("/contests/join", async (req: Request, res: Response) => {
+  const result = await contestController.joinContest(req, res);
+  return result;
+});
+
+/**
  * Generative AI
  */
 

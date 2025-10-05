@@ -76,6 +76,10 @@ export default class ContestController {
     return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: ok });
   }
 
+  public async joinContest(req: Request, res: Response) {
+    const { contestId, matchId } = req.body;
+  }
+
   /** generative ai */
 
   public async generateQuestions(req: Request, res: Response) {
