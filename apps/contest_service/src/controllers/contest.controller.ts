@@ -77,7 +77,48 @@ export default class ContestController {
   }
 
   public async joinContest(req: Request, res: Response) {
-    const { contestId, matchId } = req.body;
+    const { userId, contestId, matchId } = req.body;
+
+    if (!userId || !contestId) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: "userId and contestId are required" });
+    }
+
+    try {
+      const result = await this.contestService!.joinContest({
+        userId,
+        contestId,
+        matchId,
+      });
+
+      return res
+        .status(STATUS_CODE.SUCCESS)
+        .json({ success: true, message: "Contest joined", data: result });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.joinContest error: ${err?.message ?? err}`
+      );
+
+      if (err?.code === "CONFLICT") {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: err.message || "User already joined this contest",
+        });
+      }
+
+      if (err?.code === "NOT_FOUND") {
+        return res.status(STATUS_CODE.NOT_FOUND).json({
+          success: false,
+          message: err.message || "Contest not found",
+        });
+      }
+
+      // fallback
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: "Server error" });
+    }
   }
 
   /** generative ai */

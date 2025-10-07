@@ -21,7 +21,7 @@ RUN pnpm add -g ts-node-dev
 COPY . .
 
 # Expose port
-EXPOSE 4001
+EXPOSE 4003
 
 # Use the Docker-optimized dev command
 CMD ["pnpm", "run", "dev:docker"]

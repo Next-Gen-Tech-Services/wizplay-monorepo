@@ -51,3 +51,38 @@ export const requireAuth = async (
     throw new UnAuthorizError();
   }
 };
+
+export const requireAdminAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const bearerToken = req.headers.authorization;
+  const tokenParts = bearerToken?.split(" ");
+
+  if (!tokenParts || tokenParts.length !== 2) {
+    throw new UnAuthorizError("Unauthorized access");
+  }
+
+  try {
+    const payload: any = jwt.verify(tokenParts[1], ServerConfigs.TOKEN_SECRET);
+
+    const { auth_id, email } = payload?.data || {};
+
+    if (!auth_id || !email) throw new UnAuthorizError("Invalid admin token");
+
+    const userRepository = new UserRepository();
+    const adminUser = await userRepository.getUserById(auth_id);
+    logger.info(`payload=====:${JSON.stringify(adminUser)} `);
+
+    if (!adminUser) throw new UnAuthorizError("Admin not found");
+
+    req.currentUser = { ...adminUser, type: "admin" };
+    logger.info(`[ADMIN_AUTH] Authenticated admin: ${email}`);
+
+    return next();
+  } catch (error: any) {
+    logger.error(`[ADMIN_AUTH ERROR]: ${error.message}`);
+    throw new UnAuthorizError("Unauthorized admin access");
+  }
+};

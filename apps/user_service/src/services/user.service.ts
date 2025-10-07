@@ -35,4 +35,26 @@ export default class UserService {
       throw new BadRequestError(error.message);
     }
   }
+
+  public async list(opts: {
+    search?: string;
+    active?: "all" | boolean;
+    page?: number;
+    pageSize?: number;
+  }) {
+    try {
+      const { search = "", active = "all", page = 1, pageSize = 50 } = opts;
+
+      const result = await this.userRepository.list({
+        search: search || undefined,
+        active: active === "all" ? "all" : active,
+        page,
+        pageSize,
+      });
+
+      return result;
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to list users");
+    }
+  }
 }

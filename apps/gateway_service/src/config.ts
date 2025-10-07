@@ -10,7 +10,7 @@ export interface ProxyRoute {
   secure?: boolean;
 }
 
-export const PORT = Number(process.env.PROXY_PORT ?? 8080);
+export const PORT = Number(process.env.PROXY_PORT ?? 8000);
 
 export const ROUTES: ProxyRoute[] = [
   {

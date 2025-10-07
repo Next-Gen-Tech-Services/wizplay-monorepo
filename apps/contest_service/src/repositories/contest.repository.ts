@@ -1,5 +1,6 @@
 // src/repositories/contest.repository.ts
 import { BadRequestError, logger, ServerError } from "@repo/common";
+import { Transaction } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
 import {
   CreateContestPayload,
@@ -98,6 +99,38 @@ export default class ContestRepository {
     } catch (err: any) {
       logger.error(`deleteContest DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
+    }
+  }
+
+  public async findById(id: string, options?: { transaction?: Transaction }) {
+    try {
+      return await this._DB.Contest.findByPk(id, {
+        transaction: options?.transaction,
+      });
+    } catch (err: any) {
+      logger.error(`findById DB error: ${err?.message ?? err}`);
+      throw err;
+    }
+  }
+
+  public async incrementFilledSpots(
+    id: string,
+    by = 1,
+    options?: { transaction?: Transaction }
+  ) {
+    try {
+      // underscored: true => DB column is filled_spots
+      await this._DB.Contest.increment(
+        {
+          filledSpots: by as any,
+        },
+        { where: { id }, transaction: options?.transaction }
+      );
+      // return updated row if you want:
+      return await this.findById(id, options);
+    } catch (err: any) {
+      logger.error(`incrementFilledSpots DB error: ${err?.message ?? err}`);
+      throw err;
     }
   }
 

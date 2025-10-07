@@ -1,8 +1,12 @@
 // src/configs/database.config.ts
+import initUserSubmission, {
+  UserSubmission,
+} from "@/models/userSubmission.model";
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
 import initContestModel, { Contest } from "../models/contest.model";
 import initQuestionModel, { Question } from "../models/question.model";
+import initUserContestModel, { UserContest } from "../models/userContest.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
@@ -10,6 +14,8 @@ export interface IDatabase {
   sequelize: Sequelize;
   Contest: typeof Contest;
   Question: typeof Question;
+  UserContest: typeof UserContest;
+  UserSubmission: typeof UserSubmission;
 }
 
 const sequelize = new Sequelize({
@@ -30,6 +36,8 @@ const sequelize = new Sequelize({
 // initialize models
 const ContestInstance = initContestModel(sequelize);
 const QuestionInstance = initQuestionModel(sequelize);
+const UserContestInstance = initUserContestModel(sequelize);
+const UserSubmissionInstance = initUserSubmission(sequelize);
 
 // associations (optional but useful)
 ContestInstance.hasMany(QuestionInstance, {
@@ -55,7 +63,9 @@ export async function connectDatabase() {
 
 export const DB: IDatabase = {
   Sequelize,
-  sequelize,
+  sequelize: sequelize,
   Contest: ContestInstance,
   Question: QuestionInstance,
+  UserContest: UserContestInstance,
+  UserSubmission: UserSubmissionInstance,
 };

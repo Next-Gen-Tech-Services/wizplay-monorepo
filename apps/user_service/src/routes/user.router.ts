@@ -25,4 +25,13 @@ router.get("/user", requireAuth, async (req: Request, res: Response) => {
   return result;
 });
 
+router.get(
+  "/user/get-all-users",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await controller.getAll(req, res);
+    return result;
+  }
+);
+
 export default router;

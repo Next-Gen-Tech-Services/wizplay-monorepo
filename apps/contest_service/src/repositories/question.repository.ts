@@ -1,5 +1,6 @@
 // src/repositories/contest.repository.ts
 import { logger, ServerError } from "@repo/common";
+import { Transaction } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
 import { IQuestionAttrs, Question } from "../models/question.model";
 
@@ -94,6 +95,40 @@ export default class QuestionRepository {
     } catch (err: any) {
       logger.error(`deleteQuestion DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
+    }
+  }
+
+  public async findByIds(
+    ids: string[],
+    options?: { transaction?: Transaction }
+  ) {
+    try {
+      return await this._DB.Question.findAll({
+        where: { id: ids },
+        transaction: options?.transaction,
+      });
+    } catch (err: any) {
+      logger.error(
+        `QuestionRepository.findByIds error: ${err?.message ?? err}`
+      );
+      throw err;
+    }
+  }
+
+  public async findByContest(
+    contestId: string,
+    options?: { transaction?: Transaction }
+  ) {
+    try {
+      return await this._DB.Question.findAll({
+        where: { contestId },
+        transaction: options?.transaction,
+      });
+    } catch (err: any) {
+      logger.error(
+        `QuestionRepository.findByContest error: ${err?.message ?? err}`
+      );
+      throw err;
     }
   }
 }

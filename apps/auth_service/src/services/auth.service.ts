@@ -107,7 +107,7 @@ export default class Service {
         await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
           userId: verifiedUser.userId,
           authId: verifiedUser.id,
-          phoneNumber: verifiedUser.phoneNumber,
+          phoneNumber: phoneNumber,
         });
         logger.debug("signup event published");
       } else {
@@ -147,8 +147,7 @@ export default class Service {
 
     const token = generateToken(
       {
-        auth_id: user.id,
-        email: user.email,
+        session_id: `${user.id}:${user.userId}:${user.email}`,
       },
       ServerConfigs.TOKEN_SECRET
     );
