@@ -76,17 +76,17 @@ export default function (sequelize: Sequelize) {
       },
 
       amount: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
 
       balanceBefore: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
 
       balanceAfter: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
 

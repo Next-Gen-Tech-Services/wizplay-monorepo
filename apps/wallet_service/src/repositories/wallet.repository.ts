@@ -1,6 +1,6 @@
 // src/repositories/contest.repository.ts
 import { Wallet } from "@/models/wallet.model";
-import { BadRequestError, ServerError } from "@repo/common";
+import { BadRequestError, logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
 
 export default class WalletRepository {
@@ -64,8 +64,8 @@ export default class WalletRepository {
       }
 
       const walletPayload = {
-        balance: walletInfo?.balance - amount,
-        totalWithdrawn: walletInfo?.totalWithdrawn + amount,
+        balance: walletInfo?.balance - Number(amount),
+        totalWithdrawn: walletInfo?.totalWithdrawn + Number(amount),
       };
       const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {
         where: {
@@ -108,8 +108,8 @@ export default class WalletRepository {
       }
 
       const walletPayload = {
-        balance: walletInfo?.balance + amount,
-        totalWinnings: walletInfo?.totalWinnings + amount,
+        balance: walletInfo?.balance + Number(amount),
+        totalWinnings: walletInfo?.totalWinnings + Number(amount),
       };
 
       const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {

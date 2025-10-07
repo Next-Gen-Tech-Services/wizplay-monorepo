@@ -1,5 +1,5 @@
-import WalletRepository from "@/repositories/wallet.repository";
 import { logger, ServerError } from "@repo/common";
+import WalletRepository from "../../repositories/wallet.repository";
 import { KAFKA_EVENTS } from "../../types/events.type";
 import { kafkaClient } from "../kafka";
 

@@ -48,36 +48,36 @@ export default function (sequelize: Sequelize) {
       },
 
       balance: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0.0,
+        defaultValue: 0,
         validate: {
           min: 0,
         },
       },
 
       totalDeposited: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0.0,
+        defaultValue: 0,
         validate: {
           min: 0,
         },
       },
 
       totalWithdrawn: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0.0,
+        defaultValue: 0,
         validate: {
           min: 0,
         },
       },
 
       totalWinnings: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0.0,
+        defaultValue: 0,
         validate: {
           min: 0,
         },

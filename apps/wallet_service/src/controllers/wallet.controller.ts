@@ -18,7 +18,7 @@ export default class WalletController {
 
   public async debitBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
-    const amount: number = req.body;
+    const { amount }: { amount: number } = req.body;
     const result = await this.walletService.debitBalance(userId, amount);
     return res
       .status(STATUS_CODE.SUCCESS)
@@ -27,7 +27,7 @@ export default class WalletController {
 
   public async creditBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
-    const amount: number = req.body;
+    const { amount }: { amount: number } = req.body;
     const result = await this.walletService.creditBalance(userId, amount);
     return res
       .status(STATUS_CODE.SUCCESS)

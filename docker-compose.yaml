@@ -198,5 +198,7 @@ volumes:
     driver: local
   contest_db_data:
     driver: local
+  wallet_db_data:
+    driver: local
   redis_data:
     driver: local

@@ -1,5 +1,5 @@
 {
-  "name": "contest_service",
+  "name": "wallet_service",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
