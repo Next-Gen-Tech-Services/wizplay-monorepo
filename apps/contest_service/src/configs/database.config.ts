@@ -1,12 +1,12 @@
 // src/configs/database.config.ts
-import initUserSubmission, {
-  UserSubmission,
-} from "@/models/userSubmission.model";
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
 import initContestModel, { Contest } from "../models/contest.model";
 import initQuestionModel, { Question } from "../models/question.model";
 import initUserContestModel, { UserContest } from "../models/userContest.model";
+import initUserSubmission, {
+  UserSubmission,
+} from "../models/userSubmission.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
