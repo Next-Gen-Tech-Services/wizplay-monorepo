@@ -50,5 +50,34 @@ export default class UserContestRepository {
     }
   }
 
-  // Optionally expose other useful methods like cancelJoin, listByUser etc.
+  public async findAllUserContests(userId: string) {
+    try {
+      return await this._DB.UserContest.findAll({
+        where: { userId },
+        include: [
+          {
+            model: this._DB.Contest,
+            as: "contest",
+            attributes: [
+              "id",
+              "title",
+              "startAt",
+              "endAt",
+              "status",
+              "type",
+              "entryFee",
+              "prizePool",
+              "questionsCount",
+            ],
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+    } catch (err: any) {
+      logger.error(
+        `UserContestRepository.findAllUserContests error: ${err?.message ?? err}`
+      );
+      throw err;
+    }
+  }
 }

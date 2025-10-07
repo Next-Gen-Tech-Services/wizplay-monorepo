@@ -42,19 +42,31 @@ export default class ContestRepository {
   ) {
     try {
       const where: any = matchId ? { matchId } : {};
-
       const include: any[] = [];
 
-      // Include user joins only if userId is provided
-      if (userId) {
+      // --- detect association alias between Contest -> UserContest (if any) ---
+      const contestAssociations = this._DB.Contest.associations || {};
+      const assocEntry = Object.values(contestAssociations).find(
+        (a: any) => a && a.target && a.target === this._DB.UserContest
+      );
+      const userContestAlias =
+        assocEntry && assocEntry.as ? assocEntry.as : null;
+
+      // Only include join if we have a userId AND Sequelize knows the alias.
+      // (This include is mainly to return any joined data if needed; we will compute hasJoined using a separate query.)
+      if (userId && userContestAlias) {
         include.push({
           model: this._DB.UserContest,
-          as: "userJoins",
-          required: false, // LEFT JOIN
+          as: userContestAlias,
+          required: false,
           where: { userId },
-          attributes: ["id", "status"],
+          attributes: ["id", "status", "contestId", "userId"],
         });
       }
+
+      logger.info(
+        `listContestsByMatch - userId: ${userId} alias: ${userContestAlias}`
+      );
 
       const result = await this._DB.Contest.findAndCountAll({
         where,
@@ -62,7 +74,7 @@ export default class ContestRepository {
         order: [["startAt", "ASC"]],
         limit,
         offset,
-        distinct: true, // Ensures correct count with joins
+        distinct: true,
       });
 
       // Normalize count (handles edge cases with joins)
@@ -77,10 +89,8 @@ export default class ContestRepository {
             }
             return acc;
           }, 0);
-          // Fallback if reduction fails
-          if (total === 0 && result.count.length > 0) {
+          if (total === 0 && result.count.length > 0)
             total = result.count.length;
-          }
         } catch {
           total = result.count.length;
         }
@@ -88,17 +98,39 @@ export default class ContestRepository {
         total = Number(result.count ?? 0);
       }
 
-      // Map contests and add hasJoined flag
+      // --- Robust hasJoined calculation: query user's joined contest IDs and build a Set ---
+      let joinedContestIds = new Set<string>();
+      if (userId) {
+        const joinedRows = await this._DB.UserContest.findAll({
+          where: { userId },
+          attributes: ["contestId"],
+          raw: true,
+        });
+        joinedRows.forEach((r: any) => {
+          if (r && r.contestId) joinedContestIds.add(String(r.contestId));
+        });
+      }
+
+      logger.info(
+        `listContestsByMatch - userId: ${userId} joinedContestIds: ${JSON.stringify(
+          Array.from(joinedContestIds)
+        )}`
+      );
+
+      // Map contests and add hasJoined flag based on Set (guaranteed accurate)
       const items = result.rows.map((contest: any) => {
         const data = contest.toJSON();
 
-        // Check if user has joined this contest
+        // If alias was included and present it could be used, but we prefer the joinedContestIds Set.
         const hasJoined = userId
-          ? Array.isArray(data.userJoins) && data.userJoins.length > 0
+          ? joinedContestIds.has(String(data.id))
           : false;
 
-        // Remove userJoins from response (we only needed it for the flag)
-        delete data.userJoins;
+        // Remove any included join array to keep response clean regardless of alias name
+        if (userContestAlias && data[userContestAlias])
+          delete data[userContestAlias];
+        if (data.userJoins) delete data.userJoins;
+        if (data.userContests) delete data.userContests;
 
         return {
           ...data,

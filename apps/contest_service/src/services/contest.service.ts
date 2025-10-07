@@ -245,4 +245,14 @@ export default class ContestService {
       throw new ServerError("Failed to join contest");
     }
   }
+
+  public async userContest(userId: string) {
+    try {
+      const contests = await this.userContestRepo!.findAllUserContests(userId);
+      return contests;
+    } catch (err: any) {
+      logger.error(`ContestService.joinContest error: ${err?.message ?? err}`);
+      throw new ServerError("Failed to join contest");
+    }
+  }
 }

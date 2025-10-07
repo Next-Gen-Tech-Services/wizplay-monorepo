@@ -15,6 +15,11 @@ const contestController: ContestController =
 /**
  * Contests
  */
+router.get("/contests", requireAuth, async (req, res) => {
+  const result = await contestController.listByMatch(req, res);
+  return result;
+});
+
 router.post("/contests", async (req, res) => {
   const result = await contestController.createContest(req, res);
   return result;
@@ -35,19 +40,27 @@ router.delete("/contests/:id", async (req, res) => {
   return result;
 });
 
-router.get("/contests", requireAuth, async (req, res) => {
-  const result = await contestController.listByMatch(req, res);
-  return result;
-});
-
 /**
  * User Contests
  */
 
-router.post("/contests/join", async (req: Request, res: Response) => {
-  const result = await contestController.joinContest(req, res);
-  return result;
-});
+router.post(
+  "/contests/join",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await contestController.joinContest(req, res);
+    return result;
+  }
+);
+
+router.get(
+  "/contests/join/:userId",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await contestController.userContest(req, res);
+    return result;
+  }
+);
 
 /**
  * Generative AI

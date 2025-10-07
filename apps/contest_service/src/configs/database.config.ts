@@ -41,29 +41,34 @@ const UserSubmissionInstance = initUserSubmission(sequelize);
 
 // associations (optional but useful)
 ContestInstance.hasMany(QuestionInstance, {
-  foreignKey: "contestId",
+  foreignKey: "contest_id", // use the DB column name if your model maps field -> underscored
   as: "questions",
 });
 
 QuestionInstance.belongsTo(ContestInstance, {
-  foreignKey: "contestId",
+  foreignKey: "contest_id",
   as: "contest",
 });
 
 ContestInstance.hasMany(UserContestInstance, {
-  foreignKey: "contestId",
+  foreignKey: "contest_id",
+  as: "userContests",
+});
+
+ContestInstance.hasMany(UserContestInstance, {
+  foreignKey: "contest_id",
   as: "userJoins",
 });
 
 UserContestInstance.belongsTo(ContestInstance, {
-  foreignKey: "contestId",
-  as: "contest",
+  foreignKey: "contest_id",
+  as: "contest", // single belongsTo alias used by find/include
 });
 
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     logger.info("Database connection established ✅");
   } catch (error: any) {
     logger.error(`Error connecting database: ${error.message ?? error}`);

@@ -122,6 +122,47 @@ export default class ContestController {
     }
   }
 
+  public async userContest(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: "userId is required" });
+    }
+
+    try {
+      const result = await this.contestService!.userContest(userId);
+
+      return res
+        .status(STATUS_CODE.SUCCESS)
+        .json({ success: true, message: "Contest joined", data: result });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.joinContest error: ${err?.message ?? err}`
+      );
+
+      if (err?.code === "CONFLICT") {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: err.message || "User already joined this contest",
+        });
+      }
+
+      if (err?.code === "NOT_FOUND") {
+        return res.status(STATUS_CODE.NOT_FOUND).json({
+          success: false,
+          message: err.message || "Contest not found",
+        });
+      }
+
+      // fallback
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: "Server error" });
+    }
+  }
+
   /** generative ai */
 
   public async generateQuestions(req: Request, res: Response) {
