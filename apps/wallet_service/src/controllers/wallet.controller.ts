@@ -1,0 +1,18 @@
+// src/controllers/contest.controller.ts
+import { STATUS_CODE } from "@repo/common";
+import { Request, Response } from "express";
+import { autoInjectable } from "tsyringe";
+import WalletService from "../services/wallet.service";
+
+@autoInjectable()
+export default class WalletController {
+  constructor(private readonly walletService: WalletService) {}
+
+  public async showBalance(req: Request, res: Response) {
+    const userId: string = req.userId!;
+    const result = await this.walletService.showBalance(userId);
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
+}

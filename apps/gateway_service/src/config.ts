@@ -76,6 +76,16 @@ export const ROUTES: ProxyRoute[] = [
     pathRewrite: { "^/api/v1/questions": "/api/v1/questions" },
     timeoutMs: 15000,
   },
+
+  {
+    name: "wallet",
+    mountPath: "/api/v1/wallet",
+    target: process.env.WALLET_SERVICE_URL ?? "http://localhost:4009",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/wallet": "/api/v1/wallet" },
+    timeoutMs: 15000,
+  },
   // {
   //   name: "socket",
   //   mountPath: "/ws",
