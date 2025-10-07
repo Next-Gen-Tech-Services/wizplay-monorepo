@@ -30,4 +30,10 @@ router.patch("/wallet/credit", requireAuth, async (req, res) => {
   return result;
 });
 
+// get all user transactions
+router.get("/wallet/transactions", requireAuth, async (req, res) => {
+  const result = await walletController.getUserTransactions(req, res);
+  return result;
+});
+
 export default router;

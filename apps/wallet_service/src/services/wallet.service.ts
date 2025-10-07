@@ -37,4 +37,13 @@ export default class ContestService {
       throw new ServerError(`Error credit wallet data: ${error.message}`);
     }
   }
+
+  public async getUserTransactions(userId: string) {
+    try {
+      const walletInfo = await this.repo.getTransactions(userId);
+      return walletInfo;
+    } catch (error: any) {
+      throw new ServerError(`Error fetching wallet data: ${error.message}`);
+    }
+  }
 }

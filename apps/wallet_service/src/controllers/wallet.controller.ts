@@ -33,4 +33,12 @@ export default class WalletController {
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });
   }
+
+  public async getUserTransactions(req: Request, res: Response) {
+    const userId: string = req.userId!;
+    const result = await this.walletService.getUserTransactions(userId);
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
 }

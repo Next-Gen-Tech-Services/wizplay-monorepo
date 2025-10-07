@@ -139,4 +139,23 @@ export default class WalletRepository {
       throw new ServerError(err.message);
     }
   }
+
+  public async getTransactions(userId: string): Promise<any> {
+    try {
+      const transactions = await this._DB.Transaction.findAll({
+        where: {
+          userId: userId,
+        },
+      });
+
+      if (!transactions) {
+        throw new BadRequestError("No transactions found for this user");
+      }
+
+      return transactions;
+    } catch (err: any) {
+      logger.error(`DB error: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
+    }
+  }
 }
