@@ -111,6 +111,28 @@ services:
       timeout: 5s
       retries: 5
 
+  wallet_db_server:
+    image: "postgres:15-alpine"
+    container_name: wallet_db_server
+    ports:
+      - "5439:5432"
+    environment:
+      POSTGRES_USER: wallet_db
+      POSTGRES_PASSWORD: wallet_db
+      POSTGRES_DB: wallet_service
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    volumes:
+      - wallet_db_data:/var/lib/postgresql/data
+      - ./database/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wallet_db -d wallet_service"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Kafka with improved configuration
   kafka:
     image: bitnami/kafka:latest
@@ -175,6 +197,8 @@ volumes:
   coupon_db_data:
     driver: local
   contest_db_data:
+    driver: local
+  wallet_db_data:
     driver: local
   redis_data:
     driver: local
