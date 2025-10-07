@@ -27,7 +27,7 @@ export default function (sequelize: Sequelize) {
         defaultValue: UUIDV4,
       },
       userId: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       contestId: {
