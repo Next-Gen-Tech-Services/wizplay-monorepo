@@ -5,6 +5,7 @@ import { Request, Response, Router } from "express";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import ContestController from "../controllers/contest.controller";
+import { requireAuth } from "../middlewares/auth.middleware";
 import { generateQuestionsValidator } from "../validators";
 
 const router = Router();
@@ -34,7 +35,7 @@ router.delete("/contests/:id", async (req, res) => {
   return result;
 });
 
-router.get("/contests", async (req, res) => {
+router.get("/contests", requireAuth, async (req, res) => {
   const result = await contestController.listByMatch(req, res);
   return result;
 });

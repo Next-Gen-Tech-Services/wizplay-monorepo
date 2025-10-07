@@ -8,6 +8,7 @@ declare global {
   namespace Express {
     interface Request {
       currentUser?: IUserAtters;
+      userId?: any;
     }
   }
 }
@@ -34,16 +35,9 @@ export const requireAuth = async (
     if (payloadKeys.length !== 3) {
       throw new UnAuthorizError();
     }
-    const userRepository = new UserRepository();
-    const user = await userRepository.getUserWithId(
-      payloadKeys[1],
-      payloadKeys[0]
-    );
-    if (!user) {
-      throw new UnAuthorizError();
-    }
 
-    req.currentUser = user;
+    // req.currentUser = user;
+    req.userId = payloadKeys[1];
     return next();
   } catch (error) {
     logger.error(`[MIDDLEWARE]: ${error}`);

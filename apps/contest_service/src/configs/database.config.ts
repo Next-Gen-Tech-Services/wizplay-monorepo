@@ -50,6 +50,16 @@ QuestionInstance.belongsTo(ContestInstance, {
   as: "contest",
 });
 
+ContestInstance.hasMany(UserContestInstance, {
+  foreignKey: "contestId",
+  as: "userJoins",
+});
+
+UserContestInstance.belongsTo(ContestInstance, {
+  foreignKey: "contestId",
+  as: "contest",
+});
+
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();

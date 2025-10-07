@@ -39,7 +39,8 @@ export default class ContestController {
       const result = await this.contestService.listContests(
         matchId,
         limit,
-        offset
+        offset,
+        req.userId
       );
 
       return res

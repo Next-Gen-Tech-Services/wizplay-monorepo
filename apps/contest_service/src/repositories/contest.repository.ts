@@ -34,24 +34,40 @@ export default class ContestRepository {
     }
   }
 
-  public async listContestsByMatch(matchId?: string, limit = 20, offset = 0) {
+  public async listContestsByMatch(
+    matchId?: string,
+    limit = 20,
+    offset = 0,
+    userId?: string
+  ) {
     try {
       const where = matchId ? { matchId } : {};
 
-      // Use distinct + col to ensure COUNT(DISTINCT "Contest"."id") so joins don't inflate counts.
+      const include: any[] = [];
+
+      if (userId) {
+        include.push({
+          model: this._DB.UserContest,
+          as: "userJoins",
+          required: false, // LEFT JOIN
+          where: { userId },
+          attributes: ["id"],
+        });
+      }
+
       const result = await this._DB.Contest.findAndCountAll({
         where,
+        include,
         order: [["start_at", "ASC"]],
         limit,
         offset,
         distinct: true,
-        col: "Contest.id", // adjust if your model alias is different
+        col: "Contest.id",
       });
 
-      // Normalize count (Sequelize returns number OR array if grouped)
+      // normalize count logic (keep your original)
       let total: number;
       if (Array.isArray(result.count)) {
-        // try to sum counts if array of objects, otherwise fallback to length
         try {
           total = result.count.reduce((acc: number, cur: any) => {
             if (typeof cur === "number") return acc + cur;
@@ -70,7 +86,15 @@ export default class ContestRepository {
         total = Number(result.count ?? 0);
       }
 
-      return { items: result.rows, total };
+      // hasJoined flag for userId
+      const items = result.rows.map((contest: any) => {
+        const data = contest.toJSON();
+        const hasJoined =
+          Array.isArray(data.userJoins) && data.userJoins.length > 0;
+        return { ...data, hasJoined };
+      });
+
+      return { items, total };
     } catch (err: any) {
       logger.error(`listContestsByMatch DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
