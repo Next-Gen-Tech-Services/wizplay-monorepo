@@ -58,11 +58,11 @@ export default class ContestRepository {
       const result = await this._DB.Contest.findAndCountAll({
         where,
         include,
-        order: [["start_at", "ASC"]],
+        order: [["startAt", "ASC"]],
         limit,
         offset,
         distinct: true,
-        col: "Contest.id",
+        col: "id",
       });
 
       // normalize count logic (keep your original)
