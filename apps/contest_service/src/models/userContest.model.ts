@@ -31,11 +31,11 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
       },
       contestId: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       matchId: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       status: {
