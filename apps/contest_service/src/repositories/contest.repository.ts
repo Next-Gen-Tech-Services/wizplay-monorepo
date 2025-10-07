@@ -41,17 +41,18 @@ export default class ContestRepository {
     userId?: string
   ) {
     try {
-      const where = matchId ? { matchId } : {};
+      const where: any = matchId ? { matchId } : {};
 
       const include: any[] = [];
 
+      // Include user joins only if userId is provided
       if (userId) {
         include.push({
           model: this._DB.UserContest,
           as: "userJoins",
           required: false, // LEFT JOIN
           where: { userId },
-          attributes: ["id"],
+          attributes: ["id", "status"],
         });
       }
 
@@ -61,24 +62,25 @@ export default class ContestRepository {
         order: [["startAt", "ASC"]],
         limit,
         offset,
-        distinct: true,
-        col: "id",
+        distinct: true, // Ensures correct count with joins
       });
 
-      // normalize count logic (keep your original)
+      // Normalize count (handles edge cases with joins)
       let total: number;
       if (Array.isArray(result.count)) {
         try {
           total = result.count.reduce((acc: number, cur: any) => {
             if (typeof cur === "number") return acc + cur;
             if (cur && typeof cur === "object") {
-              const c = "count" in cur ? Number((cur as any).count) : NaN;
+              const c = "count" in cur ? Number((cur as any).count) : 0;
               return acc + (Number.isFinite(c) ? c : 0);
             }
             return acc;
           }, 0);
-          if (total === 0 && result.count.length > 0)
+          // Fallback if reduction fails
+          if (total === 0 && result.count.length > 0) {
             total = result.count.length;
+          }
         } catch {
           total = result.count.length;
         }
@@ -86,12 +88,22 @@ export default class ContestRepository {
         total = Number(result.count ?? 0);
       }
 
-      // hasJoined flag for userId
+      // Map contests and add hasJoined flag
       const items = result.rows.map((contest: any) => {
         const data = contest.toJSON();
-        const hasJoined =
-          Array.isArray(data.userJoins) && data.userJoins.length > 0;
-        return { ...data, hasJoined };
+
+        // Check if user has joined this contest
+        const hasJoined = userId
+          ? Array.isArray(data.userJoins) && data.userJoins.length > 0
+          : false;
+
+        // Remove userJoins from response (we only needed it for the flag)
+        delete data.userJoins;
+
+        return {
+          ...data,
+          hasJoined,
+        };
       });
 
       return { items, total };

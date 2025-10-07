@@ -41,7 +41,12 @@ export default class ContestService {
     return created;
   }
 
-  public async listContests(matchId?: string, limit = 20, offset = 0, userId) {
+  public async listContests(
+    matchId?: string,
+    limit = 20,
+    offset = 0,
+    userId?: string
+  ) {
     // pass through to repository
     return this.repo.listContestsByMatch(matchId, limit, offset, userId);
   }
