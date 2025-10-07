@@ -3,7 +3,8 @@ import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
 import WalletRouter from "./routes/wallet.router";
-import userEventHandler from "./utils/events/contest.events";
+import contestEventHandler from "./utils/events/contest.events";
+import userEventHandler from "./utils/events/user.events";
 import { connectProducer } from "./utils/kafka";
 
 const BrokerInit = async () => {
@@ -17,7 +18,9 @@ const BrokerInit = async () => {
     logger.info("Successfully created topics");
 
     // start consuming events
+    await contestEventHandler.handle();
     await userEventHandler.handle();
+
     logger.info("Successfully subscribed to user events");
   } catch (error) {
     logger.error("Failed to initialize Kafka broker:", error);

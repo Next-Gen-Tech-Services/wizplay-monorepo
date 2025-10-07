@@ -15,4 +15,22 @@ export default class WalletController {
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });
   }
+
+  public async debitBalance(req: Request, res: Response) {
+    const userId: string = req.userId!;
+    const amount: number = req.body;
+    const result = await this.walletService.debitBalance(userId, amount);
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
+
+  public async creditBalance(req: Request, res: Response) {
+    const userId: string = req.userId!;
+    const amount: number = req.body;
+    const result = await this.walletService.creditBalance(userId, amount);
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
 }
