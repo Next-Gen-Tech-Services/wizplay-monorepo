@@ -10,6 +10,7 @@ export interface SubmitAnswersPayload {
   contestId: string;
   answers: { questionId: string; selectedKey: string }[]; // selectedKey e.g. 'A'
   revealCorrect?: boolean; // whether to include correctKey in response (default false)
+  treatNullAnsKeyAsUnscored?: boolean; // default true -> ignore null ansKey questions in maxScore
 }
 
 @autoInjectable()
@@ -21,7 +22,13 @@ export default class SubmissionService {
   ) {}
 
   public async submitAnswers(payload: SubmitAnswersPayload) {
-    const { userId, contestId, answers, revealCorrect = false } = payload;
+    const {
+      userId,
+      contestId,
+      answers,
+      revealCorrect = false,
+      treatNullAnsKeyAsUnscored = true,
+    } = payload;
 
     if (
       !userId ||
@@ -38,14 +45,19 @@ export default class SubmissionService {
         isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
       });
 
+      // fetch questions for given ids
       const qIds = answers.map((a) => a.questionId);
       const questions = await this.questionRepo!.findByIds(qIds, {
         transaction: tx,
       });
 
-      // map questions by id
+      // map by id for quick lookup
       const qMap = new Map<string, any>();
       for (const q of questions) qMap.set(q.getDataValue("id"), q);
+
+      // helper normalize
+      const normalize = (v: any) =>
+        v === null || v === undefined ? "" : String(v).trim().toLowerCase();
 
       let total = 0;
       let max = 0;
@@ -54,40 +66,74 @@ export default class SubmissionService {
       for (const ans of answers) {
         const q = qMap.get(ans.questionId);
         if (!q) {
-          // treat missing question as zero, but track it
+          // missing question in DB: record as zero (do not increase max)
           detailedAnswers.push({
             questionId: ans.questionId,
             selectedKey: ans.selectedKey,
             isCorrect: false,
             earnedPoints: 0,
-            correctKey: revealCorrect ? null : undefined,
+            note: "question not found",
           });
           continue;
         }
 
-        const correctKey = String(q.getDataValue("correctKey") ?? "")
-          .trim()
-          .toUpperCase();
+        // Support both field names 'ansKey' (your data) or 'correctKey' (other code)
+        const rawCorrect =
+          q.getDataValue("ansKey") ??
+          q.getDataValue("correctKey") ??
+          q.getDataValue("ans_key") ??
+          q.getDataValue("correct_key") ??
+          null;
+
+        // points for question (fallback to 1)
         const qPoints =
           (q.getDataValue("points") as number) ??
           (q.getDataValue("pointsPerQuestion") as number) ??
           1;
-        max += qPoints;
 
-        const selected = String(ans.selectedKey ?? "")
-          .trim()
-          .toUpperCase();
-        const isCorrect = selected === correctKey;
+        // If question has no correct key
+        if (!rawCorrect) {
+          if (treatNullAnsKeyAsUnscored) {
+            // do not include in maxScore
+            detailedAnswers.push({
+              questionId: q.getDataValue("id"),
+              selectedKey: ans.selectedKey,
+              isCorrect: false,
+              earnedPoints: 0,
+              note: "no correct answer configured (unscored)",
+            });
+            continue;
+          } else {
+            // include in maxScore but mark incorrect (no correctKey to compare)
+            max += qPoints;
+            detailedAnswers.push({
+              questionId: q.getDataValue("id"),
+              selectedKey: ans.selectedKey,
+              isCorrect: false,
+              earnedPoints: 0,
+              note: "no correct answer configured",
+            });
+            continue;
+          }
+        }
+
+        // normal scoring path
+        const correctNorm = normalize(rawCorrect);
+        const selectedNorm = normalize(ans.selectedKey);
+
+        max += qPoints;
+        const isCorrect = selectedNorm === correctNorm;
         const earned = isCorrect ? qPoints : 0;
         total += earned;
 
-        detailedAnswers.push({
+        const answerRecord: any = {
           questionId: q.getDataValue("id"),
           selectedKey: ans.selectedKey,
           isCorrect,
           earnedPoints: earned,
-          ...(revealCorrect ? { correctKey } : {}),
-        });
+        };
+        if (revealCorrect) answerRecord.correctKey = rawCorrect;
+        detailedAnswers.push(answerRecord);
       }
 
       // persist submission
@@ -104,7 +150,6 @@ export default class SubmissionService {
 
       await tx.commit();
 
-      // return summary (omitting correctKey by default)
       return {
         submissionId: created.getDataValue("id"),
         userId,
@@ -117,7 +162,9 @@ export default class SubmissionService {
       if (tx) {
         try {
           await tx.rollback();
-        } catch (e) {}
+        } catch (e) {
+          logger.warn("Failed rollback in submitAnswers: " + String(e));
+        }
       }
       logger.error(
         `SubmissionService.submitAnswers error: ${err?.message ?? err}`

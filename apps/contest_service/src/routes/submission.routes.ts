@@ -7,13 +7,13 @@ const router = Router();
 const submissionController: SubmissionController =
   container.resolve(SubmissionController);
 
-router.post("/contests/submit", async (req, res) =>
+router.post("/questions/submit", async (req, res) =>
   submissionController.submitAnswers(req, res)
 );
-router.get("/contests/submissions/user/:userId", async (req, res) =>
+router.get("/questions/submissions/user/:userId", async (req, res) =>
   submissionController.listUserSubmissions(req, res)
 );
-router.get("/contests/submissions/:id", async (req, res) =>
+router.get("/questions/submissions/:id", async (req, res) =>
   submissionController.getSubmission(req, res)
 );
 

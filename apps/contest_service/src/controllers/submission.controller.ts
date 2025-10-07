@@ -14,6 +14,7 @@ export default class SubmissionController {
         contestId: req.body.contestId,
         answers: req.body.answers,
         revealCorrect: Boolean(req.body.revealCorrect),
+        treatNullAnsKeyAsUnscored: Boolean(req.body.treatNullAnsKeyAsUnscored),
       };
       const result = await this.submissionService!.submitAnswers(payload);
       return res
