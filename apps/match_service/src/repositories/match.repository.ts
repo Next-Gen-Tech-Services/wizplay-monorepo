@@ -93,8 +93,8 @@ export default class MatchRepository {
             ELSE false 
           END
           FROM "wishlists" 
-          WHERE "wishlists"."matchId" = "Match"."id" 
-            AND "wishlists"."userId" = :userId
+          WHERE "wishlists"."match_id" = "Match"."id" 
+            AND "wishlists"."user_id" = :userId
         )`),
           "wishlisted",
         ]);

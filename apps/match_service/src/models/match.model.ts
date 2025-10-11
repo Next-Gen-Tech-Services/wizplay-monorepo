@@ -69,8 +69,14 @@ export default function (sequelize: Sequelize) {
       tournamentKey: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: null,
+        references: {
+          model: "tournaments", // matches table name
+          key: "key",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
+
       name: {
         type: DataTypes.STRING,
         allowNull: false,
