@@ -70,12 +70,6 @@ export default function (sequelize: Sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,
-        references: {
-          model: "tournaments",
-          key: "key",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
       },
       name: {
         type: DataTypes.STRING,

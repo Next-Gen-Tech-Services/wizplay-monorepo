@@ -34,7 +34,10 @@ export default class MatchRepository {
     }
   }
 
-  public async fetchAllMatches(filters: IMatchFilters): Promise<{
+  public async fetchAllMatches(
+    filters: IMatchFilters,
+    currentUserId?: string
+  ): Promise<{
     matches: any[];
     pagination: {
       total: number;
@@ -46,7 +49,7 @@ export default class MatchRepository {
     };
   }> {
     try {
-      // construct filters (same as your existing code)
+      // construct filters
       const where: WhereOptions = {};
 
       if (filters.sport) where["sport"] = filters.sport;
@@ -77,10 +80,32 @@ export default class MatchRepository {
       const offset = filters.offset ?? 0;
       const page = Math.floor(offset / limit) + 1;
 
-      // Use findAndCountAll for pagination metadata
+      const attributes: any = {
+        include: [],
+      };
+
+      // Add wishlisted flag
+      if (currentUserId) {
+        attributes.include.push([
+          this._DB.sequelize.literal(`(
+          SELECT CASE 
+            WHEN COUNT(*) > 0 THEN true 
+            ELSE false 
+          END
+          FROM "wishlists" 
+          WHERE "wishlists"."matchId" = "Match"."id" 
+            AND "wishlists"."userId" = :userId
+        )`),
+          "wishlisted",
+        ]);
+      }
+
+      // pagination metadata
       const result = await Match.findAndCountAll({
         where,
         include: [{ association: "tournaments" }],
+        attributes: attributes.include.length > 0 ? attributes : undefined,
+        replacements: currentUserId ? { userId: currentUserId } : undefined,
         order: [["startedAt", "DESC"]],
         limit,
         offset,

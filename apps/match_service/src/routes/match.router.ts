@@ -3,6 +3,7 @@ import { Request, Response, Router } from "express";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import MatchController from "../controllers/match.controller";
+import { requireAuth } from "../middlewares/auth.middleware";
 import { listMatchesValidator } from "../validators";
 
 const router = Router();
@@ -11,6 +12,7 @@ const controller: MatchController = container.resolve(MatchController);
 // GET /matches
 router.get(
   "/matches",
+  requireAuth,
   listMatchesValidator(),
   validateRequest,
   async (req: Request, res: Response) => {

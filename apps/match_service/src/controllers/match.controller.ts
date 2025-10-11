@@ -10,8 +10,11 @@ export default class MatchController {
 
   public async getAllMatches(req: Request, res: Response) {
     const queryParams = req.query;
-    const result =
-      await this.matchService.fetchAllMatchesWithFilters(queryParams);
+    const userId = req.userId;
+    const result = await this.matchService.fetchAllMatchesWithFilters(
+      queryParams,
+      userId
+    );
 
     return res.status(STATUS_CODE.SUCCESS).json({
       success: true,

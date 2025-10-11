@@ -8,9 +8,9 @@ import MatchRepository from "../repositories/match.repository";
 export default class MatchService {
   constructor(private readonly matchRepository: MatchRepository) {}
 
-  public async fetchAllMatchesWithFilters(query: IMatchFilters) {
+  public async fetchAllMatchesWithFilters(query: IMatchFilters, userId: any) {
     try {
-      const matches = await this.matchRepository.fetchAllMatches(query);
+      const matches = await this.matchRepository.fetchAllMatches(query, userId);
 
       return matches;
     } catch (error: any) {

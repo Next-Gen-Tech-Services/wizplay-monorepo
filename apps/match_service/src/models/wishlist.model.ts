@@ -4,7 +4,7 @@ import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 export interface IWishlistAttributes {
   id?: string;
   userId: string;
-  matchId: string; // JSONB content
+  matchId: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -38,17 +38,6 @@ export default function (sequelize: Sequelize) {
       matchId: {
         type: DataTypes.UUID,
         allowNull: false,
-      },
-
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal("NOW()"),
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal("NOW()"),
       },
     },
     {
