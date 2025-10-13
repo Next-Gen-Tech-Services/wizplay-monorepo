@@ -2,13 +2,12 @@
 import { logger } from "@repo/common";
 import AppInit from "./app";
 import { connectDatabase } from "./configs/database.config";
-import redis from "./configs/redis.config";
 import ServerConfigs from "./configs/server.config";
 
 async function startServer() {
   await connectDatabase();
 
-  await redis.connectClient();
+  // await redis.connectClient();
 
   // await rabbitmqInstance.connectClient();
 

@@ -1,5 +1,5 @@
 import { BadRequestError, logger, ServerError } from "@repo/common";
-import { Op, WhereOptions } from "sequelize";
+import { Op, QueryTypes, WhereOptions } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
 import { IMatchAttrs } from "../dtos/match.dto";
 import { IMatchFilters } from "../interfaces/match";
@@ -49,7 +49,7 @@ export default class MatchRepository {
     };
   }> {
     try {
-      // construct filters
+      // construct filters (same as your existing code)
       const where: WhereOptions = {};
 
       if (filters.sport) where["sport"] = filters.sport;
@@ -104,8 +104,6 @@ export default class MatchRepository {
       const result = await Match.findAndCountAll({
         where,
         include: [{ association: "tournaments" }],
-        attributes: attributes.include.length > 0 ? attributes : undefined,
-        replacements: currentUserId ? { userId: currentUserId } : undefined,
         order: [["startedAt", "DESC"]],
         limit,
         offset,
@@ -130,6 +128,53 @@ export default class MatchRepository {
     }
   }
 
+  public async markMatchesNotInListAsFinished(
+    fetchedKeys: string[],
+    cutoffDate: Date
+  ): Promise<any> {
+    try {
+      const cutoff = Math.floor(cutoffDate.getTime() / 1000); // convert to epoch seconds
+      const keysToExclude =
+        fetchedKeys && fetchedKeys.length ? fetchedKeys : [];
+
+      if (keysToExclude.length) {
+        const query = `
+        UPDATE "${this._DB.Match.tableName}"
+        SET status = :finishedStatus, updated_at = NOW()
+        WHERE "started_at" < :cutoff
+          AND "key" NOT IN (:keys)
+          AND "status" NOT IN (:skipStatuses)
+      `;
+        return await this._DB.sequelize.query(query, {
+          replacements: {
+            finishedStatus: "finished",
+            cutoff,
+            keys: keysToExclude,
+            skipStatuses: ["finished", "cancelled"],
+          },
+          type: QueryTypes.UPDATE,
+        });
+      } else {
+        const query = `
+        UPDATE "${this._DB.Match.tableName}"
+        SET status = :finishedStatus, updated_at = NOW()
+        WHERE "started_at" < :cutoff
+          AND "status" NOT IN (:skipStatuses)
+      `;
+        return await this._DB.sequelize.query(query, {
+          replacements: {
+            finishedStatus: "finished",
+            cutoff,
+            skipStatuses: ["finished", "cancelled"],
+          },
+          type: QueryTypes.UPDATE,
+        });
+      }
+    } catch (error: any) {
+      logger.error(`Database Error (markMatchesNotInListAsFinished): ${error}`);
+      throw error;
+    }
+  }
   public async updateMatch(
     matchId: string,
     showOnFrontend: boolean
