@@ -85,14 +85,54 @@ class MatchCrons {
     }
   }
 
+  private async fetchMatchesForNext48Hours() {
+    try {
+      const roanuzToken = await redis.getter("roanuzToken");
+      const start = new Date();
+      const end = new Date(start.getTime() + 48 * 60 * 60 * 1000);
+      const params = {
+        date_from: start.toISOString(),
+        date_to: end.toISOString(),
+      };
+      const matchResponse = await axios({
+        method: "GET",
+        url: `https://api.sports.roanuz.com/v5/cricket/${this.roanuzPK}/fixtures/`,
+        headers: {
+          "Content-Type": "application/json",
+          "rs-token": roanuzToken || this.authToken,
+        },
+        params,
+      });
+      if (matchResponse?.status !== 200)
+        throw new Error(matchResponse?.data?.error);
+      const inputDays = { days: matchResponse?.data?.data?.month?.days };
+      const extractedData = extractMatches(inputDays);
+      const matchAndTournament = formatMatchData(extractedData);
+      const currentDate = new Date().toLocaleDateString();
+      await redis.setter(currentDate, JSON.stringify(matchAndTournament));
+      return matchAndTournament;
+    } catch (error: any) {
+      logger.error(`[MATCH-CRON] Error in match data api ${error.message}`);
+      return null;
+    }
+  }
+
   async scheduleJob() {
     cron.schedule("0 0 * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
       const token = await this.generateApiToken();
-      const { matches, tournaments } = await this.getMatchData();
+      const { matches, tournaments } = await this.fetchMatchesForNext48Hours();
 
       await this.tournamentRepository.createBulkTournaments(tournaments);
       await this.matchRepository.createBulkMatches(matches);
+
+      const fetchedKeys = matches.map((m: any) => m.key).filter(Boolean);
+      const now = new Date();
+      await this.matchRepository.markMatchesNotInListAsFinished(
+        fetchedKeys,
+        now
+      );
+
       logger.info("[MATCH-CRON] cron job executed");
     });
   }

@@ -15,7 +15,7 @@ export class GenerativeAi {
     try {
       const response = await this.openApiInstance.responses.create({
         model: "gpt-4.1",
-        input: `Consider you are a match analyst. Generate an future cricket match trivia contest with 10 questions each with 4 probable answer options. Here is the match data: ${matchData} and here is the type of question ${contestDescription} for which you need to generate the questions and their respective probable options. give the data in key value json format. the top level data should have key as match_trivia`,
+        input: `Consider you are a match analyst. Generate an future cricket match contest with 10 questions each with 4 probable answer options. Here is the match data: ${matchData} and here is the type of question ${contestDescription} for which you need to generate the questions and their respective probable options. give the data in key value json format. the top level data should have key as match`,
       });
       const result = JSON.parse(
         response.output[0].content[0].text
@@ -35,7 +35,7 @@ export class GenerativeAi {
         model: "gpt-4.1",
         input: `
 You are a cricket contest generator.  
-Your job is to create multiple trivia contests for an upcoming cricket match.  
+Your job is to create multiple contests for an upcoming cricket match.  
 The match format can be **Test, ODI, T20, or T10**.  
 
 ### Contest Design Rules:
