@@ -2,7 +2,6 @@ import { STATUS_CODE } from "@repo/common";
 import { Request, Response } from "express";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
-import redis from "../configs/redis.config";
 import MatchService from "../services/match.service";
 
 @autoInjectable()
@@ -39,11 +38,12 @@ export default class MatchController {
   }
 
   async subscribeMatch(req: Request, res: Response) {
-    const { matchId } = req.params;
-    const token = await redis.getter("roanuzToken");
-    logger.info(`matchID: ${matchId} `);
+    const { id } = req.params;
+    const { token } = req.body;
+    // const token = await redis.getter("roanuzToken");
+    console.log(`matchID: ${id} token: ${token}`);
     try {
-      const result = await this.matchService.subscribeMatch(matchId, token);
+      const result = await this.matchService.subscribeMatch(id, token);
       return res.status(200).json({ success: true, data: result });
     } catch (err: any) {
       // better error mapping with your STATUS_CODE if available
@@ -53,8 +53,9 @@ export default class MatchController {
 
   async unsubscribeMatch(req: Request, res: Response) {
     const { matchId } = req.params;
-    const token = await redis.getter("roanuzToken");
-    logger.info(`matchID: ${matchId} `);
+    const { token } = req.body;
+    // const token = await redis.getter("roanuzToken");
+    console.log(`matchID: ${matchId} `);
     try {
       const result = await this.matchService.unsubscribeMatch(matchId, token);
       return res.status(200).json({ success: true, data: result });
