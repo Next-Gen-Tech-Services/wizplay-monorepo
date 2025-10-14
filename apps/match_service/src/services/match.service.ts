@@ -45,7 +45,7 @@ export default class MatchService {
 
       const options = {
         method: "POST",
-        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/updates-subscribe/`,
+        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/detail-updates-subscribe/`,
         headers: {
           "rs-token": token,
           "Content-Type": "application/json",
