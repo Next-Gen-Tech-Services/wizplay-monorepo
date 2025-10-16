@@ -68,11 +68,13 @@ router.post("/matches/livematch", async (req: Request, res: Response) => {
 });
 
 router.post("/matches/subscribe/:id", async (req: Request, res: Response) => {
+  console.log("============");
   const result = await controller.subscribeMatch(req, res);
   return result;
 });
 
 router.post("/matches/unsubscribe/:id", async (req: Request, res: Response) => {
+  console.log("============");
   const result = await controller.unsubscribeMatch(req, res);
   return result;
 });

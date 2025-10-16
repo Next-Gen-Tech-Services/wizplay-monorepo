@@ -38,27 +38,36 @@ export default class MatchService {
 
   public async subscribeMatch(matchId: string, token: string) {
     try {
+      console.log(`${matchId}: ${token}`);
       if (!matchId) {
         throw new BadRequestError("Missing match id");
       }
 
-      var options = {
+      const options = {
         method: "POST",
-        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/updates-subscribe/`,
+        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/detail-updates-subscribe/`,
         headers: {
           "rs-token": token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
+        data: {
           method: "web_hook",
-        }),
+        },
       };
-      logger.info(`${JSON.stringify(options, null, 2)}`);
+
+      console.log(`${JSON.stringify(options, null, 2)}`);
       const response = await axios(options);
-      logger.info(`API RESPONSE. =======> ${response}`);
-      return response;
+      return response.data;
     } catch (error: any) {
-      throw new BadRequestError(error?.message || "Failed to update match");
+      console.error(
+        "Subscribe match error:",
+        error.response?.data || error.message
+      );
+      throw new BadRequestError(
+        error.response?.data?.message ||
+          error?.message ||
+          "Failed to subscribe to match updates"
+      );
     }
   }
 
@@ -68,23 +77,32 @@ export default class MatchService {
         throw new BadRequestError("Missing match id");
       }
 
-      var options = {
+      const options = {
         method: "POST",
         url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/updates-unsubscribe/`,
         headers: {
           "rs-token": token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
+        data: {
           method: "web_hook",
-        }),
+        },
       };
-      logger.info(`${JSON.stringify(options, null, 2)}`);
+
+      console.log(`Unsubscribe options: ${JSON.stringify(options, null, 2)}`);
       const response = await axios(options);
-      logger.info(`API RESPONSE. =======> ${response}`);
-      return response;
+      console.log(`API RESPONSE: ${JSON.stringify(response.data, null, 2)}`);
+      return response.data;
     } catch (error: any) {
-      throw new BadRequestError(error?.message || "Failed to update match");
+      console.error(
+        "Unsubscribe match error:",
+        error.response?.data || error.message
+      );
+      throw new BadRequestError(
+        error.response?.data?.message ||
+          error?.message ||
+          "Failed to unsubscribe from match updates"
+      );
     }
   }
 }
