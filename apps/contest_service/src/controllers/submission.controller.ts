@@ -71,4 +71,27 @@ export default class SubmissionController {
         .json({ success: false, message: "Server error" });
     }
   }
+
+  public async getContestSubmission(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      const userId = req.userId;
+      const row = await this.submissionService!.getContestSubmissionById(
+        userId,
+        id
+      );
+      if (!row)
+        return res
+          .status(STATUS_CODE.INTERNAL_SERVER)
+          .json({ success: false, message: "Submission not found" });
+      return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: row });
+    } catch (err: any) {
+      logger.error(
+        `SubmissionController.getSubmission error: ${err?.message ?? err}`
+      );
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: "Server error" });
+    }
+  }
 }

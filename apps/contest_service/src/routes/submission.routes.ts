@@ -20,4 +20,10 @@ router.get("/questions/submissions/:id", async (req, res) =>
   submissionController.getSubmission(req, res)
 );
 
+router.get(
+  "/questions/submissions/contest/:id",
+  requireAuth,
+  async (req, res) => submissionController.getContestSubmission(req, res)
+);
+
 export default router;

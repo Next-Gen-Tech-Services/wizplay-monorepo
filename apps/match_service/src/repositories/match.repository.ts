@@ -49,7 +49,7 @@ export default class MatchRepository {
     };
   }> {
     try {
-      // construct filters (same as your existing code)
+      // ---------- build where ----------
       const where: WhereOptions = {};
 
       if (filters.sport) where["sport"] = filters.sport;
@@ -58,63 +58,89 @@ export default class MatchRepository {
       if (filters.status) where["status"] = filters.status;
       if (filters.tournamentKey) where["tournamentKey"] = filters.tournamentKey;
       if (filters.winner) where["winner"] = filters.winner;
-      if (filters.showOnFrontend)
+      if (
+        filters.showOnFrontend !== undefined &&
+        filters.showOnFrontend !== null
+      )
         where["showOnFrontend"] = Boolean(filters.showOnFrontend);
 
-      // string search (case-insensitive)
       if (filters.name) where["name"] = { [Op.iLike]: `%${filters.name}%` };
       if (filters.shortName)
         where["shortName"] = { [Op.iLike]: `%${filters.shortName}%` };
       if (filters.metricGroup)
         where["metricGroup"] = { [Op.iLike]: `%${filters.metricGroup}%` };
 
-      // range filters
       if (filters.startedAfter || filters.startedBefore) {
         where["startedAt"] = {};
         if (filters.startedAfter)
-          where["startedAt"][Op.gte] = filters.startedAfter;
+          (where["startedAt"] as any)[Op.gte] = filters.startedAfter;
         if (filters.startedBefore)
-          where["startedAt"][Op.lte] = filters.startedBefore;
+          (where["startedAt"] as any)[Op.lte] = filters.startedBefore;
       }
-      const limit = filters.limit ?? 20;
-      const offset = filters.offset ?? 0;
-      const page = Math.floor(offset / limit) + 1;
 
-      const attributes: any = {
-        include: [],
-      };
+      // ---------- pagination ----------
+      const limit = Number(filters.limit ?? 20);
+      const offset = Number(filters.offset ?? 0);
+      const page = Math.max(1, Math.floor(offset / limit) + 1);
 
-      // Add wishlisted flag
+      // ---------- attributes & includes ----------
+      const attributes: any = { include: [] };
+      const include: any[] = [{ association: "tournaments" }];
+
       if (currentUserId) {
+        // escape user id to avoid injection when interpolating into literal
+        const escapedUserId = this._DB.sequelize.escape(currentUserId);
+
+        // Add wishlisted boolean via subquery literal
         attributes.include.push([
           this._DB.sequelize.literal(`(
-          SELECT CASE 
-            WHEN COUNT(*) > 0 THEN true 
-            ELSE false 
-          END
-          FROM "wishlists" 
-          WHERE "wishlists"."match_id" = "Match"."id" 
-            AND "wishlists"."user_id" = :userId
+          SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+          FROM "wishlists"
+          WHERE "wishlists"."match_id" = "Match"."id"
+            AND "wishlists"."user_id" = ${escapedUserId}
         )`),
+          "wishlisted",
+        ]);
+      } else {
+        // if no user, always false
+        attributes.include.push([
+          this._DB.sequelize.literal(`false`),
           "wishlisted",
         ]);
       }
 
-      // pagination metadata
+      // ---------- Query ----------
       const result = await Match.findAndCountAll({
         where,
-        include: [{ association: "tournaments" }],
+        include,
+        attributes,
         order: [["startedAt", "DESC"]],
         limit,
         offset,
+        distinct: true, // important for correct count when using include
       });
 
-      const totalPages = Math.ceil(result.count / limit);
+      const total = Number(result.count ?? 0);
+      const totalPages = Math.max(1, Math.ceil(total / limit));
+
+      // convert to plain objects and normalize wishlisted to boolean
+      const matches = result.rows.map((r: any) => {
+        const plain = r.get ? r.get({ plain: true }) : r;
+        // sometimes sequelize returns 't'/'f' or 1/0 depending on dialect, normalize:
+        if (plain.wishlisted === "t" || plain.wishlisted === "1") {
+          plain.wishlisted = true;
+        } else {
+          plain.wishlisted = Boolean(plain.wishlisted);
+        }
+        // remove wishlist include rows if present to keep response tidy
+        if (plain.wishlists !== undefined) delete plain.wishlists;
+        return plain;
+      });
 
       return {
-        matches: result.rows,
+        matches,
         pagination: {
-          total: result.count,
+          total,
           page,
           limit,
           totalPages,

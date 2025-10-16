@@ -18,6 +18,8 @@ export interface IContestAttrs {
 
   entryFee?: number | null;
   prizePool?: number | null;
+  prizeBreakdown?: any | null; // JSON object
+
   pointsPerQuestion?: number | null;
   questionsCount?: number | null;
 
@@ -51,6 +53,7 @@ interface ContestCreationAttributes
     | "filledSpots"
     | "entryFee"
     | "prizePool"
+    | "prizeBreakdown"
     | "platform"
     | "type"
     | "difficulty"
@@ -81,6 +84,7 @@ export class Contest
 
   public entryFee!: number | null;
   public prizePool!: number | null;
+  public prizeBreakdown!: any | null;
   public pointsPerQuestion!: number | null;
   public questionsCount!: number | null;
 
@@ -165,7 +169,12 @@ export default function (sequelize: Sequelize) {
         allowNull: true,
         defaultValue: 0,
       },
-
+      prizeBreakdown: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+        defaultValue: null,
+        field: "prize_breakdown",
+      },
       pointsPerQuestion: {
         type: DataTypes.INTEGER,
         allowNull: true,

@@ -46,4 +46,24 @@ export default class UserSubmissionRepository {
       throw err;
     }
   }
+
+  public async findContestSubmissionById(userId: string, id: string) {
+    try {
+      return await this._DB.UserSubmission.findOne({
+        where: { contestId: id, userId },
+        include: [
+          {
+            model: this._DB.Question,
+            as: "question",
+            attributes: ["id", "question"], // or "questionText"
+          },
+        ],
+      });
+    } catch (err: any) {
+      logger.error(
+        `UserSubmissionRepository.findContestSubmissionById error: ${err?.message ?? err}`
+      );
+      throw err;
+    }
+  }
 }

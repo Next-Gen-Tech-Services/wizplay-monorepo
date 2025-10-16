@@ -180,4 +180,8 @@ export default class SubmissionService {
   public async getSubmissionById(id: string) {
     return this.submissionRepo!.findById(id);
   }
+
+  public async getContestSubmissionById(userId: string, id: string) {
+    return this.submissionRepo!.findContestSubmissionById(userId, id);
+  }
 }

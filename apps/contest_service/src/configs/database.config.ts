@@ -2,6 +2,9 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
 import initContestModel, { Contest } from "../models/contest.model";
+import initContestPrizeModel, {
+  ContestPrize,
+} from "../models/contestPrize.model";
 import initQuestionModel, { Question } from "../models/question.model";
 import initUserContestModel, { UserContest } from "../models/userContest.model";
 import initUserSubmission, {
@@ -13,6 +16,7 @@ export interface IDatabase {
   Sequelize: typeof Sequelize;
   sequelize: Sequelize;
   Contest: typeof Contest;
+  ContestPrize: typeof ContestPrize;
   Question: typeof Question;
   UserContest: typeof UserContest;
   UserSubmission: typeof UserSubmission;
@@ -38,7 +42,15 @@ const ContestInstance = initContestModel(sequelize);
 const QuestionInstance = initQuestionModel(sequelize);
 const UserContestInstance = initUserContestModel(sequelize);
 const UserSubmissionInstance = initUserSubmission(sequelize);
-
+const ContestPrizeInstance = initContestPrizeModel(sequelize);
+UserSubmissionInstance.belongsTo(QuestionInstance, {
+  foreignKey: "questionId",
+  as: "question",
+});
+QuestionInstance.hasMany(UserContestInstance, {
+  foreignKey: "questionId",
+  as: "answers",
+});
 // associations (optional but useful)
 ContestInstance.hasMany(QuestionInstance, {
   foreignKey: "contest_id", // use the DB column name if your model maps field -> underscored
@@ -80,6 +92,7 @@ export const DB: IDatabase = {
   Sequelize,
   sequelize: sequelize,
   Contest: ContestInstance,
+  ContestPrize: ContestPrizeInstance,
   Question: QuestionInstance,
   UserContest: UserContestInstance,
   UserSubmission: UserSubmissionInstance,

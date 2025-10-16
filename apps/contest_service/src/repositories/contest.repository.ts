@@ -215,14 +215,205 @@ export default class ContestRepository {
     return result;
   }
 
-  public async saveBulkContests(data: any) {
-    if (!data.length) {
+  public async saveBulkContests(data: any[]) {
+    if (!data || !data.length) {
       throw new BadRequestError("invalid contests value");
     }
 
-    const result = await this._DB.Contest.bulkCreate(data);
-    logger.info(`Inserted bulk data inside contests`);
+    // Start transaction so contests + prize rows are atomic
+    const tx: Transaction = await this._DB.sequelize.transaction();
+    try {
+      // bulk create contests inside tx, return created rows
+      const createdRows = await this._DB.Contest.bulkCreate(data, {
+        transaction: tx,
+        returning: true,
+      });
 
-    return result;
+      // For each created contest, compute prize distribution for winners = ceil(totalSpots * 0.6)
+      for (const created of createdRows) {
+        // `created` is a Sequelize instance; use get() or toJSON
+        const contest = (created as any).toJSON
+          ? (created as any).toJSON()
+          : created;
+
+        const prizePool = Number(contest.prizePool ?? 0);
+        const totalSpots = Number(contest.totalSpots ?? 0);
+
+        if (prizePool <= 0 || totalSpots <= 0) {
+          // nothing to distribute, skip
+          continue;
+        }
+
+        const WIN_RATIO = 0.6; // up to 60% users win
+        const winners = Math.max(1, Math.ceil(totalSpots * WIN_RATIO));
+
+        // DECAY controls how top-heavy the distribution is. >1 more top-heavy.
+        // tweak DECAY = 1.0 (linear), 1.2..1.5 recommended for more top-heavy.
+        const DECAY = 1.2;
+
+        const perRank = this.generatePerRankDistribution(
+          prizePool,
+          winners,
+          DECAY
+        );
+
+        // persist per-rank rows (uses your savePrizeBreakdown which accepts transaction)
+        await this.savePrizeBreakdown(contest.id, perRank, { transaction: tx });
+      }
+
+      await tx.commit();
+      logger.info(`Inserted bulk data inside contests: ${createdRows.length}`);
+      return createdRows;
+    } catch (err: any) {
+      try {
+        await tx.rollback();
+      } catch (e) {
+        logger.warn("rollback failed: " + String(e));
+      }
+      logger.error(`saveBulkContests DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error while saving contests");
+    }
+  }
+
+  /**
+   * Generate per-rank rows using a weight function and normalize to prizePool.
+   * - prizePool: total amount to distribute
+   * - winners: number of winning ranks (1..winners)
+   * - decay: exponential/power decay (1 => uniform weights; >1 => top-heavy)
+   *
+   * returns: Array<{ rank: number, amount: number }>
+   */
+  private generatePerRankDistribution(
+    prizePool: number,
+    winners: number,
+    decay = 1.2
+  ): { rank: number; amount: number }[] {
+    if (!Number.isFinite(prizePool) || prizePool <= 0 || winners <= 0) {
+      return [];
+    }
+
+    // Build raw weights: w_r = 1 / (r^decay)
+    const weights: number[] = new Array(winners);
+    for (let i = 0; i < winners; i++) {
+      const rank = i + 1;
+      weights[i] = 1 / Math.pow(rank, decay);
+    }
+
+    // Normalize weights to sum = prizePool
+    const totalWeight = weights.reduce((a, b) => a + b, 0);
+    const rawAmounts = weights.map((w) => (w / totalWeight) * prizePool);
+
+    // Floor to integer amounts and distribute leftover cents starting from top rank
+    const perRankFloored = rawAmounts.map((a) => Math.floor(a));
+    const assigned = perRankFloored.reduce((s, v) => s + v, 0);
+    let leftover = Math.round(prizePool - assigned);
+
+    // distribute leftover (could be a few units) to top ranks one-by-one
+    let idx = 0;
+    while (leftover > 0 && idx < perRankFloored.length) {
+      perRankFloored[idx] += 1;
+      leftover -= 1;
+      idx += 1;
+      if (idx >= perRankFloored.length) idx = 0; // wrap if tiny leftover > winners
+    }
+
+    // Build final perRank rows
+    const perRankRows = perRankFloored.map((amt, i) => ({
+      rank: i + 1,
+      amount: amt,
+    }));
+
+    return perRankRows;
+  }
+
+  public async savePrizeBreakdown(
+    contestId: string,
+    perRank: { rank: number; amount: number }[],
+    options?: { transaction?: Transaction }
+  ) {
+    try {
+      // delete existing per-rank rows for this contest
+      await this._DB.ContestPrize.destroy({
+        where: { contestId },
+        transaction: options?.transaction,
+      });
+
+      if (perRank.length) {
+        const rows = perRank.map((r) => ({
+          contestId,
+          rank: r.rank,
+          amount: r.amount,
+          rankFrom: r.rank, // or set appropriately based on your logic
+          rankTo: r.rank, // or set appropriately based on your logic
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }));
+        await this._DB.ContestPrize.bulkCreate(rows, {
+          transaction: options?.transaction,
+        });
+      }
+
+      // update compact JSON on contest row for fast reads (slabs + total)
+      const slabs = this.combineIntoSlabs(perRank);
+      await this._DB.Contest.update(
+        {
+          prizeBreakdown: {
+            perRank,
+            slabs,
+            totalAssigned: perRank.reduce((a, b) => a + b.amount, 0),
+          },
+        },
+        { where: { id: contestId }, transaction: options?.transaction }
+      );
+
+      return true;
+    } catch (err: any) {
+      logger.error(`savePrizeBreakdown DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error saving prize breakdown");
+    }
+  }
+
+  public async getPrizeBreakdown(contestId: string) {
+    try {
+      const rows = await this._DB.ContestPrize.findAll({
+        where: { contestId },
+        order: [["rank", "ASC"]],
+      });
+      return rows.map((r: any) => r.toJSON());
+    } catch (err: any) {
+      logger.error(`getPrizeBreakdown DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error");
+    }
+  }
+
+  private async combineIntoSlabs(perRank: { rank: number; amount: number }[]) {
+    if (!perRank.length) return [];
+    const slabs = [];
+    let curFrom = perRank[0].rank;
+    let curTo = perRank[0].rank;
+    let curAmt = perRank[0].amount;
+    for (let i = 1; i < perRank.length; i++) {
+      const r = perRank[i];
+      if (r.amount === curAmt && r.rank === curTo + 1) {
+        curTo = r.rank;
+      } else {
+        slabs.push({
+          from: curFrom,
+          to: curTo,
+          amountPerRank: curAmt,
+          total: curAmt * (curTo - curFrom + 1),
+        });
+        curFrom = r.rank;
+        curTo = r.rank;
+        curAmt = r.amount;
+      }
+    }
+    slabs.push({
+      from: curFrom,
+      to: curTo,
+      amountPerRank: curAmt,
+      total: curAmt * (curTo - curFrom + 1),
+    });
+    return slabs;
   }
 }
