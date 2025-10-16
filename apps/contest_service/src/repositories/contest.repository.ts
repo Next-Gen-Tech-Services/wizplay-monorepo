@@ -25,9 +25,108 @@ export default class ContestRepository {
     }
   }
 
-  public async getContestById(id: string): Promise<Contest | null> {
+  public async getContestById(
+    id: string,
+    userId?: string
+  ): Promise<any | null> {
     try {
-      return await this._DB.Contest.findByPk(id);
+      const contest = await this._DB.Contest.findByPk(id);
+      if (!contest) return null;
+
+      const data = contest.toJSON();
+      const d = data as any; // <-- cast to any once for dynamic fields
+
+      // --- optional: compute hasJoined if userId provided ---
+      let hasJoined = false;
+      if (userId) {
+        const joined = await this._DB.UserContest.findOne({
+          where: { userId, contestId: id },
+          attributes: ["id"],
+          raw: true,
+        });
+        hasJoined = !!joined;
+      }
+
+      // Helper: compress a single contest's rank/prize array into consecutive ranges with same amount
+      const compressRankArray = (
+        rankArray: any[]
+      ): Array<{
+        from: number;
+        to: number;
+        amount: number;
+        totalPayout?: number;
+      }> => {
+        if (!Array.isArray(rankArray) || rankArray.length === 0) return [];
+        const normalized = rankArray
+          .map((r: any) => {
+            const rank = Number(r.rank ?? r.position ?? r.pos ?? NaN);
+            const amount = Number(r.amount ?? r.prize ?? r.reward ?? 0);
+            return Number.isFinite(rank) ? { rank, amount } : null;
+          })
+          .filter(Boolean) as Array<{ rank: number; amount: number }>;
+        if (normalized.length === 0) return [];
+        normalized.sort((a, b) => a.rank - b.rank);
+        const ranges: Array<{
+          from: number;
+          to: number;
+          amount: number;
+          totalPayout?: number;
+        }> = [];
+        let curFrom = normalized[0].rank;
+        let curTo = normalized[0].rank;
+        let curAmount = normalized[0].amount;
+        for (let i = 1; i < normalized.length; i++) {
+          const item = normalized[i];
+          const isConsecutive = item.rank === curTo + 1;
+          const sameAmount = item.amount === curAmount;
+          if (isConsecutive && sameAmount) {
+            curTo = item.rank;
+          } else {
+            ranges.push({
+              from: curFrom,
+              to: curTo,
+              amount: curAmount,
+              totalPayout: curAmount * (curTo - curFrom + 1),
+            });
+            curFrom = item.rank;
+            curTo = item.rank;
+            curAmount = item.amount;
+          }
+        }
+        ranges.push({
+          from: curFrom,
+          to: curTo,
+          amount: curAmount,
+          totalPayout: curAmount * (curTo - curFrom + 1),
+        });
+        return ranges;
+      };
+
+      // derive rankArray from known locations using the `d` any-cast
+      const rankArray =
+        d.prizeBreakdown?.perRank ??
+        d.ranks ??
+        d.prizeBreakup ??
+        d.prize ??
+        null;
+      const rankRanges = compressRankArray(rankArray);
+
+      // clean up any joined association keys if present
+      const contestAssociations = this._DB.Contest.associations || {};
+      const assocEntry = Object.values(contestAssociations).find(
+        (a: any) => a && a.target && a.target === this._DB.UserContest
+      );
+      const userContestAlias =
+        assocEntry && assocEntry.as ? assocEntry.as : null;
+      if (userContestAlias && d[userContestAlias]) delete d[userContestAlias];
+      if (d.userJoins) delete d.userJoins;
+      if (d.userContests) delete d.userContests;
+
+      return {
+        ...d,
+        hasJoined,
+        rankRanges, // [{from, to, amount, totalPayout}, ...]
+      };
     } catch (err: any) {
       logger.error(`getContestById DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
@@ -44,7 +143,6 @@ export default class ContestRepository {
       const where: any = matchId ? { matchId } : {};
       const include: any[] = [];
 
-      // --- detect association alias between Contest -> UserContest (if any) ---
       const contestAssociations = this._DB.Contest.associations || {};
       const assocEntry = Object.values(contestAssociations).find(
         (a: any) => a && a.target && a.target === this._DB.UserContest
@@ -52,8 +150,6 @@ export default class ContestRepository {
       const userContestAlias =
         assocEntry && assocEntry.as ? assocEntry.as : null;
 
-      // Only include join if we have a userId AND Sequelize knows the alias.
-      // (This include is mainly to return any joined data if needed; we will compute hasJoined using a separate query.)
       if (userId && userContestAlias) {
         include.push({
           model: this._DB.UserContest,
@@ -77,7 +173,6 @@ export default class ContestRepository {
         distinct: true,
       });
 
-      // Normalize count (handles edge cases with joins)
       let total: number;
       if (Array.isArray(result.count)) {
         try {
@@ -98,7 +193,6 @@ export default class ContestRepository {
         total = Number(result.count ?? 0);
       }
 
-      // --- Robust hasJoined calculation: query user's joined contest IDs and build a Set ---
       let joinedContestIds = new Set<string>();
       if (userId) {
         const joinedRows = await this._DB.UserContest.findAll({
@@ -111,31 +205,77 @@ export default class ContestRepository {
         });
       }
 
-      logger.info(
-        `listContestsByMatch - userId: ${userId} joinedContestIds: ${JSON.stringify(
-          Array.from(joinedContestIds)
-        )}`
-      );
+      const compressRankArray = (
+        rankArray: any[]
+      ): Array<{
+        from: number;
+        to: number;
+        amount: number;
+        totalPayout?: number;
+      }> => {
+        if (!Array.isArray(rankArray) || rankArray.length === 0) return [];
+        const normalized = rankArray
+          .map((r: any) => {
+            const rank = Number(r.rank ?? r.position ?? r.pos ?? NaN);
+            const amount = Number(r.amount ?? r.prize ?? r.reward ?? 0);
+            return Number.isFinite(rank) ? { rank, amount } : null;
+          })
+          .filter(Boolean) as Array<{ rank: number; amount: number }>;
+        if (normalized.length === 0) return [];
+        normalized.sort((a, b) => a.rank - b.rank);
+        const ranges: Array<{
+          from: number;
+          to: number;
+          amount: number;
+          totalPayout?: number;
+        }> = [];
+        let curFrom = normalized[0].rank;
+        let curTo = normalized[0].rank;
+        let curAmount = normalized[0].amount;
+        for (let i = 1; i < normalized.length; i++) {
+          const item = normalized[i];
+          const isConsecutive = item.rank === curTo + 1;
+          const sameAmount = item.amount === curAmount;
+          if (isConsecutive && sameAmount) {
+            curTo = item.rank;
+          } else {
+            ranges.push({
+              from: curFrom,
+              to: curTo,
+              amount: curAmount,
+              totalPayout: curAmount * (curTo - curFrom + 1),
+            });
+            curFrom = item.rank;
+            curTo = item.rank;
+            curAmount = item.amount;
+          }
+        }
+        ranges.push({
+          from: curFrom,
+          to: curTo,
+          amount: curAmount,
+          totalPayout: curAmount * (curTo - curFrom + 1),
+        });
+        return ranges;
+      };
 
-      // Map contests and add hasJoined flag based on Set (guaranteed accurate)
       const items = result.rows.map((contest: any) => {
         const data = contest.toJSON();
-
-        // If alias was included and present it could be used, but we prefer the joinedContestIds Set.
         const hasJoined = userId
           ? joinedContestIds.has(String(data.id))
           : false;
-
-        // Remove any included join array to keep response clean regardless of alias name
         if (userContestAlias && data[userContestAlias])
           delete data[userContestAlias];
         if (data.userJoins) delete data.userJoins;
         if (data.userContests) delete data.userContests;
-
-        return {
-          ...data,
-          hasJoined,
-        };
+        const rankArray =
+          data.prizeBreakdown?.perRank ??
+          data.ranks ??
+          data.prizeBreakup ??
+          data.prize ??
+          null;
+        const rankRanges = compressRankArray(rankArray);
+        return { ...data, hasJoined, rankRanges };
       });
 
       return { items, total };

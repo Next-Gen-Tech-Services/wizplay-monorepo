@@ -49,9 +49,7 @@ export default class MatchRepository {
     };
   }> {
     try {
-      // ---------- build where ----------
       const where: WhereOptions = {};
-
       if (filters.sport) where["sport"] = filters.sport;
       if (filters.format) where["format"] = filters.format;
       if (filters.gender) where["gender"] = filters.gender;
@@ -63,35 +61,33 @@ export default class MatchRepository {
         filters.showOnFrontend !== null
       )
         where["showOnFrontend"] = Boolean(filters.showOnFrontend);
-
       if (filters.name) where["name"] = { [Op.iLike]: `%${filters.name}%` };
       if (filters.shortName)
         where["shortName"] = { [Op.iLike]: `%${filters.shortName}%` };
       if (filters.metricGroup)
         where["metricGroup"] = { [Op.iLike]: `%${filters.metricGroup}%` };
-
+      if (filters.teamName)
+        (where as any)[Op.or] = [
+          { homeTeamName: { [Op.iLike]: `%${filters.teamName}%` } },
+          { awayTeamName: { [Op.iLike]: `%${filters.teamName}%` } },
+        ];
       if (filters.startedAfter || filters.startedBefore) {
-        where["startedAt"] = {};
+        where["started_at"] = {};
         if (filters.startedAfter)
-          (where["startedAt"] as any)[Op.gte] = filters.startedAfter;
+          (where["started_at"] as any)[Op.gte] = filters.startedAfter;
         if (filters.startedBefore)
-          (where["startedAt"] as any)[Op.lte] = filters.startedBefore;
+          (where["started_at"] as any)[Op.lte] = filters.startedBefore;
       }
 
-      // ---------- pagination ----------
       const limit = Number(filters.limit ?? 20);
       const offset = Number(filters.offset ?? 0);
       const page = Math.max(1, Math.floor(offset / limit) + 1);
 
-      // ---------- attributes & includes ----------
       const attributes: any = { include: [] };
       const include: any[] = [{ association: "tournaments" }];
 
       if (currentUserId) {
-        // escape user id to avoid injection when interpolating into literal
         const escapedUserId = this._DB.sequelize.escape(currentUserId);
-
-        // Add wishlisted boolean via subquery literal
         attributes.include.push([
           this._DB.sequelize.literal(`(
           SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
@@ -102,37 +98,62 @@ export default class MatchRepository {
           "wishlisted",
         ]);
       } else {
-        // if no user, always false
         attributes.include.push([
           this._DB.sequelize.literal(`false`),
           "wishlisted",
         ]);
       }
 
-      // ---------- Query ----------
+      const now = new Date();
+      const startOfTodayDt = new Date(now);
+      startOfTodayDt.setHours(0, 0, 0, 0);
+      const startOfTomorrowDt = new Date(startOfTodayDt);
+      startOfTomorrowDt.setDate(startOfTomorrowDt.getDate() + 1);
+      const endOfTomorrowDt = new Date(startOfTodayDt);
+      endOfTomorrowDt.setDate(endOfTomorrowDt.getDate() + 2);
+
+      const startOfTodayEpoch = Math.floor(startOfTodayDt.getTime() / 1000);
+      const startOfTomorrowEpoch = Math.floor(
+        startOfTomorrowDt.getTime() / 1000
+      );
+      const endOfTomorrowEpoch = Math.floor(endOfTomorrowDt.getTime() / 1000);
+      const escCompleted = this._DB.sequelize.escape("completed");
+
+      const order: any = [
+        [
+          this._DB.sequelize.literal(`CASE
+          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} AND "status" != ${escCompleted} THEN 0
+          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} AND "status" = ${escCompleted} THEN 1
+          ELSE 2 END`),
+          "ASC",
+        ],
+        [
+          this._DB.sequelize.literal(`CASE
+          WHEN "status" = ${escCompleted} THEN -("started_at")
+          ELSE "started_at" END`),
+          "ASC",
+        ],
+      ];
+
       const result = await Match.findAndCountAll({
         where,
         include,
         attributes,
-        order: [["startedAt", "DESC"]],
+        order,
         limit,
         offset,
-        distinct: true, // important for correct count when using include
+        distinct: true,
       });
 
       const total = Number(result.count ?? 0);
       const totalPages = Math.max(1, Math.ceil(total / limit));
 
-      // convert to plain objects and normalize wishlisted to boolean
       const matches = result.rows.map((r: any) => {
         const plain = r.get ? r.get({ plain: true }) : r;
-        // sometimes sequelize returns 't'/'f' or 1/0 depending on dialect, normalize:
-        if (plain.wishlisted === "t" || plain.wishlisted === "1") {
-          plain.wishlisted = true;
-        } else {
-          plain.wishlisted = Boolean(plain.wishlisted);
-        }
-        // remove wishlist include rows if present to keep response tidy
+        plain.wishlisted =
+          plain.wishlisted === "t" || plain.wishlisted === "1"
+            ? true
+            : Boolean(plain.wishlisted);
         if (plain.wishlists !== undefined) delete plain.wishlists;
         return plain;
       });
