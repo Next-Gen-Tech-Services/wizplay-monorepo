@@ -119,8 +119,9 @@ export default class ContestService {
       if (bulkQuestions) {
         await publishUserEvent(KAFKA_EVENTS.GENERATE_CONTEST, {
           matchId: matchData.id,
+          contests: bulkContests,
         });
-        logger.debug("generate contest event published");
+        logger.debug("generate contest event published!");
       }
 
       return {

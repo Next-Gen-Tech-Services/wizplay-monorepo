@@ -120,4 +120,52 @@ export default class CouponRepository {
       throw new ServerError("Error toggling coupon");
     }
   }
+
+  /** Find unused coupons by platform */
+  public async findUnusedCoupons(
+    platform: string,
+    limit: number = 100
+  ): Promise<Coupon[]> {
+    try {
+      const coupons = await this._DB.Coupon.findAll({
+        where: {
+          platform,
+          status: "active",
+          expiry: {
+            [Op.gt]: new Date(),
+          },
+          id: {
+            [Op.notIn]: this._DB.sequelize.literal(
+              `(SELECT coupon_id FROM contest_coupons WHERE coupon_id IS NOT NULL)`
+            ),
+          },
+        },
+        limit,
+        order: this._DB.sequelize.random(),
+      });
+
+      return coupons.map((c) => c.toJSON() as Coupon);
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Error finding unused coupons");
+    }
+  }
+
+  /** Create contest coupon assignments */
+  public async createContestCoupons(
+    data: Array<{
+      matchId: string;
+      contestId: string;
+      couponId: string;
+      rank: number;
+    }>
+  ): Promise<any[]> {
+    try {
+      const contestCoupons = await this._DB.ContestCoupon.bulkCreate(data);
+      return contestCoupons.map((cc) => cc.toJSON());
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Error creating contest coupons");
+    }
+  }
 }
