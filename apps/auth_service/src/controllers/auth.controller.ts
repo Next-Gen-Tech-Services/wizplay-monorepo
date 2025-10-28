@@ -110,6 +110,7 @@ export default class AuthController {
     return res.status(STATUS_CODE.SUCCESS).json({
       success: true,
       data: result.data,
+      token: result.token,
       message: result.message,
       errors: null,
       timestamp: new Date().toISOString(),

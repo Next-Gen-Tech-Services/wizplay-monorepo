@@ -7,7 +7,6 @@ import {
   UnAuthorizError,
   validatePassword,
 } from "@repo/common";
-import axios from "axios";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
 import Redis, { IRedis } from "../configs/redis.config";
@@ -15,7 +14,7 @@ import ServerConfigs from "../configs/server.config";
 import { IGoogleResponse } from "../interfaces/user.interface";
 import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
-import { oauth2client } from "../utils/google-config";
+import { handleGoogleAuth } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
@@ -220,14 +219,10 @@ export default class Service {
   }
 
   public async googleAuth(authCode: string) {
-    const googleResponse = await oauth2client.getToken(authCode);
-    oauth2client.setCredentials(googleResponse.tokens);
+    const res = await handleGoogleAuth(authCode);
 
-    const googleAccountData = await axios.get(
-      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleResponse?.tokens?.access_token}`
-    );
-
-    const { email, name, picture } = googleAccountData.data;
+    const { email, name, picture } = res.payload;
+    logger.info(`Google Auth User : ${JSON.stringify(res.getAttributes())}`);
     const nameSplit = name.split(" ");
     let userInput: IGoogleResponse = {
       firstName: nameSplit[0],
@@ -258,6 +253,7 @@ export default class Service {
         },
         ServerConfigs.TOKEN_SECRET
       );
+      logger.warn(`Generated Token : ${token}`);
 
       return {
         data: userExists,
@@ -290,6 +286,7 @@ export default class Service {
         },
         ServerConfigs.TOKEN_SECRET
       );
+      logger.warn(`Generated Token : ${token}`);
 
       return {
         data: createUser,

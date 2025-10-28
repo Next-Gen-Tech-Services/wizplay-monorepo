@@ -21,6 +21,9 @@ coverage
 # Vercel
 .vercel
 
+# VS Code
+.vscode
+
 # Build Outputs
 .next/
 out/
@@ -47,3 +50,4 @@ database
 logs/
 # Ignore all logs folders everywhere in monorepo
 **/logs/
+apps/contest_service/.env.development

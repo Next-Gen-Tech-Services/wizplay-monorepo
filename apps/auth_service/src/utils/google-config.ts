@@ -1,8 +1,16 @@
-import { google } from "googleapis";
+import { OAuth2Client } from "google-auth-library";
 import ServerConfigs from "../configs/server.config";
 
-export const oauth2client = new google.auth.OAuth2(
-  ServerConfigs.GOOGLE_OAUTH_CLIENT_ID,
-  ServerConfigs.GOOGLE_OAUTH_CLIENT_SECRET,
-  "postmessage"
-);
+const verifyClient = new OAuth2Client();
+
+export async function handleGoogleAuth(idToken: string) {
+  const ticket = await verifyClient.verifyIdToken({
+    idToken: idToken,
+    audience: [
+      ServerConfigs.GOOGLE_IOS_CLIENT_ID,
+      ServerConfigs.GOOGLE_ANDROID_CLIENT_ID,
+    ],
+  });
+
+  return ticket;
+}
