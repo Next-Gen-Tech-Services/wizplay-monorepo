@@ -117,4 +117,10 @@ router.delete(
   (req: Request, res: Response) => controller.remove(req, res)
 );
 
+// assign coupon to contest
+router.post("/assign", async (req: Request, res: Response) => {
+  const result = await controller.assignCoupons(req, res);
+  return result;
+});
+
 export default router;

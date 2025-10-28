@@ -1,6 +1,6 @@
 import { KafkaClient, logger } from "@repo/common";
 import ServerConfigs from "../configs/server.config";
-import { ContestEvents } from "../types";
+import { ContestEvents, KAFKA_EVENTS } from "../types";
 
 export const kafkaClient = new KafkaClient(
   {
@@ -19,7 +19,7 @@ export const connectProducer = async () => {
 
 // Publish an event
 export const publishUserEvent = async (
-  event: ContestEvents,
+  event: KAFKA_EVENTS,
   data: Record<string, any>
 ) => {
   await kafkaClient.publish({

@@ -1,14 +1,17 @@
 // src/events/coupon.event.handler.ts
 import { logger, ServerError } from "@repo/common";
 import CouponRepository from "../../repositories/coupon.repository";
-import { CouponEvents } from "../../types";
+import CouponService from "../../services/coupon.service";
+import { KAFKA_EVENTS } from "../../types";
 import { kafkaClient } from "../kafka"; // adjust path to your kafka client
 
 class CouponEventHandler {
   private repo: CouponRepository;
+  private service: CouponService;
 
   constructor() {
     this.repo = new CouponRepository();
+    this.service = new CouponService(this.repo);
   }
 
   public async handle(): Promise<void> {
@@ -18,22 +21,28 @@ class CouponEventHandler {
         async (message: any) => {
           try {
             logger.info("CouponEventHandler received message", { message });
-            // message.event should be one of CouponEvents
+            // message.event should be one of KAFKA_EVENTS
             switch (message.event) {
-              case CouponEvents.COUPON_CREATED:
+              case KAFKA_EVENTS.COUPON_CREATED:
                 await this.onCreated(message.data);
                 break;
-              case CouponEvents.COUPON_UPDATED:
+              case KAFKA_EVENTS.COUPON_UPDATED:
                 await this.onUpdated(message.data);
                 break;
-              case CouponEvents.COUPON_DELETED:
+              case KAFKA_EVENTS.COUPON_DELETED:
                 await this.onDeleted(message.data);
                 break;
-              case CouponEvents.COUPON_TOGGLED:
+              case KAFKA_EVENTS.COUPON_TOGGLED:
                 await this.onToggled(message.data);
                 break;
-              case CouponEvents.COUPON_USED:
+              case KAFKA_EVENTS.COUPON_USED:
                 await this.onUsed(message.data);
+                break;
+              case KAFKA_EVENTS.COUPON_USED:
+                await this.onUsed(message.data);
+                break;
+              case KAFKA_EVENTS.GENERATE_CONTEST:
+                await this.onContestGenerated(message.data);
                 break;
               default:
                 logger.warn("Unhandled coupon event", { event: message.event });
@@ -43,7 +52,7 @@ class CouponEventHandler {
             // do not crash consumer loop — you may want to rethrow to let client handle retries depending on kafkaClient impl
           }
         },
-        Object.values(CouponEvents) // subscribe to all coupon events
+        Object.values(KAFKA_EVENTS) // subscribe to all coupon events
       );
       logger.info("CouponEventHandler subscribed to coupon events");
     } catch (error: any) {
@@ -127,6 +136,59 @@ class CouponEventHandler {
       });
     } catch (err: any) {
       logger.error({ err }, "Failed to process coupon used event");
+    }
+  }
+
+  private async onContestGenerated(data: any) {
+    logger.info(
+      `Handling contest generated event": ${{
+        matchId: data?.matchId,
+        contestCount: data?.contests?.length,
+      }}`
+    );
+
+    try {
+      if (!data?.contests || !Array.isArray(data.contests)) {
+        logger.warn("Invalid contest data in event", { data });
+        return;
+      }
+
+      // Extract contest data
+      const contestsData = data.contests.map((contest: any) => ({
+        id: contest.id,
+        matchId: contest.matchId || data.matchId,
+        platform: contest.platform || "default",
+      }));
+
+      logger.info("Assigning coupons to contests", {
+        count: contestsData.length,
+      });
+
+      // Call service to assign coupons to all contests
+      const result = await this.service.assignCoupons(contestsData);
+
+      logger.info("Successfully assigned coupons to contests", {
+        matchId: data.matchId,
+        contestsProcessed: result.count,
+        totalCouponsAssigned: result.count * 3,
+      });
+
+      // await kafkaClient.publish(KAFKA_EVENTS.COUPONS_ASSIGNED, result);
+    } catch (err: any) {
+      logger.error(
+        {
+          err,
+          matchId: data?.matchId,
+          message: err?.message,
+        },
+        "Failed to assign coupons to contests"
+      );
+
+      // You might want to publish a failure event here
+      // await kafkaClient.publish(KAFKA_EVENTS.COUPONS_ASSIGNMENT_FAILED, {
+      //   matchId: data?.matchId,
+      //   error: err?.message
+      // });
     }
   }
 }
