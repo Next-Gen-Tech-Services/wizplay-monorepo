@@ -11,29 +11,29 @@ const router = Router();
 // const controller: MatchController = container.resolve(MatchController);
 const sseClients: Array<{ id: string; matchId: string; res: Response }> = [];
 // GET /matches
-router.get("/matches", requireAuth, listMatchesValidator(), validateRequest, async (req:Request, res:Response) => {
+router.get("/matches", requireAuth, listMatchesValidator(), validateRequest, async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.getAllMatches(req, res);
 });
 
 // PATCH /matches/:id
-router.patch("/matches/:id", validateRequest, async (req:Request, res:Response) => {
+router.patch("/matches/:id", validateRequest, async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.updateMatch(req, res);
 });
 
 // POST /livematch webhook
-router.post("/matches/livematch", async (req:Request, res:Response) => {
+router.post("/matches/livematch", async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.liveMatchData(req, res);
 });
 
 // subscribe/unsubscribe
-router.post("/matches/subscribe/:id", async (req:Request, res:Response) => {
+router.post("/matches/subscribe/:id", async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.subscribeMatch(req, res);
 });
-router.post("/matches/unsubscribe/:id", async (req:Request, res:Response) => {
+router.post("/matches/unsubscribe/:id", async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.unsubscribeMatch(req, res);
 });
