@@ -168,4 +168,28 @@ export default class CouponRepository {
       throw new ServerError("Error creating contest coupons");
     }
   }
+
+  public async getCouponsByIds(
+    couponIds: string[],
+    filters?: { status?: string }
+  ): Promise<Coupon[]> {
+    try {
+      const where: any = {
+        id: { [Op.in]: couponIds }
+      };
+
+      if (filters?.status) {
+        where.status = filters.status;
+      }
+
+      const coupons = await this._DB.Coupon.findAll({ where });
+      return coupons.map(c => c.toJSON() as Coupon);
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Error fetching coupons by IDs");
+    }
+  }
+
 }
+
+

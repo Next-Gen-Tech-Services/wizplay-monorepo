@@ -5,6 +5,7 @@ import { body, param, query } from "express-validator";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import CouponController from "../controllers/coupon.controller";
+import { assignCouponsValidatorDetailed } from "@/validators";
 
 const router = Router();
 const controller: CouponController = container.resolve(CouponController);
@@ -118,9 +119,16 @@ router.delete(
 );
 
 // assign coupon to contest
-router.post("/assign", async (req: Request, res: Response) => {
+router.post("/auto/assign", async (req: Request, res: Response) => {
   const result = await controller.assignCoupons(req, res);
   return result;
 });
+
+// assign coupon to contest
+router.post("/assign", assignCouponsValidatorDetailed(),
+  validateRequest, async (req: Request, res: Response) => {
+    const result = await controller.assignMannualCoupons(req, res);
+    return result;
+  });
 
 export default router;

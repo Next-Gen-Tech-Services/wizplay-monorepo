@@ -7,7 +7,7 @@ import CouponService from "../services/coupon.service";
 
 @autoInjectable()
 export default class CouponController {
-  constructor(private readonly couponService: CouponService) {}
+  constructor(private readonly couponService: CouponService) { }
 
   /** Create a coupon */
   public async create(req: Request, res: Response) {
@@ -111,6 +111,18 @@ export default class CouponController {
   /** Assign Coupons */
   public async assignCoupons(req: Request, res: Response) {
     const result = await this.couponService.assignCoupons(req.body);
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      data: result,
+      message: "Coupons Assigned",
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
+
+  /** Assign Mannual Coupons */
+  public async assignMannualCoupons(req: Request, res: Response) {
+    const result = await this.couponService.assignMannualCoupons(req.body);
     return res.status(STATUS_CODE.SUCCESS).json({
       success: true,
       data: result,

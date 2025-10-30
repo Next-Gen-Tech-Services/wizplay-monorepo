@@ -4,16 +4,24 @@ import "tsyringe";
 import { autoInjectable } from "tsyringe";
 import { ICouponAtters } from "../dtos/coupon.dto";
 import CouponRepository from "../repositories/coupon.repository";
+import axios from "axios";
 
-interface ContestData {
+interface IContestData {
   id: string;
   matchId: string;
   platform: string;
 }
 
+interface IContestWithCouponData {
+  contestId: string;
+  matchId: string;
+  rank: number;
+  couponId: string
+}
+
 @autoInjectable()
 export default class CouponService {
-  constructor(private readonly couponRepository: CouponRepository) {}
+  constructor(private readonly couponRepository: CouponRepository) { }
 
   /** Just a test helper */
   public async fetchTestData() {
@@ -111,7 +119,7 @@ export default class CouponService {
     }
   }
 
-  public async assignCoupons(data: ContestData | ContestData[]) {
+  public async assignCoupons(data: IContestData | IContestData[]) {
     try {
       const contests = Array.isArray(data) ? data : [data];
       const results = [];
@@ -164,9 +172,9 @@ export default class CouponService {
 
         logger.info(
           `[coupon-service] Successfully assigned 3 coupons to contest ${contest.id}: ` +
-            `Rank 1: ${selectedCoupons[0].code}, ` +
-            `Rank 2: ${selectedCoupons[1].code}, ` +
-            `Rank 3: ${selectedCoupons[2].code}`
+          `Rank 1: ${selectedCoupons[0].code}, ` +
+          `Rank 2: ${selectedCoupons[1].code}, ` +
+          `Rank 3: ${selectedCoupons[2].code}`
         );
 
         results.push({
@@ -188,6 +196,48 @@ export default class CouponService {
         count: results.length,
         data: results,
       };
+    } catch (error: any) {
+      logger.error(
+        `[coupon-service] error assigning coupons to contests: ${error.message}`
+      );
+      throw new ServerError(error?.message || "Error assigning coupons");
+    }
+  }
+
+  public async assignMannualCoupons(data: IContestWithCouponData | IContestWithCouponData[]) {
+    try {
+      const assignedCoupons = Array.isArray(data) ? data : [data];
+      const errors: any[] = [];
+
+      const couponIds = [...new Set(assignedCoupons.map(item => item.couponId))];
+      const validCoupons = await this.couponRepository.getCouponsByIds(couponIds, { status: "active" });
+      const validCouponSet = new Set(validCoupons.map(c => c.id));
+
+      const validAssignments: IContestWithCouponData[] = [];
+      for (const assignment of assignedCoupons) {
+        if (validCouponSet.has(assignment.couponId)) {
+          // TODO: Add contest validation here if needed
+          validAssignments.push(assignment);
+        } else {
+          errors.push({
+            message: "Invalid coupon or coupon is not active",
+            ...assignment
+          });
+        }
+      }
+
+      let results: any[] = [];
+      if (validAssignments.length > 0) {
+        results = await this.couponRepository.createContestCoupons(validAssignments);
+      }
+
+      return {
+        success: true,
+        count: results.length,
+        data: results,
+        errors: errors.length > 0 ? errors : undefined
+      };
+
     } catch (error: any) {
       logger.error(
         `[coupon-service] error assigning coupons to contests: ${error.message}`
