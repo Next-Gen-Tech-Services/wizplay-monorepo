@@ -15,6 +15,7 @@ class ServerConfigs {
   static DATABASE_PASSWORD: string = process.env.DATABASE_PASSWORD as string;
   static DATABASE_HOST: string = process.env.DATABASE_HOST as string;
   static DATABASE_PORT: string = process.env.DATABASE_PORT as string;
+  static DB_SYNC: string = process.env.DB_SYNC as string;
   static REDIS_USERNAME: string = process.env.REDIS_USERNAME as string;
   static REDIS_PASSWORD: string = process.env.REDIS_PASSWORD as string;
   static REDIS_HOST: string = process.env.REDIS_HOST as string;

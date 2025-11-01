@@ -1,12 +1,16 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
-import authModel, { Auth } from "../models/auth.model";
+import contestCouponModel, {
+  ContestCoupon,
+} from "../models/contestCoupon.model";
+import couponModel, { Coupon } from "../models/coupon.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
   Sequelize: any;
   sequelize: Sequelize;
-  Auth: typeof Auth;
+  Coupon: typeof Coupon;
+  ContestCoupon: typeof ContestCoupon;
 }
 
 const sequelize = new Sequelize({
@@ -24,17 +28,25 @@ const sequelize = new Sequelize({
   },
 });
 
-const AuthInstance = authModel(sequelize);
+const CouponInstance = couponModel(sequelize);
+const ContestCouponInstance = contestCouponModel(sequelize);
+
+// ContestCoupon belongs to Coupon (one contest coupon references one coupon)
+ContestCouponInstance.belongsTo(CouponInstance, {
+  foreignKey: "couponId",
+  as: "coupon",
+});
+
+// Coupon has one ContestCoupon (one coupon belongs to only one contest)
+CouponInstance.hasOne(ContestCouponInstance, {
+  foreignKey: "couponId",
+  as: "contestCoupon",
+});
 
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    // Only sync on first run or when explicitly needed
-    // Use migrations for production instead of sync
-    if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ alter: true });
-      logger.info("Database synced ✅");
-    }
+    await sequelize.sync({ alter: true });
     logger.info("Database connection established ✅");
   } catch (error: any) {
     logger.error(`Error connecting database: ${error} `);
@@ -44,5 +56,6 @@ export async function connectDatabase() {
 export const DB: IDatabase = {
   Sequelize,
   sequelize,
-  Auth: AuthInstance,
+  Coupon: CouponInstance,
+  ContestCoupon: ContestCouponInstance,
 };

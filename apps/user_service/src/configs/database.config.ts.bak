@@ -1,12 +1,14 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
-import authModel, { Auth } from "../models/auth.model";
+import userModel, { User } from "../models/user.model";
+import wishlistModel, { Wishlist } from "../models/wishlist.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
   Sequelize: any;
   sequelize: Sequelize;
-  Auth: typeof Auth;
+  User: typeof User;
+  Wishlist: typeof Wishlist;
 }
 
 const sequelize = new Sequelize({
@@ -24,17 +26,13 @@ const sequelize = new Sequelize({
   },
 });
 
-const AuthInstance = authModel(sequelize);
+const UserInstance = userModel(sequelize);
+const WishlistInstance = wishlistModel(sequelize);
 
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    // Only sync on first run or when explicitly needed
-    // Use migrations for production instead of sync
-    if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ alter: true });
-      logger.info("Database synced ✅");
-    }
+    await sequelize.sync({ alter: true });
     logger.info("Database connection established ✅");
   } catch (error: any) {
     logger.error(`Error connecting database: ${error} `);
@@ -44,5 +42,6 @@ export async function connectDatabase() {
 export const DB: IDatabase = {
   Sequelize,
   sequelize,
-  Auth: AuthInstance,
+  User: UserInstance,
+  Wishlist: WishlistInstance,
 };

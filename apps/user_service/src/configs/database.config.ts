@@ -32,7 +32,10 @@ const WishlistInstance = wishlistModel(sequelize);
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
+    if (ServerConfigs.DB_SYNC === 'true') {
+      await sequelize.sync({ alter: true });
+      logger.info("Database synced ✅");
+    }
     logger.info("Database connection established ✅");
   } catch (error: any) {
     logger.error(`Error connecting database: ${error} `);
