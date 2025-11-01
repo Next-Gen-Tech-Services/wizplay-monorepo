@@ -14,11 +14,12 @@ import ServerConfigs from "../configs/server.config";
 import { IGoogleResponse } from "../interfaces/user.interface";
 import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
-import { handleGoogleAuth } from "../utils/google-config";
+import { handleGoogleAuth, oauth2client } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
+import axios from "axios";
 
 @autoInjectable()
 export default class Service {
@@ -218,11 +219,10 @@ export default class Service {
     }
   }
 
-  public async googleAuth(authCode: string) {
+  public async googleAuth(authCode: string, platform: string) {
     const res = await handleGoogleAuth(authCode);
-
     const { email, name, picture } = res.payload;
-    logger.info(`Google Auth User : ${JSON.stringify(res.getAttributes())}`);
+    // logger.info(`Google Auth User : ${JSON.stringify(data.getAttributes())}`);
     const nameSplit = name.split(" ");
     let userInput: IGoogleResponse = {
       firstName: nameSplit[0],

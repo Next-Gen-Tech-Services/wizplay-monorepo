@@ -11,6 +11,11 @@ const walletController: WalletController = container.resolve(WalletController);
 /**
  * Wallet
  */
+// get all user wallet info
+router.get("/get-all-user-wallet", requireAuth, async (req, res) => {
+  const result = await walletController.getAllUserWallet(req, res);
+  return result;
+});
 
 // show wallet info
 router.get("/wallet", requireAuth, async (req, res) => {

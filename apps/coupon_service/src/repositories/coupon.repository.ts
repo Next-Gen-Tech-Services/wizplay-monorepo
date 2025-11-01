@@ -123,13 +123,11 @@ export default class CouponRepository {
 
   /** Find unused coupons by platform */
   public async findUnusedCoupons(
-    platform: string,
     limit: number = 100
   ): Promise<Coupon[]> {
     try {
       const coupons = await this._DB.Coupon.findAll({
         where: {
-          platform,
           status: "active",
           expiry: {
             [Op.gt]: new Date(),
@@ -166,6 +164,22 @@ export default class CouponRepository {
     } catch (error: any) {
       logger.error(`Database Error: ${error}`);
       throw new ServerError("Error creating contest coupons");
+    }
+  }
+
+  /** Update Coupon status */
+  public async updateCouponStatus(couponId:string) {
+    try {
+      const result = await this._DB.Coupon.update({
+        status: "used",
+      }, {
+        where: {
+          id: couponId
+        }
+      });
+      return result
+    } catch (error:any) {
+      logger.error(`Database error: ${error.message}`)
     }
   }
 }

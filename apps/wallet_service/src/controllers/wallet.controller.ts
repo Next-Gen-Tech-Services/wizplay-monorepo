@@ -8,6 +8,13 @@ import WalletService from "../services/wallet.service";
 export default class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
+  public async getAllUserWallet(req: Request, res: Response) {
+    const result = await this.walletService.getAllUserWallet();
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
+
   public async showBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
     const result = await this.walletService.showBalance(userId);

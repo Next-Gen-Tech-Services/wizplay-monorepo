@@ -11,6 +11,12 @@ interface ContestData {
   platform: string;
 }
 
+interface contestCouponData {
+  matchId: string;
+  contestId: string;
+  couponId: string;
+  rank: number;
+}
 @autoInjectable()
 export default class CouponService {
   constructor(private readonly couponRepository: CouponRepository) {}
@@ -113,15 +119,12 @@ export default class CouponService {
 
   public async assignCoupons(data: ContestData | ContestData[]) {
     try {
-      const contests = Array.isArray(data) ? data : [data];
-      const results = [];
+      const results: any = [];
 
-      for (const contest of contests) {
+      for (const contest of data instanceof Array ? data : [data]) {
         // Get unused coupons from repository
-        const unusedCoupons = await this.couponRepository.findUnusedCoupons(
-          contest.platform,
-          100
-        );
+        const unusedCoupons =
+          await this.couponRepository.findUnusedCoupons(100);
 
         // Validate availability
         if (unusedCoupons.length < 3) {
@@ -137,7 +140,7 @@ export default class CouponService {
         const selectedCoupons = unusedCoupons.slice(0, 3);
 
         // Prepare contest coupon data
-        const contestCouponData = [
+        const contestCouponData: contestCouponData[] = [
           {
             matchId: contest.matchId,
             contestId: contest.id,
@@ -162,11 +165,10 @@ export default class CouponService {
         const contestCoupons =
           await this.couponRepository.createContestCoupons(contestCouponData);
 
-        logger.info(
-          `[coupon-service] Successfully assigned 3 coupons to contest ${contest.id}: ` +
-            `Rank 1: ${selectedCoupons[0].code}, ` +
-            `Rank 2: ${selectedCoupons[1].code}, ` +
-            `Rank 3: ${selectedCoupons[2].code}`
+        await Promise.all(
+          contestCouponData.map((cc) =>
+            this.couponRepository.updateCouponStatus(cc.couponId)
+          )
         );
 
         results.push({

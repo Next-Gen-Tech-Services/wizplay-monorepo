@@ -11,6 +11,15 @@ export default class ContestService {
     this.generativeAI = new GenerativeAi();
   }
 
+  public async getAllUserWallet() {
+    try {
+      const walletInfo = await this.repo.getAllWallets();
+      return walletInfo;
+    } catch (error: any) {
+      throw new ServerError(`Error fetching wallet data: ${error.message}`);
+    }
+  }
+
   public async showBalance(userId: string) {
     try {
       const walletInfo = await this.repo.getWallet(userId);

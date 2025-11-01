@@ -125,14 +125,6 @@ class MatchCrons {
 
       await this.tournamentRepository.createBulkTournaments(tournaments);
       await this.matchRepository.createBulkMatches(matches);
-
-      const fetchedKeys = matches.map((m: any) => m.key).filter(Boolean);
-      const now = new Date();
-      await this.matchRepository.markMatchesNotInListAsFinished(
-        fetchedKeys,
-        now
-      );
-
       logger.info("[MATCH-CRON] cron job executed");
     });
   }
