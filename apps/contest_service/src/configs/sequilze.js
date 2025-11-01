@@ -1,30 +1,17 @@
-// /server/src/configs/database-config.ts
+// Sequelize configuration - reads from environment variables
 import { config } from "dotenv";
 
 const envFile = `.env.${process.env.NODE_ENV || "development"}`;
 config({ path: envFile });
 
-export const development = {
-  username: process.env.DB_USERNAME || "your_username",
-  password: process.env.DB_PASSWORD || "your_password",
-  database: process.env.DB_NAME || "your_database",
-  host: process.env.DB_HOST || "localhost",
-  port: process.env.DB_PORT || 5432,
+// Single configuration object that reads from .env files
+const sequelizeConfig = {
+  username: process.env.AUTH_DATABASE_USERNAME || "auth_db",
+  password: process.env.AUTH_DATABASE_PASSWORD || "auth_db",
+  database: process.env.AUTH_DATABASE_NAME || "auth_service",
+  host: process.env.AUTH_DATABASE_HOST || "localhost",
+  port: process.env.AUTH_DATABASE_PORT || 5434,
   dialect: "postgres",
 };
-export const test = {
-  username: process.env.DB_USERNAME || "your_username",
-  password: process.env.DB_PASSWORD || "your_password",
-  database: process.env.DB_NAME || "your_test_database",
-  host: process.env.DB_HOST || "localhost",
-  port: process.env.DB_PORT || 5432,
-  dialect: "postgres",
-};
-export const production = {
-  username: process.env.DB_USERNAME || "your_username",
-  password: process.env.DB_PASSWORD || "your_password",
-  database: process.env.DB_NAME || "your_production_database",
-  host: process.env.DB_HOST || "localhost",
-  port: process.env.DB_PORT || 5432,
-  dialect: "postgres",
-};
+
+export default sequelizeConfig;

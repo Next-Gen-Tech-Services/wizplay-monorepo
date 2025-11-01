@@ -6,15 +6,15 @@ dotenv.config({
 
 class ServerConfigs {
   static NODE_ENV: string = process.env.NODE_ENV as string;
-  static APP_PORT: string = process.env.APP_PORT as string;
+  static APP_PORT: string = process.env.AUTH_SERVICE_PORT as string;
   static TOKEN_SECRET: string = process.env.TOKEN_SECRET as string;
   static LOG_LEVEL: string = process.env.LOG_LEVEL as string;
   static API_VERSION: string = process.env.API_VERSION as string;
-  static DATABASE_NAME: string = process.env.DATABASE_NAME as string;
-  static DATABASE_USERNAME: string = process.env.DATABASE_USERNAME as string;
-  static DATABASE_PASSWORD: string = process.env.DATABASE_PASSWORD as string;
-  static DATABASE_HOST: string = process.env.DATABASE_HOST as string;
-  static DATABASE_PORT: string = process.env.DATABASE_PORT as string;
+  static DATABASE_NAME: string = process.env.AUTH_DATABASE_NAME as string;
+  static DATABASE_USERNAME: string = process.env.AUTH_DATABASE_USERNAME as string;
+  static DATABASE_PASSWORD: string = process.env.AUTH_DATABASE_PASSWORD as string;
+  static DATABASE_HOST: string = process.env.AUTH_DATABASE_HOST as string;
+  static DATABASE_PORT: string = process.env.AUTH_DATABASE_PORT as string;
   static DB_SYNC: string = process.env.DB_SYNC as string;
   static REDIS_USERNAME: string = process.env.REDIS_USERNAME as string;
   static REDIS_PASSWORD: string = process.env.REDIS_PASSWORD as string;
