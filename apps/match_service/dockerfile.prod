@@ -33,8 +33,9 @@ COPY --from=deps /app/packages ./packages
 COPY apps/match_service ./apps/match_service
 COPY turbo.json ./
 
-# Build the auth service
+# Build the match service with increased memory limit
 WORKDIR /app/apps/match_service
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm run build
 
 # Stage 3: Production image
