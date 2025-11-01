@@ -47,7 +47,7 @@ UserSubmissionInstance.belongsTo(QuestionInstance, {
   foreignKey: "questionId",
   as: "question",
 });
-QuestionInstance.hasMany(UserContestInstance, {
+QuestionInstance.hasMany(UserSubmissionInstance, {
   foreignKey: "questionId",
   as: "answers",
 });

@@ -1,0 +1,62 @@
+# Multi-stage build for production
+FROM node:20-alpine AS base
+
+# Install pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+# Stage 1: Install dependencies
+FROM base AS deps
+WORKDIR /app
+
+# Copy root package files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+# Copy workspace packages
+COPY packages ./packages
+COPY apps/wallet_service/package.json ./apps/wallet_service/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile --filter wallet_service...
+
+# Stage 2: Build the application
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/wallet_service/node_modules ./apps/wallet_service/node_modules
+COPY --from=deps /app/packages ./packages
+
+# Copy source code
+COPY apps/wallet_service ./apps/wallet_service
+COPY turbo.json ./
+
+# Build the auth service
+WORKDIR /app/apps/wallet_service
+RUN pnpm run build
+
+# Stage 3: Production image
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 walletservice
+
+# Copy built application
+COPY --from=builder --chown=walletservice:nodejs /app/apps/wallet_service/dist ./dist
+COPY --from=builder --chown=walletservice:nodejs /app/apps/wallet_service/package.json ./
+
+# Copy dependencies
+COPY --from=deps --chown=walletservice:nodejs /app/node_modules ./node_modules
+COPY --from=deps --chown=walletservice:nodejs /app/apps/wallet_service/node_modules ./node_modules
+
+USER walletservice
+
+EXPOSE 4006
+
+CMD ["node", "dist/server.js"]

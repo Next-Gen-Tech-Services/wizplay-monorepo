@@ -11,7 +11,8 @@
         ".env*"
       ],
       "outputs": [
-        ".dist/**"
+        "dist/**",
+        "build/**"
       ]
     },
     "lint": {
@@ -28,6 +29,13 @@
       "cache": false,
       "persistent": true,
       "interruptible": true
+    },
+    "start": {
+      "dependsOn": [
+        "^build"
+      ],
+      "cache": false,
+      "persistent": true
     }
   }
 }

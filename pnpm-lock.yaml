@@ -26,9 +26,9 @@ importers:
       amqplib:
         specifier: ^0.10.8
         version: 0.10.9
-      axois:
-        specifier: 0.0.1-security
-        version: 0.0.1-security
+      axios:
+        specifier: ^1.11.0
+        version: 1.11.0
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -65,6 +65,9 @@ importers:
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
@@ -84,9 +87,6 @@ importers:
       '@types/amqplib':
         specifier: ^0.10.7
         version: 0.10.7
-      '@types/axios':
-        specifier: ^0.14.4
-        version: 0.14.4
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
@@ -111,9 +111,6 @@ importers:
       '@types/supertest':
         specifier: ^6.0.3
         version: 6.0.3
-      axios:
-        specifier: ^1.11.0
-        version: 1.11.0
       jest:
         specifier: ^30.0.5
         version: 30.1.3(@types/node@24.3.1)(ts-node@10.9.2(@types/node@24.3.1)(typescript@5.9.2))
@@ -186,6 +183,9 @@ importers:
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
@@ -298,6 +298,9 @@ importers:
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
@@ -383,6 +386,9 @@ importers:
       pino-pretty:
         specifier: ^9.0.0
         version: 9.4.1
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
     devDependencies:
       '@types/express':
         specifier: ^4.17.17
@@ -420,6 +426,9 @@ importers:
       express-validator:
         specifier: ^7.2.1
         version: 7.2.1
+      jsonwebtoken:
+        specifier: ^9.0.2
+        version: 9.0.2
       kafkajs:
         specifier: ^2.2.4
         version: 2.2.4
@@ -441,6 +450,9 @@ importers:
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
@@ -475,6 +487,9 @@ importers:
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
       '@types/node':
         specifier: ^24.1.0
         version: 24.3.1
@@ -544,6 +559,9 @@ importers:
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
@@ -629,6 +647,9 @@ importers:
       express-validator:
         specifier: ^7.2.1
         version: 7.2.1
+      jsonwebtoken:
+        specifier: ^9.0.2
+        version: 9.0.2
       kafkajs:
         specifier: ^2.2.4
         version: 2.2.4
@@ -650,6 +671,9 @@ importers:
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
@@ -687,6 +711,9 @@ importers:
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
       '@types/node':
         specifier: ^24.1.0
         version: 24.3.1
@@ -1465,10 +1492,6 @@ packages:
   '@types/amqplib@0.10.7':
     resolution: {integrity: sha512-IVj3avf9AQd2nXCx0PGk/OYq7VmHiyNxWFSb5HhU9ATh+i+gHWvVcljFTcTWQ/dyHJCTrzCixde+r/asL2ErDA==}
 
-  '@types/axios@0.14.4':
-    resolution: {integrity: sha512-9JgOaunvQdsQ/qW2OPmE5+hCeUB52lQSolecrFrthct55QekhmXEwT203s20RL+UHtCQc15y3VXpby9E7Kkh/g==}
-    deprecated: This is a stub types definition. axios provides its own type definitions, so you do not need this installed.
-
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -1787,9 +1810,6 @@ packages:
 
   axios@1.11.0:
     resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
-
-  axois@0.0.1-security:
-    resolution: {integrity: sha512-8Nui4fwwyxHfjAfpDlg3Jt66EJA4i1D1eJch3D+wM/Oe+qhpyp7yfiszko/O5/adYu20wc37RG9/Eg8QIJHcvA==}
 
   babel-jest@30.1.2:
     resolution: {integrity: sha512-IQCus1rt9kaSh7PQxLYRY5NmkNrNlU2TpabzwV7T2jljnpdHOcmnYYv8QmE04Li4S3a2Lj8/yXyET5pBarPr6g==}
@@ -5140,12 +5160,6 @@ snapshots:
     dependencies:
       '@types/node': 24.3.1
 
-  '@types/axios@0.14.4':
-    dependencies:
-      axios: 1.11.0
-    transitivePeerDependencies:
-      - debug
-
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.28.4
@@ -5456,8 +5470,6 @@ snapshots:
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-
-  axois@0.0.1-security: {}
 
   babel-jest@30.1.2(@babel/core@7.28.4):
     dependencies:

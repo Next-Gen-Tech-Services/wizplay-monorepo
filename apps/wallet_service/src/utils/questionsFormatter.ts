@@ -1,7 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 // src/utils/contestFormatter.ts
-import { IQuestionAttrs } from "../models/question.model";
-import { IContestAttrs } from "../models/wallet.model";
 
 export function formatQuestions(
   data: { question: string; options: string[] }[],
@@ -23,10 +21,7 @@ export function formatQuestions(
 /**
  * Format contest data for Contest.bulkCreate()
  */
-export function formatContestsForBulkInsert(
-  contests: any[],
-  matchId: string
-): IContestAttrs[] {
+export function formatContestsForBulkInsert(contests: any[], matchId: string) {
   return contests.map((contest) => ({
     id: contest.id ?? uuidv4(),
     matchId,
@@ -59,8 +54,8 @@ export function formatContestsForBulkInsert(
 export function formatQuestionsForBulkInsert(
   contests: any[],
   matchId: string
-): IQuestionAttrs[] {
-  const questions: IQuestionAttrs[] = [];
+){
+  const questions: any[] = [];
 
   contests.forEach((contest) => {
     contest.questions?.forEach((q: any) => {

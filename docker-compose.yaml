@@ -1,4 +1,3 @@
-# docker-compose.yaml (updated - removed 'version:' and replaced Bitnami kafka with Confluent)
 services:
   user_db_server:
     image: "postgres:15-alpine"

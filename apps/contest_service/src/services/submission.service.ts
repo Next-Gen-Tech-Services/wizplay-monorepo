@@ -51,9 +51,13 @@ export default class SubmissionService {
         transaction: tx,
       });
 
-      // map by id for quick lookup
+      // map by id for quick lookup (store plain values for easy flattening)
       const qMap = new Map<string, any>();
-      for (const q of questions) qMap.set(q.getDataValue("id"), q);
+      for (const q of questions) {
+        // ensure we keep plain values (use get() to get plain object)
+        const plainQ = typeof q.get === "function" ? q.get({ plain: true }) : q;
+        qMap.set(plainQ.id, plainQ);
+      }
 
       // helper normalize
       const normalize = (v: any) =>
@@ -65,53 +69,64 @@ export default class SubmissionService {
 
       for (const ans of answers) {
         const q = qMap.get(ans.questionId);
+
         if (!q) {
           // missing question in DB: record as zero (do not increase max)
-          detailedAnswers.push({
+          const base = {
             questionId: ans.questionId,
             selectedKey: ans.selectedKey,
             isCorrect: false,
             earnedPoints: 0,
             note: "question not found",
-          });
+          };
+          // no question to flatten
+          detailedAnswers.push(base);
           continue;
         }
 
         // Support both field names 'ansKey' (your data) or 'correctKey' (other code)
         const rawCorrect =
-          q.getDataValue("ansKey") ??
-          q.getDataValue("correctKey") ??
-          q.getDataValue("ans_key") ??
-          q.getDataValue("correct_key") ??
-          null;
+          q.ansKey ?? q.correctKey ?? q.ans_key ?? q.correct_key ?? null;
 
         // points for question (fallback to 1)
-        const qPoints =
-          (q.getDataValue("points") as number) ??
-          (q.getDataValue("pointsPerQuestion") as number) ??
-          1;
+        const qPoints = (q.points ?? q.pointsPerQuestion ?? 1) as number;
 
         // If question has no correct key
         if (!rawCorrect) {
           if (treatNullAnsKeyAsUnscored) {
             // do not include in maxScore
-            detailedAnswers.push({
-              questionId: q.getDataValue("id"),
+            const base = {
+              questionId: q.id,
               selectedKey: ans.selectedKey,
               isCorrect: false,
               earnedPoints: 0,
               note: "no correct answer configured (unscored)",
+            };
+
+            // flatten chosen question fields
+            detailedAnswers.push({
+              ...base,
+              question: q.question ?? null,
+              options: q.options ?? null,
+              ansKey: rawCorrect ?? null,
             });
             continue;
           } else {
             // include in maxScore but mark incorrect (no correctKey to compare)
             max += qPoints;
-            detailedAnswers.push({
-              questionId: q.getDataValue("id"),
+            const base = {
+              questionId: q.id,
               selectedKey: ans.selectedKey,
               isCorrect: false,
               earnedPoints: 0,
               note: "no correct answer configured",
+            };
+
+            detailedAnswers.push({
+              ...base,
+              question: q.question ?? null,
+              options: q.options ?? null,
+              ansKey: rawCorrect ?? null,
             });
             continue;
           }
@@ -127,16 +142,23 @@ export default class SubmissionService {
         total += earned;
 
         const answerRecord: any = {
-          questionId: q.getDataValue("id"),
+          questionId: q.id,
           selectedKey: ans.selectedKey,
           isCorrect,
           earnedPoints: earned,
         };
+
         if (revealCorrect) answerRecord.correctKey = rawCorrect;
+
+        // flatten selected question fields into the answer
+        answerRecord.question = q.question ?? null;
+        answerRecord.options = q.options ?? null;
+        answerRecord.ansKey = rawCorrect ?? null;
+
         detailedAnswers.push(answerRecord);
       }
 
-      // persist submission
+      // persist submission (now includes flattened question fields inside answers)
       const created = await this.submissionRepo!.create(
         {
           userId,

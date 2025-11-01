@@ -14,7 +14,7 @@ import ServerConfigs from "../configs/server.config";
 import { IGoogleResponse } from "../interfaces/user.interface";
 import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
-import { handleGoogleAuth, oauth2client } from "../utils/google-config";
+import { handleGoogleAuth } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
@@ -221,9 +221,13 @@ export default class Service {
 
   public async googleAuth(authCode: string, platform: string) {
     const res = await handleGoogleAuth(authCode);
-    const { email, name, picture } = res.payload;
+    const payload = res.getPayload();
+    if (!payload || !payload.email) {
+      throw new UnAuthorizError("Invalid Google token or email not provided");
+    }
+    const { email, name, picture } = payload;
     // logger.info(`Google Auth User : ${JSON.stringify(data.getAttributes())}`);
-    const nameSplit = name.split(" ");
+    const nameSplit = name?.split(" ") || [""];
     let userInput: IGoogleResponse = {
       firstName: nameSplit[0],
       lastName: nameSplit[nameSplit.length - 1],
