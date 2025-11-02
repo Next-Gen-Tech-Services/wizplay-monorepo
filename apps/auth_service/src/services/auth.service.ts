@@ -16,10 +16,9 @@ import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
 import { handleGoogleAuth } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
-import { sendOtpUtil } from "../utils/otp";
+import { sendOtpUtil, verifyOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
-import axios from "axios";
 
 @autoInjectable()
 export default class Service {
@@ -37,10 +36,12 @@ export default class Service {
   public async generateOtp(phoneNumber: string): Promise<any> {
     const userExist =
       await this.userRepository.userWithPhoneExistRepo(phoneNumber);
-
     const otpCode: string = generateOTPUtil();
-    logger.warn(`OTP Code : ${otpCode}`);
+    logger.info(`OTP Code : ${otpCode}`);
 
+    if (ServerConfigs.NODE_ENV === "production") {
+      const res = await sendOtpUtil(phoneNumber);
+    }
     if (userExist) {
       const updateOtp = await this.userRepository.updateRecentOtp({
         phoneNumber,
@@ -69,11 +70,6 @@ export default class Service {
 
       logger.warn(`updated OTP: ${updateOtp}`);
       // SEND OTP HERE
-
-      if (ServerConfigs.MSG91_BASE_URL) {
-        await sendOtpUtil(phoneNumber, otpCode);
-      }
-
       return {
         data: {
           userId: createUser.userId,
@@ -85,10 +81,22 @@ export default class Service {
 
   public async verifyOtp(phoneNumber: string, otpCode: string): Promise<any> {
     try {
-      const verifiedUser = await this.userRepository.verifyOtpRepo({
-        phoneNumber,
-        otpCode,
-      });
+      let verifiedUser;
+
+      if (ServerConfigs.NODE_ENV === "production") {
+        const response = await verifyOtpUtil(phoneNumber, otpCode);
+        if (response?.type === "error") {
+          throw new BadRequestError(response?.message);
+        }
+
+        verifiedUser =
+          await this.userRepository.userWithPhoneExistRepo(phoneNumber);
+      } else {
+        verifiedUser = await this.userRepository.verifyOtpRepo({
+          phoneNumber,
+          otpCode,
+        });
+      }
 
       if (!verifiedUser) {
         throw new BadRequestError("invalid or expired OTP");

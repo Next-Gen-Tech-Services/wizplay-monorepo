@@ -15,25 +15,6 @@ import {
 const router = Router();
 const controller: AuthController = container.resolve(AuthController);
 
-// TEST-ROUTE
-router.get("/user/test-route", (req: Request, res: Response) =>
-  controller.testResponse(req, res)
-);
-
-// GOOGLE-LOGIN ROUTE
-router.post("/google", (req: Request, res: Response) => {
-  return res.json({
-    status: "ok",
-  });
-});
-
-// APPLE-LOGIN ROUTE
-router.post("/apple", (req: Request, res: Response) => {
-  return res.json({
-    status: "ok",
-  });
-});
-
 // GENERATE OTP ROUTE
 router.post(
   "/auth/send-otp",
