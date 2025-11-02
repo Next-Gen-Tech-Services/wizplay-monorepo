@@ -70,6 +70,7 @@ export default function (sequelize: Sequelize) {
           "contest_refund",
           "contest_winnings",
           "bonus",
+          "joining_bonus",
           "referral"
         ),
         allowNull: false,
@@ -83,11 +84,13 @@ export default function (sequelize: Sequelize) {
       balanceBefore: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
 
       balanceAfter: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
 
       referenceId: {

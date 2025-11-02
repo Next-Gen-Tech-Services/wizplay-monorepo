@@ -5,6 +5,7 @@ export type TransactionType =
   | "contest_refund"
   | "contest_winnings"
   | "bonus"
+  | "joining_bonus"
   | "referral";
 
 export type TransactionStatus =

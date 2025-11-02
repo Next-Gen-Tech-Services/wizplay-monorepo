@@ -2,6 +2,7 @@
 import { Wallet } from "@/models/wallet.model";
 import { BadRequestError, logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
+import { TransactionType } from "../dtos/wallet.dto";
 
 export default class WalletRepository {
   private _DB: IDatabase = DB;
@@ -31,10 +32,22 @@ export default class WalletRepository {
         currency: "wizcoin",
         status: "active",
       });
+
       // retry needs to be implemented
       if (!newWallet) {
         throw new BadRequestError("error while initilizing wallet");
       }
+
+      logger.info(`Wallet created for userId: ${newWallet.id} `);
+      // Create initial transaction
+      await this._DB.Transaction.create({
+        walletId: newWallet.id,
+        type: "joining_bonus",
+        userId: userId,
+        amount: 100,
+        balanceBefore: 0,
+        balanceAfter: 100,
+      });
 
       return newWallet;
     } catch (err: any) {
@@ -105,7 +118,7 @@ export default class WalletRepository {
     }
   }
 
-  public async depositCoins(userId: string, amount: number): Promise<any> {
+  public async depositCoins(userId: string, amount: number,type :TransactionType): Promise<any> {
     try {
       const walletInfo = await this._DB.Wallet.findOne({
         where: {
@@ -133,7 +146,7 @@ export default class WalletRepository {
       if (updatedWalletInfo[0]) {
         createTransaction = await this._DB.Transaction.create({
           walletId: walletInfo.id,
-          type: "contest_winnings",
+          type: type,
           userId: userId,
           amount: amount,
           balanceBefore: walletInfo.balance,
@@ -156,6 +169,7 @@ export default class WalletRepository {
         where: {
           userId: userId,
         },
+        order: [["updatedAt", "DESC"]],
       });
 
       if (!transactions) {

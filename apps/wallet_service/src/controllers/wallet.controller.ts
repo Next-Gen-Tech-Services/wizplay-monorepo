@@ -35,7 +35,7 @@ export default class WalletController {
   public async creditBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
     const { amount }: { amount: number } = req.body;
-    const result = await this.walletService.creditBalance(userId, amount);
+    const result = await this.walletService.creditBalance(userId, amount,'deposit');
     return res
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });

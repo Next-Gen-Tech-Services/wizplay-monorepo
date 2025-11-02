@@ -2,6 +2,7 @@
 import { ServerError } from "@repo/common";
 import { autoInjectable } from "tsyringe";
 import WalletRepository from "../repositories/wallet.repository";
+import { TransactionType } from "../dtos/wallet.dto";
 
 @autoInjectable()
 export default class ContestService {
@@ -35,9 +36,9 @@ export default class ContestService {
     }
   }
 
-  public async creditBalance(userId: string, amount: number) {
+  public async creditBalance(userId: string, amount: number,type:TransactionType) {
     try {
-      const transactionInfo = await this.repo.depositCoins(userId, amount);
+      const transactionInfo = await this.repo.depositCoins(userId, amount,type);
       return transactionInfo;
     } catch (error: any) {
       throw new ServerError(`Error credit wallet data: ${error.message}`);
