@@ -133,4 +133,41 @@ export default class ReferralController {
       });
     }
   }
+
+  /**
+   * Validate if a referral code exists in the database
+   * @route GET /referrals/validate/:referralCode
+   */
+  public async validateReferralCode(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const { referralCode } = req.params;
+
+      if (!referralCode) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Referral code is required",
+          data: { isValid: false },
+        });
+      }
+
+      // Check if a user with this referral code exists
+      const user = await this.userRepository.findByReferralCode(referralCode);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: user ? "Referral code is valid" : "Referral code is invalid",
+        data: { isValid: !!user },
+      });
+    } catch (error: any) {
+      logger.error(`Error validating referral code: ${error.message}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: "Failed to validate referral code",
+        data: { isValid: false },
+      });
+    }
+  }
 }

@@ -17,6 +17,7 @@ import { KAFKA_EVENTS } from "../types";
 import { handleGoogleAuth } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil, verifyOtpUtil } from "../utils/otp";
+import { validateReferralCode } from "../utils/referral-validator";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
 
@@ -81,6 +82,15 @@ export default class Service {
 
   public async verifyOtp(phoneNumber: string, otpCode: string, referralCode?: string): Promise<any> {
     try {
+      // Validate referral code if provided
+      if (referralCode) {
+        const isValid = await validateReferralCode(referralCode);
+        if (!isValid) {
+          throw new BadRequestError("Invalid referral code");
+        }
+        logger.debug(`Referral code validated: ${referralCode}`);
+      }
+
       let verifiedUser;
 
       if (ServerConfigs.NODE_ENV === "production") {

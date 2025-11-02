@@ -8,6 +8,14 @@ const router = Router();
 const controller: ReferralController = container.resolve(ReferralController);
 
 /**
+ * GET /referrals/validate/:referralCode
+ * Validate if a referral code exists (public endpoint)
+ */
+router.get("/validate/:referralCode", async (req, res) => {
+  return controller.validateReferralCode(req, res);
+});
+
+/**
  * GET /referrals/my-code
  * Get current user's referral code
  */

@@ -153,6 +153,20 @@ export default class UserRepository {
     }
   }
 
+  public async findByReferralCode(referralCode: string): Promise<any> {
+    try {
+      const user = await this._DB.User.findOne({
+        where: {
+          referralCode: referralCode,
+        },
+      });
+      return user;
+    } catch (error: any) {
+      logger.error(`[Error finding user by referral code: ${error.message}]`);
+      return null;
+    }
+  }
+
   public async list(opts: {
     search?: string;
     active?: "all" | boolean;
