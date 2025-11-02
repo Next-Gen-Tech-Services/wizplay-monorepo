@@ -38,10 +38,10 @@ export default class AuthController {
   }
 
   public async verifyOtpController(req: Request, res: Response): Promise<any> {
-    const { phoneNumber, otp } = req.body;
+    const { phoneNumber, otp, referralCode } = req.body;
 
     try {
-      const result = await this.authService.verifyOtp(phoneNumber, otp);
+      const result = await this.authService.verifyOtp(phoneNumber, otp, referralCode);
       return res.status(STATUS_CODE.SUCCESS).json({
         success: true,
         data: result.data,

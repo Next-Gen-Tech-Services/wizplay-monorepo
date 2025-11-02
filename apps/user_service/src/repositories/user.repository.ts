@@ -3,22 +3,50 @@ import { Op } from "sequelize/lib/operators";
 import { DB, IDatabase } from "../configs/database.config";
 import { KAFKA_EVENTS, Language } from "../types";
 import { publishUserEvent } from "../utils/kafka";
+import { generateReferralCode } from "../utils/referral.utils";
 import { generateUniqueUsername } from "../utils/username";
+import ReferralRepository from "./referral.repository";
 
 export default class UserRepository {
   private _DB: IDatabase = DB;
+  private referralRepository: ReferralRepository;
+
   constructor() {
     this._DB = DB;
+    this.referralRepository = new ReferralRepository();
   }
 
   public async createUser(
     userId: string,
     authId: string,
     email?: string,
-    phoneNumber?: string
+    phoneNumber?: string,
+    usedReferralCode?: string
   ): Promise<any> {
     try {
       const generatedUsername = generateUniqueUsername();
+      
+      // Generate unique referral code for this new user
+      let referralCode = generateReferralCode();
+      let attempts = 0;
+      const maxAttempts = 5;
+
+      // Ensure referral code is unique
+      while (attempts < maxAttempts) {
+        const existing = await this._DB.User.findOne({
+          where: { referralCode },
+        });
+
+        if (!existing) break;
+
+        referralCode = generateReferralCode();
+        attempts++;
+      }
+
+      if (attempts === maxAttempts) {
+        throw new Error("Failed to generate unique referral code");
+      }
+
       const newUser = await this._DB.User.create(
         {
           authId,
@@ -28,6 +56,7 @@ export default class UserRepository {
           type: "user",
           userName: generatedUsername,
           selectedLanguage: Language.ENGLISH,
+          referralCode,
         },
         {
           returning: true,
@@ -35,6 +64,27 @@ export default class UserRepository {
       );
 
       if (newUser) {
+        logger.info(`User created with referral code: ${referralCode}`);
+
+        // If user used a referral code, create referral record and trigger reward
+        if (usedReferralCode) {
+          const referral = await this.referralRepository.createReferral(
+            usedReferralCode,
+            newUser.userId
+          );
+
+          if (referral) {
+            // Publish event to wallet service to reward the referrer
+            await publishUserEvent(KAFKA_EVENTS.REFERRAL_REWARD, {
+              referralId: referral.id,
+              referrerId: referral.referrerId,
+              referredUserId: newUser.userId,
+              rewardAmount: 50,
+            });
+            logger.info(`Referral reward event published for ${referral.referrerId}`);
+          }
+        }
+
         await publishUserEvent(KAFKA_EVENTS.USER_ONBOARDED, {
           userId: newUser.userId,
           authId: newUser.authId,

@@ -38,6 +38,11 @@ router.post(
       .isString()
       .isLength({ min: 4, max: 8 })
       .withMessage("Invalid OTP"),
+    body("referralCode")
+      .optional()
+      .isString()
+      .isLength({ min: 3, max: 20 })
+      .withMessage("Invalid referral code"),
   ],
   validateRequest,
   async (req: Request, res: Response) =>

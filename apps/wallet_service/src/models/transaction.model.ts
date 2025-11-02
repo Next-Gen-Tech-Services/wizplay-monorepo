@@ -71,7 +71,8 @@ export default function (sequelize: Sequelize) {
           "contest_winnings",
           "bonus",
           "joining_bonus",
-          "referral"
+          "referral",
+          "referral_bonus"
         ),
         allowNull: false,
       },

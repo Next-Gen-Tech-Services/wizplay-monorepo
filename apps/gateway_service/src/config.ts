@@ -31,6 +31,15 @@ export const ROUTES: ProxyRoute[] = [
     pathRewrite: { "^/api/v1/user": "/api/v1/user" },
     timeoutMs: 15000,
   },
+   {
+    name: "user",
+    mountPath: "/api/v1/referrals",
+    target: process.env.USER_SERVICE_URL ?? "http://localhost:4002",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/referrals": "/api/v1/referrals" },
+    timeoutMs: 15000,
+  },
   {
     name: "wishlist",
     mountPath: "/api/v1/wishlist",

@@ -79,7 +79,7 @@ export default class Service {
     }
   }
 
-  public async verifyOtp(phoneNumber: string, otpCode: string): Promise<any> {
+  public async verifyOtp(phoneNumber: string, otpCode: string, referralCode?: string): Promise<any> {
     try {
       let verifiedUser;
 
@@ -111,13 +111,14 @@ export default class Service {
       verifiedUser.otpCode = null;
 
       if (!verifiedUser.onboarded) {
-        // create user inside user-service
+        // create user inside user-service with optional referral code
         await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
           userId: verifiedUser.userId,
           authId: verifiedUser.id,
           phoneNumber: phoneNumber,
+          referralCode: referralCode || null,
         });
-        logger.debug("signup event published");
+        logger.debug(`signup event published${referralCode ? ` with referral code: ${referralCode}` : ''}`);
       } else {
         logger.warn("user is already onboarded");
       }

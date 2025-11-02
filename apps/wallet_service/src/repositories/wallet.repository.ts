@@ -29,6 +29,7 @@ export default class WalletRepository {
         totalDeposited: 0,
         totalWithdrawn: 0,
         totalWinnings: 0,
+        totalReferralEarnings: 0,
         currency: "wizcoin",
         status: "active",
       });
@@ -130,10 +131,19 @@ export default class WalletRepository {
         throw new BadRequestError("Insufficient wallet balance");
       }
 
-      const walletPayload = {
+      let walletPayload: {
+        balance: number;
+        totalReferralEarnings?: number;
+        totalWinnings?: number;
+      } = {
         balance: walletInfo?.balance + Number(amount),
-        totalWinnings: walletInfo?.totalWinnings + Number(amount),
       };
+
+      if(type === "referral_bonus") {
+        walletPayload["totalReferralEarnings"] = walletInfo?.totalReferralEarnings + Number(amount);
+      }else{
+        walletPayload["totalWinnings"] = walletInfo?.totalWinnings + Number(amount);
+      }
 
       const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {
         where: {

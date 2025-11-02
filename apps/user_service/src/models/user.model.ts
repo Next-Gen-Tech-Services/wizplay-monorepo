@@ -28,6 +28,7 @@ export class User
   userName!: string;
   type: "user" | "admin";
   selectedLanguage!: Language;
+  referralCode?: string | null;
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
@@ -84,6 +85,12 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
         defaultValue: Language.ENGLISH,
       },
+      referralCode: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: true,
+        defaultValue: null,
+      },
     },
     {
       sequelize,
@@ -105,6 +112,15 @@ export default function (sequelize: Sequelize) {
           fields: ["phone_number"],
           where: {
             phone_number: {
+              [Op.ne]: null,
+            },
+          },
+        },
+        {
+          unique: true,
+          fields: ["referral_code"],
+          where: {
+            referral_code: {
               [Op.ne]: null,
             },
           },

@@ -24,6 +24,7 @@ export class Wallet
   public totalDeposited!: number;
   public totalWithdrawn!: number;
   public totalWinnings!: number;
+  public totalReferralEarnings!: number;
   public currency!: string;
   public status!: "active" | "suspended" | "closed";
 
@@ -82,7 +83,14 @@ export default function (sequelize: Sequelize) {
           min: 0,
         },
       },
-
+      totalReferralEarnings: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+          min: 0,
+        },
+      },
       currency: {
         type: DataTypes.STRING(10),
         allowNull: false,
