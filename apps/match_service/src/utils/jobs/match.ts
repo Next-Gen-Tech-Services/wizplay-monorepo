@@ -121,18 +121,10 @@ class MatchCrons {
     cron.schedule("0 0 * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
       const token = await this.generateApiToken();
-      const { matches, tournaments } = await this.fetchMatchesForNext48Hours();
+      const { matches, tournaments } = await this.getMatchData();
 
       await this.tournamentRepository.createBulkTournaments(tournaments);
       await this.matchRepository.createBulkMatches(matches);
-
-      const fetchedKeys = matches.map((m: any) => m.key).filter(Boolean);
-      const now = new Date();
-      await this.matchRepository.markMatchesNotInListAsFinished(
-        fetchedKeys,
-        now
-      );
-
       logger.info("[MATCH-CRON] cron job executed");
     });
   }

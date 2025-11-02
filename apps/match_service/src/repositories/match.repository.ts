@@ -174,54 +174,6 @@ export default class MatchRepository {
       throw new ServerError("Database Error");
     }
   }
-
-  public async markMatchesNotInListAsFinished(
-    fetchedKeys: string[],
-    cutoffDate: Date
-  ): Promise<any> {
-    try {
-      const cutoff = Math.floor(cutoffDate.getTime() / 1000); // convert to epoch seconds
-      const keysToExclude =
-        fetchedKeys && fetchedKeys.length ? fetchedKeys : [];
-
-      if (keysToExclude.length) {
-        const query = `
-        UPDATE "${this._DB.Match.tableName}"
-        SET status = :finishedStatus, updated_at = NOW()
-        WHERE "started_at" < :cutoff
-          AND "key" NOT IN (:keys)
-          AND "status" NOT IN (:skipStatuses)
-      `;
-        return await this._DB.sequelize.query(query, {
-          replacements: {
-            finishedStatus: "finished",
-            cutoff,
-            keys: keysToExclude,
-            skipStatuses: ["finished", "cancelled"],
-          },
-          type: QueryTypes.UPDATE,
-        });
-      } else {
-        const query = `
-        UPDATE "${this._DB.Match.tableName}"
-        SET status = :finishedStatus, updated_at = NOW()
-        WHERE "started_at" < :cutoff
-          AND "status" NOT IN (:skipStatuses)
-      `;
-        return await this._DB.sequelize.query(query, {
-          replacements: {
-            finishedStatus: "finished",
-            cutoff,
-            skipStatuses: ["finished", "cancelled"],
-          },
-          type: QueryTypes.UPDATE,
-        });
-      }
-    } catch (error: any) {
-      logger.error(`Database Error (markMatchesNotInListAsFinished): ${error}`);
-      throw error;
-    }
-  }
   public async updateMatch(
     matchId: string,
     showOnFrontend: boolean

@@ -45,7 +45,7 @@ export default class MatchService {
 
       const options = {
         method: "POST",
-        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/detail-updates-subscribe/`,
+        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/subscribe/`,
         headers: {
           "rs-token": token,
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default class MatchService {
         error.response?.data || error.message
       );
       throw new BadRequestError(
-        error.response?.data?.message ||
+        JSON.stringify(error.response?.data?.error) ||
           error?.message ||
           "Failed to subscribe to match updates"
       );
@@ -79,7 +79,7 @@ export default class MatchService {
 
       const options = {
         method: "POST",
-        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/updates-unsubscribe/`,
+        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchId}/unsubscribe/`,
         headers: {
           "rs-token": token,
           "Content-Type": "application/json",

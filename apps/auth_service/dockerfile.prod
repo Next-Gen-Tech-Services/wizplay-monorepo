@@ -1,0 +1,73 @@
+# Multi-stage build for production
+FROM node:20-alpine AS base
+
+# Install pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+# Stage 1: Install dependencies
+FROM base AS deps
+WORKDIR /app
+
+# Copy root package files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+# Copy workspace packages
+COPY packages ./packages
+COPY apps/auth_service/package.json ./apps/auth_service/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile --filter auth_service...
+
+# Stage 2: Build the application
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/auth_service/node_modules ./apps/auth_service/node_modules
+COPY --from=deps /app/packages ./packages
+
+# Copy source code
+COPY apps/auth_service ./apps/auth_service
+COPY turbo.json ./
+
+# Build the auth service with increased memory limit
+WORKDIR /app/apps/auth_service
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN pnpm run build
+
+# Stage 3: Use pnpm deploy for production
+FROM base AS deploy
+WORKDIR /deploy
+
+# Use pnpm deploy to create a pruned production deployment
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/auth_service/package.json ./apps/auth_service/
+COPY packages ./packages
+COPY --from=builder /app/apps/auth_service/dist ./apps/auth_service/dist
+
+RUN pnpm deploy --filter=auth_service --prod /deploy/output
+
+# Stage 4: Final production image  
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 authservice
+
+# Copy deployed files from deploy stage
+COPY --from=deploy --chown=authservice:nodejs /deploy/output ./
+
+# Create logs directory with proper permissions
+RUN mkdir -p ./logs && chown -R authservice:nodejs ./logs
+
+USER authservice
+
+EXPOSE 4001
+
+CMD ["node", "dist/server.js"]

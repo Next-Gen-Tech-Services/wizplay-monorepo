@@ -19,6 +19,7 @@ import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil } from "../utils/otp";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
+import axios from "axios";
 
 @autoInjectable()
 export default class Service {
@@ -218,12 +219,15 @@ export default class Service {
     }
   }
 
-  public async googleAuth(authCode: string) {
+  public async googleAuth(authCode: string, platform: string) {
     const res = await handleGoogleAuth(authCode);
-
-    const { email, name, picture } = res.payload;
-    logger.info(`Google Auth User : ${JSON.stringify(res.getAttributes())}`);
-    const nameSplit = name.split(" ");
+    const payload = res.getPayload();
+    if (!payload || !payload.email) {
+      throw new UnAuthorizError("Invalid Google token or email not provided");
+    }
+    const { email, name, picture } = payload;
+    // logger.info(`Google Auth User : ${JSON.stringify(data.getAttributes())}`);
+    const nameSplit = name?.split(" ") || [""];
     let userInput: IGoogleResponse = {
       firstName: nameSplit[0],
       lastName: nameSplit[nameSplit.length - 1],

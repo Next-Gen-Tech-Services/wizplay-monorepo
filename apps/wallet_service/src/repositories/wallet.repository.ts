@@ -10,6 +10,16 @@ export default class WalletRepository {
     this._DB = DB;
   }
 
+  public async getAllWallets(): Promise<any> {
+    try {
+      const walletInfo = await this._DB.Wallet.findAll();
+      return walletInfo.map((wallet) => wallet.toJSON()) as Wallet[];
+    } catch (err: any) {
+      logger.error(`DB error: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
+    }
+  }
+
   public async createWallet(userId: string, authId: string): Promise<any> {
     try {
       const newWallet = await this._DB.Wallet.create({

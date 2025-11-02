@@ -12,7 +12,7 @@ export class UserContest
   public userId!: string;
   public contestId!: string;
   public matchId!: string;
-  public status!: "active" | "inactive";
+  public status!: "active" | "completed";
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
@@ -39,7 +39,7 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
       },
       status: {
-        type: DataTypes.ENUM("active", "inactive"),
+        type: DataTypes.ENUM("active", "completed"),
         allowNull: false,
         defaultValue: "active",
       },

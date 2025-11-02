@@ -1,0 +1,72 @@
+# Multi-stage build for production
+FROM node:20-alpine AS base
+
+# Install pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+# Stage 1: Install dependencies
+FROM base AS deps
+WORKDIR /app
+
+# Copy root package files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+# Copy workspace packages
+COPY packages ./packages
+COPY apps/coupon_service/package.json ./apps/coupon_service/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile --filter coupon_service...
+
+# Stage 2: Build the application
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/coupon_service/node_modules ./apps/coupon_service/node_modules
+COPY --from=deps /app/packages ./packages
+
+# Copy source code
+COPY apps/coupon_service ./apps/coupon_service
+COPY turbo.json ./
+
+# Build the auth service
+WORKDIR /app/apps/coupon_service
+RUN pnpm run build
+
+# Stage 3: Use pnpm deploy for production
+FROM base AS deploy
+WORKDIR /deploy
+
+# Use pnpm deploy to create a pruned production deployment
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/coupon_service/package.json ./apps/coupon_service/
+COPY packages ./packages
+COPY --from=builder /app/apps/coupon_service/dist ./apps/coupon_service/dist
+
+RUN pnpm deploy --filter=coupon_service --prod /deploy/output
+
+# Stage 4: Final production image  
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 couponservice
+
+# Copy deployed files from deploy stage
+COPY --from=deploy --chown=couponservice:nodejs /deploy/output ./
+
+# Create logs directory with proper permissions
+RUN mkdir -p ./logs && chown -R couponservice:nodejs ./logs
+
+USER couponservice
+
+EXPOSE 4004
+
+CMD ["node", "dist/server.js"]

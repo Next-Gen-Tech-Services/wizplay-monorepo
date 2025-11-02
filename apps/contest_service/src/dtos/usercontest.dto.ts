@@ -3,7 +3,7 @@ export interface IUserContestAttributes {
   userId: string;
   contestId: string;
   matchId: string;
-  status: "active" | "inactive";
+  status: "active" | "completed";
   createdAt?: Date;
   updatedAt?: Date;
 }

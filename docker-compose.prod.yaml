@@ -1,12 +1,16 @@
+# Production Docker Compose Configuration
+# Uses universal .env.production file from root directory
+
 services:
+  # Databases
   user_db_server:
     image: "postgres:15-alpine"
     container_name: user_db_server
     ports:
       - "5436:5432"
     environment:
-      POSTGRES_USER: user_db
-      POSTGRES_PASSWORD: user_db
+      POSTGRES_USER: ${USER_DB_USER:-user_db}
+      POSTGRES_PASSWORD: ${USER_DB_PASSWORD:-user_db}
       POSTGRES_DB: user_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
@@ -16,7 +20,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user_db -d user_service"]
+      test: ["CMD-SHELL", "pg_isready -U ${USER_DB_USER:-user_db} -d user_service"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -27,8 +31,8 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_USER: auth_db
-      POSTGRES_PASSWORD: auth_db
+      POSTGRES_USER: ${AUTH_DB_USER:-auth_db}
+      POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD:-auth_db}
       POSTGRES_DB: auth_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
@@ -38,7 +42,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U auth_db -d auth_service"]
+      test: ["CMD-SHELL", "pg_isready -U ${AUTH_DB_USER:-auth_db} -d auth_service"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -49,8 +53,8 @@ services:
     ports:
       - "5435:5432"
     environment:
-      POSTGRES_USER: match_db
-      POSTGRES_PASSWORD: match_db
+      POSTGRES_USER: ${MATCH_DB_USER:-match_db}
+      POSTGRES_PASSWORD: ${MATCH_DB_PASSWORD:-match_db}
       POSTGRES_DB: match_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
@@ -60,7 +64,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U match_db -d match_service"]
+      test: ["CMD-SHELL", "pg_isready -U ${MATCH_DB_USER:-match_db} -d match_service"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -71,8 +75,8 @@ services:
     ports:
       - "5437:5432"
     environment:
-      POSTGRES_USER: coupon_db
-      POSTGRES_PASSWORD: coupon_db
+      POSTGRES_USER: ${COUPON_DB_USER:-coupon_db}
+      POSTGRES_PASSWORD: ${COUPON_DB_PASSWORD:-coupon_db}
       POSTGRES_DB: coupon_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
@@ -82,7 +86,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U coupon_db -d coupon_service"]
+      test: ["CMD-SHELL", "pg_isready -U ${COUPON_DB_USER:-coupon_db} -d coupon_service"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -93,8 +97,8 @@ services:
     ports:
       - "5438:5432"
     environment:
-      POSTGRES_USER: contest_db
-      POSTGRES_PASSWORD: contest_db
+      POSTGRES_USER: ${CONTEST_DB_USER:-contest_db}
+      POSTGRES_PASSWORD: ${CONTEST_DB_PASSWORD:-contest_db}
       POSTGRES_DB: contest_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
@@ -104,7 +108,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U contest_db -d contest_service"]
+      test: ["CMD-SHELL", "pg_isready -U ${CONTEST_DB_USER:-contest_db} -d contest_service"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -115,8 +119,8 @@ services:
     ports:
       - "5439:5432"
     environment:
-      POSTGRES_USER: wallet_db
-      POSTGRES_PASSWORD: wallet_db
+      POSTGRES_USER: ${WALLET_DB_USER:-wallet_db}
+      POSTGRES_PASSWORD: ${WALLET_DB_PASSWORD:-wallet_db}
       POSTGRES_DB: wallet_service
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     volumes:
@@ -126,7 +130,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U wallet_db -d wallet_service"]
+      test: ["CMD-SHELL", "pg_isready -U ${WALLET_DB_USER:-wallet_db} -d wallet_service"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -151,7 +155,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # Kafka (Confluent single-broker for dev)
+  # Kafka (Confluent single-broker for production)
   kafka:
     image: confluentinc/cp-kafka:7.4.0
     container_name: kafka
@@ -163,7 +167,6 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      # Advertise the EC2 private hostname so host clients (and remote if permitted) can reach it.
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,INTERNAL://kafka:9093
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
@@ -182,7 +185,7 @@ services:
       timeout: 10s
       retries: 5
 
-  # Optional: Redis for caching/sessions
+  # Redis for caching/sessions
   redis:
     image: redis:7-alpine
     container_name: redis
@@ -193,8 +196,154 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    profiles:
-      - with-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Microservices
+  auth_service:
+    build:
+      context: .
+      dockerfile: apps/auth_service/dockerfile.prod
+    container_name: auth_service
+    ports:
+      - "4001:4001"
+    environment:
+      NODE_ENV: production
+      PORT: 4001
+    env_file:
+      - .env.production
+    depends_on:
+      auth_db_server:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  user_service:
+    build:
+      context: .
+      dockerfile: apps/user_service/dockerfile.prod
+    container_name: user_service
+    ports:
+      - "4002:4002"
+    environment:
+      NODE_ENV: production
+      PORT: 4002
+    env_file:
+      - .env.production
+    depends_on:
+      user_db_server:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  match_service:
+    build:
+      context: .
+      dockerfile: apps/match_service/dockerfile.prod
+    container_name: match_service
+    ports:
+      - "4003:4003"
+    environment:
+      NODE_ENV: production
+      PORT: 4003
+    env_file:
+      - .env.production
+    depends_on:
+      match_db_server:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  coupon_service:
+    build:
+      context: .
+      dockerfile: apps/coupon_service/dockerfile.prod
+    container_name: coupon_service
+    ports:
+      - "4004:4004"
+    environment:
+      NODE_ENV: production
+      PORT: 4004
+    env_file:
+      - .env.production
+    depends_on:
+      coupon_db_server:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  contest_service:
+    build:
+      context: .
+      dockerfile: apps/contest_service/dockerfile.prod
+    container_name: contest_service
+    ports:
+      - "4005:4005"
+    environment:
+      NODE_ENV: production
+      PORT: 4005
+    env_file:
+      - .env.production
+    depends_on:
+      contest_db_server:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  wallet_service:
+    build:
+      context: .
+      dockerfile: apps/wallet_service/dockerfile.prod
+    container_name: wallet_service
+    ports:
+      - "4006:4006"
+    environment:
+      NODE_ENV: production
+      PORT: 4006
+    env_file:
+      - .env.production
+    depends_on:
+      wallet_db_server:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  gateway_service:
+    build:
+      context: .
+      dockerfile: apps/gateway_service/dockerfile.prod
+    container_name: gateway_service
+    ports:
+      - "8000:8000"
+    environment:
+      NODE_ENV: production
+      PORT: 8000
+    env_file:
+      - .env.production
+    depends_on:
+      - auth_service
+      - user_service
+      - match_service
+      - coupon_service
+      - contest_service
+      - wallet_service
+    networks:
+      - app-network
+    restart: unless-stopped
 
 networks:
   app-network:

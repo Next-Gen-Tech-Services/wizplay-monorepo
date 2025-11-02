@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "clean": "rimraf build",
+    "clean": "rimraf dist",
     "build": "pnpm run clean && tsc -p tsconfig.json",
-    "dev": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules -- ./src/server.ts",
-    "dev:docker": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --poll ./src/server.ts",
-    "start": "node ./build/server.js"
+    "dev": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build -- ./src/server.ts",
+    "dev:docker": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build --poll ./src/server.ts",
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
     "pg-hstore": "^2.3.4",
     "redis": "^5.6.1",
     "reflect-metadata": "^0.2.2",
+    "rimraf": "^6.0.1",
     "sequelize": "^6.37.7",
     "tsyringe": "^4.10.0",
     "uuid": "^13.0.0",

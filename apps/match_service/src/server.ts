@@ -9,7 +9,7 @@ import { shutDown } from "./utils/shutdown";
 async function startServer() {
   await connectDatabase();
 
-  await redis.connectClient();
+  // await redis.connectClient();
 
   // await rabbitmqInstance.connectClient();
 

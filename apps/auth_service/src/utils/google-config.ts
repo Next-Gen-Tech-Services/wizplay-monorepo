@@ -1,5 +1,6 @@
 import { OAuth2Client } from "google-auth-library";
 import ServerConfigs from "../configs/server.config";
+import { google } from "googleapis";
 
 const verifyClient = new OAuth2Client();
 
@@ -14,3 +15,4 @@ export async function handleGoogleAuth(idToken: string) {
 
   return ticket;
 }
+

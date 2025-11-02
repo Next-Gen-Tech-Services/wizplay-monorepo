@@ -104,8 +104,8 @@ export default class AuthController {
   }
 
   public async authWithGoogle(req: Request, res: Response) {
-    const { auth_code } = req.body;
-    const result = await this.authService.googleAuth(auth_code);
+    const { auth_code,platform } = req.body;
+    const result = await this.authService.googleAuth(auth_code,platform);
 
     return res.status(STATUS_CODE.SUCCESS).json({
       success: true,

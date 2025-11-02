@@ -1,0 +1,201 @@
+# Google Cloud Build configuration for deploying to Cloud Run
+# This builds and deploys all microservices
+
+steps:
+  # Build auth_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/auth-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/auth_service/dockerfile.prod'
+      - '.'
+    id: 'build-auth-service'
+
+  # Build user_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/user-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/user_service/dockerfile.prod'
+      - '.'
+    id: 'build-user-service'
+
+  # Build match_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/match-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/match_service/dockerfile.prod'
+      - '.'
+    id: 'build-match-service'
+
+  # Build coupon_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/coupon-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/coupon_service/dockerfile.prod'
+      - '.'
+    id: 'build-coupon-service'
+
+  # Build contest_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/contest-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/contest_service/dockerfile.prod'
+      - '.'
+    id: 'build-contest-service'
+
+  # Build wallet_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/wallet-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/wallet_service/dockerfile.prod'
+      - '.'
+    id: 'build-wallet-service'
+
+  # Build gateway_service
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/gateway-service:$SHORT_SHA'
+      - '-f'
+      - 'apps/gateway_service/dockerfile.prod'
+      - '.'
+    id: 'build-gateway-service'
+
+  # Push all images
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/auth-service:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/user-service:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/match-service:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/coupon-service:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/contest-service:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/wallet-service:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/gateway-service:$SHORT_SHA']
+
+  # Deploy auth_service to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'auth-service'
+      - '--image=gcr.io/$PROJECT_ID/auth-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=4001'
+      - '--set-env-vars=NODE_ENV=production,PORT=4001'
+      - '--set-secrets=AUTH_DATABASE_HOST=AUTH_DATABASE_HOST:latest,AUTH_DATABASE_NAME=AUTH_DATABASE_NAME:latest,AUTH_DATABASE_USERNAME=AUTH_DATABASE_USERNAME:latest,AUTH_DATABASE_PASSWORD=AUTH_DATABASE_PASSWORD:latest,AUTH_DATABASE_PORT=AUTH_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+
+  # Deploy user_service to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'user-service'
+      - '--image=gcr.io/$PROJECT_ID/user-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=4002'
+      - '--set-env-vars=NODE_ENV=production,PORT=4002'
+      - '--set-secrets=USER_DATABASE_HOST=USER_DATABASE_HOST:latest,USER_DATABASE_NAME=USER_DATABASE_NAME:latest,USER_DATABASE_USERNAME=USER_DATABASE_USERNAME:latest,USER_DATABASE_PASSWORD=USER_DATABASE_PASSWORD:latest,USER_DATABASE_PORT=USER_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+
+  # Deploy match_service to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'match-service'
+      - '--image=gcr.io/$PROJECT_ID/match-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=4003'
+      - '--set-env-vars=NODE_ENV=production,PORT=4003'
+      - '--set-secrets=MATCH_DATABASE_HOST=MATCH_DATABASE_HOST:latest,MATCH_DATABASE_NAME=MATCH_DATABASE_NAME:latest,MATCH_DATABASE_USERNAME=MATCH_DATABASE_USERNAME:latest,MATCH_DATABASE_PASSWORD=MATCH_DATABASE_PASSWORD:latest,MATCH_DATABASE_PORT=MATCH_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+
+  # Deploy coupon_service to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'coupon-service'
+      - '--image=gcr.io/$PROJECT_ID/coupon-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=4004'
+      - '--set-env-vars=NODE_ENV=production,PORT=4004'
+      - '--set-secrets=COUPON_DATABASE_HOST=COUPON_DATABASE_HOST:latest,COUPON_DATABASE_NAME=COUPON_DATABASE_NAME:latest,COUPON_DATABASE_USERNAME=COUPON_DATABASE_USERNAME:latest,COUPON_DATABASE_PASSWORD=COUPON_DATABASE_PASSWORD:latest,COUPON_DATABASE_PORT=COUPON_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+
+  # Deploy contest_service to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'contest-service'
+      - '--image=gcr.io/$PROJECT_ID/contest-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=4005'
+      - '--set-env-vars=NODE_ENV=production,PORT=4005'
+      - '--set-secrets=CONTEST_DATABASE_HOST=CONTEST_DATABASE_HOST:latest,CONTEST_DATABASE_NAME=CONTEST_DATABASE_NAME:latest,CONTEST_DATABASE_USERNAME=CONTEST_DATABASE_USERNAME:latest,CONTEST_DATABASE_PASSWORD=CONTEST_DATABASE_PASSWORD:latest,CONTEST_DATABASE_PORT=CONTEST_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+
+  # Deploy wallet_service to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'wallet-service'
+      - '--image=gcr.io/$PROJECT_ID/wallet-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=4006'
+      - '--set-env-vars=NODE_ENV=production,PORT=4006'
+      - '--set-secrets=WALLET_DATABASE_HOST=WALLET_DATABASE_HOST:latest,WALLET_DATABASE_NAME=WALLET_DATABASE_NAME:latest,WALLET_DATABASE_USERNAME=WALLET_DATABASE_USERNAME:latest,WALLET_DATABASE_PASSWORD=WALLET_DATABASE_PASSWORD:latest,WALLET_DATABASE_PORT=WALLET_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+
+  # Deploy gateway_service to Cloud Run (public-facing)
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'gateway-service'
+      - '--image=gcr.io/$PROJECT_ID/gateway-service:$SHORT_SHA'
+      - '--region=$_REGION'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=8000'
+      - '--set-env-vars=NODE_ENV=production,PORT=8000'
+      - '--set-secrets=TOKEN_SECRET=TOKEN_SECRET:latest'
+
+substitutions:
+  _REGION: 'us-central1'
+
+timeout: 3600s
+options:
+  machineType: 'E2_HIGHCPU_8'

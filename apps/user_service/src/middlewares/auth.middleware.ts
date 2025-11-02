@@ -27,11 +27,9 @@ export const requireAuth = async (
   }
 
   try {
-    console.log("[MIDDLEWARE] Session token: ", sessionId);
     const payload: any = jwt.verify(sessionId[1], ServerConfigs.TOKEN_SECRET);
 
     const payloadKeys = payload?.data?.session_id.split(":");
-    logger.info(`Keys=====:${payloadKeys} `);
     if (payloadKeys.length !== 3) {
       throw new UnAuthorizError();
     }
@@ -73,7 +71,6 @@ export const requireAdminAuth = async (
 
     const userRepository = new UserRepository();
     const adminUser = await userRepository.getUserById(auth_id);
-    logger.info(`payload=====:${JSON.stringify(adminUser)} `);
 
     if (!adminUser) throw new UnAuthorizError("Admin not found");
 

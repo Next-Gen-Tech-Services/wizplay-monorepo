@@ -2,13 +2,19 @@
 import { ServerError } from "@repo/common";
 import { autoInjectable } from "tsyringe";
 import WalletRepository from "../repositories/wallet.repository";
-import { GenerativeAi } from "../utils/generativeAi";
 
 @autoInjectable()
 export default class ContestService {
-  private generativeAI: GenerativeAi;
   constructor(private readonly repo: WalletRepository) {
-    this.generativeAI = new GenerativeAi();
+  }
+
+  public async getAllUserWallet() {
+    try {
+      const walletInfo = await this.repo.getAllWallets();
+      return walletInfo;
+    } catch (error: any) {
+      throw new ServerError(`Error fetching wallet data: ${error.message}`);
+    }
   }
 
   public async showBalance(userId: string) {
