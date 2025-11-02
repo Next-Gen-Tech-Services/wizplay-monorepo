@@ -38,7 +38,19 @@ WORKDIR /app/apps/match_service
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm run build
 
-# Stage 3: Production image
+# Stage 3: Use pnpm deploy for production
+FROM base AS deploy
+WORKDIR /deploy
+
+# Use pnpm deploy to create a pruned production deployment
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/match_service/package.json ./apps/match_service/
+COPY packages ./packages
+COPY --from=builder /app/apps/match_service/dist ./apps/match_service/dist
+
+RUN pnpm deploy --filter=match_service --prod /deploy/output
+
+# Stage 4: Final production image  
 FROM node:20-alpine AS runner
 WORKDIR /app
 
@@ -48,13 +60,11 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 matchservice
 
-# Copy built application
-COPY --from=builder --chown=matchservice:nodejs /app/apps/match_service/dist ./dist
-COPY --from=builder --chown=matchservice:nodejs /app/apps/match_service/package.json ./
+# Copy deployed files from deploy stage
+COPY --from=deploy --chown=matchservice:nodejs /deploy/output ./
 
-# Copy dependencies
-COPY --from=deps --chown=matchservice:nodejs /app/node_modules ./node_modules
-COPY --from=deps --chown=matchservice:nodejs /app/apps/match_service/node_modules ./node_modules
+# Create logs directory with proper permissions
+RUN mkdir -p ./logs && chown -R matchservice:nodejs ./logs
 
 USER matchservice
 

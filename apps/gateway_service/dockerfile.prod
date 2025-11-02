@@ -37,7 +37,19 @@ COPY turbo.json ./
 WORKDIR /app/apps/gateway_service
 RUN pnpm run build
 
-# Stage 3: Production image
+# Stage 3: Use pnpm deploy for production
+FROM base AS deploy
+WORKDIR /deploy
+
+# Use pnpm deploy to create a pruned production deployment
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/gateway_service/package.json ./apps/gateway_service/
+COPY packages ./packages
+COPY --from=builder /app/apps/gateway_service/dist ./apps/gateway_service/dist
+
+RUN pnpm deploy --filter=wizplay-proxy --prod /deploy/output
+
+# Stage 4: Final production image  
 FROM node:20-alpine AS runner
 WORKDIR /app
 
@@ -47,16 +59,14 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 gatewayservice
 
-# Copy built application
-COPY --from=builder --chown=gatewayservice:nodejs /app/apps/gateway_service/dist ./dist
-COPY --from=builder --chown=gatewayservice:nodejs /app/apps/gateway_service/package.json ./
+# Copy deployed files from deploy stage
+COPY --from=deploy --chown=gatewayservice:nodejs /deploy/output ./
 
-# Copy dependencies
-COPY --from=deps --chown=gatewayservice:nodejs /app/node_modules ./node_modules
-COPY --from=deps --chown=gatewayservice:nodejs /app/apps/gateway_service/node_modules ./node_modules
+# Create logs directory with proper permissions (if gateway uses logging)
+RUN mkdir -p ./logs && chown -R gatewayservice:nodejs ./logs
 
 USER gatewayservice
 
-EXPOSE 3000
+EXPOSE 8000
 
 CMD ["node", "dist/index.js"]

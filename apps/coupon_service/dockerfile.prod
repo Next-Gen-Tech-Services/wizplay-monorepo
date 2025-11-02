@@ -37,7 +37,19 @@ COPY turbo.json ./
 WORKDIR /app/apps/coupon_service
 RUN pnpm run build
 
-# Stage 3: Production image
+# Stage 3: Use pnpm deploy for production
+FROM base AS deploy
+WORKDIR /deploy
+
+# Use pnpm deploy to create a pruned production deployment
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/coupon_service/package.json ./apps/coupon_service/
+COPY packages ./packages
+COPY --from=builder /app/apps/coupon_service/dist ./apps/coupon_service/dist
+
+RUN pnpm deploy --filter=coupon_service --prod /deploy/output
+
+# Stage 4: Final production image  
 FROM node:20-alpine AS runner
 WORKDIR /app
 
@@ -47,13 +59,11 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 couponservice
 
-# Copy built application
-COPY --from=builder --chown=couponservice:nodejs /app/apps/coupon_service/dist ./dist
-COPY --from=builder --chown=couponservice:nodejs /app/apps/coupon_service/package.json ./
+# Copy deployed files from deploy stage
+COPY --from=deploy --chown=couponservice:nodejs /deploy/output ./
 
-# Copy dependencies
-COPY --from=deps --chown=couponservice:nodejs /app/node_modules ./node_modules
-COPY --from=deps --chown=couponservice:nodejs /app/apps/coupon_service/node_modules ./node_modules
+# Create logs directory with proper permissions
+RUN mkdir -p ./logs && chown -R couponservice:nodejs ./logs
 
 USER couponservice
 

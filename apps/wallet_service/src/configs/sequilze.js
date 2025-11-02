@@ -1,16 +1,10 @@
-// Sequelize configuration - reads from environment variables
-import { config } from "dotenv";
-
-const envFile = `.env.${process.env.NODE_ENV || "development"}`;
-config({ path: envFile });
-
-// Single configuration object that reads from .env files
+import ServerConfigs from "./server.config";
 const sequelizeConfig = {
-  username: process.env.AUTH_DATABASE_USERNAME || "auth_db",
-  password: process.env.AUTH_DATABASE_PASSWORD || "auth_db",
-  database: process.env.AUTH_DATABASE_NAME || "auth_service",
-  host: process.env.AUTH_DATABASE_HOST || "localhost",
-  port: process.env.AUTH_DATABASE_PORT || 5434,
+  username: ServerConfigs.DATABASE_USERNAME || "wallet_db",
+  password: ServerConfigs.DATABASE_PASSWORD || "wallet_db",
+  database: ServerConfigs.DATABASE_NAME || "wallet_service",
+  host: ServerConfigs.DATABASE_HOST || "localhost",
+  port: ServerConfigs.DATABASE_PORT || 5439,
   dialect: "postgres",
 };
 
