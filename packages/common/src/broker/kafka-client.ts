@@ -36,7 +36,7 @@ export class KafkaClient implements MessageBrokerType {
     this.kafka = new Kafka({
       clientId: options.clientId,
       brokers: options.brokers,
-      logLevel: logLevel.INFO,
+      logLevel: logLevel.ERROR, // Changed from INFO to ERROR to reduce log noise
     });
   }
 

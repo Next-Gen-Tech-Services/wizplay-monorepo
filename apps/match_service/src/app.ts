@@ -11,25 +11,33 @@ import matchCrons from "./utils/jobs/match";
 import { connectProducer } from "./utils/kafka";
 import { Server as SocketIOServer } from "socket.io";
 
-const BrokerInit = async () => {
+const BrokerInit = async (retryCount = 0, maxRetries = 10) => {
   try {
-    // Wait for Kafka to be ready
-    logger.info("Waiting for Kafka to be ready...");
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // Wait for Kafka to be ready with exponential backoff
+    const waitTime = Math.min(5000 + retryCount * 2000, 30000); // Max 30 seconds
+    logger.info(`Waiting for Kafka to be ready... (attempt ${retryCount + 1}/${maxRetries}, wait: ${waitTime}ms)`);
+    await new Promise((resolve) => setTimeout(resolve, waitTime));
 
     // create producer to create topics
     await connectProducer();
-    logger.info("Successfully created topics");
+    logger.info("✅ Successfully created topics and connected producer");
 
     // start consuming events
     await matchEventHandler.handle();
-    logger.info("Successfully subscribed to user events");
-  } catch (error) {
-    logger.error("Failed to initialize Kafka broker:", error);
-    setTimeout(async () => {
-      logger.info("Retrying Kafka initialization...");
-      await BrokerInit();
-    }, 10000);
+    logger.info("✅ Successfully subscribed to user events");
+  } catch (error: any) {
+    logger.error(`Failed to initialize Kafka broker (attempt ${retryCount + 1}/${maxRetries}):`, error?.message || error);
+    
+    if (retryCount < maxRetries) {
+      const nextRetryTime = Math.min(10000 + retryCount * 5000, 60000); // Max 60 seconds between retries
+      logger.info(`Retrying Kafka initialization in ${nextRetryTime}ms...`);
+      setTimeout(async () => {
+        await BrokerInit(retryCount + 1, maxRetries);
+      }, nextRetryTime);
+    } else {
+      logger.error("❌ Max Kafka connection retries reached. Service will continue without Kafka.");
+      // Don't crash the service, just log the error
+    }
   }
 };
 
