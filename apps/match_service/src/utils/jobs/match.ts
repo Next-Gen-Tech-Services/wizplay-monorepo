@@ -118,25 +118,44 @@ class MatchCrons {
   }
 
   async scheduleJob() {
+    // Run every 1 minute: "* * * * *"
     cron.schedule("* * * * *", async () => {
-      logger.info("[MATCH-CRON] cron job scheduled");
-      const token = await this.generateApiToken();
-      const matchData = await this.getMatchData();
+      try {
+        logger.info("[MATCH-CRON] Cron job started - Running every 1 minute");
+        
+        const token = await this.generateApiToken();
+        if (!token) {
+          logger.error("[MATCH-CRON] Failed to generate API token");
+          return;
+        }
 
-      if (!matchData) {
-        logger.error("[MATCH-CRON] No match data received from API");
-        return;
+        const matchData = await this.getMatchData();
+
+        if (!matchData) {
+          logger.error("[MATCH-CRON] No match data received from API");
+          return;
+        }
+
+        const { matches, tournaments } = matchData;
+        logger.info(
+          `[MATCH-CRON] Received ${tournaments?.length || 0} tournaments and ${matches?.length || 0} matches from API`
+        );
+
+        if (tournaments?.length > 0) {
+          await this.tournamentRepository.createBulkTournaments(tournaments);
+        }
+        
+        if (matches?.length > 0) {
+          await this.matchRepository.createBulkMatches(matches);
+        }
+
+        logger.info("[MATCH-CRON] Cron job executed successfully");
+      } catch (error: any) {
+        logger.error(`[MATCH-CRON] Error in cron job execution: ${error.message}`);
       }
-
-      const { matches, tournaments } = matchData;
-      logger.info(
-        `[MATCH-CRON] Received ${tournaments?.length || 0} tournaments and ${matches?.length || 0} matches from API`
-      );
-
-      await this.tournamentRepository.createBulkTournaments(tournaments);
-      await this.matchRepository.createBulkMatches(matches);
-      logger.info("[MATCH-CRON] cron job executed successfully");
     });
+    
+    logger.info("[MATCH-CRON] Job scheduled to run every 1 minute");
   }
 }
 
