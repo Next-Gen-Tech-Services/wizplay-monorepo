@@ -79,6 +79,8 @@ export default class ContestController {
 
   public async joinContest(req: Request, res: Response) {
     const { userId, contestId, matchId } = req.body;
+    // forward authorization header to downstream services (wallet)
+    const authHeader = req.headers.authorization as string | undefined;
 
     if (!userId || !contestId) {
       return res
@@ -91,6 +93,7 @@ export default class ContestController {
         userId,
         contestId,
         matchId,
+        authHeader,
       });
 
       return res

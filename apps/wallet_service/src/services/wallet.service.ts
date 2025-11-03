@@ -27,12 +27,13 @@ export default class ContestService {
     }
   }
 
-  public async debitBalance(userId: string, amount: number) {
+  public async debitBalance(userId: string, amount: number, type:TransactionType) {
     try {
-      const transactionInfo = await this.repo.withdrawCoins(userId, amount);
+      const transactionInfo = await this.repo.withdrawCoins(userId, amount,type);
       return transactionInfo;
     } catch (error: any) {
-      throw new ServerError(`Error withdrawing wallet data: ${error.message}`);
+      // Re-throw the error as-is to preserve the error type and message
+      throw error;
     }
   }
 
@@ -41,7 +42,8 @@ export default class ContestService {
       const transactionInfo = await this.repo.depositCoins(userId, amount,type);
       return transactionInfo;
     } catch (error: any) {
-      throw new ServerError(`Error credit wallet data: ${error.message}`);
+      // Re-throw the error as-is to preserve the error type and message
+      throw error;
     }
   }
 

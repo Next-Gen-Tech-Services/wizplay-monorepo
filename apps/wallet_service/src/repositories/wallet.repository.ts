@@ -75,7 +75,7 @@ export default class WalletRepository {
     }
   }
 
-  public async withdrawCoins(userId: string, amount: number): Promise<any> {
+  public async withdrawCoins(userId: string, amount: number,type:TransactionType): Promise<any> {
     try {
       const walletInfo = await this._DB.Wallet.findOne({
         where: {
@@ -83,7 +83,11 @@ export default class WalletRepository {
         },
       });
 
-      if (!walletInfo || walletInfo?.balance < amount) {
+      if (!walletInfo) {
+        throw new BadRequestError("Wallet not found for this user");
+      }
+
+      if (walletInfo.balance < amount) {
         throw new BadRequestError("Insufficient wallet balance");
       }
 
@@ -102,7 +106,7 @@ export default class WalletRepository {
       if (updatedWalletInfo[0]) {
         createTransaction = await this._DB.Transaction.create({
           walletId: walletInfo.id,
-          type: "withdrawal",
+          type: type,
           userId: userId,
           amount: amount,
           balanceBefore: walletInfo.balance,
@@ -115,6 +119,11 @@ export default class WalletRepository {
         transaction: createTransaction,
       };
     } catch (err: any) {
+      // Re-throw BadRequestError as-is to preserve the specific error message
+      if (err instanceof BadRequestError) {
+        throw err;
+      }
+      logger.error(`DB error in withdrawCoins: ${err?.message ?? err}`);
       throw new ServerError(err.message);
     }
   }
@@ -128,7 +137,7 @@ export default class WalletRepository {
       });
 
       if (!walletInfo) {
-        throw new BadRequestError("Insufficient wallet balance");
+        throw new BadRequestError("Wallet not found for this user");
       }
 
       let walletPayload: {
@@ -169,6 +178,11 @@ export default class WalletRepository {
         transaction: createTransaction,
       };
     } catch (err: any) {
+      // Re-throw BadRequestError as-is to preserve the specific error message
+      if (err instanceof BadRequestError) {
+        throw err;
+      }
+      logger.error(`DB error in depositCoins: ${err?.message ?? err}`);
       throw new ServerError(err.message);
     }
   }

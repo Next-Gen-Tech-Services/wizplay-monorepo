@@ -17,11 +17,12 @@ import {
   formatQuestions,
   formatQuestionsForBulkInsert,
 } from "../utils/questionsFormatter";
-
+import axios from "axios";
 export interface JoinContestPayload {
   userId: string;
   contestId: string;
   matchId?: string | null;
+  authHeader?: string;
 }
 
 @autoInjectable()
@@ -137,9 +138,11 @@ export default class ContestService {
   }
 
   public async joinContest(payload: JoinContestPayload) {
-    const { userId, contestId, matchId } = payload;
+    const { userId, contestId, matchId, authHeader } = payload;
 
     let tx: Transaction | null = null;
+    let walletDeducted = false;
+
     try {
       tx = await DB.sequelize.transaction({
         isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
@@ -196,7 +199,50 @@ export default class ContestService {
         throw e;
       }
 
-      // 5) create join row
+      // 5) deduct wallet balance (if entryFee > 0)
+      const entryFee = contest.getDataValue("entryFee") as number | null;
+      if (entryFee && entryFee > 0) {
+        const walletUrl =
+          process.env.WALLET_SERVICE_URL ?? "http://localhost:4006";
+        const debitUrl = `${walletUrl}/api/v1/wallet/debit`;
+
+        logger.info(
+          `[contest-service] Deducting entry fee ${entryFee} for user ${userId} from wallet`
+        );
+        try {
+          const resp = await axios.patch(
+            debitUrl,
+            { 
+              amount: entryFee,
+              type: 'contest_entry'
+            },
+            {
+              headers: authHeader ? { Authorization: authHeader } : {},
+              timeout: 5000,
+            }
+          );
+
+          if (!resp.data?.success) {
+            throw new BadRequestError(
+              resp.data?.message || "Failed to deduct wallet balance"
+            );
+          }
+          walletDeducted = true;
+          logger.info(
+            `[contest-service] Wallet debited successfully for user ${userId}`
+          );
+        } catch (walletErr: any) {
+          await tx.rollback();
+          logger.error(
+            `[contest-service] Wallet deduction failed: ${walletErr?.response?.data?.message || walletErr.message}`
+          );
+          throw new BadRequestError(
+            walletErr?.response?.data?.message || "Insufficient wallet balance"
+          );
+        }
+      }
+
+      // 6) create join row
       const created = await this.userContestRepo!.create(
         {
           userId,
@@ -208,7 +254,7 @@ export default class ContestService {
         { transaction: tx }
       );
 
-      // 6) increment filled spots atomically
+      // 7) increment filled spots atomically
       await this.repo!.incrementFilledSpots(contestId, 1, { transaction: tx });
 
       await tx.commit();
@@ -221,6 +267,43 @@ export default class ContestService {
           await tx.rollback();
         } catch (e) {
           logger.warn("rollback failed: " + String(e));
+        }
+      }
+
+      // REFUND wallet if deduction was successful but DB failed
+      if (walletDeducted) {
+        logger.warn(
+          `[contest-service] DB transaction failed after wallet debit; attempting refund for user ${userId}`
+        );
+        try {
+          const walletUrl =
+            process.env.WALLET_SERVICE_URL ?? "http://localhost:4006";
+          const creditUrl = `${walletUrl}/api/v1/wallet/credit`;
+          const entryFee =
+            (await this.repo!.findById(contestId, {}))?.getDataValue(
+              "entryFee"
+            ) || 0;
+
+          if (entryFee > 0 && authHeader) {
+            await axios.patch(
+              creditUrl,
+              { 
+                amount: entryFee,
+                type: 'contest_refund'
+              },
+              {
+                headers: { Authorization: authHeader },
+                timeout: 5000,
+              }
+            );
+            logger.info(
+              `[contest-service] Refunded ${entryFee} to user ${userId} after rollback`
+            );
+          }
+        } catch (refundErr) {
+          logger.error(
+            `[contest-service] Refund failed: ${refundErr}. Manual intervention required for user ${userId}`
+          );
         }
       }
 

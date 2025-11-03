@@ -19,13 +19,31 @@ export default class MatchRepository {
         throw new BadRequestError("invalid matches value");
       }
 
+      // Only update fields that come from the API, preserve internal fields
+      const fieldsToUpdate: (keyof IMatchAttrs)[] = [
+        "sport",
+        "format",
+        "gender",
+        "tournamentKey",
+        "name",
+        "shortName",
+        "status",
+        "metricGroup",
+        "winner",
+        "subTitle",
+        "startedAt",
+        "endedAt",
+        "expectedStartedAt",
+        "expectedEndedAt",
+        "teams",
+        "updatedAt", // Always update timestamp
+      ];
+
       const result = await this._DB.Match.bulkCreate(matchData, {
-        updateOnDuplicate: Object.keys(
-          Match.getAttributes()
-        ) as (keyof IMatchAttrs)[],
+        updateOnDuplicate: fieldsToUpdate,
         conflictAttributes: ["key"],
       });
-      logger.info(`Inserted bulk data inside matches`);
+      logger.info(`Inserted/Updated ${result.length} matches in bulk`);
 
       return result;
     } catch (error: any) {

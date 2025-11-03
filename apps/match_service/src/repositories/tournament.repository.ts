@@ -19,13 +19,20 @@ export default class TournamentRepository {
         throw new BadRequestError("invalid tournament value");
       }
 
+      // Only update fields that come from the API, preserve internal fields
+      const fieldsToUpdate: (keyof ITournamentAtters)[] = [
+        "name",
+        "shortName",
+        "alternateName",
+        "alternateShortName",
+        "updatedAt", // Always update timestamp
+      ];
+
       const result = await this._DB.Tournament.bulkCreate(tournamentData, {
-        updateOnDuplicate: Object.keys(
-          Tournament.getAttributes()
-        ) as (keyof ITournamentAtters)[],
+        updateOnDuplicate: fieldsToUpdate,
         conflictAttributes: ["key"],
       });
-      logger.info(`Inserted bulk data inside tournaments`);
+      logger.info(`Inserted/Updated ${result.length} tournaments in bulk`);
 
       return result;
     } catch (error: any) {

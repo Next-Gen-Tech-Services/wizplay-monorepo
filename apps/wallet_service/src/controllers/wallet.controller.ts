@@ -3,6 +3,7 @@ import { STATUS_CODE } from "@repo/common";
 import { Request, Response } from "express";
 import { autoInjectable } from "tsyringe";
 import WalletService from "../services/wallet.service";
+import { TransactionType } from "../dtos/wallet.dto";
 
 @autoInjectable()
 export default class WalletController {
@@ -25,8 +26,8 @@ export default class WalletController {
 
   public async debitBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
-    const { amount }: { amount: number } = req.body;
-    const result = await this.walletService.debitBalance(userId, amount);
+    const { amount,type = 'withdrawal' }: { amount: number,type?: TransactionType } = req.body;
+    const result = await this.walletService.debitBalance(userId, amount,type);
     return res
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });
@@ -34,8 +35,8 @@ export default class WalletController {
 
   public async creditBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
-    const { amount }: { amount: number } = req.body;
-    const result = await this.walletService.creditBalance(userId, amount,'deposit');
+    const { amount,type = 'deposit' }: { amount: number,type?: TransactionType } = req.body;
+    const result = await this.walletService.creditBalance(userId, amount,type);
     return res
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });

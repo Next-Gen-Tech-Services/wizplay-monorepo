@@ -118,14 +118,24 @@ class MatchCrons {
   }
 
   async scheduleJob() {
-    cron.schedule("0 0 * * *", async () => {
+    cron.schedule("* * * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
       const token = await this.generateApiToken();
-      const { matches, tournaments } = await this.getMatchData();
+      const matchData = await this.getMatchData();
+
+      if (!matchData) {
+        logger.error("[MATCH-CRON] No match data received from API");
+        return;
+      }
+
+      const { matches, tournaments } = matchData;
+      logger.info(
+        `[MATCH-CRON] Received ${tournaments?.length || 0} tournaments and ${matches?.length || 0} matches from API`
+      );
 
       await this.tournamentRepository.createBulkTournaments(tournaments);
       await this.matchRepository.createBulkMatches(matches);
-      logger.info("[MATCH-CRON] cron job executed");
+      logger.info("[MATCH-CRON] cron job executed successfully");
     });
   }
 }
