@@ -59,4 +59,20 @@ router.get("/flags/status", async (req: Request, res: Response) => {
   return controller.getFlagStatus(req, res);
 });
 
+// Live match data routes
+router.get("/matches/:id/live-score", async (req: Request, res: Response) => {
+  const controller = container.resolve(MatchController);
+  return controller.getLiveScore(req, res);
+});
+
+router.get("/matches/:id/events", async (req: Request, res: Response) => {
+  const controller = container.resolve(MatchController);
+  return controller.getMatchEvents(req, res);
+});
+
+router.get("/matches/:id/highlights", async (req: Request, res: Response) => {
+  const controller = container.resolve(MatchController);
+  return controller.getMatchHighlights(req, res);
+});
+
 export default router;
