@@ -48,6 +48,20 @@ export default class MatchController {
     });
   }
 
+  public async getMatchById(req: Request, res: Response) {
+    const matchId = req.params.id;
+    
+    const result = await this.matchService.fetchMatchById(matchId);
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      message: "match fetched successfully",
+      data: result,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
+
+
   async updateMatch(req: Request, res: Response) {
     const { id } = req.params;
     const { showOnFrontend } = req.body;
@@ -86,6 +100,29 @@ export default class MatchController {
     } catch (err: any) {
       // better error mapping with your STATUS_CODE if available
       return res.status(500).json({ success: false, message: err.message });
+    }
+  }
+
+  async getMatchTeamData(req: Request, res: Response) {
+    const { id } = req.params;
+    console.log(`Fetching team data for matchId: ${id}`);
+    try {
+      const result = await this.matchService.getMatchTeamData(id);
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "Match team data fetched successfully",
+        data: result,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err.message,
+        data: null,
+        errors: [err.message],
+        timestamp: new Date().toISOString(),
+      });
     }
   }
 

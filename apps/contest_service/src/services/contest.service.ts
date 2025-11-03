@@ -18,6 +18,7 @@ import {
   formatQuestionsForBulkInsert,
 } from "../utils/questionsFormatter";
 import axios from "axios";
+import ServerConfigs from "../configs/server.config";
 export interface JoinContestPayload {
   userId: string;
   contestId: string;
@@ -203,7 +204,7 @@ export default class ContestService {
       const entryFee = contest.getDataValue("entryFee") as number | null;
       if (entryFee && entryFee > 0) {
         const walletUrl =
-          process.env.WALLET_SERVICE_URL ?? "http://localhost:4006";
+          ServerConfigs.WALLET_SERVICE_URL ?? "http://localhost:4006";
         const debitUrl = `${walletUrl}/api/v1/wallet/debit`;
 
         logger.info(

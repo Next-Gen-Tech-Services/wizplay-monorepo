@@ -6,6 +6,7 @@ export interface ITeamSide {
   alternate_code?: string;
   gender_name?: string;
   country_code?: string | null;
+  flag_url?: string; // Team flag/logo URL
 }
 
 export interface ITeams {

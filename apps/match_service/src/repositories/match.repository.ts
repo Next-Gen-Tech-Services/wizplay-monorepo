@@ -4,6 +4,25 @@ import { DB, IDatabase } from "../configs/database.config";
 import { IMatchAttrs } from "../dtos/match.dto";
 import { IMatchFilters } from "../interfaces/match";
 import { Match } from "../models/match.model";
+import ServerConfigs from "../configs/server.config";
+
+/**
+ * Add team flag URLs to match data based on country codes
+ * Uses locally stored flags downloaded from Roanuz API
+ */
+function addTeamFlags(matchData: any): any {
+  if (matchData && matchData.teams) {
+    const baseUrl = ServerConfigs.ASSET_SERVICE_URL;
+
+    if (matchData.teams.a && matchData.teams.a.country_code) {
+      matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
+    }
+    if (matchData.teams.b && matchData.teams.b.country_code) {
+      matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
+    }
+  }
+  return matchData;
+}
 
 export default class MatchRepository {
   private _DB: IDatabase = DB;
@@ -11,7 +30,7 @@ export default class MatchRepository {
     this._DB = DB;
   }
 
-  public async getTestData(): Promise<any> {}
+  public async getTestData(): Promise<any> { }
 
   public async createBulkMatches(matchData: IMatchAttrs[]): Promise<any> {
     try {
@@ -173,7 +192,9 @@ export default class MatchRepository {
             ? true
             : Boolean(plain.wishlisted);
         if (plain.wishlists !== undefined) delete plain.wishlists;
-        return plain;
+
+        // Add team flag URLs
+        return addTeamFlags(plain);
       });
 
       return {
@@ -268,6 +289,35 @@ export default class MatchRepository {
         },
         include: [{ association: "tournaments" }],
       });
+
+      if (matchData) {
+        const plain = matchData.get({ plain: true });
+        return addTeamFlags(plain);
+      }
+
+      return matchData;
+    } catch (error: any) {
+      logger.error(error.message);
+    }
+  }
+
+  public async getMatchById(matchId: string): Promise<any> {
+    try {
+      if (!matchId) {
+        throw new BadRequestError("invalid match id");
+      }
+
+      const matchData = await this._DB.Match.findOne({
+        where: {
+          id: matchId,
+        },
+        include: [{ association: "tournaments" }],
+      });
+
+      if (matchData) {
+        const plain = matchData.get({ plain: true });
+        return addTeamFlags(plain);
+      }
 
       return matchData;
     } catch (error: any) {

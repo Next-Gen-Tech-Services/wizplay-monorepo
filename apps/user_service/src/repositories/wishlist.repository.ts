@@ -1,6 +1,24 @@
 // src/repositories/wishlist.repository.ts
 import { logger } from "@repo/common";
 import { DB } from "../configs/database.config";
+import ServerConfigs from "../configs/server.config";
+
+/**
+ * Add team flag URLs to match data
+ */
+function addTeamFlags(matchData: any): any {
+  if (matchData && matchData.teams) {
+    const baseUrl = ServerConfigs.MATCHES_SERVICE_URL;
+
+    if (matchData.teams.team1 && matchData.teams.team1.code) {
+      matchData.teams.team1.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.team1.code.toLowerCase()}.svg`;
+    }
+    if (matchData.teams.team2 && matchData.teams.team2.code) {
+      matchData.teams.team2.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.team2.code.toLowerCase()}.svg`;
+    }
+  }
+  return matchData;
+}
 
 export default class WishlistRepository {
   private _DB = DB;
@@ -19,12 +37,26 @@ export default class WishlistRepository {
   }
 
   public async findByUser(userId: string, limit = 50, offset = 0) {
-    return this._DB.Wishlist.findAll({
-      where: { userId },
-      order: [["createdAt", "DESC"]],
-      limit,
-      offset,
-    });
+    try {
+      const wishlists = await this._DB.Wishlist.findAll({
+        where: { userId },
+        order: [["createdAt", "DESC"]],
+        limit,
+        offset,
+      });
+
+      // Add team flag URLs to each wishlist item's match data
+      return wishlists.map((wishlist: any) => {
+        const plain = wishlist.get ? wishlist.get({ plain: true }) : wishlist;
+        if (plain.matchData) {
+          plain.matchData = addTeamFlags(plain.matchData);
+        }
+        return plain;
+      });
+    } catch (err: any) {
+      logger.error("WishlistRepository.findByUser error", err);
+      throw err;
+    }
   }
 
   public async findByMatchId(userId: string, matchId: string) {

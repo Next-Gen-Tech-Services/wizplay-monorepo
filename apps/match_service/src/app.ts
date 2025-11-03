@@ -8,6 +8,7 @@ import ServerConfigs from "./configs/server.config";
 import MatchRouter from "./routes/match.router";
 import matchEventHandler from "./utils/events/match.events";
 import matchCrons from "./utils/jobs/match";
+import countryFlagsCron from "./utils/jobs/country-flags";
 import { connectProducer } from "./utils/kafka";
 import { Server as SocketIOServer } from "socket.io";
 
@@ -45,6 +46,7 @@ const CronsInit = async () => {
   try {
     logger.info("Waiting for crons to be initialized...");
     await matchCrons.scheduleJob();
+    await countryFlagsCron.scheduleJob();
     logger.info("Cron jobs scheduled successfully");
   } catch (error) {
     logger.error("Failed to initialize cron jobs:", error);
@@ -81,6 +83,9 @@ const AppInit = async () => {
   expressApp.use(cors());
   expressApp.use(express.json());
   expressApp.use(attachRequestId);
+
+  // Serve static flag images
+  expressApp.use("/api/v1/matches/flags/", express.static("public/flags"));
 
   await BrokerInit();
   await CronsInit();

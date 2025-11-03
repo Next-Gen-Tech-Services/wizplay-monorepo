@@ -24,6 +24,7 @@ class ServerConfigs {
   static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
   static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
+  static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
   private constructor() {}
 }
 

@@ -2,11 +2,13 @@
 import { BadRequestError, logger, ServerError } from "@repo/common";
 import { Transaction } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
+import ServerConfigs from "../configs/server.config";
 import {
   CreateContestPayload,
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import { Contest } from "../models/contest.model";
+import axios from "axios";
 
 export default class ContestRepository {
   private _DB: IDatabase = DB;
@@ -122,10 +124,35 @@ export default class ContestRepository {
       if (d.userJoins) delete d.userJoins;
       if (d.userContests) delete d.userContests;
 
+      logger.info(`[CONTEST-REPO] Fetching match data for contest ${id}`);
+      // Fetch match data if matchId exists
+      let matchData = null;
+      if (d.matchId) {
+        try {
+          const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL || "http://localhost:4003";
+          // Use the matches list endpoint filtered by the specific match ID
+          const matchResponse = await axios.get(
+            `${matchServiceUrl}/api/v1/matches/${d.matchId}`,
+            {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+          
+          // Extract the first match from the response
+          matchData = matchResponse.data?.data || [];
+        } catch (matchErr: any) {
+          logger.error(`Failed to fetch match data for contest ${id}: ${matchErr?.message ?? matchErr}`);
+          // Don't throw error, just set matchData to null
+        }
+      }
+
       return {
         ...d,
         hasJoined,
         rankRanges, // [{from, to, amount, totalPayout}, ...]
+        matchData, // populated match data
       };
     } catch (err: any) {
       logger.error(`getContestById DB error: ${err?.message ?? err}`);

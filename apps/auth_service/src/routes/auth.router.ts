@@ -41,7 +41,6 @@ router.post(
     body("referralCode")
       .optional()
       .isString()
-      .isLength({ min: 3, max: 20 })
       .withMessage("Invalid referral code"),
   ],
   validateRequest,

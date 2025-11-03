@@ -40,7 +40,7 @@ export default class Service {
     const otpCode: string = generateOTPUtil();
     logger.info(`OTP Code : ${otpCode}`);
 
-    if (ServerConfigs.NODE_ENV === "production") {
+    if (ServerConfigs.NODE_ENV === "development") {
       const res = await sendOtpUtil(phoneNumber);
     }
     if (userExist) {
@@ -93,7 +93,7 @@ export default class Service {
 
       let verifiedUser;
 
-      if (ServerConfigs.NODE_ENV === "production") {
+      if (ServerConfigs.NODE_ENV === "development") {
         const response = await verifyOtpUtil(phoneNumber, otpCode);
         if (response?.type === "error") {
           throw new BadRequestError(response?.message);

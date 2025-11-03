@@ -26,6 +26,7 @@ class ServerConfigs {
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
   static ROANUZ_PK: string = process.env.ROANUZ_PK as string;
   static ROANUZ_AK: string = process.env.ROANUZ_AK as string;
+  static ASSET_SERVICE_URL: string = process.env.ASSET_SERVICE_URL as string;
   private constructor() {}
 }
 

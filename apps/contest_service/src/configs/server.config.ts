@@ -27,6 +27,8 @@ class ServerConfigs {
   static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
   static OPEN_API_KEY: string = process.env.OPEN_API_KEY as string;
+  static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
+  static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
   private constructor() {}
 }
 

@@ -85,77 +85,16 @@ class MatchCrons {
     }
   }
 
-  private async fetchMatchesForNext48Hours() {
-    try {
-      const roanuzToken = await redis.getter("roanuzToken");
-      const start = new Date();
-      const end = new Date(start.getTime() + 48 * 60 * 60 * 1000);
-      const params = {
-        date_from: start.toISOString(),
-        date_to: end.toISOString(),
-      };
-      const matchResponse = await axios({
-        method: "GET",
-        url: `https://api.sports.roanuz.com/v5/cricket/${this.roanuzPK}/fixtures/`,
-        headers: {
-          "Content-Type": "application/json",
-          "rs-token": roanuzToken || this.authToken,
-        },
-        params,
-      });
-      if (matchResponse?.status !== 200)
-        throw new Error(matchResponse?.data?.error);
-      const inputDays = { days: matchResponse?.data?.data?.month?.days };
-      const extractedData = extractMatches(inputDays);
-      const matchAndTournament = formatMatchData(extractedData);
-      const currentDate = new Date().toLocaleDateString();
-      await redis.setter(currentDate, JSON.stringify(matchAndTournament));
-      return matchAndTournament;
-    } catch (error: any) {
-      logger.error(`[MATCH-CRON] Error in match data api ${error.message}`);
-      return null;
-    }
-  }
-
   async scheduleJob() {
-    // Run every 1 minute: "* * * * *"
-    cron.schedule("* * * * *", async () => {
-      try {
-        logger.info("[MATCH-CRON] Cron job started - Running every 1 minute");
-        
-        const token = await this.generateApiToken();
-        if (!token) {
-          logger.error("[MATCH-CRON] Failed to generate API token");
-          return;
-        }
+    cron.schedule("0 0 * * *", async () => {
+      logger.info("[MATCH-CRON] cron job scheduled");
+      const token = await this.generateApiToken();
+      const { matches, tournaments } = await this.getMatchData();
 
-        const matchData = await this.getMatchData();
-
-        if (!matchData) {
-          logger.error("[MATCH-CRON] No match data received from API");
-          return;
-        }
-
-        const { matches, tournaments } = matchData;
-        logger.info(
-          `[MATCH-CRON] Received ${tournaments?.length || 0} tournaments and ${matches?.length || 0} matches from API`
-        );
-
-        if (tournaments?.length > 0) {
-          await this.tournamentRepository.createBulkTournaments(tournaments);
-        }
-        
-        if (matches?.length > 0) {
-          await this.matchRepository.createBulkMatches(matches);
-        }
-
-        logger.info("[MATCH-CRON] Cron job executed successfully");
-      } catch (error: any) {
-        logger.error(`[MATCH-CRON] Error in cron job execution: ${error.message}`);
-      }
+      await this.tournamentRepository.createBulkTournaments(tournaments);
+      await this.matchRepository.createBulkMatches(matches);
+      logger.info("[MATCH-CRON] cron job executed");
     });
-    
-    logger.info("[MATCH-CRON] Job scheduled to run every 1 minute");
   }
 }
 
