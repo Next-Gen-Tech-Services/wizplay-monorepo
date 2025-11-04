@@ -1,6 +1,6 @@
 // src/repositories/contest.repository.ts
 import { BadRequestError, logger, ServerError } from "@repo/common";
-import { Transaction } from "sequelize";
+import { Op, Transaction } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
 import ServerConfigs from "../configs/server.config";
 import {
@@ -26,6 +26,23 @@ export default class ContestRepository {
       throw new ServerError("Database error creating contest");
     }
   }
+
+  public async findOne(
+    id: string,
+  ): Promise<any | null> {
+    try {
+      const contest = await this._DB.Contest.findByPk(id);
+      if (!contest) return null;
+      return {
+        ...contest.toJSON(),
+
+      };
+    } catch (err: any) {
+      logger.error(`getContestById DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error");
+    }
+  }
+
 
   public async getContestById(
     id: string,
@@ -139,7 +156,7 @@ export default class ContestRepository {
               }
             }
           );
-          
+
           // Extract the first match from the response
           matchData = matchResponse.data?.data || [];
         } catch (matchErr: any) {
@@ -616,5 +633,57 @@ export default class ContestRepository {
       total: curAmt * (curTo - curFrom + 1),
     });
     return slabs;
+  }
+
+  /**
+   * Find all contests by match ID
+   */
+  public async findByMatchId(matchId: string) {
+    try {
+      return await this._DB.Contest.findAll({
+        where: { matchId },
+      });
+    } catch (err: any) {
+      logger.error(`ContestRepository.findByMatchId error: ${err?.message ?? err}`);
+      throw err;
+    }
+  }
+
+  /**
+   * Update contest status
+   */
+  public async updateStatus(contestId: string, status: "scheduled" | "running" | "completed" | "cancelled") {
+    try {
+      const contest = await this._DB.Contest.findByPk(contestId);
+      if (!contest) {
+        throw new Error(`Contest ${contestId} not found`);
+      }
+
+      await contest.update({ status });
+      logger.info(`Contest ${contestId} status updated to ${status}`);
+      return contest;
+    } catch (err: any) {
+      logger.error(`ContestRepository.updateStatus error: ${err?.message ?? err}`);
+      throw err;
+    }
+  }
+
+  /**
+   * Find all scheduled contests whose join deadline has passed
+   */
+  public async findExpiredScheduled(currentTimestamp: number) {
+    try {
+      return await this._DB.Contest.findAll({
+        where: {
+          status: "scheduled",
+          startAt: {
+            [Op.lt]: currentTimestamp,
+          },
+        },
+      });
+    } catch (err: any) {
+      logger.error(`ContestRepository.findExpiredScheduled error: ${err?.message ?? err}`);
+      throw err;
+    }
   }
 }

@@ -357,4 +357,101 @@ export default class MatchRepository {
       throw error;
     }
   }
+
+  /**
+   * Get all active matches (not completed or cancelled)
+   */
+  public async getActiveMatches(): Promise<Match[]> {
+    try {
+      const matches = await this._DB.Match.findAll({
+        where: {
+          status: {
+            [Op.notIn]: ["completed", "cancelled", "abandoned"],
+          },
+        },
+        order: [["startedAt", "ASC"]],
+      });
+      return matches;
+    } catch (error: any) {
+      logger.error(`Error fetching active matches: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetch match data from Roanuz API
+   */
+  public async fetchMatchFromRoanuz(matchKey: string): Promise<any> {
+    try {
+      // TODO: Implement actual Roanuz API call
+      // This is a placeholder - you'll need to implement the actual API call
+      logger.info(`Fetching match ${matchKey} from Roanuz API`);
+      
+      // Example API call structure:
+      // const response = await axios.get(`${ROANUZ_API_URL}/matches/${matchKey}`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${ROANUZ_API_KEY}`
+      //   }
+      // });
+      // return response.data;
+      
+      return null; // Replace with actual API response
+    } catch (error: any) {
+      logger.error(`Error fetching match from Roanuz: ${error.message}`);
+      return null;
+    }
+  }
+
+  /**
+   * Update match status
+   */
+  public async updateMatchStatus(
+    matchId: string,
+    data: {
+      status: string;
+      winner?: string;
+      startedAt?: number;
+      endedAt?: number;
+    }
+  ): Promise<Match | null> {
+    try {
+      const match = await this._DB.Match.findByPk(matchId);
+      if (!match) {
+        logger.warn(`Match ${matchId} not found for status update`);
+        return null;
+      }
+
+      await match.update(data);
+      logger.info(`Updated match ${matchId} status to ${data.status}`);
+      return match;
+    } catch (error: any) {
+      logger.error(`Error updating match status: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
+   * Update live match data
+   */
+  public async updateLiveData(matchId: string, liveData: any): Promise<any> {
+    try {
+      // Store live data in a JSONB column or separate table
+      const match = await this._DB.Match.findByPk(matchId);
+      if (!match) {
+        return null;
+      }
+
+      // You might want to add a liveData column to the Match model
+      // For now, we'll just log it
+      logger.debug(`Live data updated for match ${matchId}`);
+      
+      // TODO: Store live data in database
+      // await match.update({ liveData });
+      
+      return match;
+    } catch (error: any) {
+      logger.error(`Error updating live data: ${error.message}`);
+      throw error;
+    }
+  }
 }

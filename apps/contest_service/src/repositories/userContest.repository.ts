@@ -93,4 +93,20 @@ export default class UserContestRepository {
       throw err;
     }
   }
+
+  /**
+   * Find all users who joined a specific contest
+   */
+  public async findByContestId(contestId: string) {
+    try {
+      return await this._DB.UserContest.findAll({
+        where: { contestId },
+      });
+    } catch (err: any) {
+      logger.error(
+        `UserContestRepository.findByContestId error: ${err?.message ?? err}`
+      );
+      throw err;
+    }
+  }
 }

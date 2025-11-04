@@ -8,4 +8,6 @@ export enum KAFKA_EVENTS {
   USER_ADD_TO_WISHLIST = "user_add_to_wishlist",
   USER_REMOVE_FROM_WISHLIST = "user_remove_from_wishlist",
   GENERATE_CONTEST = "generate_contest",
+  MATCH_STATUS_CHANGED = "match_status_changed",
+  MATCH_LIVE_DATA_UPDATE = "match_live_data_update",
 }
