@@ -27,6 +27,11 @@ export class NotificationClient {
     }
 
     try {
+      // Validate config
+      if (!config.projectId || !config.privateKey || !config.clientEmail) {
+        throw new Error('Invalid Firebase configuration: projectId, privateKey, and clientEmail are required');
+      }
+
       this.app = admin.initializeApp({
         credential: admin.credential.cert({
           projectId: config.projectId,

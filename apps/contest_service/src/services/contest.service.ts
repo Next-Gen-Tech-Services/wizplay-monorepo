@@ -213,7 +213,7 @@ export default class ContestService {
         try {
           const resp = await axios.patch(
             debitUrl,
-            { 
+            {
               amount: entryFee,
               type: 'contest_entry'
             },
@@ -288,7 +288,7 @@ export default class ContestService {
           if (entryFee > 0 && authHeader) {
             await axios.patch(
               creditUrl,
-              { 
+              {
                 amount: entryFee,
                 type: 'contest_refund'
               },
@@ -334,10 +334,44 @@ export default class ContestService {
   public async userContest(userId: string) {
     try {
       const contests = await this.userContestRepo!.findAllUserContests(userId);
-      return contests;
+
+      // Populate match data for each contest
+      const contestsWithMatchData = await Promise.all(
+        contests.map(async (userContest: any) => {
+          const contest = userContest.contest;
+
+          if (contest?.matchId) {
+            try {
+              // Fetch match data from match service
+              const matchResponse = await axios.get(
+                `${ServerConfigs.MATCHES_SERVICE_URL}/api/v1/matches/${contest.matchId}`
+              );
+
+              // Add match data to contest
+              const contestData = contest.toJSON ? contest.toJSON() : contest;
+              return {
+                ...userContest.toJSON(),
+                matchData: matchResponse.data?.data || null,
+                contest: contestData,
+
+              };
+            } catch (matchErr: any) {
+              logger.warn(
+                `Failed to fetch match data for matchId ${contest.matchId}: ${matchErr?.message}`
+              );
+              // Return contest without match data if fetch fails
+              return userContest;
+            }
+          }
+
+          return userContest;
+        })
+      );
+
+      return contestsWithMatchData;
     } catch (err: any) {
-      logger.error(`ContestService.joinContest error: ${err?.message ?? err}`);
-      throw new ServerError("Failed to join contest");
+      logger.error(`ContestService.userContest error: ${err?.message ?? err}`);
+      throw new ServerError("Failed to fetch user contests");
     }
   }
 }

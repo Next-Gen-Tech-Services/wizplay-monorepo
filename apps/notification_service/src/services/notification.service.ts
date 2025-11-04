@@ -1,147 +1,111 @@
 // src/services/notification.service.ts
-import { logger } from "@repo/common";
+import { BadRequestError, ServerError, logger } from "@repo/common";
 import { autoInjectable } from "tsyringe";
-import { getNotificationClient, NotificationPayload} from "@repo/notifications";
+import { getNotificationClient, NotificationPayload } from "@repo/notifications";
 import ServerConfigs from "../configs/server.config";
-import NotificationRepository from "../repositories/notification.repository";
 import axios from "axios";
+import NotificationRepository from "../repositories/notification.repository";
 
 @autoInjectable()
 export default class NotificationService {
-  private notificationClient = getNotificationClient({
-    projectId: ServerConfigs.FIREBASE_PROJECT_ID,
-    privateKey: ServerConfigs.FIREBASE_PRIVATE_KEY,
-    clientEmail: ServerConfigs.FIREBASE_CLIENT_EMAIL,
-  });
+  private notificationClient?: ReturnType<typeof getNotificationClient>;
 
   constructor(private readonly notificationRepo: NotificationRepository) {}
 
-  /**
-   * Send notification and save to database
-   */
+  private getClient() {
+    if (!this.notificationClient) {
+      if (!ServerConfigs.FIREBASE_PROJECT_ID || !ServerConfigs.FIREBASE_PRIVATE_KEY || !ServerConfigs.FIREBASE_CLIENT_EMAIL) {
+        throw new BadRequestError("Firebase credentials are not configured");
+      }
+      this.notificationClient = getNotificationClient({
+        projectId: ServerConfigs.FIREBASE_PROJECT_ID,
+        privateKey: ServerConfigs.FIREBASE_PRIVATE_KEY,
+        clientEmail: ServerConfigs.FIREBASE_CLIENT_EMAIL,
+      });
+    }
+    return this.notificationClient;
+  }
+
   public async sendNotification(payload: NotificationPayload & { deviceToken?: string }) {
     try {
-      // Save to database first
+      if (!payload?.userId || !payload?.title || !payload?.body || !payload?.type) {
+        throw new BadRequestError("Missing required notification fields");
+      }
+
       const notification = await this.notificationRepo.create({
         userId: payload.userId,
         title: payload.title,
         body: payload.body,
         type: payload.type,
         data: payload.data || {},
-        imageUrl: payload.imageUrl,
-        actionUrl: payload.actionUrl,
-        deviceToken: payload.deviceToken,
+        imageUrl: payload.imageUrl ?? null,
+        actionUrl: payload.actionUrl ?? null,
+        deviceToken: payload.deviceToken ?? null,
         isSent: false,
         isRead: false,
       });
 
-      // If device token provided, send via Firebase
-      if (payload.deviceToken) {
-        try {
-          const result = await this.notificationClient.send(payload.deviceToken, payload);
-
-          // Update sent status
-          await this.notificationRepo.updateSentStatus(
-            notification.id,
-            result.success,
-            result.error
-          );
-
-          logger.info(`Notification sent to user ${payload.userId}: ${result.messageId}`);
-        } catch (sendErr: any) {
-          logger.error(`Failed to send notification: ${sendErr?.message}`);
-          await this.notificationRepo.updateSentStatus(
-            notification.id,
-            false,
-            sendErr?.message
-          );
-        }
-      } else {
+      const token = payload.deviceToken ?? (await this.getUserDeviceToken(payload.userId));
+      if (!token) {
         logger.warn(`No device token for user ${payload.userId}, notification saved to DB only`);
+        return { data: notification, message: "Notification saved without device token" };
       }
 
-      return notification;
+      try {
+        const client = this.getClient();
+        const result = await client.send(token, { ...payload, userId: payload.userId });
+        await this.notificationRepo.updateSentStatus(notification.id, true, null);
+        logger.info(`Notification sent to user ${payload.userId}: ${result.messageId}`);
+      } catch (sendErr: any) {
+        logger.error(`Failed to send notification: ${sendErr?.message}`);
+        await this.notificationRepo.updateSentStatus(notification.id, false, sendErr?.message);
+      }
+
+      return { data: notification, message: "Notification processed" };
     } catch (err: any) {
       logger.error(`NotificationService.sendNotification error: ${err?.message ?? err}`);
-      throw err;
+      throw new ServerError(err?.message ?? "Notification send failed");
     }
   }
 
-  /**
-   * Get user notifications
-   */
   public async getUserNotifications(userId: string, limit = 50, offset = 0) {
     try {
       const notifications = await this.notificationRepo.findByUserId(userId, limit, offset);
       const unreadCount = await this.notificationRepo.countUnread(userId);
-
-      return {
-        notifications,
-        unreadCount,
-        total: notifications.length,
-      };
+      return { data: { notifications, unreadCount, total: notifications.length }, message: "OK" };
     } catch (err: any) {
       logger.error(`NotificationService.getUserNotifications error: ${err?.message ?? err}`);
-      throw err;
+      throw new ServerError(err?.message ?? "Failed to fetch notifications");
     }
   }
 
-  /**
-   * Mark notification as read
-   */
   public async markAsRead(notificationId: string) {
     try {
-      return await this.notificationRepo.markAsRead(notificationId);
+      const res = await this.notificationRepo.markAsRead(notificationId);
+      return { data: res, message: "Marked as read" };
     } catch (err: any) {
       logger.error(`NotificationService.markAsRead error: ${err?.message ?? err}`);
-      throw err;
+      throw new ServerError(err?.message ?? "Failed to mark as read");
     }
   }
 
-  /**
-   * Mark all notifications as read for a user
-   */
   public async markAllAsRead(userId: string) {
     try {
-      return await this.notificationRepo.markAllAsRead(userId);
+      const res = await this.notificationRepo.markAllAsRead(userId);
+      return { data: res, message: "All marked as read" };
     } catch (err: any) {
       logger.error(`NotificationService.markAllAsRead error: ${err?.message ?? err}`);
-      throw err;
+      throw new ServerError(err?.message ?? "Failed to mark all as read");
     }
   }
 
-  /**
-   * Get device token from user service
-   */
   public async getUserDeviceToken(userId: string): Promise<string | null> {
     try {
-      const response = await axios.get(
-        `${ServerConfigs.USER_SERVICE_URL}/api/v1/user/${userId}`,
-        { timeout: 3000 }
-      );
-
-      if (response.data?.success && response.data.data?.deviceToken) {
-        return response.data.data.deviceToken;
-      }
-
-      return null;
+      const response = await axios.get(`${ServerConfigs.USER_SERVICE_URL}/api/v1/user/${userId}/device-token`);
+      return response.data?.deviceToken || null;
     } catch (err: any) {
-      logger.warn(`Failed to get device token for user ${userId}: ${err?.message}`);
+      logger.error(`Failed to get device token for user ${userId}: ${err?.message}`);
       return null;
-    }
-  }
-
-  /**
-   * Delete old notifications (cleanup job)
-   */
-  public async cleanupOldNotifications(daysOld: number = 30) {
-    try {
-      const deleted = await this.notificationRepo.deleteOld(daysOld);
-      logger.info(`Deleted ${deleted} old notifications`);
-      return deleted;
-    } catch (err: any) {
-      logger.error(`NotificationService.cleanupOldNotifications error: ${err?.message ?? err}`);
-      throw err;
     }
   }
 }

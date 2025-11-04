@@ -37,7 +37,7 @@ COPY --from=builder /app/apps/notification_service/package.json ./apps/notificat
 RUN npm install -g pnpm
 
 # Expose port
-EXPOSE 4006
+EXPOSE 4007
 
 # Start the service
 CMD ["node", "apps/notification_service/dist/server.js"]

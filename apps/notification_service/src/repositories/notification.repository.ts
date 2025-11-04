@@ -1,127 +1,168 @@
 // src/repositories/notification.repository.ts
-import { logger } from "@repo/common";
+import { autoInjectable } from "tsyringe";
 import { Op } from "sequelize";
-import { DB } from "../configs/database.config";
+import { logger, ServerError } from "@repo/common";
+import { NotificationType } from "@repo/notifications";
+import { DB, IDatabase } from "../configs/database.config";
 
+@autoInjectable()
 export default class NotificationRepository {
-  private _DB = DB;
+  private _DB: IDatabase = DB;
 
-  constructor() {}
-
-  public async create(payload: any) {
+  /**
+   * Create a new notification
+   */
+  public async create(data: {
+    userId: string;
+    title: string;
+    body: string;
+    type: NotificationType;
+    data?: Record<string, any>;
+    imageUrl?: string | null;
+    actionUrl?: string | null;
+    deviceToken?: string | null;
+    isSent: boolean;
+    isRead: boolean;
+  }) {
     try {
-      const notification = await this._DB.Notification.create(payload);
-      return notification;
+      const result = await this._DB.Notification.create({
+        ...data,
+        data: data.data ?? {},
+        imageUrl: data.imageUrl ?? null,
+        actionUrl: data.actionUrl ?? null,
+        deviceToken: data.deviceToken ?? null,
+      });
+      return result;
     } catch (err: any) {
-      logger.error(`NotificationRepository.create error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(create) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
+  /**
+   * Find notification by ID
+   */
   public async findById(id: string) {
     try {
       return await this._DB.Notification.findByPk(id);
     } catch (err: any) {
-      logger.error(`NotificationRepository.findById error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(findById) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
+  /**
+   * Find notifications by user ID (paginated, newest first)
+   */
   public async findByUserId(userId: string, limit = 50, offset = 0) {
     try {
-      const notifications = await this._DB.Notification.findAll({
+      return await this._DB.Notification.findAll({
         where: { userId },
-        order: [["createdAt", "DESC"]],
         limit,
         offset,
+        order: [["createdAt", "DESC"]],
       });
-      return notifications;
     } catch (err: any) {
-      logger.error(`NotificationRepository.findByUserId error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(findByUserId) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
+  /**
+   * Count unread notifications for a user
+   */
   public async countUnread(userId: string) {
     try {
-      const count = await this._DB.Notification.count({
+      return await this._DB.Notification.count({
         where: { userId, isRead: false },
       });
-      return count;
     } catch (err: any) {
-      logger.error(`NotificationRepository.countUnread error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(countUnread) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
+  /**
+   * Mark notification as read
+   */
   public async markAsRead(id: string) {
     try {
-      const [updated] = await this._DB.Notification.update(
-        { isRead: true, readAt: new Date() },
-        { where: { id } }
-      );
-      return updated > 0;
+      const notification = await this._DB.Notification.findByPk(id);
+      if (notification) {
+        notification.isRead = true;
+        notification.readAt = new Date();
+        await notification.save();
+      }
+      return notification;
     } catch (err: any) {
-      logger.error(`NotificationRepository.markAsRead error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(markAsRead) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
+  /**
+   * Mark all notifications as read for a user
+   */
   public async markAllAsRead(userId: string) {
     try {
-      const [updated] = await this._DB.Notification.update(
+      const [count] = await this._DB.Notification.update(
         { isRead: true, readAt: new Date() },
         { where: { userId, isRead: false } }
       );
-      return updated;
+      return count;
     } catch (err: any) {
-      logger.error(`NotificationRepository.markAllAsRead error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(markAllAsRead) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
-  public async updateSentStatus(id: string, isSent: boolean, errorMessage?: string) {
+  /**
+   * Update sent status (and error message if failed)
+   */
+  public async updateSentStatus(id: string, isSent: boolean, errorMessage?: string | null) {
     try {
-      const [updated] = await this._DB.Notification.update(
-        {
-          isSent,
-          sentAt: isSent ? new Date() : null,
-          errorMessage: errorMessage || null,
-        },
-        { where: { id } }
-      );
-      return updated > 0;
+      const notification = await this._DB.Notification.findByPk(id);
+      if (notification) {
+        notification.isSent = isSent;
+        notification.sentAt = isSent ? new Date() : null;
+        notification.errorMessage = errorMessage ?? null;
+        await notification.save();
+      }
+      return notification;
     } catch (err: any) {
-      logger.error(`NotificationRepository.updateSentStatus error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(updateSentStatus) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
+  /**
+   * Delete notification by ID
+   */
   public async deleteById(id: string) {
     try {
-      const deleted = await this._DB.Notification.destroy({ where: { id } });
-      return deleted > 0;
+      return await this._DB.Notification.destroy({ where: { id } });
     } catch (err: any) {
-      logger.error(`NotificationRepository.deleteById error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(deleteById) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 
-  public async deleteOld(daysOld: number = 30) {
+  /**
+   * Delete old notifications (older than specified days)
+   */
+  public async deleteOld(days: number = 30) {
     try {
-      const cutoffDate = new Date();
-      cutoffDate.setDate(cutoffDate.getDate() - daysOld);
+      const date = new Date();
+      date.setDate(date.getDate() - days);
 
-      const deleted = await this._DB.Notification.destroy({
+      return await this._DB.Notification.destroy({
         where: {
-          createdAt: { [Op.lt]: cutoffDate },
-          isRead: true,
+          createdAt: { [Op.lt]: date },
         },
       });
-      return deleted;
     } catch (err: any) {
-      logger.error(`NotificationRepository.deleteOld error: ${err?.message ?? err}`);
-      throw err;
+      logger.error(`DB(deleteOld) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
     }
   }
 }

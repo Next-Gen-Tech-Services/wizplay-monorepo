@@ -1,12 +1,13 @@
-import { logger, STATUS_CODE } from "@repo/common";
+import { logger, UnAuthorizError } from "@repo/common";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import ServerConfigs from "../configs/server.config";
+import { IUserAtters } from "../dtos/user.dto";
 
 declare global {
   namespace Express {
     interface Request {
-      currentUser?: any;
+      currentUser?: IUserAtters;
       userId?: string;
     }
   }
@@ -17,40 +18,28 @@ export const requireAuth = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log("[MIDDLEWARE] Access token: ", req.headers.authorization);
+  const bearerToken = req.headers.authorization;
+  const sessionId = bearerToken?.split(" ");
+
+  if (!sessionId) {
+    throw new UnAuthorizError("Unauthorized access");
+  }
+
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    console.log("[MIDDLEWARE] Session token: ", sessionId);
+    const payload: any = jwt.verify(sessionId[1], ServerConfigs.TOKEN_SECRET);
 
-    if (!token) {
-      return res.status(STATUS_CODE.UN_AUTHORIZED).json({
-        success: false,
-        message: "No token provided",
-        timestamp: new Date().toISOString(),
-      });
+    const payloadKeys = payload?.data?.session_id.split(":");
+    logger.info(`Keys=====:${payloadKeys} `);
+    if (payloadKeys.length !== 3) {
+      throw new UnAuthorizError();
     }
 
-    const payload: any = jwt.verify(token, ServerConfigs.TOKEN_SECRET);
-    
-    // Support different token formats
-    if (payload?.data?.session_id) {
-      const payloadKeys = payload.data.session_id.split(":");
-      req.userId = payloadKeys[1];
-    } else if (payload?.userId) {
-      req.userId = payload.userId;
-    } else {
-      return res.status(STATUS_CODE.UN_AUTHORIZED).json({
-        success: false,
-        message: "Invalid token format",
-        timestamp: new Date().toISOString(),
-      });
-    }
-
-    req.currentUser = payload;
-    next();
+    req.userId = payloadKeys[1];
+    return next();
   } catch (error) {
-    return res.status(STATUS_CODE.UN_AUTHORIZED).json({
-      success: false,
-      message: "Invalid or expired token",
-      timestamp: new Date().toISOString(),
-    });
+    logger.error(`[MIDDLEWARE]: ${error}`);
+    throw new UnAuthorizError();
   }
 };

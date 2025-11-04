@@ -1,4 +1,3 @@
-// src/configs/server.config.ts
 import dotenv from "dotenv";
 
 dotenv.config({
@@ -7,9 +6,10 @@ dotenv.config({
 
 class ServerConfigs {
   static NODE_ENV: string = process.env.NODE_ENV as string;
-  static APP_PORT: string = process.env.NOTIFICATION_SERVICE_PORT || "4006";
-  static TOKEN_SECRET: string = process.env.TOKEN_SECRET as string;
+  static APP_PORT: string = process.env.NOTIFICATION_SERVICE_PORT || "4007";
+  static LOG_LEVEL: string = process.env.LOG_LEVEL as string;
   static API_VERSION: string = process.env.API_VERSION || "v1";
+  static TOKEN_SECRET: string = process.env.TOKEN_SECRET as string;
   
   // Database
   static DATABASE_NAME: string = process.env.NOTIFICATION_DATABASE_NAME as string;
@@ -46,4 +46,3 @@ class ServerConfigs {
 }
 
 export default ServerConfigs;
-export const serverConfig = ServerConfigs;

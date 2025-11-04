@@ -191,7 +191,7 @@ export default class Service {
 
       const resetToken = encryptPassword(user.email).toString();
       const setCache = await this.redis.setter(user.email, resetToken);
-      logger.info(`[auth-service] Adding reset token: ${setCache}`);
+      logger.info(`[auth-service] Adding reset token: ${resetToken}`);
 
       const resetLink = `${ServerConfigs.CLIENT_HOST}/reset-password?token=${resetToken}&email=${email}`;
       sendResetLinkMail(user.email, resetLink);

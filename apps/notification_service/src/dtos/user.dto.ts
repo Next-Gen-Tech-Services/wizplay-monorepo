@@ -1,6 +1,6 @@
 import { Language } from "../types";
 
-export interface IUserAttributes {
+export interface IUserAtters {
   id: string;
   userId: string;
   authId: string;

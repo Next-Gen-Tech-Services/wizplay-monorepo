@@ -73,7 +73,6 @@ router.post("/contests/generate", async (req: Request, res: Response) => {
 
 router.post(
   "/contests/generate/questions",
-  timeout("120s"),
   generateQuestionsValidator(),
   validateRequest,
   async (req: Request, res: Response) => {

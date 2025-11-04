@@ -1,11 +1,10 @@
-// src/configs/database.config.ts
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
-import initNotificationModel, { Notification } from "../models/notification.model";
+import notificationModel, { Notification } from "../models/notification.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
-  Sequelize: typeof Sequelize;
+  Sequelize: any;
   sequelize: Sequelize;
   Notification: typeof Notification;
 }
@@ -25,28 +24,25 @@ const sequelize = new Sequelize({
   },
 });
 
-// Initialize models
-const NotificationInstance = initNotificationModel(sequelize);
+const NotificationInstance = notificationModel(sequelize);
 
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    if (ServerConfigs.DB_SYNC === "true") {
+    // Only sync on first run or when explicitly needed
+    // Use migrations for production instead of sync
+    if (ServerConfigs.DB_SYNC === 'true') {
       await sequelize.sync({ alter: true });
       logger.info("Database synced ✅");
     }
     logger.info("Database connection established ✅");
   } catch (error: any) {
-    logger.error(`Error connecting database: ${error.message ?? error}`);
-    throw error;
+    logger.error(`Error connecting database: ${error} `);
   }
 }
 
-// Alias for consistency with other services
-export const connectDB = connectDatabase;
-
 export const DB: IDatabase = {
   Sequelize,
-  sequelize: sequelize,
+  sequelize,
   Notification: NotificationInstance,
 };

@@ -1,21 +1,22 @@
 // src/models/notification.model.ts
 import { DataTypes, Model, Optional, Sequelize, UUIDV4 } from "sequelize";
+import { NotificationType } from "@repo/notifications";
 
 export interface INotificationAttrs {
   id: string;
   userId: string;
   title: string;
   body: string;
-  type: string;
-  data?: any;
-  imageUrl?: string | null;
-  actionUrl?: string | null;
+  type: NotificationType;
+  data: Record<string, any> | null;
+  imageUrl: string | null;
+  actionUrl: string | null;
   isRead: boolean;
   isSent: boolean;
-  deviceToken?: string | null;
-  errorMessage?: string | null;
-  sentAt?: Date | null;
-  readAt?: Date | null;
+  deviceToken: string | null;
+  errorMessage: string | null;
+  sentAt: Date | null;
+  readAt: Date | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -24,17 +25,17 @@ interface NotificationCreationAttributes
   extends Optional<
     INotificationAttrs,
     | "id"
-    | "createdAt"
-    | "updatedAt"
     | "data"
     | "imageUrl"
     | "actionUrl"
+    | "isRead"
+    | "isSent"
     | "deviceToken"
     | "errorMessage"
     | "sentAt"
     | "readAt"
-    | "isRead"
-    | "isSent"
+    | "createdAt"
+    | "updatedAt"
   > {}
 
 export class Notification
@@ -45,8 +46,8 @@ export class Notification
   public userId!: string;
   public title!: string;
   public body!: string;
-  public type!: string;
-  public data!: any;
+  public type!: NotificationType;
+  public data!: Record<string, any> | null;
   public imageUrl!: string | null;
   public actionUrl!: string | null;
   public isRead!: boolean;
@@ -55,8 +56,8 @@ export class Notification
   public errorMessage!: string | null;
   public sentAt!: Date | null;
   public readAt!: Date | null;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public readonly createdAt?: Date;
+  public readonly updatedAt?: Date;
 }
 
 export default function (sequelize: Sequelize) {
@@ -69,12 +70,11 @@ export default function (sequelize: Sequelize) {
         defaultValue: UUIDV4,
       },
       userId: {
-        type: DataTypes.STRING(128),
+        type: DataTypes.UUID,
         allowNull: false,
-        field: "user_id",
       },
       title: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       body: {
@@ -82,7 +82,7 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
       },
       type: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.ENUM(...(Object.values(NotificationType) as string[])),
         allowNull: false,
       },
       data: {
@@ -91,86 +91,66 @@ export default function (sequelize: Sequelize) {
         defaultValue: {},
       },
       imageUrl: {
-        type: DataTypes.STRING(500),
+        type: DataTypes.STRING,
         allowNull: true,
-        field: "image_url",
+        defaultValue: null,
       },
       actionUrl: {
-        type: DataTypes.STRING(500),
+        type: DataTypes.STRING,
         allowNull: true,
-        field: "action_url",
+        defaultValue: null,
       },
       isRead: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "is_read",
       },
       isSent: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "is_sent",
       },
       deviceToken: {
-        type: DataTypes.STRING(500),
+        type: DataTypes.STRING,
         allowNull: true,
-        field: "device_token",
+        defaultValue: null,
       },
       errorMessage: {
         type: DataTypes.TEXT,
         allowNull: true,
-        field: "error_message",
+        defaultValue: null,
       },
       sentAt: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: "sent_at",
+        defaultValue: null,
       },
       readAt: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: "read_at",
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-        field: "created_at",
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-        field: "updated_at",
+        defaultValue: null,
       },
     },
     {
       sequelize,
       modelName: "Notification",
-      tableName: "notifications",
       timestamps: true,
       underscored: true,
       indexes: [
-        {
-          fields: ["user_id", "created_at"],
-          name: "idx_notifications_user_created",
-        },
-        {
-          fields: ["user_id", "is_read"],
-          name: "idx_notifications_user_read",
-        },
-        {
-          fields: ["type"],
-          name: "idx_notifications_type",
-        },
-        {
-          fields: ["is_sent"],
-          name: "idx_notifications_sent",
-        },
+        { fields: ["user_id"] },
+        { fields: ["user_id", "is_read"] },
+        { fields: ["created_at"] },
       ],
     }
   );
+
+  Notification.addHook("beforeSave", (n: Notification) => {
+    if (n.isSent && !n.sentAt) n.sentAt = new Date();
+  });
+
+  Notification.addHook("beforeSave", (n: Notification) => {
+    if (n.isRead && !n.readAt) n.readAt = new Date();
+  });
 
   return Notification;
 }
