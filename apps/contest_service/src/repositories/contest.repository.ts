@@ -329,8 +329,42 @@ export default class ContestRepository {
 
   public async deleteContest(id: string) {
     try {
-      const cnt = await this._DB.Contest.destroy({ where: { id } });
-      return cnt > 0;
+      // Use transaction to ensure all-or-nothing deletion
+      const result = await this._DB.sequelize.transaction(async (t) => {
+        // 1. Delete all user submissions for this contest
+        await this._DB.UserSubmission.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 2. Delete all user contest entries (joined users)
+        await this._DB.UserContest.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 3. Delete all questions for this contest
+        await this._DB.Question.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 4. Delete contest prizes
+        await this._DB.ContestPrize.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 5. Finally, delete the contest itself
+        const cnt = await this._DB.Contest.destroy({
+          where: { id },
+          transaction: t,
+        });
+
+        return cnt > 0;
+      });
+
+      return result;
     } catch (err: any) {
       logger.error(`deleteContest DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");

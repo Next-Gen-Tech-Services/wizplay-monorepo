@@ -55,6 +55,8 @@ QuestionInstance.hasMany(UserSubmissionInstance, {
 ContestInstance.hasMany(QuestionInstance, {
   foreignKey: "contest_id", // use the DB column name if your model maps field -> underscored
   as: "questions",
+  onDelete: "CASCADE",
+  hooks: true,
 });
 
 QuestionInstance.belongsTo(ContestInstance, {
@@ -65,16 +67,33 @@ QuestionInstance.belongsTo(ContestInstance, {
 ContestInstance.hasMany(UserContestInstance, {
   foreignKey: "contest_id",
   as: "userContests",
+  onDelete: "CASCADE",
+  hooks: true,
 });
 
 ContestInstance.hasMany(UserContestInstance, {
   foreignKey: "contest_id",
   as: "userJoins",
+  onDelete: "CASCADE",
+  hooks: true,
 });
 
 UserContestInstance.belongsTo(ContestInstance, {
   foreignKey: "contest_id",
   as: "contest", // single belongsTo alias used by find/include
+});
+
+// UserSubmission associations
+ContestInstance.hasMany(UserSubmissionInstance, {
+  foreignKey: "contest_id",
+  as: "submissions",
+  onDelete: "CASCADE",
+  hooks: true,
+});
+
+UserSubmissionInstance.belongsTo(ContestInstance, {
+  foreignKey: "contest_id",
+  as: "contest",
 });
 
 export async function connectDatabase() {

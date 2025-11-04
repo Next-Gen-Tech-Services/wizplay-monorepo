@@ -34,4 +34,10 @@ router.get(
   }
 );
 
+// Public endpoint for fetching user by ID (for inter-service communication)
+router.get("/user/:userId", async (req: Request, res: Response) => {
+  const result = await controller.getUserById(req, res);
+  return result;
+});
+
 export default router;

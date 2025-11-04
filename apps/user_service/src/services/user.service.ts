@@ -57,4 +57,16 @@ export default class UserService {
       throw new BadRequestError(error.message || "Failed to list users");
     }
   }
+
+  public async getUserById(userId: string) {
+    try {
+      const result = await this.userRepository.findById(userId);
+      if (!result) {
+        throw new BadRequestError("User not found");
+      }
+      return { data: result, message: "User fetched successfully" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to fetch user");
+    }
+  }
 }

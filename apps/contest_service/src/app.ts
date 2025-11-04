@@ -5,6 +5,7 @@ import ServerConfigs from "./configs/server.config";
 import ContestRouter from "./routes/contest.router";
 import QuestionRouter from "./routes/question.router";
 import SubmissionRouter from "./routes/submission.routes";
+import LeaderboardRouter from "./routes/leaderboard.router";
 import userEventHandler from "./utils/events/contest.events";
 import { connectProducer } from "./utils/kafka";
 
@@ -50,6 +51,7 @@ const AppInit = async () => {
   expressApp.use("/api/v1", ContestRouter);
   expressApp.use("/api/v1", QuestionRouter);
   expressApp.use("/api/v1", SubmissionRouter);
+  expressApp.use("/api/v1", LeaderboardRouter);
   expressApp.get(
     `/${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {

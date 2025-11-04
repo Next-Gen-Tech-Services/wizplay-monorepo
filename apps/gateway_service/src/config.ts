@@ -77,6 +77,15 @@ export const ROUTES: ProxyRoute[] = [
     timeoutMs: 15000,
   },
   {
+    name: "leaderboard",
+    mountPath: "/api/v1/leaderboard",
+    target: process.env.CONTEST_SERVICE_URL ?? "http://localhost:4005",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/leaderboard": "/api/v1/leaderboard" },
+    timeoutMs: 15000,
+  },
+  {
     name: "questions",
     mountPath: "/api/v1/questions",
     target: process.env.CONTEST_SERVICE_URL ?? "http://localhost:4005",
