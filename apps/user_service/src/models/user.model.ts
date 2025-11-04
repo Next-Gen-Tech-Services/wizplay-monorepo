@@ -29,6 +29,7 @@ export class User
   type: "user" | "admin";
   selectedLanguage!: Language;
   referralCode?: string | null;
+  deviceToken?: string | null;
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
@@ -89,6 +90,11 @@ export default function (sequelize: Sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
         unique: true,
+        defaultValue: null,
+      },
+      deviceToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
         defaultValue: null,
       },
     },

@@ -104,4 +104,13 @@ export const ROUTES: ProxyRoute[] = [
     pathRewrite: { "^/api/v1/wallet": "/api/v1/wallet" },
     timeoutMs: 15000,
   },
+  {
+    name: "notifications",
+    mountPath: "/api/v1/notifications",
+    target: process.env.NOTIFICATION_SERVICE_URL ?? "http://localhost:4007",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/notifications": "/api/v1/notifications" },
+    timeoutMs: 15000,
+  },
 ];

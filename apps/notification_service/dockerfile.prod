@@ -1,0 +1,43 @@
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
+COPY turbo.json ./
+
+# Copy packages
+COPY packages ./packages
+
+# Copy notification service
+COPY apps/notification_service ./apps/notification_service
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Build the service
+RUN pnpm --filter notification_service build
+
+# Production stage
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy built files from builder
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/apps/notification_service/dist ./apps/notification_service/dist
+COPY --from=builder /app/apps/notification_service/package.json ./apps/notification_service/
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Expose port
+EXPOSE 4006
+
+# Start the service
+CMD ["node", "apps/notification_service/dist/server.js"]

@@ -214,4 +214,20 @@ export default class UserRepository {
       return { items: [], total: 0, page: 1, pageSize: 50 };
     }
   }
+
+  public async updateDeviceToken(userId: string, deviceToken: string): Promise<any> {
+    try {
+      const result = await this._DB.User.update(
+        { deviceToken },
+        {
+          where: { userId },
+          returning: true,
+        }
+      );
+      return result;
+    } catch (error: any) {
+      logger.error(`[Error updating device token: ${error.message}]`);
+      throw error;
+    }
+  }
 }

@@ -8,3 +8,4 @@ export * from "./utils/globalLogger";
 export * from "./utils/password";
 export * from "./utils/statusCodes";
 export * from "./utils/token";
+export * from "./kafka/producer";

@@ -40,4 +40,13 @@ router.get("/user/:userId", async (req: Request, res: Response) => {
   return result;
 });
 
+router.patch(
+  "/user/device-token",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await controller.updateDeviceToken(req, res);
+    return result;
+  }
+);
+
 export default router;

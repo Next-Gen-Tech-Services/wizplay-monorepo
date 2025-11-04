@@ -3,8 +3,7 @@
 export interface LeaderboardEntry {
   rank: number;
   userId: string;
-  userName?: string; // Optional, if user data is available
-  userAvatar?: string; // Optional user avatar
+  userName?: string;
   totalScore: number;
   maxScore: number;
   percentage: number;

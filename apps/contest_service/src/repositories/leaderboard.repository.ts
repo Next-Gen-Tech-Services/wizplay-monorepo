@@ -111,8 +111,8 @@ export default class LeaderboardRepository {
           return {
             rank: offset + index + 1,
             userId: sub.userId,
-            userName: userData?.userName || "Unknown User",
-            userAvatar: userData?.userAvatar || null,
+            userName: userData?.userName,
+            email: userData?.email ,
             contestId: sub.contestId,
             totalScore: sub.totalScore,
             maxScore: sub.maxScore,
