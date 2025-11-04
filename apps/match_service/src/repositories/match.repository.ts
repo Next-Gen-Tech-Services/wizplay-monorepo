@@ -339,4 +339,22 @@ export default class MatchRepository {
       logger.error(error.message);
     }
   }
+
+  public async removeFromWishlist(userId: string, matchId: string): Promise<number> {
+    try {
+      if (!userId || !matchId) {
+        throw new BadRequestError("invalid user id or match id");
+      }
+      const deletedRows = await this._DB.Wishlist.destroy({
+        where: {
+          userId,
+          matchId,
+        },
+      });
+      return deletedRows;
+    } catch (error: any) {
+      logger.error(`Error removing from wishlist: ${error.message}`);
+      throw error;
+    }
+  }
 }

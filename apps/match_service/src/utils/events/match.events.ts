@@ -28,6 +28,13 @@ class MatchEventHandler {
             await this.handleUserAddToWishlist(message);
             break;
 
+          case KAFKA_EVENTS.USER_REMOVE_FROM_WISHLIST:
+            logger.info(
+              `Handle user_remove_from_wishlist:, ${JSON.stringify(message.data)}`
+            );
+            await this.handleUserRemoveFromWishlist(message);
+            break;
+
           case KAFKA_EVENTS.GENERATE_CONTEST:
             logger.info(
               `Handle generate_contest:, ${JSON.stringify(message.data)}`
@@ -69,6 +76,25 @@ class MatchEventHandler {
       return true;
     }
   }
+
+  private async handleUserRemoveFromWishlist(message: any): Promise<boolean> {
+    const { userId, matchId } = message.data;
+    logger.info(`Removing match ${matchId} from wishlist for user ${userId}`);
+    
+    try {
+      const result = await this.matchRepository.removeFromWishlist(userId, matchId);
+      if (!result) {
+        logger.warn(`Failed to remove wishlist entry for user ${userId}, match ${matchId}`);
+        return false;
+      }
+      logger.info(`Successfully removed match ${matchId} from wishlist for user ${userId}`);
+      return true;
+    } catch (error: any) {
+      logger.error(`Error removing from wishlist: ${error?.message}`);
+      return false;
+    }
+  }
+
   private async handleGenerateContest(message: any): Promise<boolean> {
     const { matchId } = message.data;
     const result = await this.matchRepository.updateGeneratedStatus(matchId, {
