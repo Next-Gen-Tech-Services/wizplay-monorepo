@@ -19,6 +19,10 @@ RUN npm install -g pnpm
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
+# Build workspace packages first (required by notification_service)
+RUN pnpm --filter @repo/common build
+RUN pnpm --filter @repo/notifications build
+
 # Build the service
 RUN pnpm --filter notification_service build
 
@@ -32,6 +36,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/apps/notification_service/dist ./apps/notification_service/dist
 COPY --from=builder /app/apps/notification_service/package.json ./apps/notification_service/
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/pnpm-workspace.yaml ./
 
 # Install pnpm
 RUN npm install -g pnpm
