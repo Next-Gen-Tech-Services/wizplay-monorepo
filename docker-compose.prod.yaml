@@ -135,6 +135,28 @@ services:
       timeout: 5s
       retries: 5
 
+  notification_db_server:
+    image: "postgres:15-alpine"
+    container_name: notification_db_server
+    ports:
+      - "5440:5432"
+    environment:
+      POSTGRES_USER: ${NOTIFICATION_DB_USER:-notification_db}
+      POSTGRES_PASSWORD: ${NOTIFICATION_DB_PASSWORD:-notification_db}
+      POSTGRES_DB: notification_service
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    volumes:
+      - notification_db_data:/var/lib/postgresql/data
+      - ./database/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${NOTIFICATION_DB_USER:-notification_db} -d notification_service"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Zookeeper for Kafka (Confluent)
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
@@ -213,10 +235,15 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4001
+      REDIS_HOST: redis
     env_file:
       - .env.production
     depends_on:
       auth_db_server:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
         condition: service_healthy
     networks:
       - app-network
@@ -237,14 +264,24 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4002
+      REDIS_HOST: redis
     env_file:
       - .env.production
     depends_on:
       user_db_server:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   match_service:
     build:
@@ -256,14 +293,24 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4003
+      REDIS_HOST: redis
     env_file:
       - .env.production
     depends_on:
       match_db_server:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   coupon_service:
     build:
@@ -275,14 +322,24 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4004
+      REDIS_HOST: redis
     env_file:
       - .env.production
     depends_on:
       coupon_db_server:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   contest_service:
     build:
@@ -294,14 +351,24 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4005
+      REDIS_HOST: redis
     env_file:
       - .env.production
     depends_on:
       contest_db_server:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   wallet_service:
     build:
@@ -313,14 +380,54 @@ services:
     environment:
       NODE_ENV: production
       PORT: 4006
+      REDIS_HOST: redis
     env_file:
       - .env.production
     depends_on:
       wallet_db_server:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4006/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  notification_service:
+    build:
+      context: .
+      dockerfile: apps/notification_service/dockerfile.prod
+    container_name: notification_service
+    ports:
+      - "4007:4007"
+    environment:
+      NODE_ENV: production
+      PORT: 4007
+      REDIS_HOST: redis
+      NOTIFICATION_DATABASE_HOST: notification_db_server
+    env_file:
+      - .env.production
+    depends_on:
+      notification_db_server:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4007/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   gateway_service:
     build:
@@ -332,18 +439,38 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8000
+      AUTH_SERVICE_URL: http://auth_service:4001
+      USER_SERVICE_URL: http://user_service:4002
+      MATCHES_SERVICE_URL: http://match_service:4003
+      COUPONS_SERVICE_URL: http://coupon_service:4004
+      CONTEST_SERVICE_URL: http://contest_service:4005
+      WALLET_SERVICE_URL: http://wallet_service:4006
+      NOTIFICATION_SERVICE_URL: http://notification_service:4007
     env_file:
       - .env.production
     depends_on:
-      - auth_service
-      - user_service
-      - match_service
-      - coupon_service
-      - contest_service
-      - wallet_service
+      auth_service:
+        condition: service_healthy
+      user_service:
+        condition: service_healthy
+      match_service:
+        condition: service_healthy
+      coupon_service:
+        condition: service_healthy
+      contest_service:
+        condition: service_healthy
+      wallet_service:
+        condition: service_healthy
+      notification_service:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 networks:
   app-network:
@@ -363,6 +490,8 @@ volumes:
   contest_db_data:
     driver: local
   wallet_db_data:
+    driver: local
+  notification_db_data:
     driver: local
   zookeeper_data:
     driver: local

@@ -204,7 +204,7 @@ services:
       timeout: 10s
       retries: 5
 
-  # Optional: Redis for caching/sessions
+  # Redis for caching/sessions
   redis:
     image: redis:7-alpine
     container_name: redis
@@ -215,8 +215,11 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    profiles:
-      - with-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
 networks:
   app-network:
