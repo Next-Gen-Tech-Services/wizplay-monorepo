@@ -1,49 +1,77 @@
-FROM node:18-alpine AS builder
-
-WORKDIR /app
-
-# Copy package files
-COPY package.json pnpm-lock.yaml ./
-COPY pnpm-workspace.yaml ./
-COPY turbo.json ./
-
-# Copy packages
-COPY packages ./packages
-
-# Copy notification service
-COPY apps/notification_service ./apps/notification_service
+# Multi-stage build for production
+FROM node:20-alpine AS base
 
 # Install pnpm
-RUN npm install -g pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+# Stage 1: Install dependencies
+FROM base AS deps
+WORKDIR /app
+
+# Copy root package files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+# Copy workspace packages
+COPY packages ./packages
+COPY apps/notification_service/package.json ./apps/notification_service/
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --filter notification_service...
 
-# Build workspace packages first (required by notification_service)
+# Stage 2: Build the application
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/notification_service/node_modules ./apps/notification_service/node_modules
+COPY --from=deps /app/packages ./packages
+
+# Copy source code
+COPY apps/notification_service ./apps/notification_service
+COPY turbo.json ./
+
+# Build workspace packages first
 RUN pnpm --filter @repo/common build
 RUN pnpm --filter @repo/notifications build
 
-# Build the service
-RUN pnpm --filter notification_service build
+# Build the notification service with increased memory limit
+WORKDIR /app/apps/notification_service
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN pnpm run build
 
-# Production stage
-FROM node:18-alpine
+# Stage 3: Use pnpm deploy for production
+FROM base AS deploy
+WORKDIR /deploy
 
+# Use pnpm deploy to create a pruned production deployment
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/notification_service/package.json ./apps/notification_service/
+COPY packages ./packages
+COPY --from=builder /app/apps/notification_service/dist ./apps/notification_service/dist
+
+RUN pnpm deploy --filter=notification_service --prod /deploy/output
+
+# Stage 4: Final production image  
+FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Copy built files from builder
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/packages ./packages
-COPY --from=builder /app/apps/notification_service/dist ./apps/notification_service/dist
-COPY --from=builder /app/apps/notification_service/package.json ./apps/notification_service/
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/pnpm-workspace.yaml ./
+ENV NODE_ENV=production
 
-# Install pnpm
-RUN npm install -g pnpm
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 notificationservice
 
-# Expose port
+# Copy deployed files from deploy stage
+COPY --from=deploy --chown=notificationservice:nodejs /deploy/output ./
+
+# Create logs directory with proper permissions
+RUN mkdir -p ./logs && chown -R notificationservice:nodejs ./logs
+
+USER notificationservice
+
 EXPOSE 4007
 
-# Start the service
-CMD ["node", "apps/notification_service/dist/server.js"]
+CMD ["node", "dist/server.js"]
