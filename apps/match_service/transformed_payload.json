@@ -1,0 +1,257 @@
+{
+  "match_id": "a-rz--cricket--Ym1981594608794214405",
+  "title": "United Arab Emirates vs Nepal - 91st Match - ICC Cricket World Cup League Two, 2023-27",
+  "short_name": "UAE vs NEP",
+  "subtitle": "91st Match",
+  "status": "started",
+  "play_status": "in_play",
+  "start_at": {
+    "epoch_s": 1762320600,
+    "utc": "2025-11-05T05:30:00.000Z",
+    "ist": "2025-11-05T11:00:00+05:30"
+  },
+  "start_at_local": {
+    "epoch_s": 1762335000,
+    "utc": "2025-11-05T09:30:00.000Z",
+    "ist": "2025-11-05T15:00:00+05:30"
+  },
+  "tournament": {
+    "key": "a-rz--cricket--icc--icccwclt--2023-27-8JlY",
+    "name": "ICC Cricket World Cup League Two, 2023-27"
+  },
+  "teams": {
+    "a": {
+      "key": "uae",
+      "code": "UAE",
+      "name": "United Arab Emirates",
+      "alternate_name": "United Arab Emirates",
+      "alternate_code": "UAE",
+      "gender_name": "United Arab Emirates Men",
+      "country_code": "ARE"
+    },
+    "b": {
+      "key": "nep",
+      "code": "NEP",
+      "name": "Nepal",
+      "alternate_name": "Nepal",
+      "alternate_code": "NEP",
+      "gender_name": "Nepal Men",
+      "country_code": "NPL"
+    }
+  },
+  "venue": {
+    "name": "Dubai International Cricket Stadium",
+    "city": "Dubai",
+    "country": "United Arab Emirates",
+    "geolocation": "25.0459724,55.2183558"
+  },
+  "toss": {
+    "called": "b",
+    "winner": "a",
+    "elected": "bowl",
+    "squad_announced": true
+  },
+  "target": null,
+  "innings": [
+    {
+      "id": "b_1",
+      "team": "b",
+      "is_completed": false,
+      "overs": [
+        30,
+        5
+      ],
+      "score_str": "136/4 in 30.5",
+      "runs": 136,
+      "wickets": 4,
+      "balls": 185
+    }
+  ],
+  "live": {
+    "current_innings": "b_1",
+    "batting_team": "b",
+    "bowling_team": "a",
+    "score": {
+      "runs": 136,
+      "balls": 185,
+      "wickets": 4,
+      "run_rate": 4.41,
+      "title": "136/4 in 30.5",
+      "overs": [
+        30,
+        5
+      ],
+      "msg_lead_by": "",
+      "msg_trail_by": ""
+    },
+    "required_score": null,
+    "striker": {
+      "key": "dipendra_airee",
+      "name": "Dipendra Singh Airee",
+      "stats": {
+        "runs": 33,
+        "balls": 37,
+        "fours": 3,
+        "sixes": 1,
+        "dot_balls": 21,
+        "strike_rate": 89.19,
+        "ones": 9,
+        "twos": 3,
+        "threes": 0,
+        "fives": 0,
+        "innings_index": "b_1",
+        "stats": {
+          "boundary_percentage": 54.54545454545454,
+          "boundary_frequency": 9.25,
+          "dot_ball_percentage": 56.75675675675676,
+          "dot_ball_frequency": 1.7619047619047619
+        }
+      }
+    },
+    "non_striker": {
+      "key": "arif_sheikh",
+      "name": "Aarif Sheikh",
+      "stats": {
+        "runs": 7,
+        "balls": 16,
+        "fours": 0,
+        "sixes": 0,
+        "dot_balls": 9,
+        "strike_rate": 43.75,
+        "ones": 7,
+        "twos": 0,
+        "threes": 0,
+        "fives": 0,
+        "innings_index": "b_1",
+        "stats": {
+          "boundary_percentage": 0,
+          "boundary_frequency": 0,
+          "dot_ball_percentage": 56.25,
+          "dot_ball_frequency": 1.7777777777777777
+        }
+      }
+    },
+    "bowler": {
+      "key": "c__player__zahid_ali__fa8f2",
+      "name": "Mohammad Zahid Ali",
+      "stats": {
+        "balls": 35,
+        "runs": 38,
+        "economy": 6.51,
+        "wickets": 1,
+        "extras": 3,
+        "maiden_overs": 0,
+        "overs": [
+          5,
+          5
+        ],
+        "balls_breakup": {
+          "dot_balls": 21,
+          "wides": 3,
+          "no_balls": 0,
+          "fours": 4,
+          "sixes": 1
+        },
+        "wickets_breakup": {
+          "bowled": 0,
+          "caught": 1,
+          "lbw": 0,
+          "stumping": 0
+        },
+        "team_contribution_extras": {
+          "bye": 0,
+          "leg_bye": 0,
+          "penalty": 0
+        },
+        "innings_index": "b_1",
+        "stats": {
+          "boundary_percentage": 57.89473684210527,
+          "boundary_frequency": 7,
+          "dot_ball_percentage": 60,
+          "dot_ball_frequency": 1.6666666666666667
+        }
+      }
+    },
+    "recent_overs": [
+      {
+        "overnumber": 27,
+        "ball_repr": [
+          "r0",
+          "e1,wd",
+          "r2"
+        ]
+      },
+      {
+        "overnumber": 28,
+        "ball_repr": [
+          "r1",
+          "r1",
+          "r0",
+          "r0",
+          "r1",
+          "r1"
+        ]
+      },
+      {
+        "overnumber": 29,
+        "ball_repr": [
+          "r2",
+          "r2",
+          "r0",
+          "r0",
+          "r1",
+          "r0"
+        ]
+      },
+      {
+        "overnumber": 30,
+        "ball_repr": [
+          "r1",
+          "r1",
+          "b6",
+          "b4",
+          "r0"
+        ]
+      }
+    ],
+    "last_ball_key": "539968",
+    "last_event_repr": {
+      "overnumber": 27,
+      "ball_repr": [
+        "r0",
+        "e1,wd",
+        "r2"
+      ]
+    }
+  },
+  "top_batters": {
+    "unknown": {
+      "player_key": "c__player__dhruv_parashar__0f70b",
+      "name": "Dhruv Parashar",
+      "runs": 0,
+      "balls": null,
+      "fours": null,
+      "sixes": null,
+      "strike_rate": null
+    },
+    "b_1": {
+      "player_key": "c__player__bhim_sharki__d065e",
+      "name": "Bhim Sharki",
+      "runs": 48,
+      "balls": 68,
+      "fours": 7,
+      "sixes": null,
+      "strike_rate": 70.59
+    }
+  },
+  "weather": "27.2°C|Overcast",
+  "notes": [],
+  "updated_at": {
+    "epoch_s": 1762329252,
+    "utc": "2025-11-05T07:54:12.387Z"
+  },
+  "__meta": {
+    "last_ball_key": "539968",
+    "last_score_epoch": null
+  }
+}

@@ -32,16 +32,16 @@ app.get("/_routes", (_req, res) =>
 // Mount proxies from config
 for (const route of ROUTES) {
   logger.info(
-    { route: route.name, mount: route.mountPath, target: route.target },
+    { route: route.name, mount: route.mountPath, target: route.target, ws: route.ws },
     "Mounting proxy route"
   );
-  // mount as prefix so /api/v1/auth/send-otp goes to the auth service
-  app.use(route.mountPath, makeProxy(route));
+  const proxyMiddleware = makeProxy(route);
+  app.use(route.mountPath, proxyMiddleware);
 }
 
 // fallback 404
 app.use((_req, res) => res.status(404).json({ error: "Not Found" }));
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`wizplay-proxy listening on port ${PORT}`);
 });

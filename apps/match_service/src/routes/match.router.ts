@@ -6,6 +6,7 @@ import MatchController from "../controllers/match.controller";
 import FlagController from "../controllers/flag.controller";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { listMatchesValidator } from "../validators";
+import { getSubscriptionStatus } from "../utils/jobs/init-subscription";
 import { Server as SocketIOServer } from "socket.io";
 
 const router = Router();
@@ -26,10 +27,16 @@ router.get("/matches/:id/team-data", async (req: Request, res: Response) => {
   return controller.getMatchTeamData(req, res);
 });
 
-// PATCH /matches/:id
+// PATCH /matches/:id - Update showOnFrontend flag
 router.patch("/matches/:id", validateRequest, async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.updateMatch(req, res);
+});
+
+// PATCH /matches/:key/status - Update match status, winner, timestamps
+router.patch("/matches/:key/status", validateRequest, async (req: Request, res: Response) => {
+  const controller = container.resolve(MatchController);
+  return controller.updateMatchStatus(req, res);
 });
 
 // POST /livematch webhook
@@ -73,6 +80,24 @@ router.get("/matches/:id/events", async (req: Request, res: Response) => {
 router.get("/matches/:id/highlights", async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.getMatchHighlights(req, res);
+});
+
+// Subscription status endpoint (for debugging/monitoring)
+router.get("/matches/subscription/status", async (req: Request, res: Response) => {
+  try {
+    const status = getSubscriptionStatus();
+    return res.status(200).json({
+      success: true,
+      data: status,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+      timestamp: new Date().toISOString(),
+    });
+  }
 });
 
 export default router;

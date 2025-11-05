@@ -9,8 +9,8 @@ import MatchLiveRepository from "../repositories/matchLive.repository";
 import { MatchLiveEventType } from "../models/matchLiveEvent.model";
 import redis from "../configs/redis.config";
 import zlib from "zlib";
-import transformMatch from "../utils/transformLiveMatchData";
-
+import {  transformCricketMatch } from "../utils/transformLiveMatchData";
+import fs from 'fs'
 const lastSeen: Record<string, string | number> = {};
 
 @autoInjectable()
@@ -150,38 +150,15 @@ export default class MatchController {
           }
 
           const jsonStr = decoded.toString("utf8");
-          const raw = JSON.parse(jsonStr);
+          let raw = JSON.parse(jsonStr);
 
-          // transform
-          const cleaned = transformMatch(raw);
-          const matchId = cleaned.match_id || "unknown";
+          raw = transformCricketMatch(raw);
+          const matchId = raw.match.id;
 
-          const eventKey = cleaned?.__meta?.last_ball_key || cleaned.updated_at.epoch_s;
-          const last = lastSeen[matchId];
-          if (last && eventKey && String(last) === String(eventKey)) {
-            // duplicate event: acknowledge but do not re-broadcast
-            return res.status(200).send({ ok: true, dedup: true });
-          }
-          // save last seen key
-          if (eventKey) lastSeen[matchId] = eventKey;
-
-          // Store in Redis (fast, temporary cache - 10 minutes TTL)
-          try {
-            await redis.setter(
-              `match:${matchId}:live`,
-              JSON.stringify(cleaned)
-            );
-          } catch (redisErr) {
-            console.error("Redis storage error:", redisErr);
-          }
-
-          // Store in Database (async, don't block webhook response)
-          this.storeLiveMatchData(matchId, cleaned).catch((dbErr) => {
-            console.error("Database storage error:", dbErr);
-          });
+          
 
           // broadcast to sockets and SSE clients
-          this.broadcast(matchId, "match_update", cleaned);
+          this.broadcast(matchId, "match_update", raw);
 
           // respond to webhook provider quickly
           res.status(200).send({ ok: true });
@@ -190,6 +167,56 @@ export default class MatchController {
     } catch (err: any) {
       console.error("Webhook processing error:", err);
       res.status(500).send({ error: "Internal server error" });
+    }
+  }
+
+  // Update match status in the main Match table based on webhook data
+  private async updateMatchStatusFromWebhook(matchId: string, data: any): Promise<void> {
+    try {
+      const matchStatus = data.status; // e.g., "started", "completed", "not_started"
+      const playStatus = data.play_status; // e.g., "live", "result"
+
+      if (!matchStatus) {
+        return; // No status to update
+      }
+
+      const updateData: any = {};
+
+      // Map webhook status to database status
+      if (matchStatus === "started" || playStatus === "live") {
+        updateData.status = "started";
+        
+        // Set startedAt if not already set
+        if (data.start_at?.epoch_s) {
+          updateData.startedAt = data.start_at.epoch_s;
+        }
+      } else if (matchStatus === "completed" || playStatus === "result") {
+        updateData.status = "completed";
+        
+        // Set endedAt when match completes
+        if (!data.end_at && data.updated_at?.epoch_s) {
+          updateData.endedAt = data.updated_at.epoch_s;
+        }
+
+        // Try to extract winner from the notes or toss winner field
+        // This may need adjustment based on your webhook structure
+        if (data.notes) {
+          // Example: "India won by 5 wickets"
+          const winnerMatch = data.notes.match(/^(\w+)\s+won/i);
+          if (winnerMatch) {
+            updateData.winner = winnerMatch[1];
+          }
+        }
+      }
+
+      // Only update if there's something to update
+      if (Object.keys(updateData).length > 0) {
+        await this.matchService.updateMatchStatus(matchId, updateData);
+        console.log(`✅ Updated match ${matchId} status to: ${updateData.status}`);
+      }
+    } catch (error: any) {
+      console.error(`Failed to update match status for ${matchId}:`, error?.message || error);
+      // Don't throw - we don't want to break webhook processing
     }
   }
 
@@ -349,6 +376,70 @@ export default class MatchController {
         success: false,
         message: err.message,
         data: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  // Manual endpoint to update match status
+  async updateMatchStatus(req: Request, res: Response) {
+    const matchKey = req.params.key;
+    const { status, winner, endedAt, startedAt } = req.body;
+
+    try {
+      if (!matchKey) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Match key is required",
+          data: null,
+          errors: ["Match key is required"],
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      // Validate status if provided
+      const validStatuses = ["not_started", "started", "completed", "cancelled"];
+      if (status && !validStatuses.includes(status)) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: `Invalid status. Must be one of: ${validStatuses.join(", ")}`,
+          data: null,
+          errors: [`Invalid status: ${status}`],
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const updateData: any = {};
+      if (status !== undefined) updateData.status = status;
+      if (winner !== undefined) updateData.winner = winner;
+      if (endedAt !== undefined) updateData.endedAt = endedAt;
+      if (startedAt !== undefined) updateData.startedAt = startedAt;
+
+      if (Object.keys(updateData).length === 0) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "No update data provided. Please provide at least one field to update (status, winner, endedAt, startedAt)",
+          data: null,
+          errors: ["No update data provided"],
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.matchService.updateMatchStatus(matchKey, updateData);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "Match status updated successfully",
+        data: result,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err.message,
+        data: null,
+        errors: [err.message],
         timestamp: new Date().toISOString(),
       });
     }

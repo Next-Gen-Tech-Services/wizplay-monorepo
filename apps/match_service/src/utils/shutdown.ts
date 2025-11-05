@@ -1,5 +1,14 @@
+import { stopSubscriptionService } from "./jobs/init-subscription";
+
 export function shutDown(exitCode: number = 0, server?: any) {
   console.log("🛑 Shutting down server...");
+
+  // Stop subscription service
+  try {
+    stopSubscriptionService();
+  } catch (error) {
+    console.error("Error stopping subscription service:", error);
+  }
 
   if (server) {
     server.close(() => {

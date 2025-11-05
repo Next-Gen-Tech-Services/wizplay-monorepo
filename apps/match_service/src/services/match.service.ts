@@ -70,6 +70,18 @@ export default class MatchService {
       const response = await axios(options);
       return response.data;
     } catch (error: any) {
+      // Check if already subscribed error (P-400-4)
+      const errorCode = error.response?.data?.error?.code;
+      if (errorCode === "P-400-4") {
+        // Already subscribed - treat as success
+        logger.info(`Match ${matchId} is already subscribed - skipping`);
+        return {
+          data: null,
+          message: "Already subscribed",
+          already_subscribed: true,
+        };
+      }
+
       console.error(
         "Subscribe match error:",
         error.response?.data || error.message
@@ -105,6 +117,18 @@ export default class MatchService {
       console.log(`API RESPONSE: ${JSON.stringify(response.data, null, 2)}`);
       return response.data;
     } catch (error: any) {
+      // Check if already unsubscribed or not subscribed error
+      const errorCode = error.response?.data?.error?.code;
+      if (errorCode === "P-400-4" || errorCode === "P-404-1") {
+        // Not subscribed or already unsubscribed - treat as success
+        logger.info(`Match ${matchId} is not subscribed or already unsubscribed - skipping`);
+        return {
+          data: null,
+          message: "Not subscribed or already unsubscribed",
+          already_unsubscribed: true,
+        };
+      }
+
       console.error(
         "Unsubscribe match error:",
         error.response?.data || error.message
@@ -200,6 +224,121 @@ export default class MatchService {
         error.response?.data?.message ||
         error?.message ||
         "Failed to fetch match team data"
+      );
+    }
+  }
+
+  public async updateMatchStatus(
+    matchKey: string,
+    data: {
+      status?: string;
+      winner?: string | null;
+      endedAt?: number | null;
+      startedAt?: number;
+    }
+  ) {
+    try {
+      if (!matchKey) {
+        throw new BadRequestError("Missing match key");
+      }
+
+      const updatedMatch = await this.matchRepository.updateMatchStatus(
+        matchKey,
+        data
+      );
+
+      return updatedMatch;
+    } catch (error: any) {
+      throw new BadRequestError(
+        error?.message || "Failed to update match status"
+      );
+    }
+  }
+
+  /**
+   * Fetch match info from Roanuz API and update match status in database
+   * This is used to poll match status for subscribed matches
+   */
+  public async fetchAndUpdateMatchStatus(matchKey: string, token: string) {
+    try {
+      if (!matchKey || !token) {
+        throw new BadRequestError("Missing match key or token");
+      }
+
+      // Fetch match data from Roanuz API
+      const options = {
+        method: "GET",
+        url: `https://api.sports.roanuz.com/v5/cricket/${ServerConfigs.ROANUZ_PK}/match/${matchKey}/`,
+        headers: {
+          "rs-token": token,
+          "Content-Type": "application/json",
+        },
+      };
+
+      logger.info(`[MATCH-SERVICE] Fetching match status for: ${matchKey}`);
+      const response = await axios(options);
+      const matchData = response.data?.data;
+
+      if (!matchData) {
+        throw new BadRequestError("No match data found from API");
+      }
+
+      // Extract status information
+      const status = matchData.status; // e.g., "started", "completed", "not_started"
+      const playStatus = matchData.play_status; // e.g., "live", "result"
+      
+      const updateData: any = {};
+
+      // Map API status to database status
+      if (status === "started" || playStatus === "live") {
+        updateData.status = "started";
+        if (matchData.start_at) {
+          updateData.startedAt = matchData.start_at;
+        }
+      } else if (status === "completed" || playStatus === "result") {
+        updateData.status = "completed";
+        
+        // Set endedAt if not already set
+        if (matchData.completed_date_approximate) {
+          updateData.endedAt = matchData.completed_date_approximate;
+        } else if (matchData.estimated_end_date) {
+          updateData.endedAt = matchData.estimated_end_date;
+        }
+
+        // Extract winner
+        if (matchData.winner) {
+          updateData.winner = matchData.winner;
+        } else if (matchData.play?.result?.msg) {
+          // Try to parse winner from result message
+          const resultMsg = matchData.play.result.msg;
+          const winnerMatch = resultMsg.match(/^(\w+)\s+won/i);
+          if (winnerMatch) {
+            updateData.winner = winnerMatch[1];
+          }
+        }
+      } else if (status === "not_started") {
+        updateData.status = "not_started";
+      }
+
+      // Only update if there's something to update
+      if (Object.keys(updateData).length > 0) {
+        await this.matchRepository.updateMatchStatus(matchKey, updateData);
+        logger.info(
+          `[MATCH-SERVICE] Updated match ${matchKey} status: ${JSON.stringify(updateData)}`
+        );
+        return { updated: true, ...updateData };
+      }
+
+      return { updated: false, message: "No status change detected" };
+    } catch (error: any) {
+      logger.error(
+        `[MATCH-SERVICE] Error fetching/updating match status for ${matchKey}:`,
+        error.response?.data || error.message
+      );
+      throw new BadRequestError(
+        error.response?.data?.message ||
+        error?.message ||
+        "Failed to fetch and update match status"
       );
     }
   }

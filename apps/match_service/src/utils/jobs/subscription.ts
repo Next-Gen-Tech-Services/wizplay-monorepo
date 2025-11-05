@@ -15,6 +15,7 @@ class MatchSubscriptionService {
   private subscribedMatches: Set<string> = new Set();
   private regularCheckInterval: NodeJS.Timeout | null = null;
   private scheduledChecks: Map<string, NodeJS.Timeout> = new Map();
+  private statusCheckInterval: NodeJS.Timeout | null = null;
   private matchRepository: MatchRepository;
   private matchService: MatchService;
   public token: string;
@@ -46,6 +47,9 @@ class MatchSubscriptionService {
       },
       regularCheckMinutes * 60 * 1000
     );
+
+    // Start periodic status check for subscribed matches (every 2 minutes)
+    this.startStatusPolling(2);
   }
 
   // Stop monitoring
@@ -55,11 +59,76 @@ class MatchSubscriptionService {
       this.regularCheckInterval = null;
     }
 
+    if (this.statusCheckInterval) {
+      clearInterval(this.statusCheckInterval);
+      this.statusCheckInterval = null;
+    }
+
     // Clear all scheduled checks
     this.scheduledChecks.forEach((timeout) => clearTimeout(timeout));
     this.scheduledChecks.clear();
 
     console.log("Stopped match subscription monitoring");
+  }
+
+  // Start periodic status polling for subscribed matches
+  private startStatusPolling(intervalMinutes: number = 2) {
+    console.log(`Starting status polling every ${intervalMinutes} minutes for subscribed matches...`);
+
+    // Initial poll
+    this.pollSubscribedMatchesStatus();
+
+    // Set up interval
+    this.statusCheckInterval = setInterval(
+      () => {
+        this.pollSubscribedMatchesStatus();
+      },
+      intervalMinutes * 60 * 1000
+    );
+  }
+
+  // Poll status for all subscribed matches
+  private async pollSubscribedMatchesStatus() {
+    if (this.subscribedMatches.size === 0) {
+      return;
+    }
+
+    console.log(`🔄 Polling status for ${this.subscribedMatches.size} subscribed matches...`);
+
+    const matchKeys = Array.from(this.subscribedMatches);
+    
+    // Poll matches in parallel (but limit concurrency to avoid rate limits)
+    const batchSize = 5;
+    for (let i = 0; i < matchKeys.length; i += batchSize) {
+      const batch = matchKeys.slice(i, i + batchSize);
+      
+      await Promise.all(
+        batch.map(async (matchKey) => {
+          try {
+            const result = await this.matchService.fetchAndUpdateMatchStatus(
+              matchKey,
+              this.token
+            );
+            
+            if (result.updated) {
+              console.log(`✅ Updated status for match ${matchKey}: ${result.status}`);
+              
+              // If match completed, unsubscribe
+              if (result.status === "completed") {
+                await this.unsubscribeFromMatch(matchKey);
+              }
+            }
+          } catch (error: any) {
+            console.error(`❌ Error polling match ${matchKey}:`, error.message);
+          }
+        })
+      );
+
+      // Small delay between batches to avoid rate limiting
+      if (i + batchSize < matchKeys.length) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    }
   }
 
   // Load subscribed matches from Redis
@@ -234,9 +303,33 @@ class MatchSubscriptionService {
   // Subscribe to a match
   private async subscribeToMatch(matchId: string) {
     try {
-      await this.matchService.subscribeMatch(matchId, this.token);
+      const result = await this.matchService.subscribeMatch(matchId, this.token);
+      
+      // Check if already subscribed
+      if (result.already_subscribed) {
+        console.log(`ℹ️ Match ${matchId} was already subscribed`);
+      } else {
+        console.log(`✅ Successfully subscribed to match: ${matchId}`);
+      }
+      
       this.subscribedMatches.add(matchId);
-      console.log(`✅ Successfully subscribed to match: ${matchId}`);
+
+      // Immediately fetch and update match status after subscribing
+      try {
+        const statusResult = await this.matchService.fetchAndUpdateMatchStatus(
+          matchId,
+          this.token
+        );
+        if (statusResult.updated) {
+          console.log(`📊 Initial status update for ${matchId}: ${statusResult.status}`);
+        }
+      } catch (statusError: any) {
+        console.error(
+          `⚠️ Failed to fetch initial status for ${matchId}:`,
+          statusError.message
+        );
+        // Don't fail subscription if status fetch fails
+      }
     } catch (error: any) {
       console.error(
         `❌ Failed to subscribe to match ${matchId}:`,
@@ -248,9 +341,16 @@ class MatchSubscriptionService {
   // Unsubscribe from a match
   private async unsubscribeFromMatch(matchId: string) {
     try {
-      await this.matchService.unsubscribeMatch(matchId, this.token);
+      const result = await this.matchService.unsubscribeMatch(matchId, this.token);
+      
+      // Check if already unsubscribed
+      if (result.already_unsubscribed) {
+        console.log(`ℹ️ Match ${matchId} was not subscribed or already unsubscribed`);
+      } else {
+        console.log(`✅ Successfully unsubscribed from match: ${matchId}`);
+      }
+      
       this.subscribedMatches.delete(matchId);
-      console.log(`✅ Successfully unsubscribed from match: ${matchId}`);
     } catch (error: any) {
       console.error(
         `❌ Failed to unsubscribe from match ${matchId}:`,

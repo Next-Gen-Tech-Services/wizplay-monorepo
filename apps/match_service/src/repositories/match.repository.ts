@@ -277,6 +277,56 @@ export default class MatchRepository {
     }
   }
 
+  public async updateMatchStatus(
+    matchKey: string,
+    data: {
+      status?: string;
+      winner?: string | null;
+      endedAt?: number | null;
+      startedAt?: number;
+    }
+  ): Promise<any> {
+    try {
+      if (!matchKey) {
+        throw new ServerError("Missing match key");
+      }
+
+      // Build update object with only provided fields
+      const updateData: any = {};
+      if (data.status !== undefined) updateData.status = data.status;
+      if (data.winner !== undefined) updateData.winner = data.winner;
+      if (data.endedAt !== undefined) updateData.endedAt = data.endedAt;
+      if (data.startedAt !== undefined) updateData.startedAt = data.startedAt;
+
+      const [affectedCount, updatedMatches] = await this._DB.Match.update(
+        updateData,
+        {
+          where: {
+            key: matchKey,
+          },
+          returning: true,
+        }
+      );
+
+      if (affectedCount === 0) {
+        throw new BadRequestError(`Match not found with key: ${matchKey}`);
+      }
+
+      logger.info(
+        `Updated match status for ${matchKey}: ${JSON.stringify(updateData)}`
+      );
+
+      return updatedMatches[0];
+    } catch (error: any) {
+      logger.error(
+        `match.repository.updateMatchStatus DB error: ${error?.message ?? error}`
+      );
+      throw new ServerError(
+        error?.message || "Database error while updating match status"
+      );
+    }
+  }
+
   public async getMatchWithId(matchId: string): Promise<any> {
     try {
       if (!matchId) {

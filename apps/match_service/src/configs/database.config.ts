@@ -44,7 +44,7 @@ export async function connectDatabase() {
     // Only sync on first run or when explicitly needed
     // Use migrations for production instead of sync
     if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ alter: true });
+      await sequelize.sync({ force: true });
       logger.info("Database synced ✅");
     }
     logger.info("Database connection established ✅");
@@ -81,13 +81,16 @@ WishlistInstance.belongsTo(MatchInstance, {
 // Live match associations
 MatchLiveStateInstance.belongsTo(MatchInstance, {
   foreignKey: "matchId",
-  targetKey: "id",
+  // live state stores the external match key (string) not the internal UUID id
+  // so target the Match 'key' attribute which is a string
+  targetKey: "key",
   as: "match",
 });
 
 MatchLiveEventInstance.belongsTo(MatchInstance, {
   foreignKey: "matchId",
-  targetKey: "id",
+  // live events reference the match 'key' (string)
+  targetKey: "key",
   as: "match",
 });
 

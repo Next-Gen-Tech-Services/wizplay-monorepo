@@ -1,0 +1,3955 @@
+{
+  "sport": "cricket",
+  "data_kind": "match",
+  "data": {
+    "context": {
+      "match_key": "a-rz--cricket--Ym1981594608794214405",
+      "tournament_key": "a-rz--cricket--icc--icccwclt--2023-27-8JlY",
+      "association_key": "a-rz--icc",
+      "player_key": null,
+      "team_key": null,
+      "competition_key": null,
+      "metric_group": "MG100",
+      "start_date": 1762320600,
+      "is_hot": true,
+      "end_date": 1762353000,
+      "age_month": null,
+      "age": null,
+      "api_data": null
+    },
+    "key": "a-rz--cricket--Ym1981594608794214405",
+    "name": "United Arab Emirates vs Nepal",
+    "short_name": "UAE vs NEP",
+    "sub_title": "91st Match",
+    "status": "started",
+    "start_at": 1762320600,
+    "tournament": {
+      "key": "a-rz--cricket--icc--icccwclt--2023-27-8JlY",
+      "name": "ICC Cricket World Cup League Two, 2023-27",
+      "short_name": "ICCCWCLT",
+      "alternate_name": "ICC Cricket World Cup League Two, 2023-27",
+      "alternate_short_name": "ICCCWCLT"
+    },
+    "metric_group": "MG100",
+    "sport": "cricket",
+    "winner": null,
+    "teams": {
+      "b": {
+        "key": "nep",
+        "code": "NEP",
+        "name": "Nepal",
+        "alternate_name": "Nepal",
+        "alternate_code": "NEP",
+        "gender_name": "Nepal Men",
+        "country_code": "NPL"
+      },
+      "a": {
+        "key": "uae",
+        "code": "UAE",
+        "name": "United Arab Emirates",
+        "alternate_name": "United Arab Emirates",
+        "alternate_code": "UAE",
+        "gender_name": "United Arab Emirates Men",
+        "country_code": "ARE"
+      }
+    },
+    "venue": {
+      "key": "c__stadium__dubai_international_cricket_stadium__dubai__32515",
+      "name": "Dubai International Cricket Stadium",
+      "city": "Dubai",
+      "country": {
+        "short_code": "AE",
+        "code": "ARE",
+        "name": "United Arab Emirates",
+        "official_name": "United Arab Emirates",
+        "is_region": false
+      },
+      "geolocation": "25.0459724,55.2183558"
+    },
+    "expected_start_at": null,
+    "association": {
+      "key": "c__board__icc__c2ab7ee61",
+      "code": "ICC",
+      "name": "International Cricket Council",
+      "country": null,
+      "parent": null
+    },
+    "messages": [],
+    "gender": "male",
+    "tour_key": null,
+    "format": "oneday",
+    "title": "United Arab Emirates vs Nepal - 91st Match - ICC Cricket World Cup League Two, 2023-27",
+    "play_status": "in_play",
+    "start_at_local": 1762335000,
+    "toss": {
+      "called": "b",
+      "winner": "a",
+      "elected": "bowl",
+      "squad_announced": true
+    },
+    "play": {
+      "first_batting": "b",
+      "day_number": 1,
+      "overs_per_innings": [
+        50,
+        0
+      ],
+      "reduced_overs": null,
+      "target": null,
+      "result": null,
+      "innings_order": [
+        "b_1"
+      ],
+      "innings": {
+        "b_1": {
+          "index": "b_1",
+          "overs": [
+            30,
+            5
+          ],
+          "is_completed": false,
+          "score_str": "136/4 in 30.5",
+          "score": {
+            "runs": 136,
+            "balls": 185,
+            "fours": 14,
+            "sixes": 1,
+            "dot_balls": 116,
+            "run_rate": 4.41
+          },
+          "score_breakup_detail": {
+            "available": true,
+            "ones": 40,
+            "twos": 12,
+            "threes": 0,
+            "fours": 14,
+            "fives": 0,
+            "sixes": 1,
+            "four_boundaries": 14,
+            "six_boundaries": 1
+          },
+          "wickets": 4,
+          "extra_runs": {
+            "extra": 10,
+            "bye": 0,
+            "leg_bye": 3,
+            "wide": 7,
+            "no_ball": 0,
+            "penalty": 0
+          },
+          "balls_breakup": {
+            "balls": 185,
+            "dot_balls": 116,
+            "wides": 7,
+            "no_balls": 0
+          },
+          "batting_order": [
+            "c__player__kushal_bhurtel__15d50",
+            "c__player__m_a_sheikh__5c610",
+            "c__player__bhim_sharki__d065e",
+            "rk_paudel",
+            "arif_sheikh",
+            "dipendra_airee"
+          ],
+          "bowling_order": [],
+          "wicket_order": [
+            "c__player__kushal_bhurtel__15d50",
+            "c__player__m_a_sheikh__5c610",
+            "rk_paudel",
+            "c__player__bhim_sharki__d065e"
+          ],
+          "partnerships": [
+            {
+              "begin_overs": [
+                0,
+                1
+              ],
+              "end_overs": [
+                1,
+                5
+              ],
+              "player_a_key": "c__player__kushal_bhurtel__15d50",
+              "player_a_score": {
+                "runs": 2,
+                "balls": 9,
+                "fours": 0,
+                "sixes": 0
+              },
+              "player_b_key": "c__player__m_a_sheikh__5c610",
+              "player_b_score": {
+                "runs": 1,
+                "balls": 2,
+                "fours": 0,
+                "sixes": 0
+              },
+              "score": {
+                "runs": 4,
+                "balls": 11,
+                "fours": 0,
+                "sixes": 0,
+                "run_rate": 2.18
+              },
+              "is_completed": true
+            },
+            {
+              "begin_overs": [
+                1,
+                6
+              ],
+              "end_overs": [
+                17,
+                4
+              ],
+              "player_a_key": "c__player__bhim_sharki__d065e",
+              "player_a_score": {
+                "runs": 36,
+                "balls": 49,
+                "fours": 5,
+                "sixes": 0
+              },
+              "player_b_key": "c__player__m_a_sheikh__5c610",
+              "player_b_score": {
+                "runs": 33,
+                "balls": 46,
+                "fours": 4,
+                "sixes": 0
+              },
+              "score": {
+                "runs": 74,
+                "balls": 95,
+                "fours": 9,
+                "sixes": 0,
+                "run_rate": 4.67
+              },
+              "is_completed": true
+            },
+            {
+              "begin_overs": [
+                17,
+                5
+              ],
+              "end_overs": [
+                20,
+                6
+              ],
+              "player_a_key": "rk_paudel",
+              "player_a_score": {
+                "runs": 2,
+                "balls": 7,
+                "fours": 0,
+                "sixes": 0
+              },
+              "player_b_key": "c__player__bhim_sharki__d065e",
+              "player_b_score": {
+                "runs": 7,
+                "balls": 13,
+                "fours": 1,
+                "sixes": 0
+              },
+              "score": {
+                "runs": 9,
+                "balls": 20,
+                "fours": 1,
+                "sixes": 0,
+                "run_rate": 2.7
+              },
+              "is_completed": true
+            },
+            {
+              "begin_overs": [
+                21,
+                1
+              ],
+              "end_overs": [
+                22,
+                2
+              ],
+              "player_a_key": "c__player__bhim_sharki__d065e",
+              "player_a_score": {
+                "runs": 5,
+                "balls": 6,
+                "fours": 1,
+                "sixes": 0
+              },
+              "player_b_key": "arif_sheikh",
+              "player_b_score": {
+                "runs": 0,
+                "balls": 2,
+                "fours": 0,
+                "sixes": 0
+              },
+              "score": {
+                "runs": 7,
+                "balls": 8,
+                "fours": 1,
+                "sixes": 0,
+                "run_rate": 5.25
+              },
+              "is_completed": true
+            },
+            {
+              "begin_overs": [
+                22,
+                3
+              ],
+              "end_overs": [
+                30,
+                5
+              ],
+              "player_a_key": "dipendra_airee",
+              "player_a_score": {
+                "runs": 33,
+                "balls": 37,
+                "fours": 3,
+                "sixes": 1
+              },
+              "player_b_key": "arif_sheikh",
+              "player_b_score": {
+                "runs": 7,
+                "balls": 14,
+                "fours": 0,
+                "sixes": 0
+              },
+              "score": {
+                "runs": 42,
+                "balls": 51,
+                "fours": 3,
+                "sixes": 1,
+                "run_rate": 4.94
+              },
+              "is_completed": false
+            }
+          ],
+          "post_innings_manual_reviewed": null
+        },
+        "a_1": {
+          "index": "a_1",
+          "overs": [
+            0,
+            0
+          ],
+          "is_completed": false,
+          "score_str": "0/0 in 0.0",
+          "score": {
+            "runs": 0,
+            "balls": 0,
+            "fours": 0,
+            "sixes": 0,
+            "dot_balls": 0,
+            "run_rate": 0
+          },
+          "score_breakup_detail": {
+            "available": false,
+            "ones": null,
+            "twos": null,
+            "threes": null,
+            "fours": null,
+            "fives": null,
+            "sixes": null,
+            "four_boundaries": null,
+            "six_boundaries": null
+          },
+          "wickets": 0,
+          "extra_runs": {
+            "extra": 0,
+            "bye": 0,
+            "leg_bye": 0,
+            "wide": 0,
+            "no_ball": 0,
+            "penalty": 0
+          },
+          "balls_breakup": {
+            "balls": 0,
+            "dot_balls": 0,
+            "wides": 0,
+            "no_balls": 0
+          },
+          "batting_order": [],
+          "bowling_order": [
+            "c__player__junaid_siddique__e5bef",
+            "c__player__zahid_ali__fa8f2",
+            "c__player__muhammad_jawadullah__07f6e",
+            "c__player__haider_ali__84c42",
+            "c__player__dhruv_parashar__0f70b",
+            "c__player__h_kaushik__50cee"
+          ],
+          "wicket_order": [],
+          "partnerships": [],
+          "post_innings_manual_reviewed": false
+        }
+      },
+      "live": {
+        "innings": "b_1",
+        "batting_team": "b",
+        "bowling_team": "a",
+        "last_ball_key": "539968",
+        "striker_key": "dipendra_airee",
+        "non_striker_key": "arif_sheikh",
+        "bowler_key": "c__player__zahid_ali__fa8f2",
+        "match_break": null,
+        "score": {
+          "runs": 136,
+          "balls": 185,
+          "wickets": 4,
+          "run_rate": 4.41,
+          "title": "136/4 in 30.5",
+          "overs": [
+            30,
+            5
+          ],
+          "msg_lead_by": "",
+          "msg_trail_by": ""
+        },
+        "required_score": null,
+        "recent_overs": [
+          {
+            "overnumber": 27,
+            "ball_keys": [
+              "538432",
+              "538496",
+              "538497"
+            ],
+            "over_key": "b_1_28"
+          },
+          {
+            "overnumber": 28,
+            "ball_keys": [
+              "538688",
+              "538752",
+              "538816",
+              "538880",
+              "538944",
+              "539008"
+            ],
+            "over_key": "b_1_29"
+          },
+          {
+            "overnumber": 29,
+            "ball_keys": [
+              "539200",
+              "539264",
+              "539328",
+              "539392",
+              "539456",
+              "539520"
+            ],
+            "over_key": "b_1_30"
+          },
+          {
+            "overnumber": 30,
+            "ball_keys": [
+              "539712",
+              "539776",
+              "539840",
+              "539904",
+              "539968"
+            ],
+            "over_key": "b_1_31"
+          }
+        ],
+        "recent_overs_repr": [
+          {
+            "overnumber": 27,
+            "ball_repr": [
+              "r0",
+              "e1,wd",
+              "r2"
+            ]
+          },
+          {
+            "overnumber": 28,
+            "ball_repr": [
+              "r1",
+              "r1",
+              "r0",
+              "r0",
+              "r1",
+              "r1"
+            ]
+          },
+          {
+            "overnumber": 29,
+            "ball_repr": [
+              "r2",
+              "r2",
+              "r0",
+              "r0",
+              "r1",
+              "r0"
+            ]
+          },
+          {
+            "overnumber": 30,
+            "ball_repr": [
+              "r1",
+              "r1",
+              "b6",
+              "b4",
+              "r0"
+            ]
+          }
+        ],
+        "recent_players": {
+          "striker": {
+            "key": "dipendra_airee",
+            "name": "Dipendra Singh Airee",
+            "stats": {
+              "runs": 33,
+              "balls": 37,
+              "fours": 3,
+              "sixes": 1,
+              "dot_balls": 21,
+              "strike_rate": 89.19,
+              "ones": 9,
+              "twos": 3,
+              "threes": 0,
+              "fives": 0,
+              "innings_index": "b_1",
+              "stats": {
+                "boundary_percentage": 54.54545454545454,
+                "boundary_frequency": 9.25,
+                "dot_ball_percentage": 56.75675675675676,
+                "dot_ball_frequency": 1.7619047619047619
+              }
+            }
+          },
+          "non_striker": {
+            "key": "arif_sheikh",
+            "name": "Aarif Sheikh",
+            "stats": {
+              "runs": 7,
+              "balls": 16,
+              "fours": 0,
+              "sixes": 0,
+              "dot_balls": 9,
+              "strike_rate": 43.75,
+              "ones": 7,
+              "twos": 0,
+              "threes": 0,
+              "fives": 0,
+              "innings_index": "b_1",
+              "stats": {
+                "boundary_percentage": 0,
+                "boundary_frequency": 0,
+                "dot_ball_percentage": 56.25,
+                "dot_ball_frequency": 1.7777777777777777
+              }
+            }
+          },
+          "bowler": {
+            "key": "c__player__zahid_ali__fa8f2",
+            "name": "Mohammad Zahid Ali",
+            "stats": {
+              "balls": 35,
+              "runs": 38,
+              "economy": 6.51,
+              "wickets": 1,
+              "extras": 3,
+              "maiden_overs": 0,
+              "overs": [
+                5,
+                5
+              ],
+              "balls_breakup": {
+                "dot_balls": 21,
+                "wides": 3,
+                "no_balls": 0,
+                "fours": 4,
+                "sixes": 1
+              },
+              "wickets_breakup": {
+                "bowled": 0,
+                "caught": 1,
+                "lbw": 0,
+                "stumping": 0
+              },
+              "team_contribution_extras": {
+                "bye": 0,
+                "leg_bye": 0,
+                "penalty": 0
+              },
+              "innings_index": "b_1",
+              "stats": {
+                "boundary_percentage": 57.89473684210527,
+                "boundary_frequency": 7,
+                "dot_ball_percentage": 60,
+                "dot_ball_frequency": 1.6666666666666667
+              }
+            }
+          },
+          "prev_over_bowler": {
+            "key": "c__player__muhammad_jawadullah__07f6e",
+            "name": "Muhammad Jawadullah",
+            "stats": {
+              "balls": 36,
+              "runs": 37,
+              "economy": 6.17,
+              "wickets": 0,
+              "extras": 1,
+              "maiden_overs": 0,
+              "overs": [
+                6,
+                0
+              ],
+              "balls_breakup": {
+                "dot_balls": 20,
+                "wides": 1,
+                "no_balls": 0,
+                "fours": 5,
+                "sixes": 0
+              },
+              "wickets_breakup": {
+                "bowled": 0,
+                "caught": 0,
+                "lbw": 0,
+                "stumping": 0
+              },
+              "team_contribution_extras": {
+                "bye": 0,
+                "leg_bye": 0,
+                "penalty": 0
+              },
+              "innings_index": "b_1",
+              "stats": {
+                "boundary_percentage": 54.054054054054056,
+                "boundary_frequency": 7.2,
+                "dot_ball_percentage": 55.55555555555556,
+                "dot_ball_frequency": 1.8
+              }
+            }
+          }
+        },
+        "session": null,
+        "remaining_day_overs": null
+      },
+      "related_balls": {
+        "525120": {
+          "key": "525120",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Mohammad Zahid Ali to Kushal Bhurtel: <b>Wicket!</b>, Caught by Aryansh Sharma. <b>Wicket!</b> No runs.",
+          "innings": "b_1",
+          "overs": [
+            1,
+            5
+          ],
+          "batsman": {
+            "player_key": "c__player__kushal_bhurtel__15d50",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__zahid_ali__fa8f2",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "fielders": [
+            {
+              "player_key": "c__player__aryansh_sharma__a275c",
+              "is_run_out": false,
+              "is_stumps": false,
+              "is_catch": true,
+              "is_assists": false
+            }
+          ],
+          "wicket": {
+            "player_key": "c__player__kushal_bhurtel__15d50",
+            "wicket_type": "caught"
+          },
+          "non_striker_key": "c__player__m_a_sheikh__5c610",
+          "entry_time": 1762321298.92,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762321409.63,
+          "repr": "w",
+          "display_score": "4/1 in 1.5 overs"
+        },
+        "533248": {
+          "key": "533248",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Haider Ali to Bhim Sharki: <b>Wicket!</b> Runout by [T] Dhruv Parashar[H] Aryansh Sharma. No runs.",
+          "innings": "b_1",
+          "overs": [
+            17,
+            4
+          ],
+          "batsman": {
+            "player_key": "c__player__bhim_sharki__d065e",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__haider_ali__84c42",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "fielders": [
+            {
+              "player_key": "c__player__aryansh_sharma__a275c",
+              "is_run_out": true,
+              "is_stumps": false,
+              "is_catch": false,
+              "is_assists": false
+            },
+            {
+              "player_key": "c__player__dhruv_parashar__0f70b",
+              "is_run_out": false,
+              "is_stumps": false,
+              "is_catch": false,
+              "is_assists": true
+            }
+          ],
+          "wicket": {
+            "player_key": "c__player__m_a_sheikh__5c610",
+            "wicket_type": "run_out"
+          },
+          "non_striker_key": "c__player__m_a_sheikh__5c610",
+          "entry_time": 1762325841.677,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762325936.18,
+          "repr": "w",
+          "display_score": "74/1 in 17.4 overs"
+        },
+        "534912": {
+          "key": "534912",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Rohit Paudel: <b>Wicket!</b>, Caught by Alishan Sharafu. <b>Wicket!</b> No runs.",
+          "innings": "b_1",
+          "overs": [
+            20,
+            6
+          ],
+          "batsman": {
+            "player_key": "rk_paudel",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "fielders": [
+            {
+              "player_key": "c__player__alishan_sharafu__ed3b0",
+              "is_run_out": false,
+              "is_stumps": false,
+              "is_catch": true,
+              "is_assists": false
+            }
+          ],
+          "wicket": {
+            "player_key": "rk_paudel",
+            "wicket_type": "caught"
+          },
+          "non_striker_key": "c__player__bhim_sharki__d065e",
+          "entry_time": 1762326632.961,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762326632.961,
+          "repr": "w",
+          "display_score": "83/2 in 20.6 overs"
+        },
+        "535680": {
+          "key": "535680",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Bhim Sharki: <b>Wicket!</b>, Caught by Alishan Sharafu. <b>Wicket!</b> No runs.",
+          "innings": "b_1",
+          "overs": [
+            22,
+            2
+          ],
+          "batsman": {
+            "player_key": "c__player__bhim_sharki__d065e",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": true
+          },
+          "fielders": [
+            {
+              "player_key": "c__player__alishan_sharafu__ed3b0",
+              "is_run_out": false,
+              "is_stumps": false,
+              "is_catch": true,
+              "is_assists": false
+            }
+          ],
+          "wicket": {
+            "player_key": "c__player__bhim_sharki__d065e",
+            "wicket_type": "caught"
+          },
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762327100.105,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762327100.105,
+          "repr": "w",
+          "display_score": "90/3 in 22.2 overs"
+        },
+        "538432": {
+          "key": "538432",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: No runs.",
+          "innings": "b_1",
+          "overs": [
+            27,
+            5
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328395.556,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328395.556,
+          "repr": "r0",
+          "display_score": "108/3 in 27.5 overs"
+        },
+        "538496": {
+          "key": "538496",
+          "ball_type": "wide",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: wide, 1 run.",
+          "innings": "b_1",
+          "overs": [
+            27,
+            6
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 0,
+            "runs": 0,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 0,
+            "runs": 1,
+            "extras": 1,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 0,
+            "runs": 1,
+            "extras": 1,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328478.944,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328478.944,
+          "repr": "e1,wd",
+          "display_score": "109/3 in 27.6 overs"
+        },
+        "538497": {
+          "key": "538497",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: 2 runs.",
+          "innings": "b_1",
+          "overs": [
+            27,
+            6
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 2,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 2,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 2,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328528.236,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328528.236,
+          "repr": "r2",
+          "display_score": "111/3 in 27.6 overs"
+        },
+        "538688": {
+          "key": "538688",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Aarif Sheikh: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            28,
+            1
+          ],
+          "batsman": {
+            "player_key": "arif_sheikh",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "dipendra_airee",
+          "entry_time": 1762328583.101,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328583.101,
+          "repr": "r1",
+          "display_score": "112/3 in 28.1 overs"
+        },
+        "538752": {
+          "key": "538752",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Dipendra Singh Airee: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            28,
+            2
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328611.03,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328611.03,
+          "repr": "r1",
+          "display_score": "113/3 in 28.2 overs"
+        },
+        "538816": {
+          "key": "538816",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Aarif Sheikh: No runs.",
+          "innings": "b_1",
+          "overs": [
+            28,
+            3
+          ],
+          "batsman": {
+            "player_key": "arif_sheikh",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "dipendra_airee",
+          "entry_time": 1762328634.728,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328634.728,
+          "repr": "r0",
+          "display_score": "113/3 in 28.3 overs"
+        },
+        "538880": {
+          "key": "538880",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Aarif Sheikh: No runs.",
+          "innings": "b_1",
+          "overs": [
+            28,
+            4
+          ],
+          "batsman": {
+            "player_key": "arif_sheikh",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "dipendra_airee",
+          "entry_time": 1762328650.398,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328650.398,
+          "repr": "r0",
+          "display_score": "113/3 in 28.4 overs"
+        },
+        "538944": {
+          "key": "538944",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Aarif Sheikh: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            28,
+            5
+          ],
+          "batsman": {
+            "player_key": "arif_sheikh",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "dipendra_airee",
+          "entry_time": 1762328672.82,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328672.82,
+          "repr": "r1",
+          "display_score": "114/3 in 28.5 overs"
+        },
+        "539008": {
+          "key": "539008",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Dhruv Parashar to Dipendra Singh Airee: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            28,
+            6
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__dhruv_parashar__0f70b",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328730.83,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328730.83,
+          "repr": "r1",
+          "display_score": "115/3 in 28.6 overs"
+        },
+        "539200": {
+          "key": "539200",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: 2 runs.",
+          "innings": "b_1",
+          "overs": [
+            29,
+            1
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 2,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 2,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 2,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328825.658,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328825.658,
+          "repr": "r2",
+          "display_score": "117/3 in 29.1 overs"
+        },
+        "539264": {
+          "key": "539264",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: 2 runs.",
+          "innings": "b_1",
+          "overs": [
+            29,
+            2
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 2,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 2,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 2,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328846.141,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328852.317,
+          "repr": "r2",
+          "display_score": "119/3 in 29.2 overs"
+        },
+        "539328": {
+          "key": "539328",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: No runs.",
+          "innings": "b_1",
+          "overs": [
+            29,
+            3
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328888.862,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328888.862,
+          "repr": "r0",
+          "display_score": "119/3 in 29.3 overs"
+        },
+        "539392": {
+          "key": "539392",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: No runs.",
+          "innings": "b_1",
+          "overs": [
+            29,
+            4
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328927.388,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328927.388,
+          "repr": "r0",
+          "display_score": "119/3 in 29.4 overs"
+        },
+        "539456": {
+          "key": "539456",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Dipendra Singh Airee: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            29,
+            5
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762328964.425,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762328964.425,
+          "repr": "r1",
+          "display_score": "120/3 in 29.5 overs"
+        },
+        "539520": {
+          "key": "539520",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Muhammad Jawadullah to Aarif Sheikh: No runs.",
+          "innings": "b_1",
+          "overs": [
+            29,
+            6
+          ],
+          "batsman": {
+            "player_key": "arif_sheikh",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__muhammad_jawadullah__07f6e",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "dipendra_airee",
+          "entry_time": 1762329191.837,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762329191.837,
+          "repr": "r0",
+          "display_score": "120/3 in 29.6 overs"
+        },
+        "539712": {
+          "key": "539712",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Mohammad Zahid Ali to Dipendra Singh Airee: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            30,
+            1
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__zahid_ali__fa8f2",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762329199.639,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762329199.639,
+          "repr": "r1",
+          "display_score": "121/3 in 30.1 overs"
+        },
+        "539776": {
+          "key": "539776",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Mohammad Zahid Ali to Aarif Sheikh: 1 run.",
+          "innings": "b_1",
+          "overs": [
+            30,
+            2
+          ],
+          "batsman": {
+            "player_key": "arif_sheikh",
+            "ball_count": 1,
+            "runs": 1,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__zahid_ali__fa8f2",
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 1,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "dipendra_airee",
+          "entry_time": 1762329202.83,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762329202.83,
+          "repr": "r1",
+          "display_score": "122/3 in 30.2 overs"
+        },
+        "539840": {
+          "key": "539840",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Mohammad Zahid Ali to Dipendra Singh Airee: <b>SIX</b>. 6 runs.",
+          "innings": "b_1",
+          "overs": [
+            30,
+            3
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 6,
+            "is_dot_ball": false,
+            "is_four": false,
+            "is_six": true
+          },
+          "bowler": {
+            "player_key": "c__player__zahid_ali__fa8f2",
+            "ball_count": 1,
+            "runs": 6,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 6,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762329206.007,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762329206.007,
+          "repr": "b6",
+          "display_score": "128/3 in 30.3 overs"
+        },
+        "539904": {
+          "key": "539904",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Mohammad Zahid Ali to Dipendra Singh Airee: <b>FOUR</b>. 4 runs.",
+          "innings": "b_1",
+          "overs": [
+            30,
+            4
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 4,
+            "is_dot_ball": false,
+            "is_four": true,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__zahid_ali__fa8f2",
+            "ball_count": 1,
+            "runs": 4,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 4,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762329208.494,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762329208.494,
+          "repr": "b4",
+          "display_score": "132/3 in 30.4 overs"
+        },
+        "539968": {
+          "key": "539968",
+          "ball_type": "normal",
+          "batting_team": "b",
+          "comment": "Mohammad Zahid Ali to Dipendra Singh Airee: No runs.",
+          "innings": "b_1",
+          "overs": [
+            30,
+            5
+          ],
+          "batsman": {
+            "player_key": "dipendra_airee",
+            "ball_count": 1,
+            "runs": 0,
+            "is_dot_ball": true,
+            "is_four": false,
+            "is_six": false
+          },
+          "bowler": {
+            "player_key": "c__player__zahid_ali__fa8f2",
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "team_score": {
+            "ball_count": 1,
+            "runs": 0,
+            "extras": 0,
+            "is_wicket": false
+          },
+          "fielders": [],
+          "wicket": null,
+          "non_striker_key": "arif_sheikh",
+          "entry_time": 1762329248.263,
+          "ball_play_status": "played",
+          "ball_tags": [],
+          "updated_time": 1762329248.263,
+          "repr": "r0",
+          "display_score": "132/3 in 30.5 overs"
+        }
+      }
+    },
+    "players": {
+      "c__player__mohammad_waseem__adca9": {
+        "player": {
+          "key": "c__player__mohammad_waseem__adca9",
+          "name": "Mohammad Waseem",
+          "jersey_name": "Waseem",
+          "legal_name": "Mohammad Waseem",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 761011200,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Mohammad Waseem",
+          "jersey_name_v2": "Waseem"
+        },
+        "score": {}
+      },
+      "c__player__dhruv_parashar__0f70b": {
+        "player": {
+          "key": "c__player__dhruv_parashar__0f70b",
+          "name": "Dhruv Parashar",
+          "jersey_name": "Dhruv Parashar",
+          "legal_name": "Dhruv Parashar",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 1103500800,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Dhruv Parashar",
+          "jersey_name_v2": "Dhruv Parashar"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 42,
+                "runs": 22,
+                "economy": 3.14,
+                "wickets": 2,
+                "extras": 0,
+                "maiden_overs": 1,
+                "overs": [
+                  7,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 24,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 1,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 2,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 18.181818181818183,
+                  "boundary_frequency": 42,
+                  "dot_ball_percentage": 57.14285714285714,
+                  "dot_ball_frequency": 1.75
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 1
+            }
+          }
+        }
+      },
+      "c__player__rahul_chopra__dbecd": {
+        "player": {
+          "key": "c__player__rahul_chopra__dbecd",
+          "name": "Rahul Chopra",
+          "jersey_name": "Rahul Chopra",
+          "legal_name": "Rahul Chopra",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 784166400,
+          "seasonal_role": "keeper",
+          "roles": [
+            "batsman",
+            "keeper"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": null,
+          "skills": [
+            "bat",
+            "keep"
+          ],
+          "legal_name_v2": "Rahul Chopra",
+          "jersey_name_v2": "Rahul Chopra"
+        },
+        "score": {}
+      },
+      "c__player__junaid_siddique__e5bef": {
+        "player": {
+          "key": "c__player__junaid_siddique__e5bef",
+          "name": "Junaid Siddique",
+          "jersey_name": "Siddique",
+          "legal_name": "Muhammad Junaid Siddique",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 723600000,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium_fast",
+            "bowling_type": null
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Junaid Siddique",
+          "jersey_name_v2": "Siddique"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 36,
+                "runs": 15,
+                "economy": 2.5,
+                "wickets": 0,
+                "extras": 3,
+                "maiden_overs": 0,
+                "overs": [
+                  6,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 28,
+                  "wides": 3,
+                  "no_balls": 0,
+                  "fours": 1,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 26.666666666666668,
+                  "boundary_frequency": 36,
+                  "dot_ball_percentage": 77.77777777777779,
+                  "dot_ball_frequency": 1.2857142857142858
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__alishan_sharafu__ed3b0": {
+        "player": {
+          "key": "c__player__alishan_sharafu__ed3b0",
+          "name": "Alishan Sharafu",
+          "jersey_name": "Sharafu",
+          "legal_name": "Alishan Sharafu",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 1042156800,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Alishan Sharafu",
+          "jersey_name_v2": "Sharafu"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 2,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__aryansh_sharma__a275c": {
+        "player": {
+          "key": "c__player__aryansh_sharma__a275c",
+          "name": "Aryansh Sharma",
+          "jersey_name": "Aryansh Sharma",
+          "legal_name": "Aryansh Sharma",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 1102032000,
+          "seasonal_role": "keeper",
+          "roles": [
+            "keeper"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": null,
+          "skills": [
+            "bat",
+            "keep"
+          ],
+          "legal_name_v2": "Aryansh Sharma",
+          "jersey_name_v2": "Aryansh Sharma"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 1,
+              "stumpings": 0,
+              "runouts": 1,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__zahid_ali__fa8f2": {
+        "player": {
+          "key": "c__player__zahid_ali__fa8f2",
+          "name": "Mohammad Zahid Ali",
+          "jersey_name": "Mohammad Zahid Ali",
+          "legal_name": "Zahid Ali Mohammad",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 700531200,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "fast",
+            "bowling_type": null
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Zahid Ali Mohammad",
+          "jersey_name_v2": "Mohammad Zahid Ali"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 35,
+                "runs": 38,
+                "economy": 6.51,
+                "wickets": 1,
+                "extras": 3,
+                "maiden_overs": 0,
+                "overs": [
+                  5,
+                  5
+                ],
+                "balls_breakup": {
+                  "dot_balls": 21,
+                  "wides": 3,
+                  "no_balls": 0,
+                  "fours": 4,
+                  "sixes": 1
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 1,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 57.89473684210527,
+                  "boundary_frequency": 7,
+                  "dot_ball_percentage": 60,
+                  "dot_ball_frequency": 1.6666666666666667
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__simranjeet_singh_kang__63ef6": {
+        "player": {
+          "key": "c__player__simranjeet_singh_kang__63ef6",
+          "name": "Simranjeet Singh Kang",
+          "jersey_name": "Simranjeet Singh Kang",
+          "legal_name": "Simranjeet Singh Kang",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 626918400,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": null,
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Simranjeet Singh Kang",
+          "jersey_name_v2": "Simranjeet Singh Kang"
+        },
+        "score": {}
+      },
+      "a-rz--cricket--mc-KUR9": {
+        "player": {
+          "key": "a-rz--cricket--mc-KUR9",
+          "name": "Mayank Choudhary",
+          "jersey_name": "Mayank Choudhary",
+          "legal_name": "Mayank Choudhary",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 704764800,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": null,
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Mayank Choudhary",
+          "jersey_name_v2": "Mayank Choudhary"
+        },
+        "score": {}
+      },
+      "a-rz--cricket--sk-lPVI": {
+        "player": {
+          "key": "a-rz--cricket--sk-lPVI",
+          "name": "Sohaib Khan",
+          "jersey_name": "Sohaib Khan",
+          "legal_name": "Sohaib Khan",
+          "gender": "male",
+          "nationality": {
+            "short_code": "IN",
+            "code": "IND",
+            "name": "India",
+            "official_name": "Republic of India",
+            "is_region": false
+          },
+          "date_of_birth": 897004800,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": null,
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Sohaib Khan",
+          "jersey_name_v2": "Sohaib Khan"
+        },
+        "score": {}
+      },
+      "c__player__h_kaushik__50cee": {
+        "player": {
+          "key": "c__player__h_kaushik__50cee",
+          "name": "Harshit Kaushik",
+          "jersey_name": "Harshit Kaushik",
+          "legal_name": "Harshit Kaushik",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 843091200,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "bowler",
+            "all_rounder"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "left_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Harshit Kaushik",
+          "jersey_name_v2": "Harshit Kaushik"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 6,
+                "runs": 5,
+                "economy": 5,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  1,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 4,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 1,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 2,
+                  "penalty": 0
+                },
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 80,
+                  "boundary_frequency": 6,
+                  "dot_ball_percentage": 66.66666666666666,
+                  "dot_ball_frequency": 1.5
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__muhammad_shahdad__5e60a": {
+        "player": {
+          "key": "c__player__muhammad_shahdad__5e60a",
+          "name": "Muhammad Shahdad",
+          "jersey_name": "Muhammad Shahdad",
+          "legal_name": "Muhammad Shahdad",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 976320000,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "batsman",
+            "all_rounder"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Shahdad",
+          "jersey_name_v2": "Muhammad Shahdad"
+        },
+        "score": {}
+      },
+      "c__player__haider_ali__84c42": {
+        "player": {
+          "key": "c__player__haider_ali__84c42",
+          "name": "Haider Ali",
+          "jersey_name": "Haider Ali",
+          "legal_name": "Haider Ali",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 773366400,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "left_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Haider Ali",
+          "jersey_name_v2": "Haider Ali"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 30,
+                "runs": 16,
+                "economy": 3.2,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  5,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 21,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 2,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 1,
+                  "penalty": 0
+                },
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 50,
+                  "boundary_frequency": 15,
+                  "dot_ball_percentage": 70,
+                  "dot_ball_frequency": 1.4285714285714286
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__muhammad_rohid__4afc2": {
+        "player": {
+          "key": "c__player__muhammad_rohid__4afc2",
+          "name": "Muhammad Rohid Khan",
+          "jersey_name": "Muhammad Rohid Khan",
+          "legal_name": "Muhammad Rohid Khan",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 1033257600,
+          "seasonal_role": "bowler",
+          "roles": [
+            "all_rounder",
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "left_arm",
+            "pace": "medium_fast",
+            "bowling_type": null
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Rohid Khan",
+          "jersey_name_v2": "Muhammad Rohid Khan"
+        },
+        "score": {}
+      },
+      "a-rz--cricket--ma-pOMU": {
+        "player": {
+          "key": "a-rz--cricket--ma-pOMU",
+          "name": "Muhammad Arfan",
+          "jersey_name": "Muhammad Arfan",
+          "legal_name": "Muhammad Arfan",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 736560000,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Arfan",
+          "jersey_name_v2": "Muhammad Arfan"
+        },
+        "score": {}
+      },
+      "c__player__mayank_rajesh_kumar__1ae9f": {
+        "player": {
+          "key": "c__player__mayank_rajesh_kumar__1ae9f",
+          "name": "Mayank Rajesh Kumar",
+          "jersey_name": "Mayank Rajesh Kumar",
+          "legal_name": "Mayank Rajesh Kumar",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 862531200,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": null,
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Mayank Rajesh Kumar",
+          "jersey_name_v2": "Mayank Rajesh Kumar"
+        },
+        "score": {}
+      },
+      "c__player__muhammad_irfan_ii__5fcf4": {
+        "player": {
+          "key": "c__player__muhammad_irfan_ii__5fcf4",
+          "name": "Muhammad Irfan II",
+          "jersey_name": "Muhammad Irfan II",
+          "legal_name": "Muhammad Irfan II",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 736560000,
+          "seasonal_role": "bowler",
+          "roles": [
+            "all_rounder",
+            "bowler"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Irfan II",
+          "jersey_name_v2": "Muhammad Irfan II"
+        },
+        "score": {}
+      },
+      "c__player__farooq_momand__be4a4": {
+        "player": {
+          "key": "c__player__farooq_momand__be4a4",
+          "name": "Muhammad Farooq",
+          "jersey_name": "Farooq",
+          "legal_name": "Muhammad Momand Farooq",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 718243200,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Momand Farooq",
+          "jersey_name_v2": "Farooq"
+        },
+        "score": {}
+      },
+      "arif_sheikh": {
+        "player": {
+          "key": "arif_sheikh",
+          "name": "Aarif Sheikh",
+          "jersey_name": "Sheikh",
+          "legal_name": "Aarif Sheikh",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 875923200,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "fast_medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Aarif Sheikh",
+          "jersey_name_v2": "Sheikh"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 7,
+                "balls": 16,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 9,
+                "strike_rate": 43.75,
+                "ones": 7,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 56.25,
+                  "dot_ball_frequency": 1.7777777777777777
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__bhim_sharki__d065e": {
+        "player": {
+          "key": "c__player__bhim_sharki__d065e",
+          "name": "Bhim Sharki",
+          "jersey_name": "Sharki",
+          "legal_name": "Bhim Sharki",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 1001462400,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "off_break"
+          },
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Bhim Sharki",
+          "jersey_name_v2": "Sharki"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 48,
+                "balls": 68,
+                "fours": 7,
+                "sixes": 0,
+                "dot_balls": 43,
+                "strike_rate": 70.59,
+                "ones": 14,
+                "twos": 3,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 58.333333333333336,
+                  "boundary_frequency": 9.714285714285714,
+                  "dot_ball_percentage": 63.23529411764706,
+                  "dot_ball_frequency": 1.5813953488372092
+                }
+              },
+              "dismissal": {
+                "overs": [
+                  22,
+                  2
+                ],
+                "team_runs": 94,
+                "wicket_number": 4,
+                "msg": "c Alishan Sharafu b Dhruv Parashar",
+                "ball_key": "535680",
+                "wicket_type": "caught",
+                "bowler_key": "c__player__dhruv_parashar__0f70b",
+                "primary_fielder_keys": [
+                  "c__player__alishan_sharafu__ed3b0"
+                ],
+                "assist_fielder_keys": []
+              }
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__kushal_bhurtel__15d50": {
+        "player": {
+          "key": "c__player__kushal_bhurtel__15d50",
+          "name": "Kushal Bhurtel",
+          "jersey_name": "Bhurtel",
+          "legal_name": "Kushal Bhurtel",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 853891200,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Kushal Bhurtel",
+          "jersey_name_v2": "Bhurtel"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 2,
+                "balls": 9,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 7,
+                "strike_rate": 22.22,
+                "ones": 2,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 77.77777777777779,
+                  "dot_ball_frequency": 1.2857142857142858
+                }
+              },
+              "dismissal": {
+                "overs": [
+                  1,
+                  5
+                ],
+                "team_runs": 4,
+                "wicket_number": 1,
+                "msg": "c Aryansh Sharma b Mohammad Zahid Ali",
+                "ball_key": "525120",
+                "wicket_type": "caught",
+                "bowler_key": "c__player__zahid_ali__fa8f2",
+                "primary_fielder_keys": [
+                  "c__player__aryansh_sharma__a275c"
+                ],
+                "assist_fielder_keys": []
+              }
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "rk_paudel": {
+        "player": {
+          "key": "rk_paudel",
+          "name": "Rohit Paudel",
+          "jersey_name": "Rohit Paudel",
+          "legal_name": "Rohit Kumar Paudel",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 1030924800,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Rohit Kumar Paudel",
+          "jersey_name_v2": "Rohit Paudel"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 2,
+                "balls": 7,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 6,
+                "strike_rate": 28.57,
+                "ones": 0,
+                "twos": 1,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 85.71428571428571,
+                  "dot_ball_frequency": 1.1666666666666667
+                }
+              },
+              "dismissal": {
+                "overs": [
+                  20,
+                  6
+                ],
+                "team_runs": 87,
+                "wicket_number": 3,
+                "msg": "c Alishan Sharafu b Dhruv Parashar",
+                "ball_key": "534912",
+                "wicket_type": "caught",
+                "bowler_key": "c__player__dhruv_parashar__0f70b",
+                "primary_fielder_keys": [
+                  "c__player__alishan_sharafu__ed3b0"
+                ],
+                "assist_fielder_keys": []
+              }
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "dipendra_airee": {
+        "player": {
+          "key": "dipendra_airee",
+          "name": "Dipendra Singh Airee",
+          "jersey_name": "Airee",
+          "legal_name": "Dipendra Singh Airee",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 948672000,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Dipendra Singh Airee",
+          "jersey_name_v2": "Airee"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 33,
+                "balls": 37,
+                "fours": 3,
+                "sixes": 1,
+                "dot_balls": 21,
+                "strike_rate": 89.19,
+                "ones": 9,
+                "twos": 3,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 54.54545454545454,
+                  "boundary_frequency": 9.25,
+                  "dot_ball_percentage": 56.75675675675676,
+                  "dot_ball_frequency": 1.7619047619047619
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "karan_kc": {
+        "player": {
+          "key": "karan_kc",
+          "name": "Karan KC",
+          "jersey_name": "Karan KC",
+          "legal_name": "Karan KC",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 687052800,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "fast",
+            "bowling_type": null
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Karan KC",
+          "jersey_name_v2": "Karan KC"
+        },
+        "score": {}
+      },
+      "kus_malla": {
+        "player": {
+          "key": "kus_malla",
+          "name": "Kushal Malla",
+          "jersey_name": "Malla",
+          "legal_name": "Kushal Malla",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 1078444800,
+          "seasonal_role": "batsman",
+          "roles": [
+            "batsman"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "left_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bat"
+          ],
+          "legal_name_v2": "Kushal Malla",
+          "jersey_name_v2": "Malla"
+        },
+        "score": {}
+      },
+      "c__player__m_a_sheikh__5c610": {
+        "player": {
+          "key": "c__player__m_a_sheikh__5c610",
+          "name": "Aasif Sheikh",
+          "jersey_name": "Aasif Sheikh",
+          "legal_name": "Mohammad Aasif Sheikh",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 993168000,
+          "seasonal_role": "keeper",
+          "roles": [
+            "keeper"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat",
+            "keep"
+          ],
+          "legal_name_v2": "Mohammad Aasif Sheikh",
+          "jersey_name_v2": "Aasif Sheikh"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 34,
+                "balls": 48,
+                "fours": 4,
+                "sixes": 0,
+                "dot_balls": 30,
+                "strike_rate": 70.83,
+                "ones": 8,
+                "twos": 5,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 47.05882352941176,
+                  "boundary_frequency": 12,
+                  "dot_ball_percentage": 62.5,
+                  "dot_ball_frequency": 1.6
+                }
+              },
+              "dismissal": {
+                "overs": [
+                  17,
+                  4
+                ],
+                "team_runs": 78,
+                "wicket_number": 2,
+                "msg": "runout [T] Dhruv Parashar [H] Aryansh Sharma",
+                "ball_key": "533248",
+                "wicket_type": "run_out",
+                "bowler_key": "c__player__haider_ali__84c42",
+                "primary_fielder_keys": [
+                  "c__player__aryansh_sharma__a275c"
+                ],
+                "assist_fielder_keys": [
+                  "c__player__dhruv_parashar__0f70b"
+                ]
+              }
+            },
+            "bowling": {
+              "score": {
+                "balls": 0,
+                "runs": 0,
+                "economy": 0,
+                "wickets": 0,
+                "extras": 0,
+                "maiden_overs": 0,
+                "overs": [
+                  0,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 0,
+                  "wides": 0,
+                  "no_balls": 0,
+                  "fours": 0,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      },
+      "c__player__gulsan_jha__a212f": {
+        "player": {
+          "key": "c__player__gulsan_jha__a212f",
+          "name": "Gulsan Jha",
+          "jersey_name": "Jha",
+          "legal_name": "Gulsan Jha",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 1140134400,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Gulsan Jha",
+          "jersey_name_v2": "Jha"
+        },
+        "score": {}
+      },
+      "l_rajbanshi": {
+        "player": {
+          "key": "l_rajbanshi",
+          "name": "Lalit Rajbanshi",
+          "jersey_name": "Rajbanshi",
+          "legal_name": "Lalit Narayan Rajbanshi",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 920073600,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "left_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Lalit Narayan Rajbanshi",
+          "jersey_name_v2": "Rajbanshi"
+        },
+        "score": {}
+      },
+      "s_kami": {
+        "player": {
+          "key": "s_kami",
+          "name": "Sompal Kami",
+          "jersey_name": "Sompal Kami",
+          "legal_name": "Sompal Kami",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 823219200,
+          "seasonal_role": "all_rounder",
+          "roles": [
+            "all_rounder"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "fast_medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bat",
+            "bowl"
+          ],
+          "legal_name_v2": "Sompal Kami",
+          "jersey_name_v2": "Sompal Kami"
+        },
+        "score": {}
+      },
+      "ak_sah": {
+        "player": {
+          "key": "ak_sah",
+          "name": "Anil Sah",
+          "jersey_name": "Anil Sah",
+          "legal_name": "Anil Kumar Sah",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 911260800,
+          "seasonal_role": "keeper",
+          "roles": [
+            "keeper"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "off_break"
+          },
+          "skills": [
+            "bat",
+            "keep"
+          ],
+          "legal_name_v2": "Anil Kumar Sah",
+          "jersey_name_v2": "Anil Sah"
+        },
+        "score": {}
+      },
+      "sd_lamichhane": {
+        "player": {
+          "key": "sd_lamichhane",
+          "name": "Sandeep Lamichhane",
+          "jersey_name": "Lamichhane",
+          "legal_name": "Sandeep Lamichhane",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 965174400,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "leg_break"
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Sandeep Lamichhane",
+          "jersey_name_v2": "Lamichhane"
+        },
+        "score": {}
+      },
+      "c__player__nandan_yadav__17797": {
+        "player": {
+          "key": "c__player__nandan_yadav__17797",
+          "name": "Nandan Yadav",
+          "jersey_name": "Nandan Yadav",
+          "legal_name": "Nandan Kumar Yadav",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 964656000,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "right_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Nandan Kumar Yadav",
+          "jersey_name_v2": "Nandan Yadav"
+        },
+        "score": {}
+      },
+      "c__player__shahab_alam__2616f": {
+        "player": {
+          "key": "c__player__shahab_alam__2616f",
+          "name": "Shahab Alam",
+          "jersey_name": "Shahab Alam",
+          "legal_name": "Shahab Alam",
+          "gender": "male",
+          "nationality": {
+            "short_code": "NP",
+            "code": "NPL",
+            "name": "Nepal",
+            "official_name": "Federal Democratic Republic of Nepal",
+            "is_region": false
+          },
+          "date_of_birth": 925257600,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "left_arm",
+            "pace": "slow",
+            "bowling_type": "orthodox"
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Shahab Alam",
+          "jersey_name_v2": "Shahab Alam"
+        },
+        "score": {}
+      },
+      "c__player__muhammad_jawadullah__07f6e": {
+        "player": {
+          "key": "c__player__muhammad_jawadullah__07f6e",
+          "name": "Muhammad Jawadullah",
+          "jersey_name": "Jawadullah",
+          "legal_name": "Muhammad Jawadullah",
+          "gender": "male",
+          "nationality": {
+            "short_code": "AE",
+            "code": "ARE",
+            "name": "United Arab Emirates",
+            "official_name": "United Arab Emirates",
+            "is_region": false
+          },
+          "date_of_birth": 921196800,
+          "seasonal_role": "bowler",
+          "roles": [
+            "bowler"
+          ],
+          "batting_style": "left_hand",
+          "bowling_style": {
+            "arm": "right_arm",
+            "pace": "fast_medium",
+            "bowling_type": null
+          },
+          "skills": [
+            "bowl"
+          ],
+          "legal_name_v2": "Muhammad Jawadullah",
+          "jersey_name_v2": "Jawadullah"
+        },
+        "score": {
+          "1": {
+            "batting": {
+              "score": {
+                "runs": 0,
+                "balls": 0,
+                "fours": 0,
+                "sixes": 0,
+                "dot_balls": 0,
+                "strike_rate": 0,
+                "ones": 0,
+                "twos": 0,
+                "threes": 0,
+                "fives": 0,
+                "innings_index": null,
+                "stats": {
+                  "boundary_percentage": 0,
+                  "boundary_frequency": 0,
+                  "dot_ball_percentage": 0,
+                  "dot_ball_frequency": 0
+                }
+              },
+              "dismissal": null
+            },
+            "bowling": {
+              "score": {
+                "balls": 36,
+                "runs": 37,
+                "economy": 6.17,
+                "wickets": 0,
+                "extras": 1,
+                "maiden_overs": 0,
+                "overs": [
+                  6,
+                  0
+                ],
+                "balls_breakup": {
+                  "dot_balls": 20,
+                  "wides": 1,
+                  "no_balls": 0,
+                  "fours": 5,
+                  "sixes": 0
+                },
+                "wickets_breakup": {
+                  "bowled": 0,
+                  "caught": 0,
+                  "lbw": 0,
+                  "stumping": 0
+                },
+                "team_contribution_extras": {
+                  "bye": 0,
+                  "leg_bye": 0,
+                  "penalty": 0
+                },
+                "innings_index": "b_1",
+                "stats": {
+                  "boundary_percentage": 54.054054054054056,
+                  "boundary_frequency": 7.2,
+                  "dot_ball_percentage": 55.55555555555556,
+                  "dot_ball_frequency": 1.8
+                }
+              }
+            },
+            "fielding": {
+              "catches": 0,
+              "stumpings": 0,
+              "runouts": 0,
+              "runout_direct_hits": 0,
+              "runout_assists": 0
+            }
+          }
+        }
+      }
+    },
+    "notes": [],
+    "data_review": {
+      "schedule": true,
+      "venue": true,
+      "result": false,
+      "pom": false,
+      "score": false,
+      "players": true,
+      "playing_xi": true,
+      "score_reviewed_ball_index": [
+        "b_1",
+        [
+          30,
+          5
+        ]
+      ],
+      "team_a": true,
+      "team_b": true,
+      "good_to_close": false,
+      "note": ""
+    },
+    "squad": {
+      "a": {
+        "player_keys": [
+          "c__player__aryansh_sharma__a275c",
+          "c__player__alishan_sharafu__ed3b0",
+          "c__player__muhammad_shahdad__5e60a",
+          "c__player__rahul_chopra__dbecd",
+          "c__player__zahid_ali__fa8f2",
+          "c__player__muhammad_irfan_ii__5fcf4",
+          "c__player__dhruv_parashar__0f70b",
+          "a-rz--cricket--sk-lPVI",
+          "c__player__farooq_momand__be4a4",
+          "c__player__mayank_rajesh_kumar__1ae9f",
+          "c__player__simranjeet_singh_kang__63ef6",
+          "a-rz--cricket--ma-pOMU",
+          "c__player__haider_ali__84c42",
+          "c__player__muhammad_rohid__4afc2",
+          "c__player__junaid_siddique__e5bef",
+          "a-rz--cricket--mc-KUR9",
+          "c__player__mohammad_waseem__adca9",
+          "c__player__h_kaushik__50cee",
+          "c__player__muhammad_jawadullah__07f6e"
+        ],
+        "captain": "c__player__aryansh_sharma__a275c",
+        "keeper": "c__player__alishan_sharafu__ed3b0",
+        "playing_xi": [
+          "c__player__aryansh_sharma__a275c",
+          "c__player__alishan_sharafu__ed3b0",
+          "c__player__muhammad_shahdad__5e60a",
+          "a-rz--cricket--sk-lPVI",
+          "c__player__mohammad_waseem__adca9",
+          "c__player__h_kaushik__50cee",
+          "c__player__dhruv_parashar__0f70b",
+          "c__player__zahid_ali__fa8f2",
+          "c__player__haider_ali__84c42",
+          "c__player__junaid_siddique__e5bef",
+          "c__player__muhammad_jawadullah__07f6e"
+        ],
+        "replacements": []
+      },
+      "b": {
+        "player_keys": [
+          "arif_sheikh",
+          "c__player__shahab_alam__2616f",
+          "c__player__nandan_yadav__17797",
+          "c__player__kushal_bhurtel__15d50",
+          "l_rajbanshi",
+          "kus_malla",
+          "sd_lamichhane",
+          "c__player__m_a_sheikh__5c610",
+          "ak_sah",
+          "c__player__gulsan_jha__a212f",
+          "dipendra_airee",
+          "rk_paudel",
+          "s_kami",
+          "c__player__bhim_sharki__d065e",
+          "karan_kc"
+        ],
+        "captain": "rk_paudel",
+        "keeper": "c__player__m_a_sheikh__5c610",
+        "playing_xi": [
+          "c__player__kushal_bhurtel__15d50",
+          "c__player__m_a_sheikh__5c610",
+          "c__player__bhim_sharki__d065e",
+          "rk_paudel",
+          "arif_sheikh",
+          "dipendra_airee",
+          "kus_malla",
+          "karan_kc",
+          "c__player__nandan_yadav__17797",
+          "sd_lamichhane",
+          "l_rajbanshi"
+        ],
+        "replacements": []
+      }
+    },
+    "estimated_end_date": 1762353000,
+    "completed_date_approximate": null,
+    "umpires": {
+      "match_umpires": [],
+      "tv_umpires": [],
+      "reserve_umpires": [],
+      "match_referee": []
+    },
+    "weather": "27.2°C|Overcast"
+  },
+  "cache": {
+    "key": "api:rz:v5_cricket_match:a-rz--cricket--Ym1981594608794214405",
+    "expires": 1762412049.069879,
+    "etag": "qE13048370476072705388",
+    "max_age": null
+  },
+  "schema": {
+    "major_version": "5.0",
+    "minor_version": "2"
+  },
+  "error": null
+}

@@ -113,4 +113,14 @@ export const ROUTES: ProxyRoute[] = [
     pathRewrite: { "^/api/v1/notifications": "/api/v1/notifications" },
     timeoutMs: 15000,
   },
+  {
+    name: "socket",
+    mountPath: "/socket.io",
+    target: process.env.MATCHES_SERVICE_URL ?? "http://localhost:4003",
+    changeOrigin: true,
+    ws: true,
+    // Don't rewrite the path - Socket.IO needs /socket.io
+    timeoutMs: 60000,
+    secure: false,
+  },
 ];
