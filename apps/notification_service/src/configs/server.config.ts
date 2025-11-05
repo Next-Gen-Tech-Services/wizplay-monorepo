@@ -26,9 +26,18 @@ class ServerConfigs {
   static REDIS_PORT: string = process.env.REDIS_PORT as string;
   
   // Kafka
-  static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
-  static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID || "notification-group";
+  static KAF_CLIENT_ID: string = process.env.NOTIFICATION_KAF_CLIENT_ID || process.env.KAF_CLIENT_ID as string;
+  static KAF_GROUP_ID: string = process.env.NOTIFICATION_KAF_GROUP_ID || process.env.KAF_GROUP_ID || "notification-group";
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
+  
+  // RabbitMQ
+  static RABBITMQ_URL: string = process.env.RABBITMQ_URL as string;
+  
+  // SMTP Configuration
+  static SMTP_HOST: string = process.env.SMTP_HOST as string;
+  static SMTP_PORT: string = process.env.SMTP_PORT || "587";
+  static SMTP_USER: string = process.env.SMTP_USER as string;
+  static SMTP_PASS: string = process.env.SMTP_PASS as string;
   
   // Firebase
   static FIREBASE_PROJECT_ID: string = process.env.FIREBASE_PROJECT_ID as string;

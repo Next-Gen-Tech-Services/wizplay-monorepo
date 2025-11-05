@@ -23,8 +23,8 @@ class ServerConfigs {
   static REDIS_PORT: string = process.env.REDIS_PORT as string;
   static RABBITMQ_URL: string = process.env.RABBITMQ_URL as string;
   static DB_SYNC: string = process.env.DB_SYNC as string;
-  static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
-  static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
+  static KAF_CLIENT_ID: string = process.env.CONTEST_KAF_CLIENT_ID || process.env.KAF_CLIENT_ID as string;
+  static KAF_GROUP_ID: string = process.env.CONTEST_KAF_GROUP_ID || process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
   static OPEN_API_KEY: string = process.env.OPEN_API_KEY as string;
   static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;

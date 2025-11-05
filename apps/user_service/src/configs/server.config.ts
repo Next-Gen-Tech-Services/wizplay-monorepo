@@ -21,8 +21,8 @@ class ServerConfigs {
   static REDIS_HOST: string = process.env.REDIS_HOST as string;
   static REDIS_PORT: string = process.env.REDIS_PORT as string;
   static RABBITMQ_URL: string = process.env.RABBITMQ_URL as string;
-  static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
-  static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
+  static KAF_CLIENT_ID: string = process.env.USER_KAF_CLIENT_ID || process.env.KAF_CLIENT_ID as string;
+  static KAF_GROUP_ID: string = process.env.USER_KAF_GROUP_ID || process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
   static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
   private constructor() {}
