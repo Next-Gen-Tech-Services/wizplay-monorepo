@@ -53,7 +53,7 @@ export default class WishlistController {
       return res.status(STATUS_CODE.SUCCESS).json({
         success: true,
         message: "User wishlists fetched successfully",
-        data: result,
+        data: result.data,
         errors: null,
         timestamp: new Date().toISOString(),
       });
