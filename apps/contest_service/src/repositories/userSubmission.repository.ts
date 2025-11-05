@@ -47,33 +47,7 @@ export default class UserSubmissionRepository {
     }
   }
 
-   public async findByContestId(contestId: string) {
-    try {
-      return await this._DB.UserSubmission.findAll({
-        where: { contestId },
-      });
-    } catch (err: any) {
-      logger.error(
-        `UserSubmissionRepository.findByContestId error: ${err?.message ?? err}`
-      );
-      throw err;
-    }
-  }
-
-  public async findByUserId(userId: string) {
-    try {
-      return await this._DB.UserSubmission.findAll({
-        where: { userId },
-      });
-    } catch (err: any) {
-      logger.error(
-        `UserSubmissionRepository.findByUserId error: ${err?.message ?? err}`
-      );
-      throw err;
-    }
-  }
-
-  // New
+  // repository/service method
   public async findContestSubmissionById(userId: string, contestId: string) {
     try {
       // 1) load submission as plain object
