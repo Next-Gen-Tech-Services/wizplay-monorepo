@@ -1,10 +1,11 @@
 # Multi-stage build for production
 FROM node:20-alpine AS base
 
-# Install pnpm
+# Install pnpm globally via npm to avoid corepack network issues
+RUN npm install -g pnpm@9.0.0
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
 
 # Stage 1: Install dependencies
 FROM base AS deps
@@ -32,6 +33,10 @@ COPY --from=deps /app/packages ./packages
 # Copy source code
 COPY apps/auth_service ./apps/auth_service
 COPY turbo.json ./
+
+# Build workspace packages first
+WORKDIR /app
+RUN pnpm --filter @repo/common build
 
 # Build the auth service with increased memory limit
 WORKDIR /app/apps/auth_service
