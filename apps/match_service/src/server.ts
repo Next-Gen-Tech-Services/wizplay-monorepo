@@ -4,13 +4,14 @@ import AppInit from "./app";
 import { connectDatabase } from "./configs/database.config";
 import redis from "./configs/redis.config";
 import ServerConfigs from "./configs/server.config";
+import rabbitmqInstance from "./configs/rabbitmq.config";
 
 async function startServer() {
   await connectDatabase();
 
-  // await redis.connectClient();
+  await redis.connectClient();
 
-  // await rabbitmqInstance.connectClient();
+  await rabbitmqInstance.connectClient();
 
   const { server } = await AppInit();
   
