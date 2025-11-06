@@ -47,7 +47,7 @@ const AppInit = async () => {
 
   expressApp.use("/api/v1", NotificationRouter);
   expressApp.get(
-    `/${ServerConfigs.API_VERSION}/health-check`,
+    `${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {
       logger.debug("Sending response: Server running");
       return res.status(200).json({

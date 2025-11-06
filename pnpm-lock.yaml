@@ -529,6 +529,9 @@ importers:
       '@repo/notifications':
         specifier: workspace:*
         version: link:../../packages/notifications
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
       amqplib:
         specifier: ^0.10.3
         version: 0.10.9
@@ -550,6 +553,9 @@ importers:
       firebase-admin:
         specifier: ^12.0.0
         version: 12.7.0
+      jsonwebtoken:
+        specifier: ^9.0.2
+        version: 9.0.2
       kafkajs:
         specifier: ^2.2.4
         version: 2.2.4
@@ -596,18 +602,12 @@ importers:
       '@types/express-serve-static-core':
         specifier: ^5.0.7
         version: 5.0.7
-      '@types/jsonwebtoken':
-        specifier: ^9.0.10
-        version: 9.0.10
       '@types/node':
         specifier: ^24.1.0
         version: 24.3.1
       '@types/nodemailer':
         specifier: ^6.4.14
         version: 6.4.21
-      jsonwebtoken:
-        specifier: ^9.0.2
-        version: 9.0.2
       nodemon:
         specifier: ^3.0.3
         version: 3.1.10
