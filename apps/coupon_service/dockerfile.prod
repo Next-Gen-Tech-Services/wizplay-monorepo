@@ -51,6 +51,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/coupon_service/package.json ./apps/coupon_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/coupon_service/dist ./apps/coupon_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
 
 RUN pnpm deploy --filter=coupon_service --prod /deploy/output
 

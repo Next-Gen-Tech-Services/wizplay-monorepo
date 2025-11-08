@@ -52,6 +52,8 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/notification_service/package.json ./apps/notification_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/notification_service/dist ./apps/notification_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
+COPY --from=builder /app/packages/notifications/dist ./packages/notifications/dist
 
 RUN pnpm deploy --filter=notification_service --prod /deploy/output
 
