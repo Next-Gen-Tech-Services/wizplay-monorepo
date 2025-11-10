@@ -32,7 +32,7 @@ export async function connectDatabase() {
     // Only sync on first run or when explicitly needed
     // Use migrations for production instead of sync
     if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ alter: true });
+      await sequelize.sync({ force: true });
       logger.info("Database synced ✅");
     }
     logger.info("Database connection established ✅");

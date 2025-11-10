@@ -36,7 +36,7 @@ export async function connectDatabase() {
   try {
     await sequelize.authenticate();
     if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ alter: true });
+      await sequelize.sync({ force: true });
       logger.info("Database synced ✅");
     }
     logger.info("Database connection established ✅");

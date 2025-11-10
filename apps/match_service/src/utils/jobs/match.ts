@@ -86,7 +86,7 @@ class MatchCrons {
   }
 
   async scheduleJob() {
-    cron.schedule("0 0 * * *", async () => {
+    cron.schedule("* * * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
       const token = await this.generateApiToken();
       const { matches, tournaments } = await this.getMatchData();
