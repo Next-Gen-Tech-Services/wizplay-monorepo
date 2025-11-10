@@ -40,9 +40,9 @@ export default class Service {
     const otpCode: string = generateOTPUtil();
     logger.info(`OTP Code : ${otpCode}`);
 
-    if (ServerConfigs.NODE_ENV === "development") {
+    // if (ServerConfigs.NODE_ENV === "development") {
       const res = await sendOtpUtil(phoneNumber);
-    }
+    // }
     if (userExist) {
       const updateOtp = await this.userRepository.updateRecentOtp({
         phoneNumber,
@@ -93,7 +93,7 @@ export default class Service {
 
       let verifiedUser;
 
-      if (ServerConfigs.NODE_ENV === "development") {
+      // if (ServerConfigs.NODE_ENV === "development") {
         const response = await verifyOtpUtil(phoneNumber, otpCode);
         if (response?.type === "error") {
           throw new BadRequestError(response?.message);
@@ -101,12 +101,12 @@ export default class Service {
 
         verifiedUser =
           await this.userRepository.userWithPhoneExistRepo(phoneNumber);
-      } else {
-        verifiedUser = await this.userRepository.verifyOtpRepo({
-          phoneNumber,
-          otpCode,
-        });
-      }
+      // } else {
+      //   verifiedUser = await this.userRepository.verifyOtpRepo({
+      //     phoneNumber,
+      //     otpCode,
+      //   });
+      // }
 
       if (!verifiedUser) {
         throw new BadRequestError("invalid or expired OTP");
