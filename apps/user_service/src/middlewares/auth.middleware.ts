@@ -55,31 +55,37 @@ export const requireAdminAuth = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log("[MIDDLEWARE] Access token: ", req.headers.authorization);
   const bearerToken = req.headers.authorization;
-  const tokenParts = bearerToken?.split(" ");
+  const sessionId = bearerToken?.split(" ");
 
-  if (!tokenParts || tokenParts.length !== 2) {
+  if (!sessionId) {
     throw new UnAuthorizError("Unauthorized access");
   }
 
   try {
-    const payload: any = jwt.verify(tokenParts[1], ServerConfigs.TOKEN_SECRET);
+    const payload: any = jwt.verify(sessionId[1], ServerConfigs.TOKEN_SECRET);
 
-    const { auth_id, email } = payload?.data || {};
-
-    if (!auth_id || !email) throw new UnAuthorizError("Invalid admin token");
-
+    const payloadKeys = payload?.data?.session_id.split(":");
+    if (payloadKeys.length !== 3) {
+      throw new UnAuthorizError();
+    }
     const userRepository = new UserRepository();
-    const adminUser = await userRepository.getUserById(auth_id);
+    const admin = await userRepository.getUserWithId(
+      payloadKeys[1],
+      payloadKeys[0]
+    );
 
-    if (!adminUser) throw new UnAuthorizError("Admin not found");
+    logger.info(`[MIDDLEWARE] Admin Type: ${admin?.type}`);
+    if (!admin || admin.type !== "admin") {
+      throw new UnAuthorizError();
+    }
 
-    req.currentUser = { ...adminUser, type: "admin" };
-    logger.info(`[ADMIN_AUTH] Authenticated admin: ${email}`);
-
+    req.currentUser = admin;
     return next();
-  } catch (error: any) {
-    logger.error(`[ADMIN_AUTH ERROR]: ${error.message}`);
-    throw new UnAuthorizError("Unauthorized admin access");
+  } catch (error) {
+    logger.error(`[MIDDLEWARE]: ${error}`);
+    throw new UnAuthorizError();
   }
 };
+

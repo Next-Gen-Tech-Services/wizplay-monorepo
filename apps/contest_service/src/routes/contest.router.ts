@@ -15,6 +15,13 @@ const contestController: ContestController =
 /**
  * Contests
  */
+
+// Stats endpoint for analytics dashboard
+router.get("/contests/stats", async (req, res) => {
+  const result = await contestController.getContestStats(req, res);
+  return result;
+});
+
 router.get("/contests", requireAuth, async (req, res) => {
   const result = await contestController.listByMatch(req, res);
   return result;
@@ -67,6 +74,10 @@ router.get(
  */
 
 router.post("/contests/generate", async (req: Request, res: Response) => {
+  // Set timeout to 3 minutes for AI generation
+  req.setTimeout(180000); // 3 minutes
+  res.setTimeout(180000); // 3 minutes
+  
   const result = await contestController.generateContests(req, res);
   return result;
 });

@@ -15,6 +15,10 @@ async function startServer() {
     logger.info(`Server started at PORT: ${ServerConfigs.APP_PORT}`);
   });
 
+  // Set server timeout to 3 minutes for AI generation endpoints
+  server.timeout = 180000; // 3 minutes
+  server.keepAliveTimeout = 185000; // Slightly longer than timeout
+
   process.on("SIGTERM", () => shutDown(1, server));
   process.on("SIGINT", () => shutDown(1, server));
 

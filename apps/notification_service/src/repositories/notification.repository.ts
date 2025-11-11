@@ -148,6 +148,18 @@ export default class NotificationRepository {
   }
 
   /**
+   * Delete all notifications for a user
+   */
+  public async deleteByUserId(userId: string) {
+    try {
+      return await this._DB.Notification.destroy({ where: { userId } });
+    } catch (err: any) {
+      logger.error(`DB(deleteByUserId) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
+  /**
    * Delete old notifications (older than specified days)
    */
   public async deleteOld(days: number = 30) {

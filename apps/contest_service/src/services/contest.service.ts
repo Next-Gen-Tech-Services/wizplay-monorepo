@@ -1,6 +1,6 @@
 // src/services/contest.service.ts
 import { BadRequestError, logger, ServerError } from "@repo/common";
-import { Transaction } from "sequelize";
+import { Op, Transaction } from "sequelize";
 import { autoInjectable } from "tsyringe";
 import { DB } from "../configs/database.config";
 import {
@@ -372,6 +372,62 @@ export default class ContestService {
     } catch (err: any) {
       logger.error(`ContestService.userContest error: ${err?.message ?? err}`);
       throw new ServerError("Failed to fetch user contests");
+    }
+  }
+
+  /**
+   * Get contest statistics for analytics dashboard
+   */
+  public async getContestStats() {
+    try {
+      const [
+        total,
+        scheduled,
+        running,
+        completed,
+        totalParticipantsResult,
+        totalPrizePoolResult
+      ] = await Promise.all([
+        // Total contests
+        DB.Contest.count(),
+        
+        // Scheduled contests
+        DB.Contest.count({
+          where: { status: 'scheduled' }
+        }),
+        
+        // Running contests
+        DB.Contest.count({
+          where: { status: 'running' }
+        }),
+        
+        // Completed contests
+        DB.Contest.count({
+          where: { status: 'completed' }
+        }),
+        
+        // Total participants across all contests
+        DB.UserContest.count(),
+        
+        // Total prize pool
+        DB.Contest.sum('prizePool', {
+          where: {
+            prizePool: { [Op.ne]: null }
+          }
+        })
+      ]);
+
+      return {
+        total,
+        scheduled,
+        running,
+        completed,
+        totalParticipants: totalParticipantsResult || 0,
+        totalPrizePool: totalPrizePoolResult || 0,
+      };
+    } catch (err: any) {
+      logger.error(`ContestService.getContestStats error: ${err?.message ?? err}`);
+      throw new ServerError("Failed to fetch contest statistics");
     }
   }
 }

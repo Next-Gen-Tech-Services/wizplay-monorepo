@@ -305,7 +305,34 @@ export default class ContestRepository {
         return { ...data, hasJoined, rankRanges };
       });
 
-      return { items, total };
+      // Fetch match data for all contests
+      logger.info(`[CONTEST-REPO] Fetching match data for ${items.length} contests`);
+      const itemsWithMatchData = await Promise.all(
+        items.map(async (item) => {
+          let matchData = null;
+          if (item.matchId) {
+            try {
+              const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL || "http://localhost:4003";
+              const matchResponse = await axios.get(
+                `${matchServiceUrl}/api/v1/matches/${item.matchId}`,
+                {
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  timeout: 3000, // 3 second timeout
+                }
+              );
+              matchData = matchResponse.data?.data || null;
+            } catch (matchErr: any) {
+              logger.error(`Failed to fetch match data for contest ${item.id}: ${matchErr?.message ?? matchErr}`);
+              // Don't throw error, just set matchData to null
+            }
+          }
+          return { ...item, matchData };
+        })
+      );
+
+      return { items: itemsWithMatchData, total };
     } catch (err: any) {
       logger.error(`listContestsByMatch DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");

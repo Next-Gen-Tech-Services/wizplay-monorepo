@@ -1,7 +1,9 @@
 import { BadRequestError, logger } from "@repo/common";
 import axios from "axios";
+import { Op } from "sequelize";
 import "tsyringe";
 import { autoInjectable } from "tsyringe";
+import { DB } from "../configs/database.config";
 import ServerConfigs from "../configs/server.config";
 import { IMatchFilters } from "../interfaces/match";
 import MatchRepository from "../repositories/match.repository";
@@ -340,6 +342,67 @@ export default class MatchService {
         error?.message ||
         "Failed to fetch and update match status"
       );
+    }
+  }
+
+  /**
+   * Get match statistics for analytics dashboard
+   */
+  public async getMatchStats() {
+    try {
+      const now = new Date();
+      
+      const [
+        total,
+        upcoming,
+        live,
+        completed
+      ] = await Promise.all([
+        // Total matches
+        DB.Match.count(),
+        
+        // Upcoming matches (status: not_started, scheduled, or upcoming)
+        DB.Match.count({
+          where: {
+            [Op.or]: [
+              { status: 'not_started' },
+              { status: 'scheduled' },
+              { status: 'upcoming' }
+            ]
+          }
+        }),
+        
+        // Live matches
+        DB.Match.count({
+          where: {
+            [Op.or]: [
+              { status: 'live' },
+              { status: 'started' },
+              { status: 'in_progress' }
+            ]
+          }
+        }),
+        
+        // Completed matches
+        DB.Match.count({
+          where: {
+            [Op.or]: [
+              { status: 'completed' },
+              { status: 'finished' }
+            ]
+          }
+        })
+      ]);
+
+      return {
+        total,
+        upcoming,
+        live,
+        completed,
+      };
+    } catch (err: any) {
+      logger.error(`MatchService.getMatchStats error: ${err?.message ?? err}`);
+      throw new BadRequestError("Failed to fetch match statistics");
     }
   }
 }

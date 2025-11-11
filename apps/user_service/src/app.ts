@@ -2,6 +2,7 @@ import { attachRequestId, ErrorMiddleware, logger } from "@repo/common";
 import cors from "cors";
 import express, { Express, Request, Response } from "express";
 import ServerConfigs from "./configs/server.config";
+import AnalyticsRouter from "./routes/analytics.router";
 import ReferralRouter from "./routes/referral.router";
 import UserRouter from "./routes/user.router";
 import WishlistRouter from "./routes/wishlist.router";
@@ -50,6 +51,7 @@ const AppInit = async () => {
   expressApp.use("/api/v1", UserRouter);
   expressApp.use("/api/v1/referrals", ReferralRouter);
   expressApp.use("/api/v1/wishlist", WishlistRouter);
+  expressApp.use("/api/v1", AnalyticsRouter);
   expressApp.get(
     `${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {

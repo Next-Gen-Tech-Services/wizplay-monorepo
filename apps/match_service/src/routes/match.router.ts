@@ -10,6 +10,13 @@ import { getSubscriptionStatus } from "../utils/jobs/init-subscription";
 import { Server as SocketIOServer } from "socket.io";
 
 const router = Router();
+
+// GET /matches/stats - Stats for analytics dashboard
+router.get("/matches/stats", async (req: Request, res: Response) => {
+  const controller = container.resolve(MatchController);
+  return controller.getMatchStats(req, res);
+});
+
 // GET /matches
 router.get("/matches", requireAuth, listMatchesValidator(), validateRequest, async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);

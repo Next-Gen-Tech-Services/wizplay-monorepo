@@ -49,4 +49,11 @@ export default class WalletController {
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });
   }
+
+  public async getWalletStats(req: Request, res: Response) {
+    const result = await this.walletService.getWalletStats();
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
 }

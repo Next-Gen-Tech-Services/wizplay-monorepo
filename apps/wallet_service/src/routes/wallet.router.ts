@@ -9,6 +9,14 @@ const router = Router();
 const walletController: WalletController = container.resolve(WalletController);
 
 /**
+ * Wallet Stats (must be before other /wallet routes)
+ */
+router.get("/wallet/stats", async (req, res) => {
+  const result = await walletController.getWalletStats(req, res);
+  return result;
+});
+
+/**
  * Wallet
  */
 // get all user wallet info

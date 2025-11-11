@@ -444,4 +444,26 @@ export default class MatchController {
       });
     }
   }
+
+  public async getMatchStats(req: Request, res: Response) {
+    try {
+      const stats = await this.matchService.getMatchStats();
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "Match statistics fetched successfully",
+        data: stats,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err.message,
+        data: null,
+        errors: [err.message],
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }
