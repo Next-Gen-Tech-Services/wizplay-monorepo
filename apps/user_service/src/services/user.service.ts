@@ -60,7 +60,7 @@ export default class UserService {
 
   public async getUserById(userId: string) {
     try {
-      const result = await this.userRepository.findById(userId);
+      const result = await this.userRepository.findByIdWithDetails(userId);
       if (!result) {
         throw new BadRequestError("User not found");
       }

@@ -22,7 +22,7 @@ export default class ReferralController {
     res: Response
   ): Promise<Response> {
     try {
-      const userId = req.currentUser?.userId;
+      const userId = req.params.userId || req.currentUser?.userId;
 
       if (!userId) {
         return res.status(STATUS_CODE.UN_AUTHORIZED).json({
@@ -60,7 +60,7 @@ export default class ReferralController {
     res: Response
   ): Promise<Response> {
     try {
-      const userId = req.currentUser?.userId;
+      const userId = req.params.userId || req.currentUser?.userId;
 
       if (!userId) {
         return res.status(STATUS_CODE.UN_AUTHORIZED).json({

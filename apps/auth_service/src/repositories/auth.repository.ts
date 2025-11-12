@@ -213,4 +213,18 @@ export default class AuthRepository {
       throw error;
     }
   }
+
+  public async findAuthByUserId(userId: string): Promise<Auth | null> {
+    try {
+      const authData = await this._DB.Auth.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+      return authData;
+    } catch (error: any) {
+      logger.error(`Database Error in findAuthByUserId: ${error.message || error}`);
+      throw new ServerError("Database Error");
+    }
+  }
 }

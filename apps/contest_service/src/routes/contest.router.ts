@@ -69,6 +69,15 @@ router.get(
   }
 );
 
+// Get detailed user contest history (admin endpoint)
+router.get(
+  "/contests/user/:userId/history",
+  async (req: Request, res: Response) => {
+    const result = await contestController.getUserContestHistory(req, res);
+    return result;
+  }
+);
+
 /**
  * Generative AI
  */

@@ -28,6 +28,7 @@ class ServerConfigs {
   static CONTEST_SERVICE_URL: string = process.env.CONTEST_SERVICE_URL as string;
   static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
   static COUPON_SERVICE_URL: string = process.env.COUPONS_SERVICE_URL as string;
+  static AUTH_SERVICE_URL: string = process.env.AUTH_SERVICE_URL as string;
   private constructor() {}
 }
 

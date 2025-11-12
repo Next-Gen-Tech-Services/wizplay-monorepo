@@ -318,4 +318,22 @@ export default class Service {
       };
     }
   }
+
+  public async getAuthByUserId(userId: string): Promise<any> {
+    try {
+      const authData = await this.userRepository.findAuthByUserId(userId);
+      
+      if (!authData) {
+        return null;
+      }
+
+      // Return only necessary auth data, exclude sensitive fields like password and otpCode
+      const { password, otpCode, otpExpiresAt, ...safeAuthData } = authData.toJSON();
+      
+      return safeAuthData;
+    } catch (error: any) {
+      logger.error(`Error fetching auth data by userId: ${error.message}`);
+      throw new ServerError("Failed to fetch auth data");
+    }
+  }
 }

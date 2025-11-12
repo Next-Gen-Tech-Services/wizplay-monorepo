@@ -187,6 +187,25 @@ export default class WalletRepository {
     }
   }
 
+  public async getUserById(userId: string): Promise<any> {
+    try {
+      const userWallet = await this._DB.Wallet.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+      
+      if (!userWallet) {
+        throw new BadRequestError("No wallet found for this user");
+      }
+      return userWallet.toJSON() as Wallet;
+    }
+    catch (err: any) {
+      logger.error(`DB error: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
+    }
+  }
+
   public async getTransactions(userId: string): Promise<any> {
     try {
       const transactions = await this._DB.Transaction.findAll({
@@ -201,6 +220,26 @@ export default class WalletRepository {
       }
 
       return transactions;
+    } catch (err: any) {
+      logger.error(`DB error: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
+    }
+  }
+
+  public async getWalletHistory(userId: string): Promise<any> {
+    try {
+      const transactions = await this._DB.Transaction.findAll({
+        where: {
+          userId: userId,
+        },
+        order: [["createdAt", "DESC"]],
+      });
+
+      if (!transactions || transactions.length === 0) {
+        return [];
+      }
+
+      return transactions.map((transaction) => transaction.toJSON());
     } catch (err: any) {
       logger.error(`DB error: ${err?.message ?? err}`);
       throw new ServerError(err.message);

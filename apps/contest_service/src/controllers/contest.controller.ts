@@ -166,6 +166,32 @@ export default class ContestController {
     }
   }
 
+  public async getUserContestHistory(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: "userId is required" });
+    }
+
+    try {
+      const result = await this.contestService!.getUserContestHistory(userId);
+
+      return res
+        .status(STATUS_CODE.SUCCESS)
+        .json({ success: true, data: result });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.getUserContestHistory error: ${err?.message ?? err}`
+      );
+
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: err.message || "Failed to fetch user contest history" });
+    }
+  }
+
   /** generative ai */
 
   public async generateQuestions(req: Request, res: Response) {

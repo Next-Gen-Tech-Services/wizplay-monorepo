@@ -2,7 +2,7 @@ import { Router } from "express";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import ReferralController from "../controllers/referral.controller";
-import { requireAuth } from "../middlewares/auth.middleware";
+import { requireAdminAuth, requireAuth } from "../middlewares/auth.middleware";
 
 const router = Router();
 const controller: ReferralController = container.resolve(ReferralController);
@@ -37,6 +37,22 @@ router.get("/history", requireAuth, async (req, res) => {
  */
 router.get("/stats", requireAuth, async (req, res) => {
   return controller.getReferralStats(req, res);
+});
+
+/**
+ * GET /stats
+ * Get current user's referral statistics
+ */
+router.get("/stats/:userId", requireAdminAuth, async (req, res) => {
+  return controller.getReferralStats(req, res);
+});
+
+/**
+ * GET /history
+ * Get current user's referral history
+ */
+router.get("/history/:userId", requireAdminAuth, async (req, res) => {
+  return controller.getReferralHistory(req, res);
 });
 
 export default router;

@@ -39,6 +39,15 @@ export default class ContestService {
     }
   }
 
+  public async getUserById(userId: string) {
+    try {
+      const walletInfo = await this.repo.getUserById(userId);
+      return walletInfo;
+    }
+    catch (error: any) {
+      throw new ServerError(`Error fetching wallet data: ${error.message}`);
+    }
+  }
   public async creditBalance(userId: string, amount: number,type:TransactionType) {
     try {
       const transactionInfo = await this.repo.depositCoins(userId, amount,type);
@@ -55,6 +64,15 @@ export default class ContestService {
       return walletInfo;
     } catch (error: any) {
       throw new ServerError(`Error fetching wallet data: ${error.message}`);
+    }
+  }
+
+  public async getUserWalletHistory(userId: string) {
+    try {
+      const walletHistory = await this.repo.getWalletHistory(userId);
+      return walletHistory;
+    } catch (error: any) {
+      throw new ServerError(`Error fetching wallet history: ${error.message}`);
     }
   }
 
