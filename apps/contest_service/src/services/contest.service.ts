@@ -1,6 +1,6 @@
 // src/services/contest.service.ts
 import { BadRequestError, logger, ServerError } from "@repo/common";
-import { Transaction } from "sequelize";
+import { Op, Transaction } from "sequelize";
 import { autoInjectable } from "tsyringe";
 import { DB } from "../configs/database.config";
 import {
@@ -372,6 +372,166 @@ export default class ContestService {
     } catch (err: any) {
       logger.error(`ContestService.userContest error: ${err?.message ?? err}`);
       throw new ServerError("Failed to fetch user contests");
+    }
+  }
+
+  public async getUserContestHistory(userId: string) {
+    try {
+      const userContests = await this.userContestRepo!.findAllUserContests(userId);
+
+      // Fetch submissions and rankings for each contest
+      const contestsWithDetails = await Promise.all(
+        userContests.map(async (userContest: any) => {
+          const contest = userContest.contest;
+          const contestId = userContest.contestId;
+
+          // Get user's submission for this contest
+          const submission = await DB.UserSubmission.findOne({
+            where: { userId, contestId },
+            attributes: ["totalScore", "maxScore", "createdAt"],
+          });
+
+          // Get user's rank in this contest
+          let rank = null;
+          let totalParticipants = 0;
+          if (submission) {
+            // Count how many submissions have higher score
+            const higherScores = await DB.UserSubmission.count({
+              where: {
+                contestId,
+                totalScore: { [Op.gt]: submission.totalScore },
+              },
+            });
+
+            // Total participants
+            totalParticipants = await DB.UserSubmission.count({
+              where: { contestId },
+            });
+
+            rank = higherScores + 1;
+          }
+
+          // Fetch match data
+          let matchData = null;
+          let matchInfo = "Unknown Match";
+          if (contest?.matchId) {
+            try {
+              const matchResponse = await axios.get(
+                `${ServerConfigs.MATCHES_SERVICE_URL}/api/v1/matches/${contest.matchId}`,
+                { timeout: 3000 }
+              );
+              if (matchResponse.data?.success && matchResponse.data.data) {
+                matchData = matchResponse.data.data;
+                const teamA = matchData.teamA?.name || matchData.teamA || "Team A";
+                const teamB = matchData.teamB?.name || matchData.teamB || "Team B";
+                matchInfo = `${teamA} vs ${teamB}`;
+              }
+            } catch (matchErr: any) {
+              logger.debug(`Failed to fetch match ${contest.matchId}: ${matchErr?.message}`);
+            }
+          }
+
+          // Determine status
+          let status: "ongoing" | "completed" | "upcoming" = "ongoing";
+          if (contest?.status === "completed") {
+            status = "completed";
+          } else if (contest?.status === "scheduled") {
+            status = "upcoming";
+          } else if (contest?.status === "running") {
+            status = "ongoing";
+          }
+
+          // Calculate prize (simplified - you may want to implement actual prize distribution logic)
+          let prize = 0;
+          if (status === "completed" && rank && rank <= 3 && contest?.prizePool) {
+            // Simple prize distribution for top 3
+            if (rank === 1) prize = contest.prizePool * 0.5;
+            else if (rank === 2) prize = contest.prizePool * 0.3;
+            else if (rank === 3) prize = contest.prizePool * 0.2;
+          }
+
+          // Serialize contest data
+          const contestData = contest?.toJSON ? contest.toJSON() : contest;
+
+          return {
+            id: userContest.id,
+            contestId: contest?.id || contestId,
+            contestTitle: contest?.title || "Unknown Contest",
+            matchInfo,
+            entryFee: contest?.entryFee || 0,
+            rank,
+            score: submission?.totalScore || 0,
+            totalParticipants,
+            prize: Math.round(prize),
+            status,
+            joinedAt: userContest.createdAt,
+            // Include full contest and match data
+            contest: contestData,
+            matchData: matchData,
+          };
+        })
+      );
+
+      return contestsWithDetails;
+    } catch (err: any) {
+      logger.error(`ContestService.getUserContestHistory error: ${err?.message ?? err}`);
+      throw new ServerError("Failed to fetch user contest history");
+    }
+  }
+
+  /**
+   * Get contest statistics for analytics dashboard
+   */
+  public async getContestStats() {
+    try {
+      const [
+        total,
+        scheduled,
+        running,
+        completed,
+        totalParticipantsResult,
+        totalPrizePoolResult
+      ] = await Promise.all([
+        // Total contests
+        DB.Contest.count(),
+        
+        // Scheduled contests
+        DB.Contest.count({
+          where: { status: 'scheduled' }
+        }),
+        
+        // Running contests
+        DB.Contest.count({
+          where: { status: 'running' }
+        }),
+        
+        // Completed contests
+        DB.Contest.count({
+          where: { status: 'completed' }
+        }),
+        
+        // Total participants across all contests
+        DB.UserContest.count(),
+        
+        // Total prize pool
+        DB.Contest.sum('prizePool', {
+          where: {
+            prizePool: { [Op.ne]: null }
+          }
+        })
+      ]);
+
+      return {
+        total,
+        scheduled,
+        running,
+        completed,
+        totalParticipants: totalParticipantsResult || 0,
+        totalPrizePool: totalPrizePoolResult || 0,
+      };
+    } catch (err: any) {
+      logger.error(`ContestService.getContestStats error: ${err?.message ?? err}`);
+      throw new ServerError("Failed to fetch contest statistics");
     }
   }
 }

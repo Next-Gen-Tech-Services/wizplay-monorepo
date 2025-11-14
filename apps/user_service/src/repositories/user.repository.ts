@@ -1,11 +1,13 @@
 import { logger } from "@repo/common";
 import { Op } from "sequelize/lib/operators";
 import { DB, IDatabase } from "../configs/database.config";
+import ServerConfigs from "../configs/server.config";
 import { KAFKA_EVENTS, Language } from "../types";
 import { publishUserEvent } from "../utils/kafka";
 import { generateReferralCode } from "../utils/referral.utils";
 import { generateUniqueUsername } from "../utils/username";
 import ReferralRepository from "./referral.repository";
+import axios from "axios";
 
 export default class UserRepository {
   private _DB: IDatabase = DB;
@@ -153,6 +155,67 @@ export default class UserRepository {
     }
   }
 
+  public async findByIdWithDetails(userId: string): Promise<any> {
+    try {
+      const user = await this._DB.User.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+
+      if (!user) {
+        return null;
+      }
+
+      const userData = user.toJSON();
+
+      // Fetch wallet data from wallet service
+      let walletData = null;
+      try {
+        const walletServiceUrl = ServerConfigs.WALLET_SERVICE_URL || "http://localhost:4006";
+        const walletResponse = await axios.get(
+          `${walletServiceUrl}/api/v1/wallet/get-user-by-id/${userData.userId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            timeout: 3000,
+          }
+        );
+        walletData = walletResponse.data?.data || null;
+      } catch (walletErr: any) {
+        logger.error(`Failed to fetch wallet data for user ${userData.userId}: ${walletErr?.message ?? walletErr}`);
+      }
+
+      // Fetch auth data from auth service
+      let authData = null;
+      try {
+        const authServiceUrl = ServerConfigs.AUTH_SERVICE_URL || "http://localhost:4001";
+        const authResponse = await axios.get(
+          `${authServiceUrl}/api/v1/auth/user/${userData.userId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            timeout: 3000,
+          }
+        );
+        authData = authResponse.data?.data || null;
+      } catch (authErr: any) {
+        logger.error(`Failed to fetch auth data for user ${userData.userId}: ${authErr?.message ?? authErr}`);
+      }
+
+      return {
+        ...userData,
+        walletData,
+        authData,
+      };
+    } catch (error: any) {
+      logger.error(`[Error fetching user details with data: ${error.message}]`);
+      throw error;
+    }
+  }
+
   public async findByReferralCode(referralCode: string): Promise<any> {
     try {
       const user = await this._DB.User.findOne({
@@ -203,8 +266,58 @@ export default class UserRepository {
         order: [["createdAt", "DESC"]],
       });
 
+      // Fetch wallet data and auth data for each user
+      const usersWithData = await Promise.all(
+        rows.map(async (user: any) => {
+          const userData = user.toJSON();
+
+          // Fetch wallet data from wallet service
+          let walletData = null;
+          try {
+            const walletServiceUrl = ServerConfigs.WALLET_SERVICE_URL || "http://localhost:4006";
+            const walletResponse = await axios.get(
+              `${walletServiceUrl}/api/v1/wallet/get-user-by-id/${userData.userId}`,
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                timeout: 3000,
+              }
+            );
+            logger.info(`Fetched wallet data for user ${userData.userId}`);
+            walletData = walletResponse.data?.data || null;
+          } catch (walletErr: any) {
+            logger.error(`Failed to fetch wallet data for user ${userData.userId}: ${walletErr?.message ?? walletErr}`);
+          }
+
+          // Fetch auth data from auth service
+          let authData = null;
+          try {
+            const authServiceUrl = ServerConfigs.AUTH_SERVICE_URL || "http://localhost:4001";
+            const authResponse = await axios.get(
+              `${authServiceUrl}/api/v1/auth/user/${userData.userId}`,
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                timeout: 3000,
+              }
+            );
+            authData = authResponse.data?.data || null;
+          } catch (authErr: any) {
+            logger.error(`Failed to fetch auth data for user ${userData.userId}: ${authErr?.message ?? authErr}`);
+          }
+
+          return {
+            ...userData,
+            walletData,
+            authData,
+          };
+        })
+      );
+
       return {
-        items: rows,
+        items: usersWithData,
         total: count,
         page,
         pageSize,

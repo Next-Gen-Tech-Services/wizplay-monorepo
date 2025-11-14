@@ -40,7 +40,6 @@ RUN pnpm --filter @repo/common build
 
 # Build the auth service with increased memory limit
 WORKDIR /app/apps/auth_service
-ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm run build
 
 # Stage 3: Use pnpm deploy for production
@@ -52,6 +51,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/auth_service/package.json ./apps/auth_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/auth_service/dist ./apps/auth_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
 
 RUN pnpm deploy --filter=auth_service --prod /deploy/output
 

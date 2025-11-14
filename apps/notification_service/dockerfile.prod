@@ -41,7 +41,6 @@ RUN pnpm --filter @repo/notifications build
 
 # Build the notification service with increased memory limit
 WORKDIR /app/apps/notification_service
-ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm run build
 
 # Stage 3: Use pnpm deploy for production
@@ -53,6 +52,8 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/notification_service/package.json ./apps/notification_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/notification_service/dist ./apps/notification_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
+COPY --from=builder /app/packages/notifications/dist ./packages/notifications/dist
 
 RUN pnpm deploy --filter=notification_service --prod /deploy/output
 

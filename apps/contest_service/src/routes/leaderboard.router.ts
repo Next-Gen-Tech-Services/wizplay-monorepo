@@ -36,6 +36,11 @@ router.get("/leaderboard/user/:userId/stats", async (req, res) => {
   return await leaderboardController.getUserGlobalStats(req, res);
 });
 
+// Get user's detailed leaderboard history and performance stats
+router.get("/leaderboard/user/:userId/history", async (req, res) => {
+  return await leaderboardController.getUserLeaderboardHistory(req, res);
+});
+
 /**
  * Match Leaderboards
  */

@@ -23,7 +23,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${USER_DB_USER:-user_db} -d user_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   auth_db_server:
     image: "postgres:15-alpine"
@@ -45,7 +45,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${AUTH_DB_USER:-auth_db} -d auth_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   match_db_server:
     image: "postgres:15-alpine"
@@ -67,7 +67,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${MATCH_DB_USER:-match_db} -d match_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   coupon_db_server:
     image: "postgres:15-alpine"
@@ -89,7 +89,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${COUPON_DB_USER:-coupon_db} -d coupon_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   contest_db_server:
     image: "postgres:15-alpine"
@@ -111,7 +111,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${CONTEST_DB_USER:-contest_db} -d contest_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   wallet_db_server:
     image: "postgres:15-alpine"
@@ -133,7 +133,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${WALLET_DB_USER:-wallet_db} -d wallet_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   notification_db_server:
     image: "postgres:15-alpine"
@@ -155,7 +155,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${NOTIFICATION_DB_USER:-notification_db} -d notification_service"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   # Zookeeper for Kafka (Confluent)
   zookeeper:
@@ -175,26 +175,32 @@ services:
       test: ["CMD-SHELL", "echo ruok | nc -w 2 localhost 2181 || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   # Kafka (Confluent single-broker for production)
   kafka:
     image: confluentinc/cp-kafka:7.4.0
     container_name: kafka
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_healthy
     ports:
       - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,INTERNAL://kafka:9093
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 300000
     volumes:
       - kafka_data:/var/lib/kafka/data
     networks:
@@ -202,10 +208,11 @@ services:
     restart: unless-stopped
     user: root
     healthcheck:
-      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list || exit 1"]
+      test: ["CMD-SHELL", "kafka-broker-api-versions --bootstrap-server localhost:9092 || exit 1"]
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 10
+      start_period: 90s
 
   # Redis for caching/sessions
   redis:
@@ -222,7 +229,7 @@ services:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   # Microservices
   auth_service:

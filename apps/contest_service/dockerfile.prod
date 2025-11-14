@@ -51,6 +51,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/contest_service/package.json ./apps/contest_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/contest_service/dist ./apps/contest_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
 
 RUN pnpm deploy --filter=contest_service --prod /deploy/output
 

@@ -51,6 +51,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/wallet_service/package.json ./apps/wallet_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/wallet_service/dist ./apps/wallet_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
 
 RUN pnpm deploy --filter=wallet_service --prod /deploy/output
 

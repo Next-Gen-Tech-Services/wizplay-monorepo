@@ -114,4 +114,189 @@ export default class NotificationController {
       });
     }
   }
+
+  public async getNotificationById(req: Request, res: Response) {
+    try {
+      const notificationId = req.params.id;
+      const userId = req.userId;
+      
+      if (!notificationId || !userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Bad Request",
+        });
+      }
+
+      const { data, message } = await this.notificationService.getNotificationById(notificationId, userId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: message ?? "OK",
+        data: data,
+      });
+    } catch (err: any) {
+      logger.error(
+        `Request ID:${req.headers["x-request-id"]} | error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err?.message ?? "Failed to fetch notification",
+      });
+    }
+  }
+
+  public async deleteNotification(req: Request, res: Response) {
+    try {
+      const notificationId = req.params.id;
+      const userId = req.userId;
+      
+      if (!notificationId || !userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Bad Request",
+        });
+      }
+
+      const { data, message } = await this.notificationService.deleteNotification(notificationId, userId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: message ?? "Notification deleted",
+        data: data,
+      });
+    } catch (err: any) {
+      logger.error(
+        `Request ID:${req.headers["x-request-id"]} | error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err?.message ?? "Failed to delete notification",
+      });
+    }
+  }
+
+  public async deleteAllNotifications(req: Request, res: Response) {
+    try {
+      const userId = req.userId;
+      
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Bad Request",
+        });
+      }
+
+      const { data, message } = await this.notificationService.deleteAllNotifications(userId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: message ?? "All notifications deleted",
+        data: data,
+      });
+    } catch (err: any) {
+      logger.error(
+        `Request ID:${req.headers["x-request-id"]} | error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err?.message ?? "Failed to delete notifications",
+      });
+    }
+  }
+
+  public async getUnreadCount(req: Request, res: Response) {
+    try {
+      const userId = req.userId;
+      
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Bad Request",
+        });
+      }
+
+      const { data, message } = await this.notificationService.getUnreadCount(userId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: message ?? "OK",
+        data: data,
+      });
+    } catch (err: any) {
+      logger.error(
+        `Request ID:${req.headers["x-request-id"]} | error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err?.message ?? "Failed to get unread count",
+      });
+    }
+  }
+
+  public async sendNotification(req: Request, res: Response) {
+    try {
+      const { userId, title, body, type, data, imageUrl, actionUrl, deviceToken } = req.body;
+      
+      if (!userId || !title || !body || !type) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Missing required fields: userId, title, body, type",
+        });
+      }
+
+      const result = await this.notificationService.sendNotification({
+        userId,
+        title,
+        body,
+        type,
+        data,
+        imageUrl,
+        actionUrl,
+        deviceToken,
+      });
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: result.message ?? "Notification sent",
+        data: result.data,
+      });
+    } catch (err: any) {
+      logger.error(
+        `Request ID:${req.headers["x-request-id"]} | error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err?.message ?? "Failed to send notification",
+      });
+    }
+  }
+
+  public async sendBulkNotifications(req: Request, res: Response) {
+    try {
+      const { notifications } = req.body;
+      
+      if (!Array.isArray(notifications) || notifications.length === 0) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "notifications must be a non-empty array",
+        });
+      }
+
+      const result = await this.notificationService.sendBulkNotifications(notifications);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: result.message,
+        data: result.data,
+      });
+    } catch (err: any) {
+      logger.error(
+        `Request ID:${req.headers["x-request-id"]} | error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err?.message ?? "Failed to send bulk notifications",
+      });
+    }
+  }
 }

@@ -197,6 +197,37 @@ export default class LeaderboardController {
   }
 
   /**
+   * GET /leaderboard/user/:userId/history
+   * Get user's detailed leaderboard history with performance stats
+   */
+  public async getUserLeaderboardHistory(req: Request, res: Response) {
+    try {
+      const userId = req.params.userId;
+      const limit = Math.min(parseInt(req.query.limit as string) || 10, 50);
+
+      const history = await this.leaderboardRepo.getUserLeaderboardHistory(
+        userId,
+        limit
+      );
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: history,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(
+        `LeaderboardController.getUserLeaderboardHistory error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err.message || "Failed to fetch user leaderboard history",
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  /**
    * GET /leaderboard/global
    * Get global leaderboard across all contests
    */

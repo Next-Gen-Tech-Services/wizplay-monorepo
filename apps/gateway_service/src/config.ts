@@ -40,6 +40,15 @@ export const ROUTES: ProxyRoute[] = [
     pathRewrite: { "^/api/v1/referrals": "/api/v1/referrals" },
     timeoutMs: 15000,
   },
+   {
+    name: "user",
+    mountPath: "/api/v1/admin",
+    target: process.env.USER_SERVICE_URL ?? "http://localhost:4002",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/admin": "/api/v1/admin" },
+    timeoutMs: 15000,
+  },
   {
     name: "wishlist",
     mountPath: "/api/v1/wishlist",
@@ -74,7 +83,7 @@ export const ROUTES: ProxyRoute[] = [
     changeOrigin: true,
     ws: false,
     pathRewrite: { "^/api/v1/contests": "/api/v1/contests" },
-    timeoutMs: 15000,
+    timeoutMs: 180000, // 3 minutes for AI generation
   },
   {
     name: "leaderboard",
@@ -83,7 +92,7 @@ export const ROUTES: ProxyRoute[] = [
     changeOrigin: true,
     ws: false,
     pathRewrite: { "^/api/v1/leaderboard": "/api/v1/leaderboard" },
-    timeoutMs: 15000,
+    timeoutMs: 180000, // 3 minutes to match contest service
   },
   {
     name: "questions",
@@ -92,7 +101,7 @@ export const ROUTES: ProxyRoute[] = [
     changeOrigin: true,
     ws: false,
     pathRewrite: { "^/api/v1/questions": "/api/v1/questions" },
-    timeoutMs: 15000,
+    timeoutMs: 180000, // 3 minutes for AI generation
   },
 
   {

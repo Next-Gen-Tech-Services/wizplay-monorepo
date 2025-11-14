@@ -92,4 +92,10 @@ router.post(
   }
 );
 
+// GET AUTH DATA BY USER ID (for inter-service communication)
+router.get("/auth/user/:userId", async (req: Request, res: Response) => {
+  const result = await controller.getAuthByUserId(req, res);
+  return result;
+});
+
 export default router;

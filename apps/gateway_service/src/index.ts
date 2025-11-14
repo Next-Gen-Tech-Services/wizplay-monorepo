@@ -45,3 +45,7 @@ app.use((_req, res) => res.status(404).json({ error: "Not Found" }));
 const server = app.listen(PORT, () => {
   logger.info(`wizplay-proxy listening on port ${PORT}`);
 });
+
+// Set server timeout to 3 minutes for AI generation endpoints
+server.timeout = 180000; // 3 minutes
+server.keepAliveTimeout = 185000; // Slightly longer than timeout

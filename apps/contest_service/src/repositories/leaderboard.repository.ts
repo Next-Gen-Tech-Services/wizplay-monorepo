@@ -415,4 +415,190 @@ export default class LeaderboardRepository {
       throw err;
     }
   }
+
+  /**
+   * Get user's detailed leaderboard history with performance stats
+   * Returns recent contest entries and calculated performance metrics
+   */
+  public async getUserLeaderboardHistory(
+    userId: string,
+    limit: number = 10
+  ): Promise<any> {
+    try {
+      // Get user's submissions with full contest details
+      const submissions = await this._DB.UserSubmission.findAll({
+        where: { userId },
+        attributes: ["contestId", "totalScore", "maxScore", "createdAt"],
+        include: [
+          {
+            model: this._DB.Contest,
+            as: "contest",
+            attributes: [
+              "id",
+              "matchId",
+              "title",
+              "description",
+              "type",
+              "difficulty",
+              "startAt",
+              "endAt",
+              "entryFee",
+              "prizePool",
+              "prizeBreakdown",
+              "pointsPerQuestion",
+              "questionsCount",
+              "totalSpots",
+              "filledSpots",
+              "displayEnabled",
+              "isPopular",
+              "joinDeadline",
+              "resultTime",
+              "timeCommitment",
+              "platform",
+              "status",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+        limit: limit * 2, // Get more to calculate stats, then limit for recent entries
+      });
+
+      if (submissions.length === 0) {
+        return {
+          recentEntries: [],
+          stats: {
+            totalContests: 0,
+            averageRank: 0,
+            bestRank: 0,
+            top10Finishes: 0,
+            top3Finishes: 0,
+            totalScore: 0,
+            winRate: 0,
+            percentile: 0,
+          },
+        };
+      }
+
+      // Fetch full match data for contests with matchId
+      const matchIds = [
+        ...new Set(
+          submissions
+            .map((s: any) => s.contest?.matchId)
+            .filter((id: any) => id)
+        ),
+      ];
+
+      const matchesMap = new Map<string, any>();
+      for (const matchId of matchIds) {
+        try {
+          const response = await axios.get(
+            `${ServerConfigs.MATCHES_SERVICE_URL}/api/v1/matches/${matchId}`,
+            { timeout: 3000 }
+          );
+          if (response.data?.success && response.data.data) {
+            const match = response.data.data;
+            matchesMap.set(matchId, match);
+          }
+        } catch (err: any) {
+          logger.debug(`Failed to fetch match ${matchId}: ${err?.message}`);
+        }
+      }
+
+      // Calculate rank for each submission
+      const entriesWithRank = await Promise.all(
+        submissions.map(async (submission: any) => {
+          const rankData = await this.getUserRankInContest(
+            userId,
+            submission.contestId
+          );
+
+          const matchId = submission.contest?.matchId;
+          const matchData = matchId ? matchesMap.get(matchId) : null;
+          
+          // Extract team names for matchInfo
+          let matchInfo = "Unknown Match";
+          if (matchData?.teams?.a?.name && matchData?.teams?.b?.name) {
+            matchInfo = `${matchData.teams.a.name} vs ${matchData.teams.b.name}`;
+          } else if (matchData?.teamA && matchData?.teamB) {
+            const teamA = matchData.teamA?.name || matchData.teamA || "Team A";
+            const teamB = matchData.teamB?.name || matchData.teamB || "Team B";
+            matchInfo = `${teamA} vs ${teamB}`;
+          }
+
+          // Serialize contest data
+          const contestData = submission.contest?.toJSON ? submission.contest.toJSON() : submission.contest;
+
+          return {
+            contestId: submission.contestId,
+            contestName: submission.contest?.title || "Unknown Contest",
+            matchInfo,
+            rank: rankData?.rank || 0,
+            totalParticipants: rankData?.totalParticipants || 0,
+            score: submission.totalScore,
+            date: submission.createdAt,
+            // Include full contest and match data
+            contest: contestData,
+            matchData: matchData,
+          };
+        })
+      );
+
+      // Calculate performance stats
+      const totalContests = entriesWithRank.length;
+      const validRanks = entriesWithRank.filter((e) => e.rank > 0);
+      
+      const averageRank =
+        validRanks.length > 0
+          ? validRanks.reduce((sum, e) => sum + e.rank, 0) / validRanks.length
+          : 0;
+      
+      const bestRank = 
+        validRanks.length > 0
+          ? Math.min(...validRanks.map((e) => e.rank))
+          : 0;
+      
+      const top10Finishes = validRanks.filter((e) => e.rank <= 10).length;
+      const top3Finishes = validRanks.filter((e) => e.rank <= 3).length;
+      
+      const totalScore = entriesWithRank.reduce((sum, e) => sum + e.score, 0);
+      
+      const winRate =
+        validRanks.length > 0 ? (top3Finishes / validRanks.length) * 100 : 0;
+
+      // Calculate percentile (average position across all contests)
+      const percentileValues = validRanks
+        .filter((e) => e.totalParticipants > 0)
+        .map(
+          (e) =>
+            ((e.totalParticipants - e.rank) / e.totalParticipants) * 100
+        );
+      
+      const percentile =
+        percentileValues.length > 0
+          ? percentileValues.reduce((sum, val) => sum + val, 0) /
+            percentileValues.length
+          : 0;
+
+      return {
+        recentEntries: entriesWithRank.slice(0, limit),
+        stats: {
+          totalContests,
+          averageRank: Math.round(averageRank * 10) / 10,
+          bestRank,
+          top10Finishes,
+          top3Finishes,
+          totalScore,
+          winRate: Math.round(winRate * 10) / 10,
+          percentile: Math.round(percentile),
+        },
+      };
+    } catch (err: any) {
+      logger.error(
+        `LeaderboardRepository.getUserLeaderboardHistory error: ${err?.message ?? err}`
+      );
+      throw err;
+    }
+  }
 }

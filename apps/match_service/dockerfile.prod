@@ -40,7 +40,6 @@ RUN pnpm --filter @repo/common build
 
 # Build the match service with increased memory limit
 WORKDIR /app/apps/match_service
-ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm run build
 
 # Stage 3: Use pnpm deploy for production
@@ -52,6 +51,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/match_service/package.json ./apps/match_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/match_service/dist ./apps/match_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
 
 RUN pnpm deploy --filter=match_service --prod /deploy/output
 
@@ -68,8 +68,8 @@ RUN addgroup --system --gid 1001 nodejs && \
 # Copy deployed files from deploy stage
 COPY --from=deploy --chown=matchservice:nodejs /deploy/output ./
 
-# Create logs directory with proper permissions
-RUN mkdir -p ./logs && chown -R matchservice:nodejs ./logs
+# Create logs and public/flags directories with proper permissions
+RUN mkdir -p ./logs ./public/flags && chown -R matchservice:nodejs ./logs ./public
 
 USER matchservice
 

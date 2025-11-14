@@ -166,6 +166,32 @@ export default class ContestController {
     }
   }
 
+  public async getUserContestHistory(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: "userId is required" });
+    }
+
+    try {
+      const result = await this.contestService!.getUserContestHistory(userId);
+
+      return res
+        .status(STATUS_CODE.SUCCESS)
+        .json({ success: true, data: result });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.getUserContestHistory error: ${err?.message ?? err}`
+      );
+
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: err.message || "Failed to fetch user contest history" });
+    }
+  }
+
   /** generative ai */
 
   public async generateQuestions(req: Request, res: Response) {
@@ -214,6 +240,29 @@ export default class ContestController {
         success: false,
         data: null,
         message: err?.message || "Error generating contest",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async getContestStats(req: Request, res: Response) {
+    try {
+      const stats = await this.contestService.getContestStats();
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: stats,
+        message: "Contest statistics fetched successfully",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.getContestStats error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to fetch contest statistics",
         errors: null,
         timestamp: new Date().toISOString(),
       });
