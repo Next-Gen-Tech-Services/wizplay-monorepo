@@ -1,5 +1,6 @@
 import { Worker } from "worker_threads";
 import path from "path";
+import { logger } from "@repo/common";
 
 type WorkerMap = Map<string, Worker>; // matchId -> Worker
 const workers: WorkerMap = new Map();
@@ -12,13 +13,17 @@ export function startMatchWorker(matchId: string) {
     console.log(`⚠️ Worker already running for match ${matchId}`);
     return;
   }
-
-  const worker = new Worker(
-    path.resolve(__dirname, "./workers/liveMatchWorker.js"), // compiled JS
-    {
-      workerData: { matchId },
-    }
+  logger.info("============================= Starting Worker ============================= ")
+  const workerPath = path.resolve(
+    __dirname,
+    "./liveMatch.worker.ts"
   );
+
+  console.log("Worker Path =>", workerPath);
+
+  const worker = new Worker(workerPath, {
+    workerData: { matchId },
+  });
 
   workers.set(matchId, worker);
 

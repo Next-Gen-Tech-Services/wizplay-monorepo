@@ -8,7 +8,7 @@ const matchLiveRepo = new MatchLiveRepository();
 const BATCH_CONFIG = {
   BATCH_SIZE: parseInt(process.env.BATCH_SIZE || "50"),
   BATCH_INTERVAL: parseInt(process.env.BATCH_INTERVAL || "2000"),
-  IDLE_LIMIT: parseInt(process.env.IDLE_LIMIT || "15000"), // stop worker if no data for X ms (optional)
+  IDLE_LIMIT: parseInt(process.env.IDLE_LIMIT || "1500000"), // stop worker if no data for X ms (optional)
 };
 
 let lastActivity = Date.now();
@@ -31,7 +31,7 @@ const processBatch = async () => {
     const events = await redisClient.popBatch(listKey, BATCH_CONFIG.BATCH_SIZE);
 
     if (events.length) {
-      lastActivity = Date.now(); // Mark activity
+      lastActivity = Date.now(); 
       const savedCount = await matchLiveRepo.bulkStoreLiveMatchData(workerData.matchId, events);
       parentPort?.postMessage(`✅ Saved ${savedCount} updates for match: ${workerData.matchId}`);
     } else {
