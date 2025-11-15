@@ -7,10 +7,10 @@ import { Server as SocketIOServer } from "socket.io";
 import MatchService from "../services/match.service";
 import MatchLiveRepository from "../repositories/matchLive.repository";
 import { MatchLiveEventType } from "../models/matchLiveEvent.model";
-import redis from "../configs/redis.config";
 import zlib from "zlib";
 import {  transformCricketMatch } from "../utils/transformLiveMatchData";
 import fs from 'fs'
+import redis from "../configs/redis.config";
 const lastSeen: Record<string, string | number> = {};
 
 @autoInjectable()
@@ -155,7 +155,8 @@ export default class MatchController {
           raw = transformCricketMatch(raw);
           const matchId = raw.match.id;
 
-          
+          // push data inside redis for quick access
+          await redis.setInList(`${matchId}:live_updates`, JSON.stringify(raw));
 
           // broadcast to sockets and SSE clients
           this.broadcast(matchId, "match_update", raw);

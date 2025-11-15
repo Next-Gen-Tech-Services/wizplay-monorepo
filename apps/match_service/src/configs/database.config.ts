@@ -5,6 +5,7 @@ import tournamentModel, { Tournament } from "../models/tournament.model";
 import wishlistModel, { Wishlist } from "../models/wishlist.model";
 import matchLiveStateModel, { MatchLiveState } from "../models/matchLiveState.model";
 import matchLiveEventModel, { MatchLiveEvent } from "../models/matchLiveEvent.model";
+import liveMatchDataModel, { LiveMatchData } from "../models/liveMatchData.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
@@ -15,6 +16,7 @@ export interface IDatabase {
   Wishlist: typeof Wishlist;
   MatchLiveState: typeof MatchLiveState;
   MatchLiveEvent: typeof MatchLiveEvent;
+  LiveMatchData: typeof LiveMatchData;
 }
 
 const sequelize = new Sequelize({
@@ -37,6 +39,7 @@ const TournamentInstance = tournamentModel(sequelize);
 const WishlistInstance = wishlistModel(sequelize);
 const MatchLiveStateInstance = matchLiveStateModel(sequelize);
 const MatchLiveEventInstance = matchLiveEventModel(sequelize);
+const LiveMatchDataInstance = liveMatchDataModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -102,4 +105,5 @@ export const DB: IDatabase = {
   Wishlist: WishlistInstance,
   MatchLiveState: MatchLiveStateInstance,
   MatchLiveEvent: MatchLiveEventInstance,
+  LiveMatchData: LiveMatchDataInstance,
 };

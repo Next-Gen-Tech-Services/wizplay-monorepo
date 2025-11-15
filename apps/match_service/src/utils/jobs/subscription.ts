@@ -1,6 +1,7 @@
 import redis from "../../configs/redis.config";
 import MatchRepository from "../../repositories/match.repository";
 import MatchService from "../../services/match.service";
+import { startMatchWorker, stopMatchWorker } from "../workers/manager.worker";
 
 interface Match {
   id: string;
@@ -313,7 +314,7 @@ class MatchSubscriptionService {
       }
       
       this.subscribedMatches.add(matchId);
-
+      startMatchWorker(matchId);
       // Immediately fetch and update match status after subscribing
       try {
         const statusResult = await this.matchService.fetchAndUpdateMatchStatus(
@@ -351,6 +352,7 @@ class MatchSubscriptionService {
       }
       
       this.subscribedMatches.delete(matchId);
+      stopMatchWorker(matchId);
     } catch (error: any) {
       console.error(
         `❌ Failed to unsubscribe from match ${matchId}:`,

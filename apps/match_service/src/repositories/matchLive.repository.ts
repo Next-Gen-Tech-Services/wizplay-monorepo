@@ -130,4 +130,31 @@ export default class MatchLiveRepository {
       return 0;
     }
   }
+
+  /**
+   * Bulk store live match data
+   * @param matchKey - The match key/id
+   * @param events - Array of event data to store
+   * @returns Promise<number> - Number of records created
+   */
+  public async bulkStoreLiveMatchData(matchKey: string, events: string[]): Promise<number> {
+    try {
+      // Parse events and prepare bulk insert data
+      const bulkData = events.map(event => {
+        const eventData = JSON.parse(event);
+        return {
+          matchKey,
+          simplifiedData: eventData,
+        };
+      });
+
+      // Perform bulk insert
+      const result = await this._DB.LiveMatchData.bulkCreate(bulkData);
+      logger.info(`Successfully stored ${result.length} live match events for match: ${matchKey}`);
+      return result.length;
+    } catch (err: any) {
+      logger.error(`Failed to bulk store live match data: ${err?.message ?? err}`);
+      throw err;
+    }
+  }
 }
