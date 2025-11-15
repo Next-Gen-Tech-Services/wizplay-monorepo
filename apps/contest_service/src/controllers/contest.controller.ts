@@ -16,6 +16,44 @@ export default class ContestController {
       .json({ success: true, data: created });
   }
 
+  // Internal endpoint for service-to-service communication (no auth)
+  public async getActiveContestsByMatch(req: Request, res: Response) {
+    try {
+      const matchId = req.params.matchId;
+      
+      if (!matchId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "matchId is required",
+        });
+      }
+
+      // Get only scheduled contests for this match
+      const result = await this.contestService.listContests(
+        matchId,
+        1000, // high limit to get all
+        0,
+        undefined // no userId needed for internal calls
+      );
+
+      // Filter to only scheduled status
+      const scheduledContests = result.items.filter(
+        (contest: any) => contest.status === "scheduled"
+      );
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: scheduledContests,
+      });
+    } catch (err: any) {
+      logger.error(`Error fetching active contests: ${err.message ?? err}`);
+      return res.status(500).json({
+        success: false,
+        message: err.message ?? "Internal server error",
+      });
+    }
+  }
+
   public async listByMatch(req: Request, res: Response) {
     try {
       // allow matchId via path param or query

@@ -11,6 +11,7 @@ import zlib from "zlib";
 import {  transformCricketMatch } from "../utils/transformLiveMatchData";
 import fs from 'fs'
 import redis from "../configs/redis.config";
+import contestCompletionService from "../services/contest-completion.service";
 const lastSeen: Record<string, string | number> = {};
 
 @autoInjectable()
@@ -157,6 +158,11 @@ export default class MatchController {
 
           // push data inside redis for quick access
           await redis.setInList(`${matchId}:live_updates`, JSON.stringify(raw));
+
+          // Process contest completion based on live match data
+          contestCompletionService.processContestCompletion(matchId, raw).catch(err => {
+            console.error("Contest completion error:", err);
+          });
 
           // broadcast to sockets and SSE clients
           this.broadcast(matchId, "match_update", raw);

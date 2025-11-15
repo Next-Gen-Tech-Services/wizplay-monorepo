@@ -14,11 +14,26 @@ function addTeamFlags(matchData: any): any {
   if (matchData && matchData.teams) {
     const baseUrl = ServerConfigs.ASSET_SERVICE_URL;
 
-    if (matchData.teams.a && matchData.teams.a.country_code) {
-      matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
+    if (matchData.teams.a) {
+      // Ensure country_code is empty string if null/undefined
+      if (!matchData.teams.a.country_code) {
+        matchData.teams.a.country_code = "";
+      }
+      // Only add flag_url if country_code is not empty
+      if (matchData.teams.a.country_code) {
+        matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
+      }
     }
-    if (matchData.teams.b && matchData.teams.b.country_code) {
-      matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
+    
+    if (matchData.teams.b) {
+      // Ensure country_code is empty string if null/undefined
+      if (!matchData.teams.b.country_code) {
+        matchData.teams.b.country_code = "";
+      }
+      // Only add flag_url if country_code is not empty
+      if (matchData.teams.b.country_code) {
+        matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
+      }
     }
   }
   return matchData;
@@ -90,7 +105,12 @@ export default class MatchRepository {
       if (filters.sport) where["sport"] = filters.sport;
       if (filters.format) where["format"] = filters.format;
       if (filters.gender) where["gender"] = filters.gender;
-      if (filters.status) where["status"] = filters.status;
+      
+      // Handle status filter: if not "all", filter for not-started and started statuses
+      if (filters.status !== "all") {
+        where["status"] = { [Op.in]: ["not_started", "started"] };
+      }
+      
       if (filters.tournamentKey) where["tournamentKey"] = filters.tournamentKey;
       if (filters.winner) where["winner"] = filters.winner;
       if (
@@ -154,22 +174,28 @@ export default class MatchRepository {
         startOfTomorrowDt.getTime() / 1000
       );
       const endOfTomorrowEpoch = Math.floor(endOfTomorrowDt.getTime() / 1000);
+      const escStarted = this._DB.sequelize.escape("started");
       const escCompleted = this._DB.sequelize.escape("completed");
 
       const order: any = [
+        // First priority: Status order (started first)
         [
           this._DB.sequelize.literal(`CASE
-          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} AND "status" != ${escCompleted} THEN 0
-          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} AND "status" = ${escCompleted} THEN 1
-          ELSE 2 END`),
+          WHEN "status" = ${escStarted} THEN 0
+          WHEN "status" = 'not_started' THEN 1
+          WHEN "status" = ${escCompleted} THEN 2
+          ELSE 3 END`),
           "ASC",
         ],
+        // Second priority: Time-based ordering
         [
           this._DB.sequelize.literal(`CASE
-          WHEN "status" = ${escCompleted} THEN -("started_at")
-          ELSE "started_at" END`),
+          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} THEN 0
+          ELSE 1 END`),
           "ASC",
         ],
+        // Third priority: Sort by start time
+        ["started_at", "ASC"],
       ];
 
       const result = await Match.findAndCountAll({
@@ -193,8 +219,23 @@ export default class MatchRepository {
             : Boolean(plain.wishlisted);
         if (plain.wishlists !== undefined) delete plain.wishlists;
 
-        // Add team flag URLs
-        return addTeamFlags(plain);
+        // Add team flag URLs and convert nulls to empty strings
+        const matchWithFlags = addTeamFlags(plain);
+        
+        // Recursively replace all null values with empty strings
+        const replaceNulls = (obj: any): any => {
+          if (obj === null) return "";
+          if (typeof obj !== "object") return obj;
+          if (Array.isArray(obj)) return obj.map(replaceNulls);
+          
+          const result: any = {};
+          for (const key in obj) {
+            result[key] = replaceNulls(obj[key]);
+          }
+          return result;
+        };
+        
+        return replaceNulls(matchWithFlags);
       });
 
       return {

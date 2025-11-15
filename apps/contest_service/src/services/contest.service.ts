@@ -103,7 +103,7 @@ export default class ContestService {
   public async generateContests(matchData: any) {
     try {
       const contests = await this.generativeAI.generateContest(
-        JSON.stringify(matchData)
+        matchData
       );
 
       const contestRecords = formatContestsForBulkInsert(

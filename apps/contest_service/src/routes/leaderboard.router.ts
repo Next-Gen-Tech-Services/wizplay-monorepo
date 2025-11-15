@@ -3,7 +3,6 @@ import { Router } from "express";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import LeaderboardController from "../controllers/leaderboard.controller";
-import { requireAuth } from "../middlewares/auth.middleware";
 
 const router = Router();
 const leaderboardController: LeaderboardController = container.resolve(

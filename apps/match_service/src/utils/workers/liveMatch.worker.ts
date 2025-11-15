@@ -6,8 +6,8 @@ let isRunning = true;
 const matchLiveRepo = new MatchLiveRepository();
 
 const BATCH_CONFIG = {
-  BATCH_SIZE: parseInt(process.env.BATCH_SIZE || "50"),
-  BATCH_INTERVAL: parseInt(process.env.BATCH_INTERVAL || "2000"),
+  BATCH_SIZE: parseInt(process.env.BATCH_SIZE || "1000"),
+  BATCH_INTERVAL: parseInt(process.env.BATCH_INTERVAL || "20000"),
   IDLE_LIMIT: parseInt(process.env.IDLE_LIMIT || "1500000"), // stop worker if no data for X ms (optional)
 };
 

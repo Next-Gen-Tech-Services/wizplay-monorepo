@@ -22,6 +22,12 @@ router.get("/contests/stats", async (req, res) => {
   return result;
 });
 
+// Internal endpoint for service-to-service calls (no auth required)
+router.get("/contests/internal/active/:matchId", async (req, res) => {
+  const result = await contestController.getActiveContestsByMatch(req, res);
+  return result;
+});
+
 router.get("/contests", requireAuth, async (req, res) => {
   const result = await contestController.listByMatch(req, res);
   return result;
