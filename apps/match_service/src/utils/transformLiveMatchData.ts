@@ -1,3 +1,5 @@
+import { logger } from "@repo/common";
+
 type RawMatchData = any;
 
 interface SimplifiedMatch {
@@ -218,6 +220,8 @@ function parseBallRepr(reprRaw: string): BallDetail {
 }
 
 export function transformCricketMatch(raw: RawMatchData): SimplifiedMatch {
+
+  logger.info(`[Transform] Transforming raw match data for match ${raw?.data?.key || "unknown"}`);
   const data = raw?.data || {};
   const play = data.play || {};
   const live = play.live || {};

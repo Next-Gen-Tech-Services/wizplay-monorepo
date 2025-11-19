@@ -42,7 +42,29 @@ const BrokerInit = async (retryCount = 0, maxRetries = 10) => {
 const AppInit = async () => {
   const expressApp: Express = express();
 
-  expressApp.use(cors());
+  // CORS configuration - allow multiple origins
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://wizplay-admin-ngts.vercel.app",
+    process.env.FRONTEND_URL
+  ].filter(Boolean);
+
+  const corsOptions = {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
+  };
+  expressApp.use(cors(corsOptions));
   expressApp.use(express.json());
   expressApp.use(attachRequestId);
 

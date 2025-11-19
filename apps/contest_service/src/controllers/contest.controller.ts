@@ -3,6 +3,7 @@ import { logger, STATUS_CODE } from "@repo/common";
 import { Request, Response } from "express";
 import { autoInjectable } from "tsyringe";
 import ContestService from "../services/contest.service";
+import contestStatusService from "../services/contest-status.service";
 
 @autoInjectable()
 export default class ContestController {
@@ -38,7 +39,7 @@ export default class ContestController {
 
       // Filter to only scheduled status
       const scheduledContests = result.items.filter(
-        (contest: any) => contest.status === "scheduled"
+        (contest: any) => contest.status === "upcoming"
       );
 
       return res.status(STATUS_CODE.SUCCESS).json({
@@ -74,11 +75,17 @@ export default class ContestController {
           ? Math.floor(parsedOffset)
           : 0;
 
+      // Status filter: by default show only upcoming and live contests
+      // If type=all, show all contests
+      const type = String(req.query.type ?? "").trim().toLowerCase();
+      const statusFilter = type === "all" ? undefined : ["upcoming", "live"];
+
       const result = await this.contestService.listContests(
         matchId,
         limit,
         offset,
-        req.userId
+        req.userId,
+        statusFilter
       );
 
       return res
@@ -301,6 +308,83 @@ export default class ContestController {
         success: false,
         data: null,
         message: err?.message || "Failed to fetch contest statistics",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async generateAnswers(req: Request, res: Response) {
+    const { matchData, liveData,question } = req.body;
+    
+    try {
+      const result = await this.contestService.generateAnswers(
+        matchData,
+        liveData,
+        question
+      );  
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result?.data,
+        message: result?.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    catch (err: any) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: err?.message || "Error generating answers",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  /**
+   * Update contest statuses based on live match data
+   * Called from match_service livematch webhook
+   */
+  public async updateContestStatuses(req: Request, res: Response) {
+    try {
+      const { matchId, liveMatchData } = req.body;
+
+      if (!matchId || !liveMatchData) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "matchId and liveMatchData are required",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      logger.info(`[CONTEST-STATUS-API] Received request to update statuses for match: ${matchId}`);
+
+      const results = await contestStatusService.updateContestStatuses(
+        matchId,
+        liveMatchData
+      );
+
+      logger.info(`[CONTEST-STATUS-API] Successfully updated ${results.length} contest(s)`);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: {
+          updatedContests: results,
+          count: results.length,
+        },
+        message: `Updated ${results.length} contest(s)`,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.updateContestStatuses error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to update contest statuses",
         errors: null,
         timestamp: new Date().toISOString(),
       });

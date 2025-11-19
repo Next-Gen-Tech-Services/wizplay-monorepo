@@ -22,6 +22,9 @@ function addTeamFlags(matchData: any): any {
       // Only add flag_url if country_code is not empty
       if (matchData.teams.a.country_code) {
         matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
+      }else{
+        matchData.teams.a.flag_url = ``;
+
       }
     }
     
@@ -33,6 +36,9 @@ function addTeamFlags(matchData: any): any {
       // Only add flag_url if country_code is not empty
       if (matchData.teams.b.country_code) {
         matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
+      }else{
+        matchData.teams.b.flag_url = ``;
+        
       }
     }
   }
@@ -223,19 +229,9 @@ export default class MatchRepository {
         const matchWithFlags = addTeamFlags(plain);
         
         // Recursively replace all null values with empty strings
-        const replaceNulls = (obj: any): any => {
-          if (obj === null) return "";
-          if (typeof obj !== "object") return obj;
-          if (Array.isArray(obj)) return obj.map(replaceNulls);
-          
-          const result: any = {};
-          for (const key in obj) {
-            result[key] = replaceNulls(obj[key]);
-          }
-          return result;
-        };
+       
         
-        return replaceNulls(matchWithFlags);
+        return matchWithFlags;
       });
 
       return {
@@ -413,6 +409,25 @@ export default class MatchRepository {
       return matchData;
     } catch (error: any) {
       logger.error(error.message);
+    }
+  }
+
+  public async getMatchIdByKey(matchKey: string): Promise<string | null> {
+    try {
+      if (!matchKey) {
+        return null;
+      }
+
+      const matchData = await this._DB.Match.findOne({
+        where: { key: matchKey },
+        attributes: ['id'],
+        raw: true,
+      });
+
+      return matchData?.id || null;
+    } catch (error: any) {
+      logger.error(`getMatchIdByKey error: ${error.message}`);
+      return null;
     }
   }
 

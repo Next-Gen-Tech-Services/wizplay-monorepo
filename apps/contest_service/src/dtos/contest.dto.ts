@@ -29,7 +29,7 @@ export interface CreateContestPayload {
   timeCommitment?: string;
   platform?: string;
 
-  status: "scheduled" | "running" | "completed" | "cancelled";
+  status: "upcoming" | "joining_closed" | "live" | "calculating" | "completed" | "cancelled";
 }
 
 export interface UpdateContestPayload extends Partial<CreateContestPayload> {}

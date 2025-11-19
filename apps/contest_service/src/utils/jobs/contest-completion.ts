@@ -52,7 +52,7 @@ class ContestCompletionCron {
       // Find all active contests that need to be checked
       const contests = await DB.Contest.findAll({
         where: {
-          status: "scheduled",
+          status: "upcoming",
           startAt: {
             [Op.lte]: now + 1800, // Check contests starting within next 30 minutes
           },

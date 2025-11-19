@@ -11,7 +11,68 @@ import matchCrons from "./utils/jobs/match";
 import countryFlagsCron from "./utils/jobs/country-flags";
 import { initializeSubscriptionService } from "./utils/jobs/init-subscription";
 import { connectProducer } from "./utils/kafka";
-import { Server as SocketIOServer } from "socket.io";
+import { Server as SocketIOServer, Socket } from "socket.io";
+import redis from "./configs/redis.config";
+import MatchLiveRepository from "./repositories/matchLive.repository";
+import { transformCricketMatch } from "./utils/transformLiveMatchData";
+
+/**
+ * Send last captured match data to a newly joined user
+ * Tries Redis first (fastest), then falls back to database
+ */
+const sendLastMatchData = async (socket: Socket, matchId: string): Promise<void> => {
+  try {
+    logger.info(`[Socket.IO] Fetching last match data for ${matchId} to send to ${socket.id}`);
+
+    // Try to get the last update from Redis list
+    const redisKey = `${matchId}:live_updates`;
+    const lastUpdates = await redis.getList(redisKey, -1, -1); // Get last item from list
+
+    logger.info(`[Socket.IO] Retrieved last updates from Redis for match ${matchId}: ${lastUpdates?.length || 0} items`);
+    if (lastUpdates && lastUpdates.length > 0) {
+      try {
+        const parsedData = JSON.parse(lastUpdates[0]);
+        // let result = transformCricketMatch(parsedData);
+        // Send on match_update event (same as live updates)
+        socket.emit("match_update",  parsedData);
+        logger.info(`[Socket.IO] Sent last match data from Redis to ${socket.id} for match ${matchId}`);
+        return;
+      } catch (parseError) {
+        logger.error(`[Socket.IO] Failed to parse Redis data: ${parseError}`);
+      }
+    }
+
+    // Fallback to database
+    const liveRepo = new MatchLiveRepository();
+    const dbState = await liveRepo.getCurrentLastdata(matchId);
+
+    if (dbState) {
+      let data = dbState.simplifiedData
+      // Transform DB data to match webhook format
+      socket.emit("match_update", data);
+      socket.emit("live_update", data);
+      logger.info(`[Socket.IO] Sent last match data from DB to ${socket.id} for match ${matchId}`);
+      return;
+    }
+
+    // No data available - send empty update
+    logger.warn(`[Socket.IO] No initial data available for match ${matchId}`);
+    socket.emit("match_update", {
+      match: {
+        id: matchId,
+      },
+      source: "none",
+      message: "No live data available yet",
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    logger.error(`[Socket.IO] Error fetching initial data for match ${matchId}: ${error.message}`);
+    socket.emit("error", {
+      message: "Failed to fetch initial match data",
+      matchId,
+    });
+  }
+};
 
 const BrokerInit = async (retryCount = 0, maxRetries = 10) => {
   try {
@@ -95,12 +156,15 @@ const AppInit = async () => {
     logger.info(`[Socket.IO] Transport: ${socket.conn.transport.name}`);
 
     // allow client to join match rooms
-    socket.on("join", (matchId: string) => {
+    socket.on("join", async (matchId: string) => {
       logger.info(`[Socket.IO] Socket ${socket.id} joining room: ${matchId}`);
       try { 
         socket.join(matchId); 
         socket.emit("joined", { matchId, success: true });
         logger.info(`[Socket.IO] Socket ${socket.id} successfully joined room: ${matchId}`);
+
+        // Send last captured data to the newly joined user
+        await sendLastMatchData(socket, matchId);
       } catch (e) { 
         logger.error(`[Socket.IO] Error joining room: ${e}`);
         socket.emit("error", { message: "Failed to join room" });
@@ -121,7 +185,29 @@ const AppInit = async () => {
     });
   });
 
-  expressApp.use(cors());
+  // CORS configuration - allow multiple origins
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://wizplay-admin-ngts.vercel.app",
+    process.env.FRONTEND_URL
+  ].filter(Boolean);
+
+  const corsOptions = {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
+  };
+  expressApp.use(cors(corsOptions));
   expressApp.use(express.json());
   expressApp.use(attachRequestId);
 

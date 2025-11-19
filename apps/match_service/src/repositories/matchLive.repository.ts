@@ -68,6 +68,20 @@ export default class MatchLiveRepository {
     }
   }
 
+  public async getCurrentLastdata(matchKey: string) {
+    try {
+      const latestLiveData = await this._DB.LiveMatchData.findOne({
+        where: { matchKey },
+        order: [["createdAt", "DESC"]],
+
+      });
+      return latestLiveData;
+    } catch (err: any) {
+      logger.error(`Failed to get live state: ${err?.message ?? err}`);
+      return null;
+    }
+  }
+
   // Get all live events for a match
   public async getMatchEvents(
     matchId: string,

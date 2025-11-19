@@ -130,6 +130,6 @@ export const ROUTES: ProxyRoute[] = [
     ws: true,
     // Don't rewrite the path - Socket.IO needs /socket.io
     timeoutMs: 60000,
-    secure: false,
+    secure: true,
   },
 ];

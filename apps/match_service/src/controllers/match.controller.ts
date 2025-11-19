@@ -11,7 +11,8 @@ import zlib from "zlib";
 import {  transformCricketMatch } from "../utils/transformLiveMatchData";
 import fs from 'fs'
 import redis from "../configs/redis.config";
-import contestCompletionService from "../services/contest-completion.service";
+import axios from "axios";
+import ServerConfigs from "../configs/server.config";
 const lastSeen: Record<string, string | number> = {};
 
 @autoInjectable()
@@ -83,6 +84,62 @@ export default class MatchController {
     }
   }
 
+  /**
+   * Get live match data from Redis (for contest status updater job)
+   * Accepts match UUID and fetches data using match key
+   */
+  async getMatchLiveData(req: Request, res: Response) {
+    const { id } = req.params; // This is the match UUID
+    
+    try {
+      // Get match details to find the key
+      const match = await this.matchService.fetchMatchById(id);
+      
+      if (!match || !match.key) {
+        return res.status(STATUS_CODE.NOT_FOUND).json({
+          success: false,
+          message: "Match not found",
+          data: null,
+          errors: ["Match not found in database"],
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const matchKey = match.key;
+      
+      // Try to get latest live data from Redis using match key
+      const liveUpdates = await redis.getList(`${matchKey}:live_updates`, -1, -1);
+      
+      if (liveUpdates && liveUpdates.length > 0) {
+        const latestData = JSON.parse(liveUpdates[0]);
+        return res.status(STATUS_CODE.SUCCESS).json({
+          success: true,
+          message: "Live match data fetched successfully",
+          data: latestData,
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      } else {
+        return res.status(STATUS_CODE.NOT_FOUND).json({
+          success: false,
+          message: "No live data available for this match",
+          data: null,
+          errors: ["Match not live or no data received yet"],
+          timestamp: new Date().toISOString(),
+        });
+      }
+    } catch (err: any) {
+      console.error(`Error fetching live data for match ${id}:`, err);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        message: err.message,
+        data: null,
+        errors: [err.message],
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
   async subscribeMatch(req: Request, res: Response) {
     const { id } = req.params;
     const { token } = req.body;
@@ -134,6 +191,17 @@ export default class MatchController {
     }
   }
 
+  /**
+   * Live Match Data Webhook
+   * 
+   * Receives real-time match updates from Roanuz API
+   * Flow:
+   * 1. Decompress gzipped JSON data
+   * 2. Transform to internal format
+   * 3. Store in Redis for quick access
+   * 4. Update contest statuses → Auto-generate answers when status = "calculating"
+   * 5. Broadcast to WebSocket clients
+   */
   async liveMatchData(req: Request, res: Response) {
     try {
       const chunks: Buffer[] = [];
@@ -154,18 +222,27 @@ export default class MatchController {
           let raw = JSON.parse(jsonStr);
 
           raw = transformCricketMatch(raw);
-          const matchId = raw.match.id;
+          const matchKey = raw.match.id; // This is actually the match key from Roanuz
 
-          // push data inside redis for quick access
-          await redis.setInList(`${matchId}:live_updates`, JSON.stringify(raw));
+          // Get the actual match UUID from database using the key
+          const match = await this.matchService.getMatchByKey(matchKey);
+          const matchId = match?.id;
 
-          // Process contest completion based on live match data
-          contestCompletionService.processContestCompletion(matchId, raw).catch(err => {
-            console.error("Contest completion error:", err);
+          if (!matchId) {
+            console.warn(`[WEBHOOK] Match not found in database for key: ${matchKey}`);
+            return res.status(200).send({ ok: true, warning: "Match not found" });
+          }
+
+          // push data inside redis for quick access (use key for Redis)
+          await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(raw));
+
+          // Update contest statuses and handle answer generation (use UUID for database)
+          this.updateContestStatuses(matchId, raw).catch(err => {
+            console.error("[CONTEST-STATUS] Error updating contest statuses:", err);
           });
 
-          // broadcast to sockets and SSE clients
-          this.broadcast(matchId, "match_update", raw);
+          // broadcast to sockets and SSE clients (use key for socket rooms)
+          this.broadcast(matchKey, "match_update", raw);
 
           // respond to webhook provider quickly
           res.status(200).send({ ok: true });
@@ -449,6 +526,38 @@ export default class MatchController {
         errors: [err.message],
         timestamp: new Date().toISOString(),
       });
+    }
+  }
+
+  /**
+   * Update contest statuses by calling contest_service API
+   */
+  private async updateContestStatuses(matchId: string, liveMatchData: any): Promise<void> {
+    try {
+      const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
+      
+      console.log(`[CONTEST-STATUS] Calling contest service to update statuses for match: ${matchId}`);
+      
+      const response = await axios.post(
+        `${contestServiceUrl}/api/v1/contests/update-status`,
+        {
+          matchId,
+          liveMatchData
+        },
+        {
+          timeout: 5000,
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+
+      console.log(`[CONTEST-STATUS] Successfully updated contest statuses for match: ${matchId}`, response.data);
+    } catch (error: any) {
+      console.error(`[CONTEST-STATUS] Failed to update contest statuses for match ${matchId}:`, {
+        message: error?.message,
+        response: error?.response?.data,
+        status: error?.response?.status
+      });
+      // Don't throw - we don't want to break webhook processing
     }
   }
 

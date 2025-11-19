@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@repo/common": "workspace:*",
+    "@types/socket.io": "^3.0.2",
     "amqplib": "^0.10.8",
     "axios": "^1.11.0",
     "cors": "^2.8.5",

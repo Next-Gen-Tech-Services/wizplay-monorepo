@@ -97,6 +97,12 @@ router.post("/contests/generate", async (req: Request, res: Response) => {
   return result;
 });
 
+// Update contest statuses based on live match data (internal endpoint)
+router.post("/contests/update-status", async (req: Request, res: Response) => {
+  const result = await contestController.updateContestStatuses(req, res);
+  return result;
+});
+
 router.post(
   "/contests/generate/questions",
   generateQuestionsValidator(),
@@ -107,4 +113,12 @@ router.post(
   }
 );
 
+
+router.get(
+  "/contests/generate/answers",
+  async (req: Request, res: Response) => {
+    const result = await contestController.generateAnswers(req, res);
+    return result;
+  }
+);
 export default router;

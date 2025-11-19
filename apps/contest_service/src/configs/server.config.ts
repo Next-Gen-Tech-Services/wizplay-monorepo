@@ -29,6 +29,7 @@ class ServerConfigs {
   static OPEN_API_KEY: string = process.env.OPEN_API_KEY as string;
   static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
   static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
+  static MATCH_SERVICE_URL: string = process.env.MATCH_SERVICE_URL as string;
   static USER_SERVICE_URL: string = process.env.USER_SERVICE_URL as string;
   private constructor() {}
 }

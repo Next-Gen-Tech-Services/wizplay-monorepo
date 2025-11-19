@@ -32,6 +32,21 @@ export default class MatchService {
       throw new BadRequestError(error.message);
     }
   }
+
+  public async getMatchByKey(matchKey: string) {
+    try {
+      const matchId = await this.matchRepository.getMatchIdByKey(matchKey);
+      if (!matchId) {
+        return null;
+      }
+      
+      return { id: matchId, key: matchKey };
+    } catch (error: any) {
+      logger.error(`getMatchByKey error: ${error.message}`);
+      return null;
+    }
+  }
+
   public async updateMatch(matchId: string, showOnFrontend: boolean) {
     try {
       if (!matchId) {
