@@ -34,12 +34,6 @@ router.get("/matches/:id/team-data", async (req: Request, res: Response) => {
   return controller.getMatchTeamData(req, res);
 });
 
-// GET /matches/:id/live-data - Get latest live data from Redis (for contest status updater)
-router.get("/matches/:id/live-data", async (req: Request, res: Response) => {
-  const controller = container.resolve(MatchController);
-  return controller.getMatchLiveData(req, res);
-});
-
 // PATCH /matches/:id - Update showOnFrontend flag
 router.patch("/matches/:id", validateRequest, async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);

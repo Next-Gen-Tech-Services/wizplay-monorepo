@@ -1,257 +1,835 @@
 {
-  "match_id": "a-rz--cricket--Ym1981594608794214405",
-  "title": "United Arab Emirates vs Nepal - 91st Match - ICC Cricket World Cup League Two, 2023-27",
-  "short_name": "UAE vs NEP",
-  "subtitle": "91st Match",
-  "status": "started",
-  "play_status": "in_play",
-  "start_at": {
-    "epoch_s": 1762320600,
-    "utc": "2025-11-05T05:30:00.000Z",
-    "ist": "2025-11-05T11:00:00+05:30"
-  },
-  "start_at_local": {
-    "epoch_s": 1762335000,
-    "utc": "2025-11-05T09:30:00.000Z",
-    "ist": "2025-11-05T15:00:00+05:30"
-  },
-  "tournament": {
-    "key": "a-rz--cricket--icc--icccwclt--2023-27-8JlY",
-    "name": "ICC Cricket World Cup League Two, 2023-27"
+  "match": {
+    "id": "a-rz--cricket--Zn1964321997055995910",
+    "title": "Hobart Hurricanes Women vs Melbourne Renegades Women",
+    "shortName": "HH-W vs MR-W",
+    "subtitle": "16th Match",
+    "status": "started",
+    "playStatus": "in_play",
+    "format": "t20",
+    "venue": {
+      "name": "North Sydney Oval",
+      "city": "North Sydney",
+      "country": "Australia"
+    },
+    "startTime": {
+      "epoch": 1763613600,
+      "utc": "2025-11-20T04:40:00.000Z",
+      "ist": "2025-11-20T10:10:00+05:30"
+    },
+    "tournament": {
+      "key": "a-rz--cricket--ca--wbblt20--2025-2Ub0",
+      "name": "Womens Big Bash League, 2025"
+    },
+    "weather": "22.2°C|Partly cloudy"
   },
   "teams": {
     "a": {
-      "key": "uae",
-      "code": "UAE",
-      "name": "United Arab Emirates",
-      "alternate_name": "United Arab Emirates",
-      "alternate_code": "UAE",
-      "gender_name": "United Arab Emirates Men",
-      "country_code": "ARE"
+      "key": "hbhw",
+      "name": "Hobart Hurricanes Women",
+      "code": "HH-W"
     },
     "b": {
-      "key": "nep",
-      "code": "NEP",
-      "name": "Nepal",
-      "alternate_name": "Nepal",
-      "alternate_code": "NEP",
-      "gender_name": "Nepal Men",
-      "country_code": "NPL"
+      "key": "mlrw",
+      "name": "Melbourne Renegades Women",
+      "code": "MR-W"
     }
   },
-  "venue": {
-    "name": "Dubai International Cricket Stadium",
-    "city": "Dubai",
-    "country": "United Arab Emirates",
-    "geolocation": "25.0459724,55.2183558"
-  },
-  "toss": {
-    "called": "b",
-    "winner": "a",
-    "elected": "bowl",
-    "squad_announced": true
-  },
-  "target": null,
   "innings": [
     {
       "id": "b_1",
       "team": "b",
-      "is_completed": false,
-      "overs": [
-        30,
-        5
+      "teamName": "Melbourne Renegades Women",
+      "teamCode": "MR-W",
+      "innings_number": 1,
+      "completed": true,
+      "score": {
+        "runs": 155,
+        "wickets": 10,
+        "overs": "19.3",
+        "balls": 117,
+        "runRate": 7.95,
+        "extras": 1
+      },
+      "batting": [
+        {
+          "key": "w_cou_webb",
+          "name": "Courtney Webb",
+          "runs": 2,
+          "balls": 3,
+          "fours": 0,
+          "sixes": 0,
+          "strikeRate": 66.67,
+          "dotBalls": 1,
+          "dismissal": "c Heather Graham b Molly Strano",
+          "isOut": true,
+          "position": 1
+        },
+        {
+          "key": "c__player__emma_de_broughe__4826d",
+          "name": "Emma De Broughe",
+          "runs": 10,
+          "balls": 7,
+          "fours": 2,
+          "sixes": 0,
+          "strikeRate": 142.86,
+          "dotBalls": 3,
+          "dismissal": "st Lizelle Lee b Molly Strano",
+          "isOut": true,
+          "position": 2
+        },
+        {
+          "key": "w_s_molineux",
+          "name": "Sophie Molineux",
+          "runs": 11,
+          "balls": 11,
+          "fours": 2,
+          "sixes": 0,
+          "strikeRate": 100,
+          "dotBalls": 7,
+          "dismissal": "c Lauren Smith b Hayley Silver-Holmes",
+          "isOut": true,
+          "position": 3
+        },
+        {
+          "key": "c__player__alice_capsey__281b9",
+          "name": "Alice Capsey",
+          "runs": 37,
+          "balls": 24,
+          "fours": 6,
+          "sixes": 0,
+          "strikeRate": 154.17,
+          "dotBalls": 8,
+          "dismissal": "c Nicola Carey b Linsey Smith",
+          "isOut": true,
+          "position": 4
+        },
+        {
+          "key": "w_geo_wareham",
+          "name": "Georgia Wareham",
+          "runs": 41,
+          "balls": 26,
+          "fours": 6,
+          "sixes": 1,
+          "strikeRate": 157.69,
+          "dotBalls": 9,
+          "dismissal": "c Nicola Carey b Hayley Silver-Holmes",
+          "isOut": true,
+          "position": 5
+        },
+        {
+          "key": "w_djs_dottin",
+          "name": "Deandra Dottin",
+          "runs": 18,
+          "balls": 16,
+          "fours": 3,
+          "sixes": 0,
+          "strikeRate": 112.5,
+          "dotBalls": 8,
+          "dismissal": "bowled b Heather Graham",
+          "isOut": true,
+          "position": 6
+        },
+        {
+          "key": "w_nic_faltum",
+          "name": "Nicole Faltum",
+          "runs": 11,
+          "balls": 8,
+          "fours": 1,
+          "sixes": 0,
+          "strikeRate": 137.5,
+          "dotBalls": 3,
+          "dismissal": "bowled b Nicola Carey",
+          "isOut": true,
+          "position": 7
+        },
+        {
+          "key": "w_tes_flintoff",
+          "name": "Tess Flintoff",
+          "runs": 2,
+          "balls": 4,
+          "fours": 0,
+          "sixes": 0,
+          "strikeRate": 50,
+          "dotBalls": 2,
+          "dismissal": "bowled b Heather Graham",
+          "isOut": true,
+          "position": 8
+        },
+        {
+          "key": "w_s_coyte",
+          "name": "Sarah Coyte",
+          "runs": 15,
+          "balls": 11,
+          "fours": 2,
+          "sixes": 0,
+          "strikeRate": 136.36,
+          "dotBalls": 4,
+          "dismissal": null,
+          "isOut": false,
+          "position": 9
+        },
+        {
+          "key": "c__player__c_bekker__c0b58",
+          "name": "Charis Bekker",
+          "runs": 5,
+          "balls": 4,
+          "fours": 1,
+          "sixes": 0,
+          "strikeRate": 125,
+          "dotBalls": 2,
+          "dismissal": "c Linsey Smith b Heather Graham",
+          "isOut": true,
+          "position": 10
+        },
+        {
+          "key": "c__player__milly_illingworth__6c645",
+          "name": "Milly Hall Illingworth",
+          "runs": 2,
+          "balls": 3,
+          "fours": 0,
+          "sixes": 0,
+          "strikeRate": 66.67,
+          "dotBalls": 1,
+          "dismissal": "c Heather Graham b Linsey Smith",
+          "isOut": true,
+          "position": 11
+        }
       ],
-      "score_str": "136/4 in 30.5",
-      "runs": 136,
-      "wickets": 4,
-      "balls": 185
+      "bowling": [
+        {
+          "key": "w_h_graham",
+          "name": "Heather Graham",
+          "overs": "4.0",
+          "maidens": 0,
+          "runs": 23,
+          "wickets": 3,
+          "economy": 5.75,
+          "dotBalls": 12,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_moll_strano",
+          "name": "Molly Strano",
+          "overs": "2.0",
+          "maidens": 0,
+          "runs": 13,
+          "wickets": 2,
+          "economy": 6.5,
+          "dotBalls": 5,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_s_Linsey",
+          "name": "Linsey Smith",
+          "overs": "3.3",
+          "maidens": 0,
+          "runs": 33,
+          "wickets": 2,
+          "economy": 9.43,
+          "dotBalls": 7,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_hs_holmes",
+          "name": "Hayley Silver-Holmes",
+          "overs": "2.0",
+          "maidens": 0,
+          "runs": 31,
+          "wickets": 2,
+          "economy": 15.5,
+          "dotBalls": 5,
+          "wides": 1,
+          "noBalls": 0
+        },
+        {
+          "key": "w_n_carey",
+          "name": "Nicola Carey",
+          "overs": "4.0",
+          "maidens": 0,
+          "runs": 26,
+          "wickets": 1,
+          "economy": 6.5,
+          "dotBalls": 8,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_lau_Smith",
+          "name": "Lauren Smith",
+          "overs": "3.0",
+          "maidens": 0,
+          "runs": 18,
+          "wickets": 0,
+          "economy": 6,
+          "dotBalls": 10,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_na_sciver",
+          "name": "Natalie Sciver",
+          "overs": "1.0",
+          "maidens": 0,
+          "runs": 11,
+          "wickets": 0,
+          "economy": 11,
+          "dotBalls": 1,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "c__player__c_bekker__c0b58",
+          "name": "Charis Bekker",
+          "overs": "0.3",
+          "maidens": 0,
+          "runs": 10,
+          "wickets": 0,
+          "economy": 20,
+          "dotBalls": 1,
+          "wides": 0,
+          "noBalls": 0
+        }
+      ],
+      "partnerships": [
+        {
+          "runs": 4,
+          "balls": 5,
+          "runRate": 4.8,
+          "player1": {
+            "name": "Courtney Webb",
+            "runs": 2,
+            "balls": 3
+          },
+          "player2": {
+            "name": "Emma De Broughe",
+            "runs": 2,
+            "balls": 2
+          },
+          "completed": true
+        },
+        {
+          "runs": 15,
+          "balls": 12,
+          "runRate": 7.5,
+          "player1": {
+            "name": "Sophie Molineux",
+            "runs": 7,
+            "balls": 7
+          },
+          "player2": {
+            "name": "Emma De Broughe",
+            "runs": 8,
+            "balls": 5
+          },
+          "completed": true
+        },
+        {
+          "runs": 4,
+          "balls": 5,
+          "runRate": 4.8,
+          "player1": {
+            "name": "Alice Capsey",
+            "runs": 0,
+            "balls": 1
+          },
+          "player2": {
+            "name": "Sophie Molineux",
+            "runs": 4,
+            "balls": 4
+          },
+          "completed": true
+        },
+        {
+          "runs": 56,
+          "balls": 43,
+          "runRate": 7.81,
+          "player1": {
+            "name": "Georgia Wareham",
+            "runs": 19,
+            "balls": 20
+          },
+          "player2": {
+            "name": "Alice Capsey",
+            "runs": 37,
+            "balls": 23
+          },
+          "completed": true
+        },
+        {
+          "runs": 27,
+          "balls": 7,
+          "runRate": 23.14,
+          "player1": {
+            "name": "Deandra Dottin",
+            "runs": 4,
+            "balls": 1
+          },
+          "player2": {
+            "name": "Georgia Wareham",
+            "runs": 22,
+            "balls": 6
+          },
+          "completed": true
+        },
+        {
+          "runs": 22,
+          "balls": 20,
+          "runRate": 6.6,
+          "player1": {
+            "name": "Deandra Dottin",
+            "runs": 11,
+            "balls": 12
+          },
+          "player2": {
+            "name": "Nicole Faltum",
+            "runs": 11,
+            "balls": 8
+          },
+          "completed": true
+        },
+        {
+          "runs": 3,
+          "balls": 5,
+          "runRate": 3.6,
+          "player1": {
+            "name": "Tess Flintoff",
+            "runs": 2,
+            "balls": 4
+          },
+          "player2": {
+            "name": "Deandra Dottin",
+            "runs": 1,
+            "balls": 1
+          },
+          "completed": true
+        },
+        {
+          "runs": 5,
+          "balls": 5,
+          "runRate": 6,
+          "player1": {
+            "name": "Sarah Coyte",
+            "runs": 3,
+            "balls": 3
+          },
+          "player2": {
+            "name": "Deandra Dottin",
+            "runs": 2,
+            "balls": 2
+          },
+          "completed": true
+        },
+        {
+          "runs": 16,
+          "balls": 10,
+          "runRate": 9.6,
+          "player1": {
+            "name": "Sarah Coyte",
+            "runs": 11,
+            "balls": 6
+          },
+          "player2": {
+            "name": "Charis Bekker",
+            "runs": 5,
+            "balls": 4
+          },
+          "completed": true
+        },
+        {
+          "runs": 3,
+          "balls": 5,
+          "runRate": 3.6,
+          "player1": {
+            "name": "Milly Hall Illingworth",
+            "runs": 2,
+            "balls": 3
+          },
+          "player2": {
+            "name": "Sarah Coyte",
+            "runs": 1,
+            "balls": 2
+          },
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "a_1",
+      "team": "a",
+      "teamName": "Hobart Hurricanes Women",
+      "teamCode": "HH-W",
+      "innings_number": 2,
+      "completed": false,
+      "score": {
+        "runs": 10,
+        "wickets": 0,
+        "overs": "0.3",
+        "balls": 3,
+        "runRate": 20,
+        "extras": 0
+      },
+      "batting": [
+        {
+          "key": "w_li_lee",
+          "name": "Lizelle Lee",
+          "runs": 10,
+          "balls": 3,
+          "fours": 1,
+          "sixes": 1,
+          "strikeRate": 333.33,
+          "dotBalls": 1,
+          "dismissal": null,
+          "isOut": false,
+          "position": 1
+        },
+        {
+          "key": "a-rz--cricket--dwh-WJ3m",
+          "name": "Danni Wyatt Hodge",
+          "runs": 0,
+          "balls": 0,
+          "fours": 0,
+          "sixes": 0,
+          "strikeRate": 0,
+          "dotBalls": 0,
+          "dismissal": null,
+          "isOut": false,
+          "position": 2
+        }
+      ],
+      "bowling": [
+        {
+          "key": "w_h_graham",
+          "name": "Heather Graham",
+          "overs": "4.0",
+          "maidens": 0,
+          "runs": 23,
+          "wickets": 3,
+          "economy": 5.75,
+          "dotBalls": 12,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_moll_strano",
+          "name": "Molly Strano",
+          "overs": "2.0",
+          "maidens": 0,
+          "runs": 13,
+          "wickets": 2,
+          "economy": 6.5,
+          "dotBalls": 5,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_s_Linsey",
+          "name": "Linsey Smith",
+          "overs": "3.3",
+          "maidens": 0,
+          "runs": 33,
+          "wickets": 2,
+          "economy": 9.43,
+          "dotBalls": 7,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_hs_holmes",
+          "name": "Hayley Silver-Holmes",
+          "overs": "2.0",
+          "maidens": 0,
+          "runs": 31,
+          "wickets": 2,
+          "economy": 15.5,
+          "dotBalls": 5,
+          "wides": 1,
+          "noBalls": 0
+        },
+        {
+          "key": "w_n_carey",
+          "name": "Nicola Carey",
+          "overs": "4.0",
+          "maidens": 0,
+          "runs": 26,
+          "wickets": 1,
+          "economy": 6.5,
+          "dotBalls": 8,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_lau_Smith",
+          "name": "Lauren Smith",
+          "overs": "3.0",
+          "maidens": 0,
+          "runs": 18,
+          "wickets": 0,
+          "economy": 6,
+          "dotBalls": 10,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "w_na_sciver",
+          "name": "Natalie Sciver",
+          "overs": "1.0",
+          "maidens": 0,
+          "runs": 11,
+          "wickets": 0,
+          "economy": 11,
+          "dotBalls": 1,
+          "wides": 0,
+          "noBalls": 0
+        },
+        {
+          "key": "c__player__c_bekker__c0b58",
+          "name": "Charis Bekker",
+          "overs": "0.3",
+          "maidens": 0,
+          "runs": 10,
+          "wickets": 0,
+          "economy": 20,
+          "dotBalls": 1,
+          "wides": 0,
+          "noBalls": 0
+        }
+      ],
+      "partnerships": [
+        {
+          "runs": 10,
+          "balls": 3,
+          "runRate": 20,
+          "player1": {
+            "name": "Lizelle Lee",
+            "runs": 10,
+            "balls": 3
+          },
+          "player2": {
+            "name": "Danni Wyatt Hodge",
+            "runs": 0,
+            "balls": 0
+          },
+          "completed": false
+        }
+      ]
     }
   ],
   "live": {
-    "current_innings": "b_1",
-    "batting_team": "b",
-    "bowling_team": "a",
-    "score": {
-      "runs": 136,
-      "balls": 185,
-      "wickets": 4,
-      "run_rate": 4.41,
-      "title": "136/4 in 30.5",
-      "overs": [
-        30,
-        5
-      ],
-      "msg_lead_by": "",
-      "msg_trail_by": ""
+    "innings": "a_1",
+    "battingTeam": "Hobart Hurricanes Women",
+    "bowlingTeam": "Melbourne Renegades Women",
+    "currentScore": {
+      "runs": 10,
+      "wickets": 0,
+      "overs": "0.3",
+      "runRate": 20,
+      "display": "10/0 in 0.3"
     },
-    "required_score": null,
+    "requiredScore": {
+      "runs": 146,
+      "title": "146 runs in 117 balls",
+      "balls": 117,
+      "run_rate": 7.49
+    },
+    "target": {
+      "balls": 120,
+      "runs": 156,
+      "dl_applied": false
+    },
     "striker": {
-      "key": "dipendra_airee",
-      "name": "Dipendra Singh Airee",
-      "stats": {
-        "runs": 33,
-        "balls": 37,
-        "fours": 3,
-        "sixes": 1,
-        "dot_balls": 21,
-        "strike_rate": 89.19,
-        "ones": 9,
-        "twos": 3,
-        "threes": 0,
-        "fives": 0,
-        "innings_index": "b_1",
-        "stats": {
-          "boundary_percentage": 54.54545454545454,
-          "boundary_frequency": 9.25,
-          "dot_ball_percentage": 56.75675675675676,
-          "dot_ball_frequency": 1.7619047619047619
-        }
-      }
+      "key": "w_li_lee",
+      "name": "Lizelle Lee",
+      "runs": 10,
+      "balls": 3,
+      "fours": 1,
+      "sixes": 1,
+      "strikeRate": 333.33
     },
-    "non_striker": {
-      "key": "arif_sheikh",
-      "name": "Aarif Sheikh",
-      "stats": {
-        "runs": 7,
-        "balls": 16,
-        "fours": 0,
-        "sixes": 0,
-        "dot_balls": 9,
-        "strike_rate": 43.75,
-        "ones": 7,
-        "twos": 0,
-        "threes": 0,
-        "fives": 0,
-        "innings_index": "b_1",
-        "stats": {
-          "boundary_percentage": 0,
-          "boundary_frequency": 0,
-          "dot_ball_percentage": 56.25,
-          "dot_ball_frequency": 1.7777777777777777
-        }
-      }
+    "nonStriker": {
+      "key": "a-rz--cricket--dwh-WJ3m",
+      "name": "Danni Wyatt Hodge",
+      "runs": 0,
+      "balls": 0,
+      "fours": 0,
+      "sixes": 0,
+      "strikeRate": 0
     },
     "bowler": {
-      "key": "c__player__zahid_ali__fa8f2",
-      "name": "Mohammad Zahid Ali",
-      "stats": {
-        "balls": 35,
-        "runs": 38,
-        "economy": 6.51,
-        "wickets": 1,
-        "extras": 3,
-        "maiden_overs": 0,
-        "overs": [
-          5,
-          5
-        ],
-        "balls_breakup": {
-          "dot_balls": 21,
-          "wides": 3,
-          "no_balls": 0,
-          "fours": 4,
-          "sixes": 1
-        },
-        "wickets_breakup": {
-          "bowled": 0,
-          "caught": 1,
-          "lbw": 0,
-          "stumping": 0
-        },
-        "team_contribution_extras": {
-          "bye": 0,
-          "leg_bye": 0,
-          "penalty": 0
-        },
-        "innings_index": "b_1",
-        "stats": {
-          "boundary_percentage": 57.89473684210527,
-          "boundary_frequency": 7,
-          "dot_ball_percentage": 60,
-          "dot_ball_frequency": 1.6666666666666667
-        }
-      }
+      "key": "c__player__c_bekker__c0b58",
+      "name": "Charis Bekker",
+      "overs": "0.3",
+      "runs": 10,
+      "wickets": 0,
+      "economy": 20
     },
-    "recent_overs": [
+    "recentOvers": [
       {
-        "overnumber": 27,
-        "ball_repr": [
+        "overNumber": 0,
+        "balls": [
           "r0",
-          "e1,wd",
-          "r2"
-        ]
-      },
-      {
-        "overnumber": 28,
-        "ball_repr": [
-          "r1",
-          "r1",
-          "r0",
-          "r0",
-          "r1",
-          "r1"
-        ]
-      },
-      {
-        "overnumber": 29,
-        "ball_repr": [
-          "r2",
-          "r2",
-          "r0",
-          "r0",
-          "r1",
-          "r0"
-        ]
-      },
-      {
-        "overnumber": 30,
-        "ball_repr": [
-          "r1",
-          "r1",
-          "b6",
           "b4",
-          "r0"
+          "b6"
+        ],
+        "ballDetails": [
+          {
+            "repr": "r0",
+            "runs": 0,
+            "isWicket": false,
+            "isBoundary": false,
+            "isExtra": false
+          },
+          {
+            "repr": "b4",
+            "runs": 4,
+            "isWicket": false,
+            "isBoundary": true,
+            "isExtra": false
+          },
+          {
+            "repr": "b6",
+            "runs": 6,
+            "isWicket": false,
+            "isBoundary": true,
+            "isExtra": false
+          }
         ]
       }
     ],
-    "last_ball_key": "539968",
-    "last_event_repr": {
-      "overnumber": 27,
-      "ball_repr": [
-        "r0",
-        "e1,wd",
-        "r2"
-      ]
-    }
+    "lastBallKey": "1048768",
+    "commentary": [
+      {
+        "over": "0.3",
+        "ballKey": "1048768",
+        "repr": "b6",
+        "text": "Charis Bekker to Lizelle Lee: <b>SIX</b>. 6 runs.",
+        "batsman": "Lizelle Lee",
+        "bowler": "Charis Bekker"
+      },
+      {
+        "over": "0.2",
+        "ballKey": "1048704",
+        "repr": "b4",
+        "text": "Charis Bekker to Lizelle Lee: <b>FOUR</b>. 4 runs.",
+        "batsman": "Lizelle Lee",
+        "bowler": "Charis Bekker"
+      },
+      {
+        "over": "0.1",
+        "ballKey": "1048640",
+        "repr": "r0",
+        "text": "Charis Bekker to Lizelle Lee: No runs.",
+        "batsman": "Lizelle Lee",
+        "bowler": "Charis Bekker"
+      }
+    ]
   },
-  "top_batters": {
-    "unknown": {
-      "player_key": "c__player__dhruv_parashar__0f70b",
-      "name": "Dhruv Parashar",
-      "runs": 0,
-      "balls": null,
-      "fours": null,
-      "sixes": null,
-      "strike_rate": null
-    },
+  "toss": {
+    "winner": "a",
+    "winnerName": "Hobart Hurricanes Women",
+    "decision": "bowl"
+  },
+  "extras": {
     "b_1": {
-      "player_key": "c__player__bhim_sharki__d065e",
-      "name": "Bhim Sharki",
-      "runs": 48,
-      "balls": 68,
-      "fours": 7,
-      "sixes": null,
-      "strike_rate": 70.59
+      "total": 1,
+      "byes": 0,
+      "legByes": 0,
+      "wides": 1,
+      "noBalls": 0,
+      "penalties": 0
+    },
+    "a_1": {
+      "total": 0,
+      "byes": 0,
+      "legByes": 0,
+      "wides": 0,
+      "noBalls": 0,
+      "penalties": 0
     }
   },
-  "weather": "27.2°C|Overcast",
-  "notes": [],
-  "updated_at": {
-    "epoch_s": 1762329252,
-    "utc": "2025-11-05T07:54:12.387Z"
-  },
-  "__meta": {
-    "last_ball_key": "539968",
-    "last_score_epoch": null
-  }
+  "fallOfWickets": [
+    {
+      "innings": "b_1",
+      "wicketNumber": 1,
+      "runs": 4,
+      "overs": "0.5",
+      "playerOut": "Courtney Webb",
+      "dismissal": "c Heather Graham b Molly Strano"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 2,
+      "runs": 19,
+      "overs": "2.5",
+      "playerOut": "Emma De Broughe",
+      "dismissal": "st Lizelle Lee b Molly Strano"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 3,
+      "runs": 23,
+      "overs": "3.4",
+      "playerOut": "Sophie Molineux",
+      "dismissal": "c Lauren Smith b Hayley Silver-Holmes"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 4,
+      "runs": 79,
+      "overs": "10.5",
+      "playerOut": "Alice Capsey",
+      "dismissal": "c Nicola Carey b Linsey Smith"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 5,
+      "runs": 106,
+      "overs": "11.6",
+      "playerOut": "Georgia Wareham",
+      "dismissal": "c Nicola Carey b Hayley Silver-Holmes"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 6,
+      "runs": 128,
+      "overs": "15.2",
+      "playerOut": "Nicole Faltum",
+      "dismissal": "bowled b Nicola Carey"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 7,
+      "runs": 131,
+      "overs": "16.1",
+      "playerOut": "Tess Flintoff",
+      "dismissal": "bowled b Heather Graham"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 8,
+      "runs": 136,
+      "overs": "16.6",
+      "playerOut": "Deandra Dottin",
+      "dismissal": "bowled b Heather Graham"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 9,
+      "runs": 152,
+      "overs": "18.4",
+      "playerOut": "Charis Bekker",
+      "dismissal": "c Linsey Smith b Heather Graham"
+    },
+    {
+      "innings": "b_1",
+      "wicketNumber": 10,
+      "runs": 155,
+      "overs": "19.3",
+      "playerOut": "Milly Hall Illingworth",
+      "dismissal": "c Heather Graham b Linsey Smith"
+    }
+  ]
 }

@@ -84,62 +84,6 @@ export default class MatchController {
     }
   }
 
-  /**
-   * Get live match data from Redis (for contest status updater job)
-   * Accepts match UUID and fetches data using match key
-   */
-  async getMatchLiveData(req: Request, res: Response) {
-    const { id } = req.params; // This is the match UUID
-    
-    try {
-      // Get match details to find the key
-      const match = await this.matchService.fetchMatchById(id);
-      
-      if (!match || !match.key) {
-        return res.status(STATUS_CODE.NOT_FOUND).json({
-          success: false,
-          message: "Match not found",
-          data: null,
-          errors: ["Match not found in database"],
-          timestamp: new Date().toISOString(),
-        });
-      }
-
-      const matchKey = match.key;
-      
-      // Try to get latest live data from Redis using match key
-      const liveUpdates = await redis.getList(`${matchKey}:live_updates`, -1, -1);
-      
-      if (liveUpdates && liveUpdates.length > 0) {
-        const latestData = JSON.parse(liveUpdates[0]);
-        return res.status(STATUS_CODE.SUCCESS).json({
-          success: true,
-          message: "Live match data fetched successfully",
-          data: latestData,
-          errors: null,
-          timestamp: new Date().toISOString(),
-        });
-      } else {
-        return res.status(STATUS_CODE.NOT_FOUND).json({
-          success: false,
-          message: "No live data available for this match",
-          data: null,
-          errors: ["Match not live or no data received yet"],
-          timestamp: new Date().toISOString(),
-        });
-      }
-    } catch (err: any) {
-      console.error(`Error fetching live data for match ${id}:`, err);
-      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
-        success: false,
-        message: err.message,
-        data: null,
-        errors: [err.message],
-        timestamp: new Date().toISOString(),
-      });
-    }
-  }
-
   async subscribeMatch(req: Request, res: Response) {
     const { id } = req.params;
     const { token } = req.body;
@@ -199,7 +143,7 @@ export default class MatchController {
    * 1. Decompress gzipped JSON data
    * 2. Transform to internal format
    * 3. Store in Redis for quick access
-   * 4. Update contest statuses → Auto-generate answers when status = "calculating"
+   * 4. Update contest statuses based on live data
    * 5. Broadcast to WebSocket clients
    */
   async liveMatchData(req: Request, res: Response) {
@@ -236,7 +180,7 @@ export default class MatchController {
           // push data inside redis for quick access (use key for Redis)
           await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(raw));
 
-          // Update contest statuses and handle answer generation (use UUID for database)
+          // Update contest statuses based on live match data
           this.updateContestStatuses(matchId, raw).catch(err => {
             console.error("[CONTEST-STATUS] Error updating contest statuses:", err);
           });
@@ -254,52 +198,35 @@ export default class MatchController {
     }
   }
 
-  // Update match status in the main Match table based on webhook data
-  private async updateMatchStatusFromWebhook(matchId: string, data: any): Promise<void> {
+ 
+  /**
+   * Update contest statuses by calling contest_service API
+   */
+  private async updateContestStatuses(matchId: string, liveMatchData: any): Promise<void> {
     try {
-      const matchStatus = data.status; // e.g., "started", "completed", "not_started"
-      const playStatus = data.play_status; // e.g., "live", "result"
-
-      if (!matchStatus) {
-        return; // No status to update
-      }
-
-      const updateData: any = {};
-
-      // Map webhook status to database status
-      if (matchStatus === "started" || playStatus === "live") {
-        updateData.status = "started";
-        
-        // Set startedAt if not already set
-        if (data.start_at?.epoch_s) {
-          updateData.startedAt = data.start_at.epoch_s;
+      const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
+      
+      console.log(`[CONTEST-STATUS] Calling contest service to update statuses for match: ${matchId}`);
+      
+      const response = await axios.post(
+        `${contestServiceUrl}/api/v1/contests/update-status`,
+        {
+          matchId,
+          liveMatchData
+        },
+        {
+          timeout: 5000,
+          headers: { "Content-Type": "application/json" }
         }
-      } else if (matchStatus === "completed" || playStatus === "result") {
-        updateData.status = "completed";
-        
-        // Set endedAt when match completes
-        if (!data.end_at && data.updated_at?.epoch_s) {
-          updateData.endedAt = data.updated_at.epoch_s;
-        }
+      );
 
-        // Try to extract winner from the notes or toss winner field
-        // This may need adjustment based on your webhook structure
-        if (data.notes) {
-          // Example: "India won by 5 wickets"
-          const winnerMatch = data.notes.match(/^(\w+)\s+won/i);
-          if (winnerMatch) {
-            updateData.winner = winnerMatch[1];
-          }
-        }
-      }
-
-      // Only update if there's something to update
-      if (Object.keys(updateData).length > 0) {
-        await this.matchService.updateMatchStatus(matchId, updateData);
-        console.log(`✅ Updated match ${matchId} status to: ${updateData.status}`);
-      }
+      console.log(`[CONTEST-STATUS] Successfully updated contest statuses for match: ${matchId}`, response.data);
     } catch (error: any) {
-      console.error(`Failed to update match status for ${matchId}:`, error?.message || error);
+      console.error(`[CONTEST-STATUS] Failed to update contest statuses for match ${matchId}:`, {
+        message: error?.message,
+        response: error?.response?.data,
+        status: error?.response?.status
+      });
       // Don't throw - we don't want to break webhook processing
     }
   }
@@ -526,38 +453,6 @@ export default class MatchController {
         errors: [err.message],
         timestamp: new Date().toISOString(),
       });
-    }
-  }
-
-  /**
-   * Update contest statuses by calling contest_service API
-   */
-  private async updateContestStatuses(matchId: string, liveMatchData: any): Promise<void> {
-    try {
-      const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
-      
-      console.log(`[CONTEST-STATUS] Calling contest service to update statuses for match: ${matchId}`);
-      
-      const response = await axios.post(
-        `${contestServiceUrl}/api/v1/contests/update-status`,
-        {
-          matchId,
-          liveMatchData
-        },
-        {
-          timeout: 5000,
-          headers: { "Content-Type": "application/json" }
-        }
-      );
-
-      console.log(`[CONTEST-STATUS] Successfully updated contest statuses for match: ${matchId}`, response.data);
-    } catch (error: any) {
-      console.error(`[CONTEST-STATUS] Failed to update contest statuses for match ${matchId}:`, {
-        message: error?.message,
-        response: error?.response?.data,
-        status: error?.response?.status
-      });
-      // Don't throw - we don't want to break webhook processing
     }
   }
 

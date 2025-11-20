@@ -705,6 +705,29 @@ export default class ContestRepository {
   }
 
   /**
+   * Get contests by status
+   */
+  public async getContestsByStatus(status: string, matchId?: string): Promise<any[]> {
+    try {
+      const where: any = { status };
+      if (matchId) {
+        where.matchId = matchId;
+      }
+
+      const contests = await this._DB.Contest.findAll({
+        where,
+        attributes: ['id', 'matchId', 'title', 'type', 'status', 'createdAt', 'updatedAt'],
+        raw: true,
+      });
+
+      return contests;
+    } catch (err: any) {
+      logger.error(`getContestsByStatus DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching contests by status");
+    }
+  }
+
+  /**
    * Get all active contests (not completed or cancelled)
    */
   public async getActiveContests(): Promise<Contest[]> {
@@ -779,7 +802,7 @@ export default class ContestRepository {
   public async updateSubmissionScore(submissionId: string, points: number, isCorrect: boolean): Promise<void> {
     try {
       await this._DB.UserSubmission.update(
-        { score: points, isCorrect } as any,
+        { points, isCorrect } as any,
         { where: { id: submissionId } }
       );
     } catch (err: any) {
@@ -795,11 +818,21 @@ export default class ContestRepository {
     try {
       const { fn, col, literal } = require('sequelize');
       
+      // First check if there are any submissions
+      const submissionCount = await this._DB.UserSubmission.count({
+        where: { contestId }
+      });
+
+      if (submissionCount === 0) {
+        logger.info(`[CONTEST-REPO] No submissions found for contest ${contestId}`);
+        return [];
+      }
+
       const scores = await this._DB.UserSubmission.findAll({
         where: { contestId },
         attributes: [
           'userId',
-          [fn('SUM', col('points')), 'totalScore'],
+          [fn('COALESCE', fn('SUM', col('points')), 0), 'totalScore'],
         ],
         group: ['userId'],
         order: [[literal('totalScore'), 'DESC']],
@@ -813,6 +846,7 @@ export default class ContestRepository {
       }));
     } catch (err: any) {
       logger.error(`getUserContestScores DB error: ${err?.message ?? err}`);
+      logger.error(`getUserContestScores DB stack: ${err?.stack || 'No stack'}`);
       throw new ServerError("Database error fetching user scores");
     }
   }
@@ -832,4 +866,5 @@ export default class ContestRepository {
     }
   }
 }
+
 

@@ -90,6 +90,7 @@ interface Partnership {
 
 interface LiveData {
   innings: string;
+  inningsNumber: number;
   battingTeam: string;
   bowlingTeam: string;
   currentScore: { runs: number; wickets: number; overs: string; runRate: number; display: string };
@@ -371,9 +372,15 @@ export function transformCricketMatch(raw: RawMatchData): SimplifiedMatch {
     });
   }
 
+  // Find the innings number for the current innings
+  const currentInningsId = live.current_innings || live.innings || "";
+  const currentInningsObj = inningsData.find(inn => inn.id === currentInningsId);
+  const currentInningsNumber = currentInningsObj?.innings_number || 1;
+
   const liveData: LiveData | null = live.score
     ? {
-        innings: live.innings || "",
+        innings: currentInningsId,
+        inningsNumber: currentInningsNumber,
         battingTeam: data.teams?.[live.batting_team]?.name || "",
         bowlingTeam: data.teams?.[live.bowling_team]?.name || "",
         currentScore: { runs: live.score.runs || 0, wickets: live.score.wickets || 0, overs: formatOvers(live.score.overs), runRate: live.score.run_rate || 0, display: live.score.title || "" },

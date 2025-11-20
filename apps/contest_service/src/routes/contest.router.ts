@@ -103,6 +103,12 @@ router.post("/contests/update-status", async (req: Request, res: Response) => {
   return result;
 });
 
+// Force complete stuck contests (admin/debug endpoint)
+router.get("/contests/force-complete-stuck", async (req: Request, res: Response) => {
+  const result = await contestController.forceCompleteStuck(req, res);
+  return result;
+});
+
 router.post(
   "/contests/generate/questions",
   generateQuestionsValidator(),
