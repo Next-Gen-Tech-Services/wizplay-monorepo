@@ -8,28 +8,99 @@ import ServerConfigs from "./configs/server.config";
 import MatchRouter from "./routes/match.router";
 import matchEventHandler from "./utils/events/match.events";
 import matchCrons from "./utils/jobs/match";
+import countryFlagsCron from "./utils/jobs/country-flags";
+import { initializeSubscriptionService } from "./utils/jobs/init-subscription";
 import { connectProducer } from "./utils/kafka";
-import { Server as SocketIOServer } from "socket.io";
+import { Server as SocketIOServer, Socket } from "socket.io";
+import redis from "./configs/redis.config";
+import MatchLiveRepository from "./repositories/matchLive.repository";
+import { transformCricketMatch } from "./utils/transformLiveMatchData";
 
-const BrokerInit = async () => {
+/**
+ * Send last captured match data to a newly joined user
+ * Tries Redis first (fastest), then falls back to database
+ */
+const sendLastMatchData = async (socket: Socket, matchId: string): Promise<void> => {
   try {
-    // Wait for Kafka to be ready
-    logger.info("Waiting for Kafka to be ready...");
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    logger.info(`[Socket.IO] Fetching last match data for ${matchId} to send to ${socket.id}`);
+
+    // Try to get the last update from Redis list
+    const redisKey = `${matchId}:live_updates`;
+    const lastUpdates = await redis.getList(redisKey, -1, -1); // Get last item from list
+
+    logger.info(`[Socket.IO] Retrieved last updates from Redis for match ${matchId}: ${lastUpdates?.length || 0} items`);
+    if (lastUpdates && lastUpdates.length > 0) {
+      try {
+        const parsedData = JSON.parse(lastUpdates[0]);
+        // let result = transformCricketMatch(parsedData);
+        // Send on match_update event (same as live updates)
+        socket.emit("match_update",  parsedData);
+        logger.info(`[Socket.IO] Sent last match data from Redis to ${socket.id} for match ${matchId}`);
+        return;
+      } catch (parseError) {
+        logger.error(`[Socket.IO] Failed to parse Redis data: ${parseError}`);
+      }
+    }
+
+    // Fallback to database
+    const liveRepo = new MatchLiveRepository();
+    const dbState = await liveRepo.getCurrentLastdata(matchId);
+
+    if (dbState) {
+      let data = dbState.simplifiedData
+      // Transform DB data to match webhook format
+      socket.emit("match_update", data);
+      socket.emit("live_update", data);
+      logger.info(`[Socket.IO] Sent last match data from DB to ${socket.id} for match ${matchId}`);
+      return;
+    }
+
+    // No data available - send empty update
+    logger.warn(`[Socket.IO] No initial data available for match ${matchId}`);
+    socket.emit("match_update", {
+      match: {
+        id: matchId,
+      },
+      source: "none",
+      message: "No live data available yet",
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    logger.error(`[Socket.IO] Error fetching initial data for match ${matchId}: ${error.message}`);
+    socket.emit("error", {
+      message: "Failed to fetch initial match data",
+      matchId,
+    });
+  }
+};
+
+const BrokerInit = async (retryCount = 0, maxRetries = 10) => {
+  try {
+    // Wait for Kafka to be ready with exponential backoff
+    const waitTime = Math.min(5000 + retryCount * 2000, 30000); // Max 30 seconds
+    logger.info(`Waiting for Kafka to be ready... (attempt ${retryCount + 1}/${maxRetries}, wait: ${waitTime}ms)`);
+    await new Promise((resolve) => setTimeout(resolve, waitTime));
 
     // create producer to create topics
     await connectProducer();
-    logger.info("Successfully created topics");
+    logger.info("✅ Successfully created topics and connected producer");
 
     // start consuming events
     await matchEventHandler.handle();
-    logger.info("Successfully subscribed to user events");
-  } catch (error) {
-    logger.error("Failed to initialize Kafka broker:", error);
-    setTimeout(async () => {
-      logger.info("Retrying Kafka initialization...");
-      await BrokerInit();
-    }, 10000);
+    logger.info("✅ Successfully subscribed to user events");
+  } catch (error: any) {
+    logger.error(`Failed to initialize Kafka broker (attempt ${retryCount + 1}/${maxRetries}):`, error?.message || error);
+
+    if (retryCount < maxRetries) {
+      const nextRetryTime = Math.min(10000 + retryCount * 5000, 60000); // Max 60 seconds between retries
+      logger.info(`Retrying Kafka initialization in ${nextRetryTime}ms...`);
+      setTimeout(async () => {
+        await BrokerInit(retryCount + 1, maxRetries);
+      }, nextRetryTime);
+    } else {
+      logger.error("❌ Max Kafka connection retries reached. Service will continue without Kafka.");
+      // Don't crash the service, just log the error
+    }
   }
 };
 
@@ -37,49 +108,119 @@ const CronsInit = async () => {
   try {
     logger.info("Waiting for crons to be initialized...");
     await matchCrons.scheduleJob();
+    await countryFlagsCron.scheduleJob();
     logger.info("Cron jobs scheduled successfully");
   } catch (error) {
     logger.error("Failed to initialize cron jobs:", error);
   }
 };
 
+const SubscriptionInit = async () => {
+  try {
+    logger.info("Initializing subscription service...");
+
+    // Wait a bit for Redis to have the token (generated by match cron)
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    await initializeSubscriptionService();
+    logger.info("✅ Subscription service initialized successfully");
+  } catch (error: any) {
+    logger.error("Failed to initialize subscription service:", error.message);
+    logger.warn("Subscription service will not be available");
+    // Don't crash the app if subscription fails
+  }
+};
+
 const AppInit = async () => {
   const expressApp: Express = express();
   const server = http.createServer(expressApp);
-  const io = new SocketIOServer(server, { cors: { origin: "*" } });
+  const io = new SocketIOServer(server, {
+    path: "/socket.io",
+    cors: { 
+      origin: '*',
+      methods: ["GET", "POST"],
+      credentials: false
+    },
+    transports: ["polling", "websocket"], // Polling first, then upgrade
+    allowEIO3: true,
+    pingTimeout: 60000,
+    pingInterval: 25000,
+  });
 
   // register io in tsyringe container so controllers/services can inject it
   container.registerInstance("SocketIO", io);
 
   // === add connection listener ===
   io.on("connection", (socket) => {
-    console.log("[io] client connected:", socket.id, "from", socket.handshake.address);
+    logger.info(`[Socket.IO] Client connected: ${socket.id} from ${socket.handshake.address}`);
+    logger.info(`[Socket.IO] Transport: ${socket.conn.transport.name}`);
 
     // allow client to join match rooms
-    socket.on("join", (matchId: string) => {
-      console.log(`[io] socket ${socket.id} joining room ${matchId}`);
-      try { socket.join(matchId); } catch (e) { console.warn("join error", e); }
+    socket.on("join", async (matchId: string) => {
+      logger.info(`[Socket.IO] Socket ${socket.id} joining room: ${matchId}`);
+      try { 
+        socket.join(matchId); 
+        socket.emit("joined", { matchId, success: true });
+        logger.info(`[Socket.IO] Socket ${socket.id} successfully joined room: ${matchId}`);
+
+        // Send last captured data to the newly joined user
+        await sendLastMatchData(socket, matchId);
+      } catch (e) { 
+        logger.error(`[Socket.IO] Error joining room: ${e}`);
+        socket.emit("error", { message: "Failed to join room" });
+      }
     });
 
     socket.on("leave", (matchId: string) => {
+      logger.info(`[Socket.IO] Socket ${socket.id} leaving room: ${matchId}`);
       socket.leave(matchId);
     });
 
     socket.on("disconnect", (reason) => {
-      console.log("[io] client disconnected", socket.id, reason);
+      logger.info(`[Socket.IO] Client disconnected: ${socket.id}, reason: ${reason}`);
+    });
+
+    socket.on("error", (error) => {
+      logger.error(`[Socket.IO] Socket error: ${error}`);
     });
   });
 
-  expressApp.use(cors());
+  // CORS configuration - allow multiple origins
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://wizplay-admin-ngts.vercel.app",
+    process.env.FRONTEND_URL
+  ].filter(Boolean);
+
+  const corsOptions = {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
+  };
+  expressApp.use(cors(corsOptions));
   expressApp.use(express.json());
   expressApp.use(attachRequestId);
 
+  // Serve static flag images
+  expressApp.use("/api/v1/matches/flags/", express.static("public/flags"));
+
   await BrokerInit();
   await CronsInit();
+  await SubscriptionInit();
 
   expressApp.use("/api/v1", MatchRouter);
   expressApp.get(
-    `/${ServerConfigs.API_VERSION}/health-check`,
+    `${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {
       logger.debug("Sending response: Server running");
       return res.status(200).json({
@@ -89,7 +230,7 @@ const AppInit = async () => {
   );
 
   expressApp.use(ErrorMiddleware.handleError);
-  return expressApp;
+  return { app: expressApp, server, io };
 };
 
 export default AppInit;

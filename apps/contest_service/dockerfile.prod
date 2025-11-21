@@ -1,10 +1,11 @@
 # Multi-stage build for production
 FROM node:20-alpine AS base
 
-# Install pnpm
+# Install pnpm globally via npm to avoid corepack network issues
+RUN npm install -g pnpm@9.0.0
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
 
 # Stage 1: Install dependencies
 FROM base AS deps
@@ -33,7 +34,11 @@ COPY --from=deps /app/packages ./packages
 COPY apps/contest_service ./apps/contest_service
 COPY turbo.json ./
 
-# Build the auth service
+# Build workspace packages first
+WORKDIR /app
+RUN pnpm --filter @repo/common build
+
+# Build the contest service
 WORKDIR /app/apps/contest_service
 RUN pnpm run build
 
@@ -46,6 +51,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/contest_service/package.json ./apps/contest_service/
 COPY packages ./packages
 COPY --from=builder /app/apps/contest_service/dist ./apps/contest_service/dist
+COPY --from=builder /app/packages/common/dist ./packages/common/dist
 
 RUN pnpm deploy --filter=contest_service --prod /deploy/output
 

@@ -16,6 +16,44 @@ export default class ContestController {
       .json({ success: true, data: created });
   }
 
+  // Internal endpoint for service-to-service communication (no auth)
+  public async getActiveContestsByMatch(req: Request, res: Response) {
+    try {
+      const matchId = req.params.matchId;
+      
+      if (!matchId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "matchId is required",
+        });
+      }
+
+      // Get only scheduled contests for this match
+      const result = await this.contestService.listContests(
+        matchId,
+        1000, // high limit to get all
+        0,
+        undefined // no userId needed for internal calls
+      );
+
+      // Filter to only scheduled status
+      const scheduledContests = result.items.filter(
+        (contest: any) => contest.status === "upcoming"
+      );
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: scheduledContests,
+      });
+    } catch (err: any) {
+      logger.error(`Error fetching active contests: ${err.message ?? err}`);
+      return res.status(500).json({
+        success: false,
+        message: err.message ?? "Internal server error",
+      });
+    }
+  }
+
   public async listByMatch(req: Request, res: Response) {
     try {
       // allow matchId via path param or query
@@ -36,11 +74,17 @@ export default class ContestController {
           ? Math.floor(parsedOffset)
           : 0;
 
+      // Status filter: by default show only upcoming and live contests
+      // If type=all, show all contests
+      const type = String(req.query.type ?? "").trim().toLowerCase();
+      const statusFilter = type === "all" ? undefined : ["upcoming", "live"];
+
       const result = await this.contestService.listContests(
         matchId,
         limit,
         offset,
-        req.userId
+        req.userId,
+        statusFilter
       );
 
       return res
@@ -79,6 +123,8 @@ export default class ContestController {
 
   public async joinContest(req: Request, res: Response) {
     const { userId, contestId, matchId } = req.body;
+    // forward authorization header to downstream services (wallet)
+    const authHeader = req.headers.authorization as string | undefined;
 
     if (!userId || !contestId) {
       return res
@@ -91,6 +137,7 @@ export default class ContestController {
         userId,
         contestId,
         matchId,
+        authHeader,
       });
 
       return res
@@ -163,6 +210,32 @@ export default class ContestController {
     }
   }
 
+  public async getUserContestHistory(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: "userId is required" });
+    }
+
+    try {
+      const result = await this.contestService!.getUserContestHistory(userId);
+
+      return res
+        .status(STATUS_CODE.SUCCESS)
+        .json({ success: true, data: result });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.getUserContestHistory error: ${err?.message ?? err}`
+      );
+
+      return res
+        .status(STATUS_CODE.INTERNAL_SERVER)
+        .json({ success: false, message: err.message || "Failed to fetch user contest history" });
+    }
+  }
+
   /** generative ai */
 
   public async generateQuestions(req: Request, res: Response) {
@@ -216,4 +289,221 @@ export default class ContestController {
       });
     }
   }
+
+  public async getContestStats(req: Request, res: Response) {
+    try {
+      const stats = await this.contestService.getContestStats();
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: stats,
+        message: "Contest statistics fetched successfully",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.getContestStats error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to fetch contest statistics",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async generateAnswers(req: Request, res: Response) {
+    const { matchData, liveData,question } = req.body;
+    
+    try {
+      const result = await this.contestService.generateAnswers(
+        matchData,
+        liveData,
+        question
+      );  
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result?.data,
+        message: result?.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    catch (err: any) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: err?.message || "Error generating answers",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  /**
+   * Update contest statuses based on live match data
+   * Called from match_service livematch webhook
+   */
+  public async updateContestStatuses(req: Request, res: Response) {
+    try {
+      const { matchId, liveMatchData } = req.body;
+
+      if (!matchId || !liveMatchData) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "matchId and liveMatchData are required",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      logger.info(`[CONTEST-STATUS-API] Received request to update statuses for match: ${matchId}`);
+      logger.info(`[CONTEST-STATUS-API] Live data: ${JSON.stringify(liveMatchData)}`);
+
+      // 1. Get all contests for this match
+      const contests = await this.contestService.getContestsByMatchId(matchId);
+      
+      if (!contests || contests.length === 0) {
+        logger.info(`[CONTEST-STATUS-API] No contests found for match: ${matchId}`);
+        return res.status(STATUS_CODE.SUCCESS).json({
+          success: true,
+          data: {
+            message: "No contests found for this match",
+            matchId,
+            updatedCount: 0,
+          },
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      logger.info(`[CONTEST-STATUS-API] Found ${contests.length} contests to process`);
+
+      const updatedContests = [];
+      const contestsMovedToCalculating = [];
+
+      // 2 & 3. Process each contest and determine new status
+      for (const contest of contests) {
+        try {
+          const oldStatus = contest.status;
+          
+          // Skip if already completed or cancelled
+          if (oldStatus === 'completed' || oldStatus === 'cancelled') {
+            continue;
+          }
+
+          // Determine new status based on live data and contest type
+          const newStatus = await this.contestService.determineContestStatus(
+            contest,
+            liveMatchData
+          );
+
+          // Update status if changed
+          if (newStatus && newStatus !== oldStatus) {
+            await this.contestService.updateContestStatus(contest.id, newStatus);
+            
+            updatedContests.push({
+              contestId: contest.id,
+              title: contest.title,
+              type: contest.type,
+              oldStatus,
+              newStatus,
+            });
+
+            logger.info(`[CONTEST-STATUS-API] Updated contest ${contest.id} (${contest.type}): ${oldStatus} → ${newStatus}`);
+
+            // Track contests that moved to calculating
+            if (newStatus === 'calculating') {
+              contestsMovedToCalculating.push(contest);
+            }
+          }
+        } catch (err: any) {
+          logger.error(`[CONTEST-STATUS-API] Error updating contest ${contest.id}: ${err?.message || err}`);
+        }
+      }
+
+      // 4. Fetch all contests currently in "calculating" status for this match
+      // This includes both newly moved contests and any previously stuck contests
+      const allCalculatingContests = await this.contestService.getContestsByMatchId(matchId);
+      const calculatingContests = allCalculatingContests.filter(c => c.status === 'calculating');
+      
+      logger.info(`[CONTEST-STATUS-API] Found ${calculatingContests.length} total contests in calculating status (${contestsMovedToCalculating.length} just moved, ${calculatingContests.length - contestsMovedToCalculating.length} already calculating)`);
+
+      // 5. Generate answers and calculate scores for ALL contests in "calculating" status
+      
+      for (const contest of calculatingContests) {
+        try {
+          logger.info(`[CONTEST-STATUS-API] Processing calculation for contest ${contest.id} (${contest.type})`);
+          
+          // Generate answers and calculate scores
+          await this.contestService.processContestCalculation(
+            contest.id,
+            matchId,
+            liveMatchData
+          );
+          
+          logger.info(`[CONTEST-STATUS-API] ✅ Completed calculation for contest ${contest.id}`);
+        } catch (err: any) {
+          logger.error(`[CONTEST-STATUS-API] ❌ Error calculating contest ${contest.id}: ${err?.message || err}`);
+          logger.error(`[CONTEST-STATUS-API] Error stack: ${err?.stack || 'No stack trace'}`);
+        }
+      }
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: {
+          matchId,
+          updatedCount: updatedContests.length,
+          calculatedCount: calculatingContests.length,
+          updatedContests,
+        },
+        message: `Updated ${updatedContests.length} contest(s), calculated ${calculatingContests.length} contest(s)`,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.updateContestStatuses error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to update contest statuses",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  /**
+   * Force complete stuck contests in calculating status
+   * GET /contests/force-complete-stuck?matchId=xxx (optional)
+   */
+  public async forceCompleteStuck(req: Request, res: Response) {
+    try {
+      const matchId = req.query.matchId as string | undefined;
+      
+      logger.info(`[CONTEST-CONTROLLER] Force completing stuck contests${matchId ? ` for match ${matchId}` : ''}`);
+      
+      const result = await this.contestService.forceCompleteStuckContests(matchId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: `Fixed ${result.fixed} stuck contest(s)`,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.forceCompleteStuck error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to force complete stuck contests",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }
+

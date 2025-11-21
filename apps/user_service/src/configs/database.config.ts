@@ -1,5 +1,6 @@
 import { logger } from "@repo/common";
 import { Sequelize } from "sequelize";
+import referralModel, { Referral } from "../models/referral.model";
 import userModel, { User } from "../models/user.model";
 import wishlistModel, { Wishlist } from "../models/wishlist.model";
 import ServerConfigs from "./server.config";
@@ -9,6 +10,7 @@ export interface IDatabase {
   sequelize: Sequelize;
   User: typeof User;
   Wishlist: typeof Wishlist;
+  Referral: typeof Referral;
 }
 
 const sequelize = new Sequelize({
@@ -19,7 +21,7 @@ const sequelize = new Sequelize({
   host: ServerConfigs.DATABASE_HOST,
   port: Number(ServerConfigs.DATABASE_PORT) || 5432,
   dialectOptions: {},
-  logging: console.log,
+  logging: false,
   define: {
     charset: "utf8mb4",
     underscored: true,
@@ -28,6 +30,7 @@ const sequelize = new Sequelize({
 
 const UserInstance = userModel(sequelize);
 const WishlistInstance = wishlistModel(sequelize);
+const ReferralInstance = referralModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -47,4 +50,5 @@ export const DB: IDatabase = {
   sequelize,
   User: UserInstance,
   Wishlist: WishlistInstance,
+  Referral: ReferralInstance,
 };

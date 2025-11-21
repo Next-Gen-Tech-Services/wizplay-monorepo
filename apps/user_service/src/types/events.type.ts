@@ -4,4 +4,6 @@ export enum KAFKA_EVENTS {
   USER_SEND_OTP = "user_send_otp",
   USER_ONBOARDED = "user_onboarded",
   USER_ADD_TO_WISHLIST = "user_add_to_wishlist",
+  USER_REMOVE_FROM_WISHLIST = "user_remove_from_wishlist",
+  REFERRAL_REWARD = "referral_reward",
 }

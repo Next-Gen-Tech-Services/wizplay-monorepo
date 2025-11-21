@@ -2,11 +2,13 @@
 import { BadRequestError, logger, ServerError } from "@repo/common";
 import { Transaction } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
+import ServerConfigs from "../configs/server.config";
 import {
   CreateContestPayload,
   UpdateContestPayload,
 } from "../dtos/contest.dto";
 import { Contest } from "../models/contest.model";
+import axios from "axios";
 
 export default class ContestRepository {
   private _DB: IDatabase = DB;
@@ -37,6 +39,7 @@ export default class ContestRepository {
       const d = data as any; // <-- cast to any once for dynamic fields
 
       // --- optional: compute hasJoined if userId provided ---
+      // hasJoined should be true if user has joined (has entry in UserContest)
       let hasJoined = false;
       if (userId) {
         const joined = await this._DB.UserContest.findOne({
@@ -122,10 +125,35 @@ export default class ContestRepository {
       if (d.userJoins) delete d.userJoins;
       if (d.userContests) delete d.userContests;
 
+      logger.info(`[CONTEST-REPO] Fetching match data for contest ${id}`);
+      // Fetch match data if matchId exists
+      let matchData = null;
+      if (d.matchId) {
+        try {
+          const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL || "http://localhost:4003";
+          // Use the matches list endpoint filtered by the specific match ID
+          const matchResponse = await axios.get(
+            `${matchServiceUrl}/api/v1/matches/${d.matchId}`,
+            {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+          
+          // Extract the first match from the response
+          matchData = matchResponse.data?.data || [];
+        } catch (matchErr: any) {
+          logger.error(`Failed to fetch match data for contest ${id}: ${matchErr?.message ?? matchErr}`);
+          // Don't throw error, just set matchData to null
+        }
+      }
+
       return {
         ...d,
         hasJoined,
         rankRanges, // [{from, to, amount, totalPayout}, ...]
+        matchData, // populated match data
       };
     } catch (err: any) {
       logger.error(`getContestById DB error: ${err?.message ?? err}`);
@@ -137,10 +165,16 @@ export default class ContestRepository {
     matchId?: string,
     limit = 20,
     offset = 0,
-    userId?: string
+    userId?: string,
+    statusFilter?: string[]
   ) {
     try {
       const where: any = matchId ? { matchId } : {};
+      
+      // Apply status filter if provided (e.g., only upcoming and live)
+      if (statusFilter && statusFilter.length > 0) {
+        where.status = statusFilter;
+      }
       const include: any[] = [];
 
       const contestAssociations = this._DB.Contest.associations || {};
@@ -194,6 +228,8 @@ export default class ContestRepository {
       }
 
       let joinedContestIds = new Set<string>();
+      let submittedContestIds = new Set<string>();
+      
       if (userId) {
         const joinedRows = await this._DB.UserContest.findAll({
           where: { userId },
@@ -202,6 +238,16 @@ export default class ContestRepository {
         });
         joinedRows.forEach((r: any) => {
           if (r && r.contestId) joinedContestIds.add(String(r.contestId));
+        });
+        
+        // Get contests where user has submitted answers
+        const submittedRows = await this._DB.UserSubmission.findAll({
+          where: { userId },
+          attributes: ["contestId"],
+          raw: true,
+        });
+        submittedRows.forEach((r: any) => {
+          if (r && r.contestId) submittedContestIds.add(String(r.contestId));
         });
       }
 
@@ -261,9 +307,12 @@ export default class ContestRepository {
 
       const items = result.rows.map((contest: any) => {
         const data = contest.toJSON();
+        
+        // hasJoined is true if user has joined the contest (has entry in UserContest)
         const hasJoined = userId
           ? joinedContestIds.has(String(data.id))
           : false;
+        
         if (userContestAlias && data[userContestAlias])
           delete data[userContestAlias];
         if (data.userJoins) delete data.userJoins;
@@ -278,7 +327,34 @@ export default class ContestRepository {
         return { ...data, hasJoined, rankRanges };
       });
 
-      return { items, total };
+      // Fetch match data for all contests
+      logger.info(`[CONTEST-REPO] Fetching match data for ${items.length} contests`);
+      const itemsWithMatchData = await Promise.all(
+        items.map(async (item) => {
+          let matchData = null;
+          if (item.matchId) {
+            try {
+              const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL || "http://localhost:4003";
+              const matchResponse = await axios.get(
+                `${matchServiceUrl}/api/v1/matches/${item.matchId}`,
+                {
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  timeout: 3000, // 3 second timeout
+                }
+              );
+              matchData = matchResponse.data?.data || null;
+            } catch (matchErr: any) {
+              logger.error(`Failed to fetch match data for contest ${item.id}: ${matchErr?.message ?? matchErr}`);
+              // Don't throw error, just set matchData to null
+            }
+          }
+          return { ...item, matchData };
+        })
+      );
+
+      return { items: itemsWithMatchData, total };
     } catch (err: any) {
       logger.error(`listContestsByMatch DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
@@ -302,8 +378,42 @@ export default class ContestRepository {
 
   public async deleteContest(id: string) {
     try {
-      const cnt = await this._DB.Contest.destroy({ where: { id } });
-      return cnt > 0;
+      // Use transaction to ensure all-or-nothing deletion
+      const result = await this._DB.sequelize.transaction(async (t) => {
+        // 1. Delete all user submissions for this contest
+        await this._DB.UserSubmission.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 2. Delete all user contest entries (joined users)
+        await this._DB.UserContest.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 3. Delete all questions for this contest
+        await this._DB.Question.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 4. Delete contest prizes
+        await this._DB.ContestPrize.destroy({
+          where: { contestId: id },
+          transaction: t,
+        });
+
+        // 5. Finally, delete the contest itself
+        const cnt = await this._DB.Contest.destroy({
+          where: { id },
+          transaction: t,
+        });
+
+        return cnt > 0;
+      });
+
+      return result;
     } catch (err: any) {
       logger.error(`deleteContest DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error");
@@ -556,4 +666,205 @@ export default class ContestRepository {
     });
     return slabs;
   }
+
+  /**
+   * Get all contests for a specific match
+   */
+  public async getContestsByMatchId(matchId: string): Promise<Contest[]> {
+    try {
+      const contests = await this._DB.Contest.findAll({
+        where: { matchId },
+        raw: true,
+      });
+      return contests as Contest[];
+    } catch (err: any) {
+      logger.error(`getContestsByMatchId DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching contests by matchId");
+    }
+  }
+
+  /**
+   * Update contest status
+   */
+  public async updateContestStatus(contestId: string, status: string): Promise<void> {
+    try {
+      const [affectedRows] = await this._DB.Contest.update(
+        { status: status as any },
+        { where: { id: contestId } }
+      );
+      
+      if (affectedRows === 0) {
+        logger.warn(`[CONTEST-REPO] No contest found with id ${contestId} to update status`);
+      } else {
+        logger.info(`[CONTEST-REPO] Successfully updated contest ${contestId} status to ${status}`);
+      }
+    } catch (err: any) {
+      logger.error(`updateContestStatus DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error updating contest status");
+    }
+  }
+
+  /**
+   * Get contests by status
+   */
+  public async getContestsByStatus(status: string, matchId?: string): Promise<any[]> {
+    try {
+      const where: any = { status };
+      if (matchId) {
+        where.matchId = matchId;
+      }
+
+      const contests = await this._DB.Contest.findAll({
+        where,
+        attributes: ['id', 'matchId', 'title', 'type', 'status', 'createdAt', 'updatedAt'],
+        raw: true,
+      });
+
+      return contests;
+    } catch (err: any) {
+      logger.error(`getContestsByStatus DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching contests by status");
+    }
+  }
+
+  /**
+   * Get all active contests (not completed or cancelled)
+   */
+  public async getActiveContests(): Promise<Contest[]> {
+    try {
+      const { Op } = require('sequelize');
+      const contests = await this._DB.Contest.findAll({
+        where: {
+          status: {
+            [Op.notIn]: ['completed', 'cancelled']
+          }
+        },
+        attributes: ['id', 'matchId', 'title', 'type', 'status'],
+        raw: true,
+      });
+      return contests as Contest[];
+    } catch (err: any) {
+      logger.error(`getActiveContests DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching active contests");
+    }
+  }
+
+  /**
+   * Get all questions for a contest
+   */
+  public async getQuestionsByContestId(contestId: string): Promise<any[]> {
+    try {
+      const questions = await this._DB.Question.findAll({
+        where: { contestId },
+        raw: true,
+      });
+      return questions;
+    } catch (err: any) {
+      logger.error(`getQuestionsByContestId DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching questions");
+    }
+  }
+
+  /**
+   * Update question answer
+   */
+  public async updateQuestionAnswer(questionId: string, answer: any): Promise<void> {
+    try {
+      await this._DB.Question.update(
+        { ansKey: answer },
+        { where: { id: questionId } }
+      );
+    } catch (err: any) {
+      logger.error(`updateQuestionAnswer DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error updating question answer");
+    }
+  }
+
+  /**
+   * Get all user submissions for a contest
+   */
+  public async getUserSubmissionsByContestId(contestId: string): Promise<any[]> {
+    try {
+      const submissions = await this._DB.UserSubmission.findAll({
+        where: { contestId },
+        raw: true,
+      });
+      return submissions;
+    } catch (err: any) {
+      logger.error(`getUserSubmissionsByContestId DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching submissions");
+    }
+  }
+
+  /**
+   * Update submission score
+   */
+  public async updateSubmissionScore(submissionId: string, points: number, isCorrect: boolean): Promise<void> {
+    try {
+      await this._DB.UserSubmission.update(
+        { points, isCorrect } as any,
+        { where: { id: submissionId } }
+      );
+    } catch (err: any) {
+      logger.error(`updateSubmissionScore DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error updating submission score");
+    }
+  }
+
+  /**
+   * Get user contest scores aggregated
+   */
+  public async getUserContestScores(contestId: string): Promise<any[]> {
+    try {
+      const { fn, col, literal } = require('sequelize');
+      
+      // First check if there are any submissions
+      const submissionCount = await this._DB.UserSubmission.count({
+        where: { contestId }
+      });
+
+      if (submissionCount === 0) {
+        logger.info(`[CONTEST-REPO] No submissions found for contest ${contestId}`);
+        return [];
+      }
+
+      const scores = await this._DB.UserSubmission.findAll({
+        where: { contestId },
+        attributes: [
+          'userId',
+          [fn('COALESCE', fn('SUM', col('points')), 0), 'totalScore'],
+        ],
+        group: ['userId'],
+        order: [[literal('totalScore'), 'DESC']],
+        raw: true,
+      });
+
+      // Add ranks
+      return scores.map((score: any, index: number) => ({
+        ...score,
+        rank: index + 1,
+      }));
+    } catch (err: any) {
+      logger.error(`getUserContestScores DB error: ${err?.message ?? err}`);
+      logger.error(`getUserContestScores DB stack: ${err?.stack || 'No stack'}`);
+      throw new ServerError("Database error fetching user scores");
+    }
+  }
+
+  /**
+   * Update user contest final score and rank
+   */
+  public async updateUserContestScore(contestId: string, userId: string, totalScore: number, rank: number): Promise<void> {
+    try {
+      await this._DB.UserContest.update(
+        { score: totalScore, rank } as any,
+        { where: { contestId, userId } }
+      );
+    } catch (err: any) {
+      logger.error(`updateUserContestScore DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error updating user contest score");
+    }
+  }
 }
+
+

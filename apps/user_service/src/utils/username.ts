@@ -101,21 +101,13 @@ export function generateUniqueUsername(): string {
     return (Date.now().toString(36) + randNum().toString()).slice(-6);
   }
 
-  const patterns = [
-    () => `${pickRandom(adjectives)}_${pickRandom(animals)}_${uniqueSuffix()}`,
-    () => `${pickRandom(verbs)}_${pickRandom(tech)}_${uniqueSuffix()}`,
-    () => `${pickRandom(colors)}_${pickRandom(animals)}_${uniqueSuffix()}`,
-    () =>
-      `${pickRandom(adjectives)}_${pickRandom(colors)}_${pickRandom(animals)}`,
-    () => `${pickRandom(animals)}_${pickRandom(tech)}_${uniqueSuffix()}`,
-    () =>
-      `${pickRandom(verbs)}_${pickRandom(adjectives)}_${pickRandom(animals)}`,
-    () => `${pickRandom(adjectives)}${pickRandom(animals)}_${uniqueSuffix()}`,
-    () => `${pickRandom(colors)}${pickRandom(fantasy)}_${uniqueSuffix()}`,
-    () => `${pickRandom(fantasy)}_${pickRandom(verbs)}_${uniqueSuffix()}`,
-    () => `${pickRandom(fantasy)}_${pickRandom(animals)}_${randNum()}`,
-    () => `${pickRandom(adjectives)}_${pickRandom(fantasy)}_${uniqueSuffix()}`,
-  ];
-
+ const patterns = [
+  () => `${pickRandom(adjectives)}_${uniqueSuffix()}`,
+  () => `${pickRandom(verbs)}_${uniqueSuffix()}`,
+  () => `${pickRandom(colors)}_${uniqueSuffix()}`,
+  () => `${pickRandom(animals)}_${uniqueSuffix()}`,
+  () => `${pickRandom(tech)}_${uniqueSuffix()}`,
+  () => `${pickRandom(fantasy)}_${uniqueSuffix()}`,
+];
   return pickRandom(patterns)();
 }

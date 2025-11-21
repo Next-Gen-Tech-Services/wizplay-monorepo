@@ -1,7 +1,39 @@
 // src/models/contest.model.ts
 import { DataTypes, Model, Optional, Sequelize, UUIDV4 } from "sequelize";
 
-export type ContestStatus = "scheduled" | "running" | "completed" | "cancelled";
+/**
+ * Contest Status Types
+ * 
+ * upcoming         - Contest created but not yet open for joining
+ * live             - Contest open for joining and submissions
+ * joining_closed   - Joining period ended, contest still running
+ * calculating      - Contest ended, results being calculated
+ * completed        - Results declared and prizes distributed
+ * cancelled        - Contest cancelled (match abandoned)
+ * 
+ * Flow by Contest Type:
+ * 
+ * PRE-MATCH:
+ * 1. upcoming (created) → live (3 hours before match)
+ * 2. live (users join) → joining_closed (after toss)
+ * 3. joining_closed → calculating (after both innings)
+ * 4. calculating → completed (results declared)
+ * 
+ * POWERPLAY/MIDDLE/DEATH (Phase-based):
+ * 1. upcoming (created) → live (after toss, before phase starts)
+ * 2. live (users join) → joining_closed (first ball of phase bowled)
+ * 3. joining_closed → calculating (phase ends: 6 overs for T20 powerplay, etc)
+ * 4. calculating → completed (results declared)
+ * 
+ * Any status can move to cancelled if match is abandoned.
+ */
+export type ContestStatus = 
+  | "upcoming" 
+  | "joining_closed" 
+  | "live" 
+  | "calculating" 
+  | "completed" 
+  | "cancelled";
 
 export interface IContestAttrs {
   id: string;
@@ -236,9 +268,9 @@ export default function (sequelize: Sequelize) {
       },
 
       status: {
-        type: DataTypes.ENUM("scheduled", "running", "completed", "cancelled"),
+        type: DataTypes.ENUM("upcoming", "joining_closed", "live", "calculating", "completed", "cancelled"),
         allowNull: false,
-        defaultValue: "scheduled",
+        defaultValue: "upcoming",
       },
     },
     {

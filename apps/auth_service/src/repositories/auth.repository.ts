@@ -167,6 +167,25 @@ export default class AuthRepository {
     authId: string
   ): Promise<any> {
     try {
+      // First check if user exists and current status
+      const user = await this._DB.Auth.findOne({
+        where: {
+          userId: userId,
+          id: authId,
+        },
+      });
+
+      if (!user) {
+        logger.warn(`User not found for userId: ${userId}, authId: ${authId}`);
+        return false;
+      }
+
+      if (user.onboarded) {
+        logger.info(`User already onboarded for userId: ${userId}, authId: ${authId}`);
+        return true;
+      }
+
+      // Update onboarding status
       const result = await this._DB.Auth.update(
         {
           onboarded: true,
@@ -179,13 +198,32 @@ export default class AuthRepository {
           returning: true,
         }
       );
-      if (result[0] === 1) {
+      
+      logger.debug(`Update result: affected rows: ${result[0]}`);
+      
+      // result[0] is the number of affected rows
+      if (result[0] >= 1) {
         return true;
       } else {
-        throw new ServerError("Error updating onboarding status");
+        logger.warn(`No rows updated for userId: ${userId}, authId: ${authId}`);
+        return false;
       }
-    } catch (error) {
-      logger.error(`Database Error: ${error}`);
+    } catch (error: any) {
+      logger.error(`Database Error in updateOnboardingStatus: ${error.message || error}`);
+      throw error;
+    }
+  }
+
+  public async findAuthByUserId(userId: string): Promise<Auth | null> {
+    try {
+      const authData = await this._DB.Auth.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+      return authData;
+    } catch (error: any) {
+      logger.error(`Database Error in findAuthByUserId: ${error.message || error}`);
       throw new ServerError("Database Error");
     }
   }

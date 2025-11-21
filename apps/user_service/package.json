@@ -8,7 +8,8 @@
     "build": "pnpm run clean && tsc -p tsconfig.json",
     "dev": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build -- ./src/server.ts",
     "dev:docker": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build --poll ./src/server.ts",
-    "start": "NODE_ENV=production node dist/server.js"
+    "start": "NODE_ENV=production node dist/server.js",
+    "seed:all": "npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "@repo/common": "workspace:*",
     "@types/jsonwebtoken": "^9.0.10",
     "amqplib": "^0.10.8",
+    "axios": "^1.11.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

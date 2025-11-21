@@ -2,6 +2,7 @@
 import { Wallet } from "@/models/wallet.model";
 import { BadRequestError, logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
+import { TransactionType } from "../dtos/wallet.dto";
 
 export default class WalletRepository {
   private _DB: IDatabase = DB;
@@ -28,13 +29,26 @@ export default class WalletRepository {
         totalDeposited: 0,
         totalWithdrawn: 0,
         totalWinnings: 0,
+        totalReferralEarnings: 0,
         currency: "wizcoin",
         status: "active",
       });
+
       // retry needs to be implemented
       if (!newWallet) {
         throw new BadRequestError("error while initilizing wallet");
       }
+
+      logger.info(`Wallet created for userId: ${newWallet.id} `);
+      // Create initial transaction
+      await this._DB.Transaction.create({
+        walletId: newWallet.id,
+        type: "joining_bonus",
+        userId: userId,
+        amount: 100,
+        balanceBefore: 0,
+        balanceAfter: 100,
+      });
 
       return newWallet;
     } catch (err: any) {
@@ -61,7 +75,7 @@ export default class WalletRepository {
     }
   }
 
-  public async withdrawCoins(userId: string, amount: number): Promise<any> {
+  public async withdrawCoins(userId: string, amount: number,type:TransactionType): Promise<any> {
     try {
       const walletInfo = await this._DB.Wallet.findOne({
         where: {
@@ -69,7 +83,11 @@ export default class WalletRepository {
         },
       });
 
-      if (!walletInfo || walletInfo?.balance < amount) {
+      if (!walletInfo) {
+        throw new BadRequestError("Wallet not found for this user");
+      }
+
+      if (walletInfo.balance < amount) {
         throw new BadRequestError("Insufficient wallet balance");
       }
 
@@ -88,7 +106,7 @@ export default class WalletRepository {
       if (updatedWalletInfo[0]) {
         createTransaction = await this._DB.Transaction.create({
           walletId: walletInfo.id,
-          type: "withdrawal",
+          type: type,
           userId: userId,
           amount: amount,
           balanceBefore: walletInfo.balance,
@@ -101,11 +119,16 @@ export default class WalletRepository {
         transaction: createTransaction,
       };
     } catch (err: any) {
+      // Re-throw BadRequestError as-is to preserve the specific error message
+      if (err instanceof BadRequestError) {
+        throw err;
+      }
+      logger.error(`DB error in withdrawCoins: ${err?.message ?? err}`);
       throw new ServerError(err.message);
     }
   }
 
-  public async depositCoins(userId: string, amount: number): Promise<any> {
+  public async depositCoins(userId: string, amount: number,type :TransactionType): Promise<any> {
     try {
       const walletInfo = await this._DB.Wallet.findOne({
         where: {
@@ -114,13 +137,22 @@ export default class WalletRepository {
       });
 
       if (!walletInfo) {
-        throw new BadRequestError("Insufficient wallet balance");
+        throw new BadRequestError("Wallet not found for this user");
       }
 
-      const walletPayload = {
+      let walletPayload: {
+        balance: number;
+        totalReferralEarnings?: number;
+        totalWinnings?: number;
+      } = {
         balance: walletInfo?.balance + Number(amount),
-        totalWinnings: walletInfo?.totalWinnings + Number(amount),
       };
+
+      if(type === "referral_bonus") {
+        walletPayload["totalReferralEarnings"] = walletInfo?.totalReferralEarnings + Number(amount);
+      }else{
+        walletPayload["totalWinnings"] = walletInfo?.totalWinnings + Number(amount);
+      }
 
       const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {
         where: {
@@ -133,7 +165,7 @@ export default class WalletRepository {
       if (updatedWalletInfo[0]) {
         createTransaction = await this._DB.Transaction.create({
           walletId: walletInfo.id,
-          type: "contest_winnings",
+          type: type,
           userId: userId,
           amount: amount,
           balanceBefore: walletInfo.balance,
@@ -146,6 +178,30 @@ export default class WalletRepository {
         transaction: createTransaction,
       };
     } catch (err: any) {
+      // Re-throw BadRequestError as-is to preserve the specific error message
+      if (err instanceof BadRequestError) {
+        throw err;
+      }
+      logger.error(`DB error in depositCoins: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
+    }
+  }
+
+  public async getUserById(userId: string): Promise<any> {
+    try {
+      const userWallet = await this._DB.Wallet.findOne({
+        where: {
+          userId: userId,
+        },
+      });
+      
+      if (!userWallet) {
+        throw new BadRequestError("No wallet found for this user");
+      }
+      return userWallet.toJSON() as Wallet;
+    }
+    catch (err: any) {
+      logger.error(`DB error: ${err?.message ?? err}`);
       throw new ServerError(err.message);
     }
   }
@@ -156,6 +212,7 @@ export default class WalletRepository {
         where: {
           userId: userId,
         },
+        order: [["updatedAt", "DESC"]],
       });
 
       if (!transactions) {
@@ -163,6 +220,26 @@ export default class WalletRepository {
       }
 
       return transactions;
+    } catch (err: any) {
+      logger.error(`DB error: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
+    }
+  }
+
+  public async getWalletHistory(userId: string): Promise<any> {
+    try {
+      const transactions = await this._DB.Transaction.findAll({
+        where: {
+          userId: userId,
+        },
+        order: [["createdAt", "DESC"]],
+      });
+
+      if (!transactions || transactions.length === 0) {
+        return [];
+      }
+
+      return transactions.map((transaction) => transaction.toJSON());
     } catch (err: any) {
       logger.error(`DB error: ${err?.message ?? err}`);
       throw new ServerError(err.message);

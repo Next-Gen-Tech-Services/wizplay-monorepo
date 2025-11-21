@@ -3,6 +3,9 @@ import { Sequelize } from "sequelize";
 import matchModel, { Match } from "../models/match.model";
 import tournamentModel, { Tournament } from "../models/tournament.model";
 import wishlistModel, { Wishlist } from "../models/wishlist.model";
+import matchLiveStateModel, { MatchLiveState } from "../models/matchLiveState.model";
+import matchLiveEventModel, { MatchLiveEvent } from "../models/matchLiveEvent.model";
+import liveMatchDataModel, { LiveMatchData } from "../models/liveMatchData.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
@@ -11,6 +14,9 @@ export interface IDatabase {
   Match: typeof Match;
   Tournament: typeof Tournament;
   Wishlist: typeof Wishlist;
+  MatchLiveState: typeof MatchLiveState;
+  MatchLiveEvent: typeof MatchLiveEvent;
+  LiveMatchData: typeof LiveMatchData;
 }
 
 const sequelize = new Sequelize({
@@ -21,7 +27,7 @@ const sequelize = new Sequelize({
   host: ServerConfigs.DATABASE_HOST,
   port: Number(ServerConfigs.DATABASE_PORT) || 5432,
   dialectOptions: {},
-  logging: console.log,
+  logging: false,
   define: {
     charset: "utf8mb4",
     underscored: true,
@@ -31,6 +37,9 @@ const sequelize = new Sequelize({
 const MatchInstance = matchModel(sequelize);
 const TournamentInstance = tournamentModel(sequelize);
 const WishlistInstance = wishlistModel(sequelize);
+const MatchLiveStateInstance = matchLiveStateModel(sequelize);
+const MatchLiveEventInstance = matchLiveEventModel(sequelize);
+const LiveMatchDataInstance = liveMatchDataModel(sequelize);
 
 export async function connectDatabase() {
   try {
@@ -72,10 +81,29 @@ WishlistInstance.belongsTo(MatchInstance, {
   as: "match",
 });
 
+// Live match associations
+MatchLiveStateInstance.belongsTo(MatchInstance, {
+  foreignKey: "matchId",
+  // live state stores the external match key (string) not the internal UUID id
+  // so target the Match 'key' attribute which is a string
+  targetKey: "key",
+  as: "match",
+});
+
+MatchLiveEventInstance.belongsTo(MatchInstance, {
+  foreignKey: "matchId",
+  // live events reference the match 'key' (string)
+  targetKey: "key",
+  as: "match",
+});
+
 export const DB: IDatabase = {
   Sequelize,
   sequelize,
   Match: MatchInstance,
   Tournament: TournamentInstance,
   Wishlist: WishlistInstance,
+  MatchLiveState: MatchLiveStateInstance,
+  MatchLiveEvent: MatchLiveEventInstance,
+  LiveMatchData: LiveMatchDataInstance,
 };

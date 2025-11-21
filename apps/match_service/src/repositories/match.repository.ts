@@ -4,6 +4,46 @@ import { DB, IDatabase } from "../configs/database.config";
 import { IMatchAttrs } from "../dtos/match.dto";
 import { IMatchFilters } from "../interfaces/match";
 import { Match } from "../models/match.model";
+import ServerConfigs from "../configs/server.config";
+
+/**
+ * Add team flag URLs to match data based on country codes
+ * Uses locally stored flags downloaded from Roanuz API
+ */
+function addTeamFlags(matchData: any): any {
+  if (matchData && matchData.teams) {
+    const baseUrl = ServerConfigs.ASSET_SERVICE_URL;
+
+    if (matchData.teams.a) {
+      // Ensure country_code is empty string if null/undefined
+      if (!matchData.teams.a.country_code) {
+        matchData.teams.a.country_code = "";
+      }
+      // Only add flag_url if country_code is not empty
+      if (matchData.teams.a.country_code) {
+        matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
+      }else{
+        matchData.teams.a.flag_url = ``;
+
+      }
+    }
+    
+    if (matchData.teams.b) {
+      // Ensure country_code is empty string if null/undefined
+      if (!matchData.teams.b.country_code) {
+        matchData.teams.b.country_code = "";
+      }
+      // Only add flag_url if country_code is not empty
+      if (matchData.teams.b.country_code) {
+        matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
+      }else{
+        matchData.teams.b.flag_url = ``;
+        
+      }
+    }
+  }
+  return matchData;
+}
 
 export default class MatchRepository {
   private _DB: IDatabase = DB;
@@ -11,7 +51,7 @@ export default class MatchRepository {
     this._DB = DB;
   }
 
-  public async getTestData(): Promise<any> {}
+  public async getTestData(): Promise<any> { }
 
   public async createBulkMatches(matchData: IMatchAttrs[]): Promise<any> {
     try {
@@ -19,13 +59,31 @@ export default class MatchRepository {
         throw new BadRequestError("invalid matches value");
       }
 
+      // Only update fields that come from the API, preserve internal fields
+      const fieldsToUpdate: (keyof IMatchAttrs)[] = [
+        "sport",
+        "format",
+        "gender",
+        "tournamentKey",
+        "name",
+        "shortName",
+        "status",
+        "metricGroup",
+        "winner",
+        "subTitle",
+        "startedAt",
+        "endedAt",
+        "expectedStartedAt",
+        "expectedEndedAt",
+        "teams",
+        "updatedAt", // Always update timestamp
+      ];
+
       const result = await this._DB.Match.bulkCreate(matchData, {
-        updateOnDuplicate: Object.keys(
-          Match.getAttributes()
-        ) as (keyof IMatchAttrs)[],
+        updateOnDuplicate: fieldsToUpdate,
         conflictAttributes: ["key"],
       });
-      logger.info(`Inserted bulk data inside matches`);
+      logger.info(`Inserted/Updated ${result.length} matches in bulk`);
 
       return result;
     } catch (error: any) {
@@ -53,7 +111,12 @@ export default class MatchRepository {
       if (filters.sport) where["sport"] = filters.sport;
       if (filters.format) where["format"] = filters.format;
       if (filters.gender) where["gender"] = filters.gender;
-      if (filters.status) where["status"] = filters.status;
+      
+      // Handle status filter: if not "all", filter for not-started and started statuses
+      if (filters.status !== "all") {
+        where["status"] = { [Op.in]: ["not_started", "started"] };
+      }
+      
       if (filters.tournamentKey) where["tournamentKey"] = filters.tournamentKey;
       if (filters.winner) where["winner"] = filters.winner;
       if (
@@ -117,22 +180,28 @@ export default class MatchRepository {
         startOfTomorrowDt.getTime() / 1000
       );
       const endOfTomorrowEpoch = Math.floor(endOfTomorrowDt.getTime() / 1000);
+      const escStarted = this._DB.sequelize.escape("started");
       const escCompleted = this._DB.sequelize.escape("completed");
 
       const order: any = [
+        // First priority: Status order (started first)
         [
           this._DB.sequelize.literal(`CASE
-          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} AND "status" != ${escCompleted} THEN 0
-          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} AND "status" = ${escCompleted} THEN 1
-          ELSE 2 END`),
+          WHEN "status" = ${escStarted} THEN 0
+          WHEN "status" = 'not_started' THEN 1
+          WHEN "status" = ${escCompleted} THEN 2
+          ELSE 3 END`),
           "ASC",
         ],
+        // Second priority: Time-based ordering
         [
           this._DB.sequelize.literal(`CASE
-          WHEN "status" = ${escCompleted} THEN -("started_at")
-          ELSE "started_at" END`),
+          WHEN "started_at" >= ${startOfTodayEpoch} AND "started_at" < ${endOfTomorrowEpoch} THEN 0
+          ELSE 1 END`),
           "ASC",
         ],
+        // Third priority: Sort by start time
+        ["started_at", "ASC"],
       ];
 
       const result = await Match.findAndCountAll({
@@ -155,7 +224,14 @@ export default class MatchRepository {
             ? true
             : Boolean(plain.wishlisted);
         if (plain.wishlists !== undefined) delete plain.wishlists;
-        return plain;
+
+        // Add team flag URLs and convert nulls to empty strings
+        const matchWithFlags = addTeamFlags(plain);
+        
+        // Recursively replace all null values with empty strings
+       
+        
+        return matchWithFlags;
       });
 
       return {
@@ -238,6 +314,56 @@ export default class MatchRepository {
     }
   }
 
+  public async updateMatchStatus(
+    matchKey: string,
+    data: {
+      status?: string;
+      winner?: string | null;
+      endedAt?: number | null;
+      startedAt?: number;
+    }
+  ): Promise<any> {
+    try {
+      if (!matchKey) {
+        throw new ServerError("Missing match key");
+      }
+
+      // Build update object with only provided fields
+      const updateData: any = {};
+      if (data.status !== undefined) updateData.status = data.status;
+      if (data.winner !== undefined) updateData.winner = data.winner;
+      if (data.endedAt !== undefined) updateData.endedAt = data.endedAt;
+      if (data.startedAt !== undefined) updateData.startedAt = data.startedAt;
+
+      const [affectedCount, updatedMatches] = await this._DB.Match.update(
+        updateData,
+        {
+          where: {
+            key: matchKey,
+          },
+          returning: true,
+        }
+      );
+
+      if (affectedCount === 0) {
+        throw new BadRequestError(`Match not found with key: ${matchKey}`);
+      }
+
+      logger.info(
+        `Updated match status for ${matchKey}: ${JSON.stringify(updateData)}`
+      );
+
+      return updatedMatches[0];
+    } catch (error: any) {
+      logger.error(
+        `match.repository.updateMatchStatus DB error: ${error?.message ?? error}`
+      );
+      throw new ServerError(
+        error?.message || "Database error while updating match status"
+      );
+    }
+  }
+
   public async getMatchWithId(matchId: string): Promise<any> {
     try {
       if (!matchId) {
@@ -251,9 +377,57 @@ export default class MatchRepository {
         include: [{ association: "tournaments" }],
       });
 
+      if (matchData) {
+        const plain = matchData.get({ plain: true });
+        return addTeamFlags(plain);
+      }
+
       return matchData;
     } catch (error: any) {
       logger.error(error.message);
+    }
+  }
+
+  public async getMatchById(matchId: string): Promise<any> {
+    try {
+      if (!matchId) {
+        throw new BadRequestError("invalid match id");
+      }
+
+      const matchData = await this._DB.Match.findOne({
+        where: {
+          id: matchId,
+        },
+        include: [{ association: "tournaments" }],
+      });
+
+      if (matchData) {
+        const plain = matchData.get({ plain: true });
+        return addTeamFlags(plain);
+      }
+
+      return matchData;
+    } catch (error: any) {
+      logger.error(error.message);
+    }
+  }
+
+  public async getMatchIdByKey(matchKey: string): Promise<string | null> {
+    try {
+      if (!matchKey) {
+        return null;
+      }
+
+      const matchData = await this._DB.Match.findOne({
+        where: { key: matchKey },
+        attributes: ['id'],
+        raw: true,
+      });
+
+      return matchData?.id || null;
+    } catch (error: any) {
+      logger.error(`getMatchIdByKey error: ${error.message}`);
+      return null;
     }
   }
 
@@ -269,6 +443,24 @@ export default class MatchRepository {
       return wishlistEntry;
     } catch (error: any) {
       logger.error(error.message);
+    }
+  }
+
+  public async removeFromWishlist(userId: string, matchId: string): Promise<number> {
+    try {
+      if (!userId || !matchId) {
+        throw new BadRequestError("invalid user id or match id");
+      }
+      const deletedRows = await this._DB.Wishlist.destroy({
+        where: {
+          userId,
+          matchId,
+        },
+      });
+      return deletedRows;
+    } catch (error: any) {
+      logger.error(`Error removing from wishlist: ${error.message}`);
+      throw error;
     }
   }
 }

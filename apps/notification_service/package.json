@@ -1,0 +1,52 @@
+{
+  "name": "notification_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "pnpm run clean && tsc -p tsconfig.json",
+    "dev": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build -- ./src/server.ts",
+    "dev:docker": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build --poll ./src/server.ts",
+    "start": "NODE_ENV=production node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@repo/common": "workspace:*",
+    "@repo/notifications": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.10",
+    "amqplib": "^0.10.3",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "firebase-admin": "^12.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "kafkajs": "^2.2.4",
+    "nodemailer": "^6.9.7",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "redis": "^5.6.1",
+    "reflect-metadata": "^0.2.2",
+    "rimraf": "^6.0.1",
+    "sequelize": "^6.37.7",
+    "tsyringe": "^4.10.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/amqplib": "^0.10.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/express-serve-static-core": "^5.0.7",
+    "@types/node": "^24.1.0",
+    "@types/nodemailer": "^6.4.14",
+    "nodemon": "^3.0.3",
+    "ts-node": "^2.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

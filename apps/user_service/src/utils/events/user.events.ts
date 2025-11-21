@@ -35,15 +35,16 @@ class UserEventHandler {
   }
 
   private async handleUserSignup(message: any): Promise<boolean> {
-    const { userId, email, phoneNumber, authId } = message.data;
+    const { userId, email, phoneNumber, authId, referralCode } = message.data;
     const result = await this.userRepository.createUser(
       userId,
       authId,
       email,
-      phoneNumber
+      phoneNumber,
+      referralCode
     );
     logger.info(
-      `User signup processed successfully for userId: ${userId} | ${authId}`
+      `User signup processed successfully for userId: ${userId} | ${authId}${referralCode ? ` with referral code: ${referralCode}` : ''}`
     );
     return true;
   }

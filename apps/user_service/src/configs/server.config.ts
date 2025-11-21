@@ -6,7 +6,7 @@ dotenv.config({
 
 class ServerConfigs {
   static NODE_ENV: string = process.env.NODE_ENV as string;
-  static APP_PORT: string =  process.env.USER_SERVICE_PORT  as string;
+  static APP_PORT: string = process.env.USER_SERVICE_PORT || "4002";
   static LOG_LEVEL: string = process.env.LOG_LEVEL as string;
   static API_VERSION: string = process.env.API_VERSION as string;
   static TOKEN_SECRET: string = process.env.TOKEN_SECRET as string;
@@ -21,9 +21,14 @@ class ServerConfigs {
   static REDIS_HOST: string = process.env.REDIS_HOST as string;
   static REDIS_PORT: string = process.env.REDIS_PORT as string;
   static RABBITMQ_URL: string = process.env.RABBITMQ_URL as string;
-  static KAF_CLIENT_ID: string = process.env.KAF_CLIENT_ID as string;
-  static KAF_GROUP_ID: string = process.env.KAF_GROUP_ID as string;
+  static KAF_CLIENT_ID: string = process.env.USER_KAF_CLIENT_ID || process.env.KAF_CLIENT_ID as string;
+  static KAF_GROUP_ID: string = process.env.USER_KAF_GROUP_ID || process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
+  static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
+  static CONTEST_SERVICE_URL: string = process.env.CONTEST_SERVICE_URL as string;
+  static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
+  static COUPON_SERVICE_URL: string = process.env.COUPONS_SERVICE_URL as string;
+  static AUTH_SERVICE_URL: string = process.env.AUTH_SERVICE_URL as string;
   private constructor() {}
 }
 

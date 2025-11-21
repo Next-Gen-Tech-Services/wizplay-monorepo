@@ -16,10 +16,10 @@ import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
 import { handleGoogleAuth } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
-import { sendOtpUtil } from "../utils/otp";
+import { sendOtpUtil, verifyOtpUtil } from "../utils/otp";
+import { validateReferralCode } from "../utils/referral-validator";
 import { sendResetLinkMail } from "../utils/smtp";
 import { generateOTPUtil, generateUUID } from "../utils/utils";
-import axios from "axios";
 
 @autoInjectable()
 export default class Service {
@@ -37,10 +37,12 @@ export default class Service {
   public async generateOtp(phoneNumber: string): Promise<any> {
     const userExist =
       await this.userRepository.userWithPhoneExistRepo(phoneNumber);
-
     const otpCode: string = generateOTPUtil();
-    logger.warn(`OTP Code : ${otpCode}`);
+    logger.info(`OTP Code : ${otpCode}`);
 
+    // if (ServerConfigs.NODE_ENV === "development") {
+      const res = await sendOtpUtil(phoneNumber);
+    // }
     if (userExist) {
       const updateOtp = await this.userRepository.updateRecentOtp({
         phoneNumber,
@@ -69,11 +71,6 @@ export default class Service {
 
       logger.warn(`updated OTP: ${updateOtp}`);
       // SEND OTP HERE
-
-      if (ServerConfigs.MSG91_BASE_URL) {
-        await sendOtpUtil(phoneNumber, otpCode);
-      }
-
       return {
         data: {
           userId: createUser.userId,
@@ -83,12 +80,33 @@ export default class Service {
     }
   }
 
-  public async verifyOtp(phoneNumber: string, otpCode: string): Promise<any> {
+  public async verifyOtp(phoneNumber: string, otpCode: string, referralCode?: string): Promise<any> {
     try {
-      const verifiedUser = await this.userRepository.verifyOtpRepo({
-        phoneNumber,
-        otpCode,
-      });
+      // Validate referral code if provided
+      if (referralCode) {
+        const isValid = await validateReferralCode(referralCode);
+        if (!isValid) {
+          throw new BadRequestError("Invalid referral code");
+        }
+        logger.debug(`Referral code validated: ${referralCode}`);
+      }
+
+      let verifiedUser;
+
+      // if (ServerConfigs.NODE_ENV === "development") {
+        const response = await verifyOtpUtil(phoneNumber, otpCode);
+        if (response?.type === "error") {
+          throw new BadRequestError(response?.message);
+        }
+
+        verifiedUser =
+          await this.userRepository.userWithPhoneExistRepo(phoneNumber);
+      // } else {
+      //   verifiedUser = await this.userRepository.verifyOtpRepo({
+      //     phoneNumber,
+      //     otpCode,
+      //   });
+      // }
 
       if (!verifiedUser) {
         throw new BadRequestError("invalid or expired OTP");
@@ -103,13 +121,14 @@ export default class Service {
       verifiedUser.otpCode = null;
 
       if (!verifiedUser.onboarded) {
-        // create user inside user-service
+        // create user inside user-service with optional referral code
         await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
           userId: verifiedUser.userId,
           authId: verifiedUser.id,
           phoneNumber: phoneNumber,
+          referralCode: referralCode || null,
         });
-        logger.debug("signup event published");
+        logger.debug(`signup event published${referralCode ? ` with referral code: ${referralCode}` : ''}`);
       } else {
         logger.warn("user is already onboarded");
       }
@@ -172,7 +191,7 @@ export default class Service {
 
       const resetToken = encryptPassword(user.email).toString();
       const setCache = await this.redis.setter(user.email, resetToken);
-      logger.info(`[auth-service] Adding reset token: ${setCache}`);
+      logger.info(`[auth-service] Adding reset token: ${resetToken}`);
 
       const resetLink = `${ServerConfigs.CLIENT_HOST}/reset-password?token=${resetToken}&email=${email}`;
       sendResetLinkMail(user.email, resetLink);
@@ -297,6 +316,24 @@ export default class Service {
         token: token,
         message: "OTP verification successful",
       };
+    }
+  }
+
+  public async getAuthByUserId(userId: string): Promise<any> {
+    try {
+      const authData = await this.userRepository.findAuthByUserId(userId);
+      
+      if (!authData) {
+        return null;
+      }
+
+      // Return only necessary auth data, exclude sensitive fields like password and otpCode
+      const { password, otpCode, otpExpiresAt, ...safeAuthData } = authData.toJSON();
+      
+      return safeAuthData;
+    } catch (error: any) {
+      logger.error(`Error fetching auth data by userId: ${error.message}`);
+      throw new ServerError("Failed to fetch auth data");
     }
   }
 }

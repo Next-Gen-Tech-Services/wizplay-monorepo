@@ -4,7 +4,7 @@ import { DataTypes, Model, Optional, Sequelize } from "sequelize";
 export interface IWishlistAttributes {
   id?: string;
   userId: string;
-  matchData: any; // JSONB content
+  matchId: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -18,7 +18,7 @@ export class Wishlist
 {
   public id!: string;
   public userId!: string;
-  public matchData!: any;
+  public matchId!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -35,9 +35,8 @@ export default function (sequelize: Sequelize) {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      matchData: {
-        // Sequelize has JSONB type via DataTypes.JSONB
-        type: DataTypes.JSONB,
+      matchId: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
 

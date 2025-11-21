@@ -5,7 +5,9 @@ export type TransactionType =
   | "contest_refund"
   | "contest_winnings"
   | "bonus"
-  | "referral";
+  | "joining_bonus"
+  | "referral"
+  | "referral_bonus";
 
 export type TransactionStatus =
   | "pending"
@@ -20,6 +22,7 @@ export interface IWalletAttrs {
   totalDeposited: number;
   totalWithdrawn: number;
   totalWinnings: number; // Lifetime winnings
+  totalReferralEarnings: number; // Lifetime referral earnings
   currency: string;
   status: "active" | "suspended" | "closed";
   createdAt?: Date;
@@ -38,6 +41,7 @@ export interface UpdateWalletPayload {
   totalDeposited?: number;
   totalWithdrawn?: number;
   totalWinnings?: number;
+  totalReferralEarnings?: number;
   status?: "active" | "suspended" | "closed";
 }
 

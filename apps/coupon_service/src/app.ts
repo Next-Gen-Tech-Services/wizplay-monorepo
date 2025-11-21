@@ -6,32 +6,62 @@ import CouponRouter from "./routes/coupon.router";
 import couponEventHandler from "./utils/events/coupon.events";
 import { connectProducer } from "./utils/kafka";
 
-const BrokerInit = async () => {
+const BrokerInit = async (retryCount = 0, maxRetries = 10) => {
   try {
-    // Wait for Kafka to be ready
-    logger.info("Waiting for Kafka to be ready...");
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // Wait for Kafka to be ready with exponential backoff
+    const waitTime = Math.min(5000 + retryCount * 2000, 30000); // Max 30 seconds
+    logger.info(`Waiting for Kafka to be ready... (attempt ${retryCount + 1}/${maxRetries}, wait: ${waitTime}ms)`);
+    await new Promise((resolve) => setTimeout(resolve, waitTime));
 
     // create producer to create topics
     await connectProducer();
-    logger.info("Successfully created topics");
+    logger.info("✅ Successfully created topics and connected producer");
 
     // start consuming events
     await couponEventHandler.handle();
-    logger.info("Successfully subscribed to user events");
-  } catch (error) {
-    logger.error("Failed to initialize Kafka broker:", error);
-    setTimeout(async () => {
-      logger.info("Retrying Kafka initialization...");
-      await BrokerInit();
-    }, 10000);
+    logger.info("✅ Successfully subscribed to user events");
+  } catch (error: any) {
+    logger.error(`Failed to initialize Kafka broker (attempt ${retryCount + 1}/${maxRetries}):`, error?.message || error);
+    
+    if (retryCount < maxRetries) {
+      const nextRetryTime = Math.min(10000 + retryCount * 5000, 60000); // Max 60 seconds between retries
+      logger.info(`Retrying Kafka initialization in ${nextRetryTime}ms...`);
+      setTimeout(async () => {
+        await BrokerInit(retryCount + 1, maxRetries);
+      }, nextRetryTime);
+    } else {
+      logger.error("❌ Max Kafka connection retries reached. Service will continue without Kafka.");
+      // Don't crash the service, just log the error
+    }
   }
 };
 
 const AppInit = async () => {
   const expressApp: Express = express();
 
-  expressApp.use(cors());
+  // CORS configuration - allow multiple origins
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://wizplay-admin-ngts.vercel.app",
+    process.env.FRONTEND_URL
+  ].filter(Boolean);
+
+  const corsOptions = {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      // Allow requests with no origin (mobile apps, Postman, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
+  };
+  expressApp.use(cors(corsOptions));
   expressApp.use(express.json());
   expressApp.use(attachRequestId);
 
@@ -39,7 +69,7 @@ const AppInit = async () => {
 
   expressApp.use("/api/v1/coupons", CouponRouter);
   expressApp.get(
-    `/${ServerConfigs.API_VERSION}/health-check`,
+    `${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {
       logger.debug("Sending response: Server running");
       return res.status(200).json({

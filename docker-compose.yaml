@@ -131,6 +131,28 @@ services:
       timeout: 5s
       retries: 5
 
+  notification_db_server:
+    image: "postgres:15-alpine"
+    container_name: notification_db_server
+    ports:
+      - "5440:5432"
+    environment:
+      POSTGRES_USER: notification_db
+      POSTGRES_PASSWORD: notification_db
+      POSTGRES_DB: notification_service
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    volumes:
+      - notification_db_data:/var/lib/postgresql/data
+      - ./database/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notification_db -d notification_service"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Zookeeper for Kafka (Confluent)
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
@@ -182,7 +204,7 @@ services:
       timeout: 10s
       retries: 5
 
-  # Optional: Redis for caching/sessions
+  # Redis for caching/sessions
   redis:
     image: redis:7-alpine
     container_name: redis
@@ -193,8 +215,11 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    profiles:
-      - with-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
 networks:
   app-network:
@@ -214,6 +239,8 @@ volumes:
   contest_db_data:
     driver: local
   wallet_db_data:
+    driver: local
+  notification_db_data:
     driver: local
   zookeeper_data:
     driver: local

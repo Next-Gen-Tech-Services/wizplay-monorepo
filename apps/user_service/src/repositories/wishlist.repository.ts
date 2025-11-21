@@ -5,11 +5,11 @@ import { DB } from "../configs/database.config";
 export default class WishlistRepository {
   private _DB = DB;
 
-  public async createWishlist(userId: string, matchData: any) {
+  public async createWishlist(userId: string, matchId: string) {
     try {
       const result = await this._DB.Wishlist.create({
         userId,
-        matchData,
+        matchId,
       });
       return result;
     } catch (err: any) {
@@ -19,35 +19,39 @@ export default class WishlistRepository {
   }
 
   public async findByUser(userId: string, limit = 50, offset = 0) {
-    return this._DB.Wishlist.findAll({
-      where: { userId },
-      order: [["createdAt", "DESC"]],
-      limit,
-      offset,
-    });
+    try {
+      const wishlists = await this._DB.Wishlist.findAll({
+        where: { userId },
+        order: [["createdAt", "DESC"]],
+        limit,
+        offset,
+      });
+
+      // Return plain wishlist items with matchId
+      return wishlists.map((wishlist: any) => {
+        const plain = wishlist.get ? wishlist.get({ plain: true }) : wishlist;
+        return plain;
+      });
+    } catch (err: any) {
+      logger.error("WishlistRepository.findByUser error", err);
+      throw err;
+    }
   }
 
   public async findByMatchId(userId: string, matchId: string) {
     return this._DB.Wishlist.findOne({
-      where: this._DB.Sequelize.where(
-        this._DB.Sequelize.cast(
-          this._DB.Sequelize.json("match_data.id"),
-          "text"
-        ),
-        matchId
-      ),
+      where: {
+        userId,
+        matchId,
+      },
     });
   }
 
   public async findOneByUserAndMatchId(userId: string, matchId: string) {
-    const Sequelize = this._DB.Sequelize;
     return this._DB.Wishlist.findOne({
       where: {
         userId,
-        [Sequelize.Op.and]: Sequelize.where(
-          Sequelize.json("match_data.id"),
-          matchId
-        ),
+        matchId,
       },
     });
   }
@@ -57,14 +61,10 @@ export default class WishlistRepository {
   }
 
   public async deleteByUserAndMatchId(userId: string, matchId: string) {
-    const Sequelize = this._DB.Sequelize;
     return this._DB.Wishlist.destroy({
       where: {
         userId,
-        [Sequelize.Op.and]: Sequelize.where(
-          Sequelize.json("match_data.id"),
-          matchId
-        ),
+        matchId,
       },
     });
   }

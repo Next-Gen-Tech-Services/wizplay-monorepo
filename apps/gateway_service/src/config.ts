@@ -31,6 +31,24 @@ export const ROUTES: ProxyRoute[] = [
     pathRewrite: { "^/api/v1/user": "/api/v1/user" },
     timeoutMs: 15000,
   },
+   {
+    name: "user",
+    mountPath: "/api/v1/referrals",
+    target: process.env.USER_SERVICE_URL ?? "http://localhost:4002",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/referrals": "/api/v1/referrals" },
+    timeoutMs: 15000,
+  },
+   {
+    name: "user",
+    mountPath: "/api/v1/admin",
+    target: process.env.USER_SERVICE_URL ?? "http://localhost:4002",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/admin": "/api/v1/admin" },
+    timeoutMs: 15000,
+  },
   {
     name: "wishlist",
     mountPath: "/api/v1/wishlist",
@@ -65,7 +83,16 @@ export const ROUTES: ProxyRoute[] = [
     changeOrigin: true,
     ws: false,
     pathRewrite: { "^/api/v1/contests": "/api/v1/contests" },
-    timeoutMs: 15000,
+    timeoutMs: 180000, // 3 minutes for AI generation
+  },
+  {
+    name: "leaderboard",
+    mountPath: "/api/v1/leaderboard",
+    target: process.env.CONTEST_SERVICE_URL ?? "http://localhost:4005",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/leaderboard": "/api/v1/leaderboard" },
+    timeoutMs: 180000, // 3 minutes to match contest service
   },
   {
     name: "questions",
@@ -74,7 +101,7 @@ export const ROUTES: ProxyRoute[] = [
     changeOrigin: true,
     ws: false,
     pathRewrite: { "^/api/v1/questions": "/api/v1/questions" },
-    timeoutMs: 15000,
+    timeoutMs: 180000, // 3 minutes for AI generation
   },
 
   {
@@ -85,5 +112,24 @@ export const ROUTES: ProxyRoute[] = [
     ws: false,
     pathRewrite: { "^/api/v1/wallet": "/api/v1/wallet" },
     timeoutMs: 15000,
+  },
+  {
+    name: "notifications",
+    mountPath: "/api/v1/notifications",
+    target: process.env.NOTIFICATION_SERVICE_URL ?? "http://localhost:4007",
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: { "^/api/v1/notifications": "/api/v1/notifications" },
+    timeoutMs: 15000,
+  },
+  {
+    name: "socket",
+    mountPath: "/socket.io",
+    target: process.env.MATCHES_SERVICE_URL ?? "http://localhost:4003",
+    changeOrigin: true,
+    ws: true,
+    // Don't rewrite the path - Socket.IO needs /socket.io
+    timeoutMs: 60000,
+    secure: true,
   },
 ];

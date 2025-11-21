@@ -38,10 +38,10 @@ export default class AuthController {
   }
 
   public async verifyOtpController(req: Request, res: Response): Promise<any> {
-    const { phoneNumber, otp } = req.body;
+    const { phoneNumber, otp, referralCode } = req.body;
 
     try {
-      const result = await this.authService.verifyOtp(phoneNumber, otp);
+      const result = await this.authService.verifyOtp(phoneNumber, otp, referralCode);
       return res.status(STATUS_CODE.SUCCESS).json({
         success: true,
         data: result.data,
@@ -115,5 +115,49 @@ export default class AuthController {
       errors: null,
       timestamp: new Date().toISOString(),
     });
+  }
+
+  public async getAuthByUserId(req: Request, res: Response) {
+    try {
+      const { userId } = req.params;
+
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          data: null,
+          message: "User ID is required",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.authService.getAuthByUserId(userId);
+
+      if (!result) {
+        return res.status(STATUS_CODE.NOT_FOUND).json({
+          success: false,
+          data: null,
+          message: "Auth record not found",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: "Auth data fetched successfully",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to fetch auth data",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
   }
 }

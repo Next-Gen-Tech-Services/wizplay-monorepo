@@ -25,5 +25,9 @@ router.get(
   requireAuth,
   async (req, res) => submissionController.getContestSubmission(req, res)
 );
-
+router.get(
+  "/questions/submissions/contest/:id/user/:userId",
+  requireAuth,
+  async (req, res) => submissionController.getUserContestSubmission(req, res)
+);
 export default router;

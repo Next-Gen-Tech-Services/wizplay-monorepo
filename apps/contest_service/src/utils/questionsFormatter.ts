@@ -49,7 +49,7 @@ export function formatContestsForBulkInsert(
     resultTime: contest.resultTime ?? null,
     timeCommitment: contest.timeCommitment ?? null,
     platform: contest.platform ?? "default",
-    status: "scheduled",
+    status: "upcoming",
   }));
 }
 

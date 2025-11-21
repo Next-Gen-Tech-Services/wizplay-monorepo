@@ -10,8 +10,29 @@ dotenv.config();
 
 const app = express();
 
-// Basic middleware
-app.use(cors());
+// CORS configuration - allow multiple origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://wizplay-admin-ngts.vercel.app",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+const corsOptions = {
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // Health and admin endpoints
 app.get("/", (_req, res) => res.json({ ok: true, message: "wizplay-proxy" }));
@@ -32,16 +53,20 @@ app.get("/_routes", (_req, res) =>
 // Mount proxies from config
 for (const route of ROUTES) {
   logger.info(
-    { route: route.name, mount: route.mountPath, target: route.target },
+    { route: route.name, mount: route.mountPath, target: route.target, ws: route.ws },
     "Mounting proxy route"
   );
-  // mount as prefix so /api/v1/auth/send-otp goes to the auth service
-  app.use(route.mountPath, makeProxy(route));
+  const proxyMiddleware = makeProxy(route);
+  app.use(route.mountPath, proxyMiddleware);
 }
 
 // fallback 404
 app.use((_req, res) => res.status(404).json({ error: "Not Found" }));
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`wizplay-proxy listening on port ${PORT}`);
 });
+
+// Set server timeout to 3 minutes for AI generation endpoints
+server.timeout = 180000; // 3 minutes
+server.keepAliveTimeout = 185000; // Slightly longer than timeout

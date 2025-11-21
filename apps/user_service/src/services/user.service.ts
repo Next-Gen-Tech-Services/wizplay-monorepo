@@ -57,4 +57,33 @@ export default class UserService {
       throw new BadRequestError(error.message || "Failed to list users");
     }
   }
+
+  public async getUserById(userId: string) {
+    try {
+      const result = await this.userRepository.findByIdWithDetails(userId);
+      if (!result) {
+        throw new BadRequestError("User not found");
+      }
+      return { data: result, message: "User fetched successfully" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to fetch user");
+    }
+  }
+
+  public async updateDeviceToken(userId: string, deviceToken: string) {
+    try {
+      const user = await this.userRepository.findById(userId);
+      if (!user) {
+        throw new BadRequestError("User not found");
+      }
+
+      // Update device token through repository
+      await this.userRepository.updateDeviceToken(userId, deviceToken);
+
+      const updatedUser = await this.userRepository.findById(userId);
+      return { data: updatedUser, message: "Device token updated successfully" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to update device token");
+    }
+  }
 }

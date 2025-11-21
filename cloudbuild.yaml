@@ -106,8 +106,11 @@ steps:
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--port=4001'
+      - '--min-instances=0'
+      - '--max-instances=10'
+      - '--memory=512Mi'
       - '--set-env-vars=NODE_ENV=production,PORT=4001'
-      - '--set-secrets=AUTH_DATABASE_HOST=AUTH_DATABASE_HOST:latest,AUTH_DATABASE_NAME=AUTH_DATABASE_NAME:latest,AUTH_DATABASE_USERNAME=AUTH_DATABASE_USERNAME:latest,AUTH_DATABASE_PASSWORD=AUTH_DATABASE_PASSWORD:latest,AUTH_DATABASE_PORT=AUTH_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest'
+      - '--update-secrets=AUTH_DATABASE_HOST=AUTH_DATABASE_HOST:latest,AUTH_DATABASE_NAME=AUTH_DATABASE_NAME:latest,AUTH_DATABASE_USERNAME=AUTH_DATABASE_USERNAME:latest,AUTH_DATABASE_PASSWORD=AUTH_DATABASE_PASSWORD:latest,AUTH_DATABASE_PORT=AUTH_DATABASE_PORT:latest,TOKEN_SECRET=TOKEN_SECRET:latest,REDIS_HOST=REDIS_HOST:latest,REDIS_PORT=REDIS_PORT:latest,REDIS_USERNAME=REDIS_USERNAME:latest,REDIS_PASSWORD=REDIS_PASSWORD:latest,KAF_BROKERS=KAF_BROKERS:latest'
 
   # Deploy user_service to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'

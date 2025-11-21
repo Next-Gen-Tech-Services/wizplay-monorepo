@@ -11,6 +11,8 @@ export interface IUserAtters {
   onboarded: boolean;
   type: "user" | "admin";
   selectedLanguage: Language;
+  referralCode?: string | null;
+  deviceToken?: string | null;
   createdAt?: Date;
   updatedAt?: Date;
 }

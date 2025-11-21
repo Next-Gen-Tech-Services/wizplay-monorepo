@@ -81,4 +81,81 @@ export default class UserController {
       });
     }
   }
+
+  public async getUserById(req: Request, res: Response) {
+    try {
+      const userId = req.params.userId;
+
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "User ID is required",
+          data: null,
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.userService.getUserById(userId);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "User fetched successfully",
+        data: result.data,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("UserController.getUserById error:", err);
+      return res.status(STATUS_CODE.NOT_FOUND ?? 404).json({
+        success: false,
+        message: "User not found",
+        data: null,
+        errors: (err as Error).message ?? null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async updateDeviceToken(req: Request, res: Response) {
+    try {
+      const { deviceToken } = req.body;
+      
+      if (!req?.currentUser?.userId) {
+        throw new BadRequestError();
+      }
+
+      if (!deviceToken) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Device token is required",
+          data: null,
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.userService.updateDeviceToken(
+        req.currentUser.userId,
+        deviceToken
+      );
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "Device token updated successfully",
+        data: result.data,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("UserController.updateDeviceToken error:", err);
+      return res.status(STATUS_CODE.INTERNAL_SERVER ?? 500).json({
+        success: false,
+        message: "Failed to update device token",
+        data: null,
+        errors: (err as Error).message ?? null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

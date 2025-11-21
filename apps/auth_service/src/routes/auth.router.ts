@@ -15,25 +15,6 @@ import {
 const router = Router();
 const controller: AuthController = container.resolve(AuthController);
 
-// TEST-ROUTE
-router.get("/user/test-route", (req: Request, res: Response) =>
-  controller.testResponse(req, res)
-);
-
-// GOOGLE-LOGIN ROUTE
-router.post("/google", (req: Request, res: Response) => {
-  return res.json({
-    status: "ok",
-  });
-});
-
-// APPLE-LOGIN ROUTE
-router.post("/apple", (req: Request, res: Response) => {
-  return res.json({
-    status: "ok",
-  });
-});
-
 // GENERATE OTP ROUTE
 router.post(
   "/auth/send-otp",
@@ -57,6 +38,10 @@ router.post(
       .isString()
       .isLength({ min: 4, max: 8 })
       .withMessage("Invalid OTP"),
+    body("referralCode")
+      .optional()
+      .isString()
+      .withMessage("Invalid referral code"),
   ],
   validateRequest,
   async (req: Request, res: Response) =>
@@ -106,5 +91,11 @@ router.post(
     return result;
   }
 );
+
+// GET AUTH DATA BY USER ID (for inter-service communication)
+router.get("/auth/user/:userId", async (req: Request, res: Response) => {
+  const result = await controller.getAuthByUserId(req, res);
+  return result;
+});
 
 export default router;

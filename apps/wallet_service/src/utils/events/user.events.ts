@@ -25,7 +25,11 @@ class UserEventHandler {
             break;
           case KAFKA_EVENTS.USER_ONBOARDED:
             await this.handleWalletCreation(message);
-            logger.info("Handle login:", message.data);
+            logger.info("Wallet created:", message.data);
+            break;
+          case KAFKA_EVENTS.REFERRAL_REWARD:
+            await this.handleReferralReward(message);
+            logger.info("Referral reward processed:", message.data);
             break;
           default:
             logger.info("Unknown event:", message.event);
@@ -44,6 +48,27 @@ class UserEventHandler {
       `User wallet created successfully for userId: ${userId} | ${authId}`
     );
     return true;
+  }
+
+  private async handleReferralReward(message: any): Promise<boolean> {
+    const { referrerId, rewardAmount, referralId } = message.data;
+    
+    try {
+      // Add 50 coins to referrer's wallet
+      const result = await this.walletRepository.depositCoins(
+        referrerId,
+        rewardAmount,
+        "referral_bonus"
+      );
+      
+      logger.info(
+        `Referral reward of ${rewardAmount} coins credited to user ${referrerId}`
+      );
+      return true;
+    } catch (error: any) {
+      logger.error(`Error processing referral reward: ${error.message}`);
+      return false;
+    }
   }
 }
 export default new UserEventHandler();
