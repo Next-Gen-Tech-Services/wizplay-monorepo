@@ -9,9 +9,9 @@ import ServerConfigs from "../configs/server.config";
 
 @autoInjectable()
 export default class WishlistService {
-  constructor(private readonly wishlistRepository: WishlistRepository) {}
+  constructor(private readonly wishlistRepository: WishlistRepository) { }
 
-  public async addToWishlist(userId: string, matchId: string) {
+  public async addToWishlist(userId: string, matchId: string): Promise<{ data: any; message: string }> {
     if (!matchId) {
       throw new BadRequestError("invalid matchId: must include id");
     }
@@ -22,7 +22,9 @@ export default class WishlistService {
       matchId
     );
     if (existing) {
-      return { data: existing, message: "Already in wishlist" };
+      // Fetch match data for existing item
+      const matchData = await this.fetchMatchData(matchId);
+      return { data: { ...existing, matchData }, message: "Already in wishlist" };
     }
 
     const created = await this.wishlistRepository.createWishlist(
@@ -40,10 +42,12 @@ export default class WishlistService {
       logger.debug("add to wishlist event published");
     }
 
-    return { data: created, message: "Added to wishlist" };
+    // Fetch match data for the created item
+    const matchData = await this.fetchMatchData(matchId);
+    return { data: { ...created, matchData }, message: "Added to wishlist" };
   }
 
-  public async getUserWishlists(userId: string, limit = 50, offset = 0) {
+  public async getUserWishlists(userId: string, limit = 50, offset = 0): Promise<{ data: any[] }> {
     const list = await this.wishlistRepository.findByUser(
       userId,
       limit,
@@ -79,14 +83,27 @@ export default class WishlistService {
     return { data: wishlistsWithFreshMatchData };
   }
 
-  public async removeFromWishlist(userId: string, matchId: string) {
+  public async removeFromWishlist(userId: string, matchId: string): Promise<{ message: string; matchData: any }> {
     if (!matchId) throw new BadRequestError("matchId required");
+
+    // Check if the item exists first
+    const existingItem = await this.wishlistRepository.findOneByUserAndMatchId(
+      userId,
+      matchId
+    );
+
+    if (!existingItem) {
+      logger.warn(`Wishlist item not found for userId: ${userId}, matchId: ${matchId}`);
+      throw new BadRequestError("wishlist item not found");
+    }
+
     const deletedRows = await this.wishlistRepository.deleteByUserAndMatchId(
       userId,
       matchId
     );
-    if (!deletedRows) {
-      throw new BadRequestError("wishlist item not found");
+
+    if (deletedRows === 0) {
+      throw new BadRequestError("Failed to delete wishlist item");
     }
 
     // Publish event to Kafka to remove from match service wishlist
@@ -101,6 +118,22 @@ export default class WishlistService {
       // Don't throw error, deletion was successful
     }
 
-    return { message: "Removed from wishlist" };
+    // Fetch match data for the removed item
+    const matchData = await this.fetchMatchData(matchId);
+    return matchData;
+  }
+
+  private async fetchMatchData(matchId: string) {
+    try {
+      const matchResponse = await axios.get(
+        `${ServerConfigs.MATCHES_SERVICE_URL}/api/v1/matches/${matchId}`
+      );
+      return matchResponse.data?.data || null;
+    } catch (matchErr: any) {
+      logger.warn(
+        `Failed to fetch match data for matchId ${matchId}: ${matchErr?.message}`
+      );
+      return null;
+    }
   }
 }

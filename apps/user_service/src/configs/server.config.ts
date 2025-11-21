@@ -6,7 +6,7 @@ dotenv.config({
 
 class ServerConfigs {
   static NODE_ENV: string = process.env.NODE_ENV as string;
-  static APP_PORT: string =  process.env.USER_SERVICE_PORT  as string;
+  static APP_PORT: string = process.env.USER_SERVICE_PORT || "4002";
   static LOG_LEVEL: string = process.env.LOG_LEVEL as string;
   static API_VERSION: string = process.env.API_VERSION as string;
   static TOKEN_SECRET: string = process.env.TOKEN_SECRET as string;

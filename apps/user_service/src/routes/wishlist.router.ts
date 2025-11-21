@@ -11,15 +11,15 @@ const wishlistController: WishlistController = container.resolve(WishlistControl
 
 router.post("/", requireAuth, async (req: Request, res: Response) => {
   const result = await wishlistController.add(req, res);
-  return res.json(result);
+  return result;
 });
 router.get("/", requireAuth, async (req: Request, res: Response) => {
   const result = await wishlistController.list(req, res);
-  return res.json(result);
+  return result;
 });
 router.delete("/:matchId", requireAuth, async (req: Request, res: Response) => {
   const result = await wishlistController.remove(req, res);
-  return res.json(result);
+  return result;
 });
 
 export default router;

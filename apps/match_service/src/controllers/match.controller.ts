@@ -8,16 +8,19 @@ import MatchService from "../services/match.service";
 import MatchLiveRepository from "../repositories/matchLive.repository";
 import { MatchLiveEventType } from "../models/matchLiveEvent.model";
 import zlib from "zlib";
-import {  transformCricketMatch } from "../utils/transformLiveMatchData";
+import { transformCricketMatch } from "../utils/transformLiveMatchData";
 import fs from 'fs'
 import redis from "../configs/redis.config";
 import axios from "axios";
 import ServerConfigs from "../configs/server.config";
+import { generateApiToken } from "../utils/utils";
+import { DB, IDatabase } from "../configs/database.config";
 const lastSeen: Record<string, string | number> = {};
 
 @autoInjectable()
 export default class MatchController {
   private liveRepo: MatchLiveRepository;
+  private _DB: IDatabase = DB;
 
   constructor(private readonly matchService: MatchService, @inject("SocketIO") private readonly io?: SocketIOServer) {
     this.liveRepo = new MatchLiveRepository();
@@ -59,7 +62,7 @@ export default class MatchController {
 
   public async getMatchById(req: Request, res: Response) {
     const matchId = req.params.id;
-    
+
     const result = await this.matchService.fetchMatchById(matchId);
     return res.status(STATUS_CODE.SUCCESS).json({
       success: true,
@@ -166,6 +169,7 @@ export default class MatchController {
           let raw = JSON.parse(jsonStr);
 
           raw = transformCricketMatch(raw);
+         
           const matchKey = raw.match.id; // This is actually the match key from Roanuz
 
           // Get the actual match UUID from database using the key
@@ -177,8 +181,13 @@ export default class MatchController {
             return res.status(200).send({ ok: true, warning: "Match not found" });
           }
 
-          // push data inside redis for quick access (use key for Redis)
-          await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(raw));
+          // Fetch and store ball-by-ball data for answer generation
+          // This will enhance raw data with ballByBallData field
+          const enhancedData = await this.fetchAndStoreBallByBall(matchKey, raw);
+
+          // push enhanced data inside redis for quick access (use key for Redis)
+          // This now includes ballByBallData in the same object
+          await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(enhancedData));
 
           // Update contest statuses based on live match data
           this.updateContestStatuses(matchId, raw).catch(err => {
@@ -198,16 +207,16 @@ export default class MatchController {
     }
   }
 
- 
+
   /**
    * Update contest statuses by calling contest_service API
    */
   private async updateContestStatuses(matchId: string, liveMatchData: any): Promise<void> {
     try {
       const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
-      
+
       console.log(`[CONTEST-STATUS] Calling contest service to update statuses for match: ${matchId}`);
-      
+
       const response = await axios.post(
         `${contestServiceUrl}/api/v1/contests/update-status`,
         {
@@ -215,7 +224,7 @@ export default class MatchController {
           liveMatchData
         },
         {
-          timeout: 5000,
+          timeout: 60000, // Increased to 60 seconds for AI processing
           headers: { "Content-Type": "application/json" }
         }
       );
@@ -228,6 +237,170 @@ export default class MatchController {
         status: error?.response?.status
       });
       // Don't throw - we don't want to break webhook processing
+    }
+  }
+
+  /**
+   * Fetch and store ball-by-ball data from Roanuz API
+   * This data is used for generating accurate answers for contests
+   * Stores in both Redis and Database (LiveMatchData table)
+   * 
+   * Smart fetching: If there are missing overs, fetches all overs from last stored to current
+   * Example: If last stored was over 4 and current is 7, fetches overs 5, 6, 7
+   * 
+   * @returns Enhanced live data with ballByBallData embedded
+   */
+  private async fetchAndStoreBallByBall(matchKey: string, liveData: any): Promise<any> {
+    try {
+      const token = await generateApiToken();
+      if (!token) {
+        console.warn("[BALL-BY-BALL] No Roanuz token found, skipping ball-by-ball fetch");
+        return;
+      }
+
+      const projectKey = process.env.ROANUZ_PROJECT_KEY || "RS_P_1953059256576118792";
+      
+      // Fetch the main endpoint to get current over ball-by-ball data
+      const mainUrl = `https://api.sports.roanuz.com/v5/cricket/${projectKey}/match/${matchKey}/ball-by-ball/?token=${token}`;
+
+      console.log(`[BALL-BY-BALL] Fetching current over data for match: ${matchKey}`);
+
+      const response = await axios.get(mainUrl, {
+        timeout: 10000,
+        headers: { "Accept": "application/json" }
+      });
+
+      if (!response.data?.data?.over) {
+        console.warn(`[BALL-BY-BALL] No over data in response for match: ${matchKey}`);
+        return;
+      }
+
+      // Extract current over data
+      const currentOverData = response.data.data.over;
+      const inningsId = currentOverData.index?.innings;
+      const currentOverNumber = currentOverData.index?.over_number;
+
+      console.log(`[BALL-BY-BALL] Current over: ${currentOverNumber} of ${inningsId}`);
+
+      // Get existing ball-by-ball data from the last live data entry
+      let allOversData: any = {};
+      
+      const existingLiveData = await this.liveRepo.getCurrentLastdata(matchKey);
+      if (existingLiveData?.simplifiedData?.ballByBallData) {
+        allOversData = existingLiveData.simplifiedData.ballByBallData;
+        console.log(`[BALL-BY-BALL] Found existing ball-by-ball data in database`);
+      } else {
+        console.log(`[BALL-BY-BALL] No existing ball-by-ball data, starting fresh`);
+      }
+
+      // Initialize innings if not exists
+      if (!allOversData[inningsId]) {
+        allOversData[inningsId] = { overs: {} };
+      }
+
+      // Find the last stored over number for this innings
+      const storedOvers = Object.keys(allOversData[inningsId].overs || {}).map(Number);
+      const lastStoredOver = storedOvers.length > 0 ? Math.max(...storedOvers) : 0;
+
+      console.log(`[BALL-BY-BALL] Last stored over: ${lastStoredOver}, Current over: ${currentOverNumber}`);
+
+      // Determine which overs to fetch
+      const oversToFetch: number[] = [];
+      
+      if (currentOverNumber > lastStoredOver) {
+        // Fetch all missing overs from (lastStoredOver + 1) to currentOverNumber
+        for (let overNum = lastStoredOver + 1; overNum <= currentOverNumber; overNum++) {
+          oversToFetch.push(overNum);
+        }
+      } else if (currentOverNumber === lastStoredOver) {
+        // Update current over (might have new balls)
+        oversToFetch.push(currentOverNumber);
+      }
+
+      console.log(`[BALL-BY-BALL] Fetching overs: ${oversToFetch.join(', ')} for ${inningsId}`);
+
+      // Fetch each missing over
+      for (const overNum of oversToFetch) {
+        try {
+          // Use the specific over endpoint: /ball-by-ball/{innings_id}_{over_number}/
+          const overKey = `${inningsId}_${overNum}`;
+          const overUrl = `https://api.sports.roanuz.com/v5/cricket/${projectKey}/match/${matchKey}/ball-by-ball/${overKey}/?token=${token}`;
+          
+          console.log(`[BALL-BY-BALL] Fetching over ${overNum}: ${overUrl}`);
+
+          const overResponse = await axios.get(overUrl, {
+            timeout: 8000,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (overResponse.data?.data?.over) {
+            const fetchedOverData = overResponse.data.data.over;
+            
+            // Simplify over data - keep only essential information
+            const simplifiedOverData = {
+              innings: fetchedOverData.index?.innings,
+              overNumber: fetchedOverData.index?.over_number,
+              balls: (fetchedOverData.balls || []).map((ball: any) => ({
+                repr: ball.repr, // Ball representation (r0, r1, b4, b6, w, etc.)
+                runs: ball.team_score?.runs || 0,
+                wickets: ball.team_score?.wickets || 0,
+                isWicket: ball.team_score?.is_wicket || false,
+                isFour: ball.batsman?.is_four || false,
+                isSix: ball.batsman?.is_six || false,
+                isDot: ball.batsman?.is_dot_ball || false,
+                batsman: ball.batsman?.player_key,
+                bowler: ball.bowler?.player_key,
+                batsmanRuns: ball.batsman?.runs || 0,
+                ballType: ball.ball_type, // normal, wide, no_ball, leg_bye, etc.
+                extras: ball.team_score?.extras || 0
+              })),
+              totalRuns: fetchedOverData.balls?.reduce((sum: number, ball: any) => sum + (ball.team_score?.runs || 0), 0) || 0,
+              totalWickets: fetchedOverData.balls?.filter((ball: any) => ball.team_score?.is_wicket).length || 0
+            };
+            
+            allOversData[inningsId].overs[overNum] = simplifiedOverData;
+            console.log(`[BALL-BY-BALL] ✅ Fetched over ${overNum} of ${inningsId} (${simplifiedOverData.balls?.length || 0} balls, ${simplifiedOverData.totalRuns} runs)`);
+          } else {
+            console.warn(`[BALL-BY-BALL] No data for over ${overNum} of ${inningsId}`);
+          }
+
+          // Small delay to avoid rate limiting
+          if (oversToFetch.length > 1) {
+            await new Promise(resolve => setTimeout(resolve, 200));
+          }
+        } catch (overError: any) {
+          console.error(`[BALL-BY-BALL] Failed to fetch over ${overNum}:`, {
+            message: overError?.message,
+            status: overError?.response?.status
+          });
+          // Continue with next over even if one fails
+        }
+      }
+
+      // Enhance live data with ball-by-ball data
+      const enhancedLiveData = {
+        ...liveData,
+        ballByBallData: allOversData
+      };
+
+      // Store in Database - with ball-by-ball data embedded
+      await this._DB.LiveMatchData.create({
+        matchKey,
+        simplifiedData: enhancedLiveData,
+      } as any);
+
+      console.log(`[BALL-BY-BALL] ✅ Stored ${oversToFetch.length} over(s) for match: ${matchKey}`);
+      console.log(`[BALL-BY-BALL] 📊 Total overs stored: ${Object.keys(allOversData[inningsId]?.overs || {}).length} for ${inningsId}`);
+
+      // Return enhanced data so it can be stored in live_updates list
+      return enhancedLiveData;
+    } catch (error: any) {
+      console.error(`[BALL-BY-BALL] Failed to fetch ball-by-ball data for match ${matchKey}:`, {
+        message: error?.message,
+        status: error?.response?.status
+      });
+      // Return original data on error
+      return liveData;
     }
   }
 

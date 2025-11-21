@@ -752,13 +752,15 @@ USE THE EXACT SAME QUESTIONS AS INNINGS 1, just replace ${teams.a.name} with ${t
    async generateAnswers(
       matchData: any,
       liveData: any,
-      questions: any[]
+      questions: any[],
+      ballByBallData?: any
    ): Promise<AnswerResponse[]> {
       try {
          const prompt = this.buildAnswerGenerationPrompt(
             matchData,
             liveData,
-            questions
+            questions,
+            ballByBallData
          );
 
          logger.info("Generating answers with prompt:", matchData);
@@ -784,7 +786,8 @@ USE THE EXACT SAME QUESTIONS AS INNINGS 1, just replace ${teams.a.name} with ${t
    private buildAnswerGenerationPrompt(
       matchData: any,
       liveData: any,
-      questions: any[]
+      questions: any[],
+      ballByBallData?: any
    ): string {
     return `
 You are a deterministic cricket match analyzer.  
@@ -796,7 +799,7 @@ Your ONLY job is to extract answers from the EXACT JSON provided.
 1. YOU MUST read values from the JSON exactly as given.  
 2. YOU MUST NOT say data is missing unless the JSON path literally does not exist.  
 3. If a field exists ANYWHERE in the provided JSON text, assume it is available and USE IT.  
-4. You MUST NOT ignore "liveData" or "matchData".  
+4. You MUST NOT ignore "liveData", "matchData", or "ballByBallData".  
 5. NEVER guess any data. NEVER hallucinate missing fields.  
 6. Output ONLY the JSON array — no markdown, no commentary, no code fences.
 
@@ -823,12 +826,21 @@ ${JSON.stringify(matchData, null, 2)}
 LIVE MATCH DATA:
 ${JSON.stringify(liveData, null, 2)}
 
+${ballByBallData ? `BALL-BY-BALL DATA (Use this for detailed over-by-over analysis, powerplay stats, death overs, etc.):
+${JSON.stringify(ballByBallData, null, 2)}` : ''}
+
 QUESTIONS:
 ${JSON.stringify(questions, null, 2)}
 
 ###############################
 ### EXTRACTION LOGIC (STRICT)
 ###############################
+
+${ballByBallData ? `BALL-BY-BALL ANALYSIS:
+- Use ballByBallData for phase-specific questions (powerplay, middle, death overs)
+- Extract runs, wickets, boundaries for specific overs ranges
+- Calculate strike rates, economy rates for specific phases
+- Identify key partnerships during specific periods` : ''}
 
 TOSS:
 - winnerKey = liveData.toss.winner

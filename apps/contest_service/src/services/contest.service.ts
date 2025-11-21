@@ -800,6 +800,19 @@ export default class ContestService {
 
       logger.info(`[CONTEST SERVICE] Processing ${questions.length} questions`);
 
+      // Fetch ball-by-ball data (embedded in liveMatchData)
+      let ballByBallData = null;
+      try {
+        if (liveMatchData.ballByBallData) {
+          ballByBallData = liveMatchData.ballByBallData;
+          logger.info(`[CONTEST SERVICE] Retrieved ball-by-ball data from liveMatchData`);
+        } else {
+          logger.warn(`[CONTEST SERVICE] No ball-by-ball data found in liveMatchData`);
+        }
+      } catch (ballErr: any) {
+        logger.error(`[CONTEST SERVICE] Error accessing ball-by-ball data: ${ballErr?.message}`);
+      }
+
       // Generate answers for ALL questions at once using AI
       let successCount = 0;
       let failCount = 0;
@@ -808,11 +821,12 @@ export default class ContestService {
         logger.info(`[CONTEST SERVICE] Calling AI to generate answers for all questions`);
         logger.info(`[CONTEST SERVICE] Questions sent to AI: ${JSON.stringify(questions.map(q => ({ id: q.id, question: q.question })))}`);
         
-        // Call AI with all questions at once
+        // Call AI with all questions at once, including ball-by-ball data if available
         const generatedAnswers = await this.generativeAI.generateAnswers(
           liveMatchData.match,
           liveMatchData.live,
-          questions
+          questions,
+          ballByBallData // Pass ball-by-ball data to AI
         );
 
         logger.info(`[CONTEST SERVICE] AI returned response: ${JSON.stringify(generatedAnswers)}`);
