@@ -6,6 +6,7 @@ const sequelizeConfig = {
   host: ServerConfigs.DATABASE_HOST || "localhost",
   port: ServerConfigs.DATABASE_PORT || 5435,
   dialect: "postgres",
+  logging: false,
 };
 
 export default sequelizeConfig;

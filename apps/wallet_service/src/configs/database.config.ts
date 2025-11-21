@@ -22,7 +22,7 @@ const sequelize = new Sequelize({
   host: ServerConfigs.DATABASE_HOST,
   port: Number(ServerConfigs.DATABASE_PORT) || 5432,
   dialectOptions: {},
-  logging: console.log, // or false in production
+  logging: false, // or false in production
   define: {
     charset: "utf8mb4",
     underscored: true,

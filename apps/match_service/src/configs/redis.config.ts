@@ -10,6 +10,7 @@ export interface IRedis {
   setInList(listKey: string, value: string): Promise<boolean>;
   getList(listKey: string, start?: number, end?: number): Promise<any[]>;
   popBatch(listKey: string, count: number): Promise<string[]>;
+  deleter(key: string): Promise<boolean>;
 }
 
 class Redis implements IRedis {
@@ -110,6 +111,23 @@ async popBatch(listKey: string, count: number): Promise<string[]> {
     } catch (err: any) {
       logger.error(`[redis-pop] ${err.message}`);
       return [];
+    }
+  }
+
+  async deleter(key: string): Promise<boolean> {
+    try {
+      if (typeof key !== "string") key = JSON.stringify(key);
+      const result = await this.client.del(key);
+      if (result > 0) {
+        logger.info(`[redis-deleter] Deleted key: ${key}`);
+        return true;
+      } else {
+        logger.warn(`[redis-deleter] Key not found: ${key}`);
+        return false;
+      }
+    } catch (err: any) {
+      logger.error(`[redis-deleter] ${err.message}`);
+      return false;
     }
   }
 }
