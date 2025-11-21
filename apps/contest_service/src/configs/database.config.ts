@@ -29,7 +29,12 @@ const sequelize = new Sequelize({
   password: ServerConfigs.DATABASE_PASSWORD,
   host: ServerConfigs.DATABASE_HOST,
   port: Number(ServerConfigs.DATABASE_PORT) || 5432,
-  dialectOptions: {},
+  dialectOptions: {
+    ssl: {
+      require: false,
+      rejectUnauthorized: false,
+    },
+  },
   logging: false, // or false in production
   define: {
     charset: "utf8mb4",
