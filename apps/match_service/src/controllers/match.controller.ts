@@ -258,7 +258,7 @@ export default class MatchController {
         return;
       }
 
-      const projectKey = process.env.ROANUZ_PROJECT_KEY || "RS_P_1953059256576118792";
+      const projectKey = ServerConfigs.ROANUZ_PK;
       
       // Fetch the main endpoint to get current over ball-by-ball data
       const mainUrl = `https://api.sports.roanuz.com/v5/cricket/${projectKey}/match/${matchKey}/ball-by-ball/?token=${token}`;
