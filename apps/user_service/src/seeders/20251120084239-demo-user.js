@@ -22,7 +22,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('auths', {
+    return queryInterface.bulkDelete('users', {
       email: 'admin@wizplay.com'
     }, {});
   },

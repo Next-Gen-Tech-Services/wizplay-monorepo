@@ -24,6 +24,12 @@ class ServerConfigs {
   static KAF_CLIENT_ID: string = process.env.WALLET_KAF_CLIENT_ID || process.env.KAF_CLIENT_ID as string;
   static KAF_GROUP_ID: string = process.env.WALLET_KAF_GROUP_ID || process.env.KAF_GROUP_ID as string;
   static KAF_BROKERS: string = process.env.KAF_BROKERS as string;
+  static USER_SERVICE_URL: string = process.env.USER_SERVICE_URL as string;
+  static AUTH_SERVICE_URL: string = process.env.AUTH_SERVICE_URL as string;
+  static COUPON_SERVICE_URL: string = process.env.COUPONS_SERVICE_URL as string;
+  static CONTEST_SERVICE_URL: string = process.env.CONTEST_SERVICE_URL as string;
+  static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
+  static DB_SSL: string = process.env.DB_SSL || "false";
   private constructor() {}
 }
 

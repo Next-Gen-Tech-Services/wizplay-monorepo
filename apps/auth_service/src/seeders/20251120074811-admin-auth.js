@@ -6,7 +6,7 @@ module.exports = {
     
     return queryInterface.bulkInsert("auths", [
       {
-        id:"83f3abb2-ce48-4974-b613-32f257e15d33",
+        id: "83f3abb2-ce48-4974-b613-32f257e15d33",
         user_id: "f15d8f6f-29a5-48f3-bb44-1be9348a3b06",
         email: "admin@wizplay.com",
         phone_number: "+917795020428",
@@ -20,12 +20,12 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
-    ]);
+    ], { validate: false });
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('auths', {
-      email: 'admin@wizplay.com'
+    return queryInterface.bulkDelete("auths", {
+      email: "admin@wizplay.com",
     }, {});
   },
 };

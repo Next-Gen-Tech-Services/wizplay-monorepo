@@ -31,6 +31,7 @@ class ServerConfigs {
   static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
   static MATCH_SERVICE_URL: string = process.env.MATCH_SERVICE_URL as string;
   static USER_SERVICE_URL: string = process.env.USER_SERVICE_URL as string;
+  static DB_SSL: string = process.env.DB_SSL as string;
   private constructor() {}
 }
 

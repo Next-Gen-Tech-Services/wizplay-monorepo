@@ -18,6 +18,8 @@ export interface IDatabase {
   MatchLiveEvent: typeof MatchLiveEvent;
   LiveMatchData: typeof LiveMatchData;
 }
+// SSL configuration
+const useSSL = ServerConfigs.DB_SSL === "true";
 
 const sequelize = new Sequelize({
   dialect: "postgres",
@@ -26,12 +28,15 @@ const sequelize = new Sequelize({
   password: ServerConfigs.DATABASE_PASSWORD,
   host: ServerConfigs.DATABASE_HOST,
   port: Number(ServerConfigs.DATABASE_PORT) || 5432,
-  dialectOptions: {
-    ssl: {
-      require: false,
-      rejectUnauthorized: false,
-    },
-  },
+  dialectOptions: useSSL
+    ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    }
+    : {},
+  
   logging: false,
   define: {
     charset: "utf8mb4",
@@ -52,7 +57,7 @@ export async function connectDatabase() {
     // Only sync on first run or when explicitly needed
     // Use migrations for production instead of sync
     if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ alter: true });
       logger.info("Database synced ✅");
     }
     logger.info("Database connection established ✅");

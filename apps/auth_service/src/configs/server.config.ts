@@ -32,7 +32,7 @@ class ServerConfigs {
   static MSG91_BASE_URL: string = process.env.MSG91_BASE_URL as string;
   static MSG91_AUTH_KEY: string = process.env.MSG91_AUTH_KEY as string;
   static MSG91_TEMPLATE_ID: string = process.env.MSG91_TEMPLATE_ID as string;
-
+  static DB_SSL: string = process.env.DB_SSL as string;
   static GOOGLE_IOS_CLIENT_ID: string = process.env
     .GOOGLE_IOS_CLIENT_ID as string;
   static GOOGLE_ANDROID_CLIENT_ID: string = process.env

@@ -22,6 +22,8 @@ export interface IDatabase {
   UserSubmission: typeof UserSubmission;
 }
 
+// SSL configuration
+const useSSL = ServerConfigs.DB_SSL === "true";
 const sequelize = new Sequelize({
   dialect: "postgres",
   database: ServerConfigs.DATABASE_NAME,
@@ -29,12 +31,14 @@ const sequelize = new Sequelize({
   password: ServerConfigs.DATABASE_PASSWORD,
   host: ServerConfigs.DATABASE_HOST,
   port: Number(ServerConfigs.DATABASE_PORT) || 5432,
-  dialectOptions: {
-    ssl: {
-      require: false,
-      rejectUnauthorized: false,
-    },
-  },
+  dialectOptions: useSSL
+    ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    }
+    : {},
   logging: false, // or false in production
   define: {
     charset: "utf8mb4",
@@ -105,7 +109,7 @@ export async function connectDatabase() {
   try {
     await sequelize.authenticate();
     if (ServerConfigs.DB_SYNC === 'true') {
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ alter: true });
       logger.info("Database synced ✅");
     }
     logger.info("Database connection established ✅");

@@ -9,7 +9,8 @@
     "dev": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build -- ./src/server.ts",
     "dev:docker": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only --ignore-watch node_modules --ignore-watch dist --ignore-watch build --poll ./src/server.ts",
     "start": "NODE_ENV=production node dist/server.js",
-    "seed:all": "npx sequelize-cli db:seed:all"
+    "seed:all": "NODE_ENV=development npx sequelize-cli db:seed:all",
+    "prod:seed:all": "NODE_ENV=production npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",

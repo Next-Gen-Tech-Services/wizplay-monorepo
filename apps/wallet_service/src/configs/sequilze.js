@@ -1,11 +1,33 @@
-import ServerConfigs from "./server.config";
-const sequelizeConfig = {
-  username: ServerConfigs.DATABASE_USERNAME || "wallet_db",
-  password: ServerConfigs.DATABASE_PASSWORD || "wallet_db",
-  database: ServerConfigs.DATABASE_NAME || "wallet_service",
-  host: ServerConfigs.DATABASE_HOST || "localhost",
-  port: ServerConfigs.DATABASE_PORT || 5439,
-  dialect: "postgres",
-};
+"use strict";
 
-export default sequelizeConfig;
+const path = require("path");
+const dotenv = require("dotenv");
+// Load environment variables
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV || "development"}`,
+});
+
+const useSSL = process.env.DB_SSL === "true";
+
+module.exports = {
+  username: process.env.WALLET_DATABASE_USERNAME || "postgres",
+  password: process.env.WALLET_DATABASE_PASSWORD || "user_db",
+  database: process.env.WALLET_DATABASE_NAME || "user_service",
+  host: process.env.WALLET_DATABASE_HOST || "localhost",
+  port: process.env.WALLET_DATABASE_PORT || 5436,
+  dialect: "postgres",
+  dialectOptions: useSSL
+    ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    }
+    : {},
+
+  logging: false,
+  define: {
+    charset: "utf8mb4",
+    underscored: true,
+  },
+};

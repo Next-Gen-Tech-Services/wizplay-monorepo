@@ -46,6 +46,8 @@ class ServerConfigs {
   
   // Other services
   static USER_SERVICE_URL: string = process.env.USER_SERVICE_URL || "http://localhost:4002";
+
+  static DB_SSL: string = process.env.DB_SSL || "false";
   
   private constructor() {}
   

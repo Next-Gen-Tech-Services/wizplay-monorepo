@@ -28,6 +28,7 @@ class ServerConfigs {
   static SMTP_PASS: string = process.env.SMTP_PASS as string;
   static SMTP_HOST: string = process.env.SMTP_HOST as string;
   static SMTP_PORT: string = process.env.SMTP_PORT as string;
+  static DB_SSL: string = process.env.DB_SSL as string;
 
   private constructor() {}
 }

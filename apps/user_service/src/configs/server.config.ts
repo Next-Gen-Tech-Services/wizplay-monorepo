@@ -29,6 +29,7 @@ class ServerConfigs {
   static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
   static COUPON_SERVICE_URL: string = process.env.COUPONS_SERVICE_URL as string;
   static AUTH_SERVICE_URL: string = process.env.AUTH_SERVICE_URL as string;
+  static DB_SSL: string = process.env.DB_SSL || "false";
   private constructor() {}
 }
 
