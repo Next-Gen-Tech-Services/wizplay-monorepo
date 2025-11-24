@@ -816,34 +816,35 @@ export default class ContestRepository {
    */
   public async getUserContestScores(contestId: string): Promise<any[]> {
     try {
-      const { fn, col, literal } = require('sequelize');
-      
-      // First check if there are any submissions
-      const submissionCount = await this._DB.UserSubmission.count({
-        where: { contestId }
+      // Get all submissions grouped by user with their totalScore
+      const submissions = await this._DB.UserSubmission.findAll({
+        where: { contestId },
+        attributes: [
+          'userId',
+          [this._DB.sequelize.fn('MAX', this._DB.sequelize.col('totalScore')), 'totalScore'],
+          [this._DB.sequelize.fn('MAX', this._DB.sequelize.col('maxScore')), 'maxScore'],
+        ],
+        group: ['userId'],
+        raw: true,
       });
 
-      if (submissionCount === 0) {
+      if (!submissions || submissions.length === 0) {
         logger.info(`[CONTEST-REPO] No submissions found for contest ${contestId}`);
         return [];
       }
 
-      const scores = await this._DB.UserSubmission.findAll({
-        where: { contestId },
-        attributes: [
-          'userId',
-          [fn('COALESCE', fn('SUM', col('points')), 0), 'totalScore'],
-        ],
-        group: ['userId'],
-        order: [[literal('totalScore'), 'DESC']],
-        raw: true,
-      });
-
-      // Add ranks
-      return scores.map((score: any, index: number) => ({
-        ...score,
+      // Sort by totalScore descending and add ranks
+      const sorted = submissions.sort((a: any, b: any) => (b.totalScore || 0) - (a.totalScore || 0));
+      
+      const scores = sorted.map((score: any, index: number) => ({
+        userId: score.userId,
+        totalScore: score.totalScore || 0,
+        maxScore: score.maxScore || 0,
         rank: index + 1,
       }));
+
+      logger.info(`[CONTEST-REPO] Calculated scores for ${scores.length} users in contest ${contestId}`);
+      return scores;
     } catch (err: any) {
       logger.error(`getUserContestScores DB error: ${err?.message ?? err}`);
       logger.error(`getUserContestScores DB stack: ${err?.stack || 'No stack'}`);
@@ -856,10 +857,11 @@ export default class ContestRepository {
    */
   public async updateUserContestScore(contestId: string, userId: string, totalScore: number, rank: number): Promise<void> {
     try {
-      await this._DB.UserContest.update(
+      const result = await this._DB.UserContest.update(
         { score: totalScore, rank } as any,
         { where: { contestId, userId } }
       );
+      logger.info(`[CONTEST-REPO] Updated UserContest for user ${userId} in contest ${contestId}: score=${totalScore}, rank=${rank}`);
     } catch (err: any) {
       logger.error(`updateUserContestScore DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error updating user contest score");

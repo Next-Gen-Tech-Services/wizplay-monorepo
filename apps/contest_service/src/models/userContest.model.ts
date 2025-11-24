@@ -2,7 +2,7 @@ import { DataTypes, Model, Optional, Sequelize, UUIDV4 } from "sequelize";
 import { IUserContestAttributes } from "../dtos/usercontest.dto";
 
 interface UserContestCreationAttributes
-  extends Optional<IUserContestAttributes, "id" | "createdAt" | "updatedAt"> {}
+  extends Optional<IUserContestAttributes, "id" | "score" | "rank" | "createdAt" | "updatedAt"> {}
 
 export class UserContest
   extends Model<IUserContestAttributes, UserContestCreationAttributes>
@@ -13,6 +13,8 @@ export class UserContest
   public contestId!: string;
   public matchId!: string;
   public status!: "active" | "completed";
+  public score?: number;
+  public rank?: number;
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
@@ -43,6 +45,16 @@ export default function (sequelize: Sequelize) {
         allowNull: false,
         defaultValue: "active",
       },
+      score: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
+      rank: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: null,
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -64,3 +76,4 @@ export default function (sequelize: Sequelize) {
 
   return UserContest;
 }
+

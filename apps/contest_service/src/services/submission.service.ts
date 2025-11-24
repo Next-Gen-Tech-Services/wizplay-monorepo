@@ -108,7 +108,6 @@ export default class SubmissionService {
               ...base,
               question: q.question ?? null,
               options: q.options ?? null,
-              ansKey: rawCorrect ?? null,
             });
             continue;
           } else {
@@ -126,7 +125,6 @@ export default class SubmissionService {
               ...base,
               question: q.question ?? null,
               options: q.options ?? null,
-              ansKey: rawCorrect ?? null,
             });
             continue;
           }
@@ -148,12 +146,15 @@ export default class SubmissionService {
           earnedPoints: earned,
         };
 
-        if (revealCorrect) answerRecord.correctKey = rawCorrect;
+        // Only include correctKey if explicitly requested
+        if (revealCorrect) {
+          answerRecord.correctKey = rawCorrect;
+          answerRecord.ansKey = rawCorrect;
+        }
 
         // flatten selected question fields into the answer
         answerRecord.question = q.question ?? null;
         answerRecord.options = q.options ?? null;
-        answerRecord.ansKey = rawCorrect ?? null;
 
         detailedAnswers.push(answerRecord);
       }

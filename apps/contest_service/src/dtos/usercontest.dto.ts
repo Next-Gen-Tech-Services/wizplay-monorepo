@@ -4,6 +4,8 @@ export interface IUserContestAttributes {
   contestId: string;
   matchId: string;
   status: "active" | "completed";
+  score?: number;
+  rank?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

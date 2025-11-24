@@ -899,37 +899,94 @@ export default class ContestService {
     try {
       logger.info(`[CONTEST SERVICE] Calculating scores for contest ${contestId}`);
 
-      // Get questions with answers
+      // Get questions with answers (now includes ansKey that was auto-generated)
       const questions = await this.repo.getQuestionsByContestId(contestId);
       const questionMap = new Map(questions.map((q: any) => [q.id, q]));
 
-      // Get all submissions
+      logger.info(`[CONTEST SERVICE] Questions loaded: ${questions.length} questions with answers`);
+
+      // Get all submissions for this contest
       const submissions = await this.repo.getUserSubmissionsByContestId(contestId);
       if (!submissions || submissions.length === 0) {
         logger.info(`[CONTEST SERVICE] No submissions found for contest ${contestId}`);
         return;
       }
 
-      logger.info(`[CONTEST SERVICE] Calculating ${submissions.length} submissions`);
+      logger.info(`[CONTEST SERVICE] Recalculating scores for ${submissions.length} submissions`);
 
-      // Calculate each submission
+      // Recalculate each submission by re-evaluating answers against questions
       for (const submission of submissions) {
         try {
-          const question = questionMap.get(submission.questionId);
-          if (!question || !question.ansKey) {
-            continue;
+          let newTotalScore = 0;
+          let maxScore = 0;
+          const updatedAnswers: any[] = [];
+
+          // Parse answers from submission
+          const answers = Array.isArray(submission.answers) ? submission.answers : [];
+          
+          logger.info(`[CONTEST SERVICE] Processing submission ${submission.id}: ${answers.length} answers`);
+
+          // Re-evaluate each answer
+          for (const answer of answers) {
+            const question = questionMap.get(answer.questionId);
+            
+            if (!question) {
+              logger.warn(`[CONTEST SERVICE] Question ${answer.questionId} not found for submission ${submission.id}`);
+              updatedAnswers.push({
+                ...answer,
+                isCorrect: false,
+                earnedPoints: 0,
+                note: 'question not found'
+              });
+              continue;
+            }
+
+            // Get the correct answer from question
+            const correctAnswer = question.ansKey || question.correctKey || null;
+            const questionPoints = question.points || 1;
+            
+            // Normalize for comparison
+            const normalize = (v: any) => 
+              v === null || v === undefined ? '' : String(v).trim().toLowerCase();
+            
+            const selectedNorm = normalize(answer.selectedKey);
+            const correctNorm = normalize(correctAnswer);
+            
+            // Determine if answer is correct
+            const isCorrect = correctNorm && selectedNorm === correctNorm;
+            const earnedPoints = isCorrect ? questionPoints : 0;
+
+            newTotalScore += earnedPoints;
+            maxScore += questionPoints;
+
+            updatedAnswers.push({
+              ...answer,
+              isCorrect,
+              earnedPoints,
+              ansKey: correctAnswer, // Include the correct answer for reference
+              note: isCorrect ? 'correct' : 'incorrect'
+            });
+
+            logger.info(`[CONTEST SERVICE] Answer evaluation - Q${answer.questionId}: selected="${selectedNorm}" vs correct="${correctNorm}" = ${isCorrect ? 'CORRECT' : 'WRONG'} (${earnedPoints}/${questionPoints} points)`);
           }
 
-          const isCorrect = submission.answer === question.ansKey;
-          const points = isCorrect ? (question.points || 1) : 0;
+          // Update submission with recalculated scores
+          await DB.UserSubmission.update(
+            { 
+              totalScore: newTotalScore,
+              maxScore: maxScore,
+              answers: updatedAnswers 
+            },
+            { where: { id: submission.id } }
+          );
 
-          await this.repo.updateSubmissionScore(submission.id, points, isCorrect);
+          logger.info(`[CONTEST SERVICE] ✅ Updated submission ${submission.id}: ${newTotalScore}/${maxScore} points`);
         } catch (err: any) {
           logger.error(`[CONTEST SERVICE] Error calculating submission ${submission.id}: ${err?.message}`);
         }
       }
 
-      // Update leaderboard
+      // Update leaderboard with final rankings
       await this.updateLeaderboard(contestId);
 
       logger.info(`[CONTEST SERVICE] ✅ Score calculation completed for contest ${contestId}`);
@@ -944,6 +1001,8 @@ export default class ContestService {
    */
   private async updateLeaderboard(contestId: string): Promise<void> {
     try {
+      logger.info(`[CONTEST SERVICE] Starting leaderboard update for contest ${contestId}`);
+      
       const userScores = await this.repo.getUserContestScores(contestId);
       
       if (!userScores || userScores.length === 0) {
@@ -953,8 +1012,9 @@ export default class ContestService {
 
       logger.info(`[CONTEST SERVICE] Updating leaderboard for ${userScores.length} users in contest ${contestId}`);
       
-      for (const userScore of userScores) {
+      const updatePromises = userScores.map(async (userScore) => {
         try {
+          logger.info(`[CONTEST SERVICE] Updating leaderboard - User: ${userScore.userId}, Score: ${userScore.totalScore}, Rank: ${userScore.rank}`);
           await this.repo.updateUserContestScore(
             contestId,
             userScore.userId,
@@ -964,9 +1024,10 @@ export default class ContestService {
         } catch (updateErr: any) {
           logger.error(`[CONTEST SERVICE] Error updating leaderboard for user ${userScore.userId}: ${updateErr?.message}`);
         }
-      }
+      });
 
-      logger.info(`[CONTEST SERVICE] Leaderboard updated for contest ${contestId}`);
+      await Promise.all(updatePromises);
+      logger.info(`[CONTEST SERVICE] ✅ Leaderboard updated for contest ${contestId} with ${userScores.length} rankings`);
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] updateLeaderboard error: ${error.message}`);
       logger.error(`[CONTEST SERVICE] Stack: ${error.stack}`);
