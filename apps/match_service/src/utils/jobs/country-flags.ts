@@ -158,8 +158,13 @@ class CountryFlagsCron {
   public async scheduleJob(): Promise<void> {
     // Run once on startup
     logger.info("[FLAGS-CRON] Running initial flags sync on startup...");
-    // await this.generateApiToken();
-    // await this.syncFlags();
+    // Generate API token and sync flags on startup so public/flags is populated
+    try {
+      await this.generateApiToken();
+      await this.syncFlags();
+    } catch (err: any) {
+      logger.error(`[FLAGS-CRON] Initial flags sync failed: ${err?.message || err}`);
+    }
 
     // Schedule to run daily at 2 AM (when traffic is low)
     cron.schedule("0 2 * * *", async () => {

@@ -20,6 +20,10 @@ RUN pnpm add -g ts-node-dev
 # Copy source code
 COPY . .
 
+# Ensure flags directory exists and copy any host flags into the image
+RUN mkdir -p public/flags && \
+	if [ -d public/flags ]; then echo "Including flags in image"; else echo "No flags found in build context"; fi
+
 # Expose port
 EXPOSE 4003
 
