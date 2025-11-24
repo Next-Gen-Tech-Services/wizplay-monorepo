@@ -303,6 +303,8 @@ services:
       REDIS_HOST: redis
     env_file:
       - .env.production
+    volumes:
+      - match_flags:/app/public/flags
     depends_on:
       match_db_server:
         condition: service_healthy
@@ -503,4 +505,6 @@ volumes:
   zookeeper_data:
     driver: local
   redis_data:
+    driver: local
+  match_flags:
     driver: local
