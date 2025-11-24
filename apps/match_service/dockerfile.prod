@@ -68,8 +68,11 @@ RUN addgroup --system --gid 1001 nodejs && \
 # Copy deployed files from deploy stage
 COPY --from=deploy --chown=matchservice:nodejs /deploy/output ./
 
-# Create logs and public/flags directories with proper permissions
-RUN mkdir -p ./logs ./public/flags && chown -R matchservice:nodejs ./logs ./public
+# Copy public assets (including flags) from source
+COPY --chown=matchservice:nodejs apps/match_service/public ./public
+
+# Create logs directory with proper permissions
+RUN mkdir -p ./logs && chown -R matchservice:nodejs ./logs ./public
 
 USER matchservice
 
