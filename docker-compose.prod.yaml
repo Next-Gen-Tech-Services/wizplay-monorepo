@@ -419,7 +419,6 @@ services:
       NODE_ENV: production
       PORT: 4007
       REDIS_HOST: redis
-      NOTIFICATION_DATABASE_HOST: notification_db_server
     env_file:
       - .env.production
     depends_on:
