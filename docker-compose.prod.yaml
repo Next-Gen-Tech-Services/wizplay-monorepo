@@ -1,163 +1,8 @@
 # Production Docker Compose Configuration
 # Uses universal .env.production file from root directory
+# Database connections are configured via RDS in .env.production
 
 services:
-  # Databases
-  user_db_server:
-    image: "postgres:15-alpine"
-    container_name: user_db_server
-    ports:
-      - "5436:5432"
-    environment:
-      POSTGRES_USER: ${USER_DB_USER:-user_db}
-      POSTGRES_PASSWORD: ${USER_DB_PASSWORD:-user_db}
-      POSTGRES_DB: user_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - user_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${USER_DB_USER:-user_db} -d user_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  auth_db_server:
-    image: "postgres:15-alpine"
-    container_name: auth_db_server
-    ports:
-      - "5434:5432"
-    environment:
-      POSTGRES_USER: ${AUTH_DB_USER:-auth_db}
-      POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD:-auth_db}
-      POSTGRES_DB: auth_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - auth_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${AUTH_DB_USER:-auth_db} -d auth_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  match_db_server:
-    image: "postgres:15-alpine"
-    container_name: match_db_server
-    ports:
-      - "5435:5432"
-    environment:
-      POSTGRES_USER: ${MATCH_DB_USER:-match_db}
-      POSTGRES_PASSWORD: ${MATCH_DB_PASSWORD:-match_db}
-      POSTGRES_DB: match_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - match_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${MATCH_DB_USER:-match_db} -d match_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  coupon_db_server:
-    image: "postgres:15-alpine"
-    container_name: coupon_db_server
-    ports:
-      - "5437:5432"
-    environment:
-      POSTGRES_USER: ${COUPON_DB_USER:-coupon_db}
-      POSTGRES_PASSWORD: ${COUPON_DB_PASSWORD:-coupon_db}
-      POSTGRES_DB: coupon_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - coupon_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${COUPON_DB_USER:-coupon_db} -d coupon_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  contest_db_server:
-    image: "postgres:15-alpine"
-    container_name: contest_db_server
-    ports:
-      - "5438:5432"
-    environment:
-      POSTGRES_USER: ${CONTEST_DB_USER:-contest_db}
-      POSTGRES_PASSWORD: ${CONTEST_DB_PASSWORD:-contest_db}
-      POSTGRES_DB: contest_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - contest_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${CONTEST_DB_USER:-contest_db} -d contest_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  wallet_db_server:
-    image: "postgres:15-alpine"
-    container_name: wallet_db_server
-    ports:
-      - "5439:5432"
-    environment:
-      POSTGRES_USER: ${WALLET_DB_USER:-wallet_db}
-      POSTGRES_PASSWORD: ${WALLET_DB_PASSWORD:-wallet_db}
-      POSTGRES_DB: wallet_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - wallet_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${WALLET_DB_USER:-wallet_db} -d wallet_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  notification_db_server:
-    image: "postgres:15-alpine"
-    container_name: notification_db_server
-    ports:
-      - "5440:5432"
-    environment:
-      POSTGRES_USER: ${NOTIFICATION_DB_USER:-notification_db}
-      POSTGRES_PASSWORD: ${NOTIFICATION_DB_PASSWORD:-notification_db}
-      POSTGRES_DB: notification_service
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-    volumes:
-      - notification_db_data:/var/lib/postgresql/data
-      - ./database/init/:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${NOTIFICATION_DB_USER:-notification_db} -d notification_service"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  # Zookeeper for Kafka (Confluent)
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     container_name: zookeeper
@@ -246,8 +91,6 @@ services:
     env_file:
       - .env.production
     depends_on:
-      auth_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -275,8 +118,6 @@ services:
     env_file:
       - .env.production
     depends_on:
-      user_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -306,8 +147,6 @@ services:
     volumes:
       - match_flags:/app/public/flags
     depends_on:
-      match_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -335,8 +174,6 @@ services:
     env_file:
       - .env.production
     depends_on:
-      coupon_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -364,8 +201,6 @@ services:
     env_file:
       - .env.production
     depends_on:
-      contest_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -393,8 +228,6 @@ services:
     env_file:
       - .env.production
     depends_on:
-      wallet_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -422,8 +255,6 @@ services:
     env_file:
       - .env.production
     depends_on:
-      notification_db_server:
-        condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -486,20 +317,6 @@ networks:
 
 volumes:
   kafka_data:
-    driver: local
-  user_db_data:
-    driver: local
-  auth_db_data:
-    driver: local
-  match_db_data:
-    driver: local
-  coupon_db_data:
-    driver: local
-  contest_db_data:
-    driver: local
-  wallet_db_data:
-    driver: local
-  notification_db_data:
     driver: local
   zookeeper_data:
     driver: local
