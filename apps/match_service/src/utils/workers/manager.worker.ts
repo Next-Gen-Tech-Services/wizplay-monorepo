@@ -14,9 +14,15 @@ export function startMatchWorker(matchId: string) {
     return;
   }
   logger.info("============================= Starting Worker ============================= ")
+  
+  // Determine correct extension based on environment
+  // In production (compiled), use .js; in development (ts-node), use .ts
+  const isProduction = __dirname.includes('/dist/');
+  const workerExtension = isProduction ? '.js' : '.ts';
+  
   const workerPath = path.resolve(
     __dirname,
-    "./liveMatch.worker.ts"
+    `./liveMatch.worker${workerExtension}`
   );
 
   console.log("Worker Path =>", workerPath);
