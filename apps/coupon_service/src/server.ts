@@ -4,7 +4,6 @@ import AppInit from "./app";
 import { connectDatabase } from "./configs/database.config";
 import redis from "./configs/redis.config";
 import ServerConfigs from "./configs/server.config";
-import { shutDown } from "./utils/shutdown";
 
 async function startServer() {
   await connectDatabase();

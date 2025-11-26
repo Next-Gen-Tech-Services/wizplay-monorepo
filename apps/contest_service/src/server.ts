@@ -3,7 +3,6 @@ import { logger } from "@repo/common";
 import AppInit from "./app";
 import { connectDatabase } from "./configs/database.config";
 import ServerConfigs from "./configs/server.config";
-import { shutDown } from "./utils/shutdown";
 
 async function startServer() {
   await connectDatabase();
@@ -17,24 +16,6 @@ async function startServer() {
   // Set server timeout to 3 minutes for AI generation endpoints
   server.timeout = 180000; // 3 minutes
   server.keepAliveTimeout = 185000; // Slightly longer than timeout
-
-  process.on("SIGTERM", () => {
-    shutDown(1, server);
-  });
-  
-  process.on("SIGINT", () => {
-    shutDown(1, server);
-  });
-
-  process.on("uncaughtException", (err) => {
-    logger.error("Uncaught Exception:", err);
-    shutDown(1, server);
-  });
-
-  process.on("unhandledRejection", (reason: any) => {
-    logger.error("Unhandled Rejection:", reason);
-    shutDown(1, server);
-  });
 }
 
 startServer();
