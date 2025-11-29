@@ -39,12 +39,19 @@ transports.push(
 // Add file transports only if directory exists and is writable
 try {
   if (fs.existsSync(logDir)) {
+    // File transport format - use JSON in production, simple format in development
+    const fileFormat = isProduction
+      ? combine(timestamp(), errors({ stack: true }), json())
+      : combine(timestamp(), errors({ stack: true }), logFormat);
+
     const serverLogTransport = new winston.transports.File({
       filename: path.join(logDir, "server.log"),
+      format: fileFormat,
     });
     const errorLogTransport = new winston.transports.File({
       filename: path.join(logDir, "error.log"),
       level: "error",
+      format: fileFormat,
     });
 
     // Handle file transport errors
@@ -61,10 +68,10 @@ try {
   console.error("Failed to setup file transports:", err);
 }
 
-// Base winston logger
+// Base winston logger - each transport defines its own format
 const baseLogger = winston.createLogger({
   level: "info",
-  format: combine(timestamp(), errors({ stack: true }), logFormat),
+  format: combine(timestamp(), errors({ stack: true })),
   transports,
 });
 
