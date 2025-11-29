@@ -3,42 +3,70 @@ import fs from "fs";
 import path from "path";
 import winston from "winston";
 
-const { combine, timestamp, errors, printf, colorize } = winston.format;
+const { combine, timestamp, errors, printf, colorize, json } = winston.format;
 
-// Simple log format
+const isProduction = process.env.NODE_ENV === "production";
+
+// Simple log format for console output
 const logFormat = printf(({ level, message, timestamp, stack }) => {
   return `${timestamp} ${level}: ${stack || message}`;
 });
 
 const logDir = path.join(process.cwd(), "logs");
 
-// Ensure logs folder exists
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
+// Ensure logs folder exists with error handling
+try {
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir, { recursive: true });
+  }
+} catch (err) {
+  // Log to console if we can't create the logs directory
+  console.error(`Failed to create logs directory at ${logDir}:`, err);
+}
+
+// Build transports array
+const transports: winston.transport[] = [];
+
+// Always add console transport - in production, Docker/Kubernetes captures stdout/stderr
+transports.push(
+  new winston.transports.Console({
+    format: isProduction
+      ? combine(timestamp(), errors({ stack: true }), json())
+      : combine(colorize(), timestamp(), errors({ stack: true }), logFormat),
+  })
+);
+
+// Add file transports only if directory exists and is writable
+try {
+  if (fs.existsSync(logDir)) {
+    const serverLogTransport = new winston.transports.File({
+      filename: path.join(logDir, "server.log"),
+    });
+    const errorLogTransport = new winston.transports.File({
+      filename: path.join(logDir, "error.log"),
+      level: "error",
+    });
+
+    // Handle file transport errors
+    serverLogTransport.on("error", (err) => {
+      console.error("Error writing to server.log:", err);
+    });
+    errorLogTransport.on("error", (err) => {
+      console.error("Error writing to error.log:", err);
+    });
+
+    transports.push(serverLogTransport, errorLogTransport);
+  }
+} catch (err) {
+  console.error("Failed to setup file transports:", err);
 }
 
 // Base winston logger
 const baseLogger = winston.createLogger({
   level: "info",
   format: combine(timestamp(), errors({ stack: true }), logFormat),
-  transports: [
-    new winston.transports.File({
-      filename: path.join(logDir, "server.log"),
-    }),
-    new winston.transports.File({
-      filename: path.join(logDir, "error.log"),
-      level: "error",
-    }),
-  ],
+  transports,
 });
-
-if (process.env.NODE_ENV !== "production") {
-  baseLogger.add(
-    new winston.transports.Console({
-      format: combine(colorize(), logFormat),
-    })
-  );
-}
 
 // Function to get caller information
 function getCallerInfo(): string {
