@@ -10,7 +10,22 @@ const logFormat = printf(({ level, message, timestamp, stack }) => {
   return `${timestamp} ${level}: ${stack || message}`;
 });
 
-const logDir = path.join(process.cwd(), "logs");
+// Determine the correct log directory
+// In a monorepo, we want logs in the service directory, not the package directory
+function getLogDirectory(): string {
+  // Use LOG_DIR environment variable if provided
+  if (process.env.LOG_DIR) {
+    return path.resolve(process.env.LOG_DIR);
+  }
+
+  // Default to logs directory in the current working directory
+  // This works correctly when:
+  // - Running from service directory: logs go to service/logs
+  // - Running from monorepo root via turbo: logs go to root/logs (or can be overridden with LOG_DIR)
+  return path.join(process.cwd(), "logs");
+}
+
+const logDir = getLogDirectory();
 
 // Ensure logs folder exists
 try {
@@ -19,28 +34,41 @@ try {
   }
 } catch (error) {
   console.error("Failed to create logs directory:", error);
+  // Fallback to console-only logging if file logging fails
 }
 
 // Determine log level from environment variable or default
 const logLevel = process.env.LOG_LEVEL || (process.env.NODE_ENV === "production" ? "info" : "debug");
 
-// Base winston logger
-const baseLogger = winston.createLogger({
-  level: logLevel,
-  format: combine(timestamp(), errors({ stack: true }), logFormat),
-  transports: [
+// Create transports array
+const transports: winston.transport[] = [];
+
+// Try to add file transports, but don't fail if it doesn't work
+try {
+  transports.push(
     new winston.transports.File({
       filename: path.join(logDir, "server.log"),
       handleExceptions: true,
       handleRejections: true,
-    }),
+    })
+  );
+  transports.push(
     new winston.transports.File({
       filename: path.join(logDir, "error.log"),
       level: "error",
       handleExceptions: true,
       handleRejections: true,
-    }),
-  ],
+    })
+  );
+} catch (error) {
+  console.error("Failed to initialize file transports, falling back to console only:", error);
+}
+
+// Base winston logger
+const baseLogger = winston.createLogger({
+  level: logLevel,
+  format: combine(timestamp(), errors({ stack: true }), logFormat),
+  transports,
   exitOnError: false,
 });
 
