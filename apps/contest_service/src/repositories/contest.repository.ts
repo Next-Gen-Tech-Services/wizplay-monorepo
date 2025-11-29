@@ -39,15 +39,30 @@ export default class ContestRepository {
       const d = data as any; // <-- cast to any once for dynamic fields
 
       // --- optional: compute hasJoined if userId provided ---
-      // hasJoined should be true if user has joined (has entry in UserContest)
+      // hasJoined should be true if:
+      // 1. User has submitted answers (has UserSubmission record), OR
+      // 2. User has joined the contest (has UserContest record)
       let hasJoined = false;
+      let hasSubmitted = false;
+      
       if (userId) {
+        // Check if user has submitted answers
+        const submission = await this._DB.UserSubmission.findOne({
+          where: { userId, contestId: id },
+          attributes: ["id"],
+          raw: true,
+        });
+        hasSubmitted = !!submission;
+        
+        // Check if user has joined the contest
         const joined = await this._DB.UserContest.findOne({
           where: { userId, contestId: id },
           attributes: ["id"],
           raw: true,
         });
-        hasJoined = !!joined;
+        
+        // If submitted answers OR joined the contest
+        hasJoined = hasSubmitted || !!joined;
       }
 
       // Helper: compress a single contest's rank/prize array into consecutive ranges with same amount
@@ -231,13 +246,20 @@ export default class ContestRepository {
       let submittedContestIds = new Set<string>();
       
       if (userId) {
+        logger.info(`[CONTEST-REPO] Fetching contest data for userId: ${userId}`);
+        
+        // Get contests where user has joined
         const joinedRows = await this._DB.UserContest.findAll({
           where: { userId },
           attributes: ["contestId"],
           raw: true,
         });
+        logger.info(`[CONTEST-REPO] Found ${joinedRows.length} joined contests for user ${userId}`);
         joinedRows.forEach((r: any) => {
-          if (r && r.contestId) joinedContestIds.add(String(r.contestId));
+          if (r && r.contestId) {
+            joinedContestIds.add(String(r.contestId));
+            logger.debug(`[CONTEST-REPO]   → Joined: ${r.contestId}`);
+          }
         });
         
         // Get contests where user has submitted answers
@@ -246,8 +268,12 @@ export default class ContestRepository {
           attributes: ["contestId"],
           raw: true,
         });
+        logger.info(`[CONTEST-REPO] Found ${submittedRows.length} submitted contests for user ${userId}`);
         submittedRows.forEach((r: any) => {
-          if (r && r.contestId) submittedContestIds.add(String(r.contestId));
+          if (r && r.contestId) {
+            submittedContestIds.add(String(r.contestId));
+            logger.debug(`[CONTEST-REPO]   → Submitted: ${r.contestId}`);
+          }
         });
       }
 
@@ -308,9 +334,13 @@ export default class ContestRepository {
       const items = result.rows.map((contest: any) => {
         const data = contest.toJSON();
         
-        // hasJoined is true if user has joined the contest (has entry in UserContest)
+        // hasJoined is true if user has:
+        // 1. Submitted answers (UserSubmission exists), OR
+        // 2. Joined the contest (UserContest exists)
+        // If submitted, they are definitely joined even if no UserContest record
+        const contestId = String(data.id);
         const hasJoined = userId
-          ? joinedContestIds.has(String(data.id))
+          ? (submittedContestIds.has(contestId) || joinedContestIds.has(contestId))
           : false;
         
         if (userContestAlias && data[userContestAlias])
