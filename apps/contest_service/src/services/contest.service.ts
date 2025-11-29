@@ -54,8 +54,15 @@ export default class ContestService {
     return this.repo.listContestsByMatch(matchId, limit, offset, userId, statusFilter);
   }
 
-  public async getContest(id: string) {
-    const c = await this.repo.getContestById(id);
+  public async getContest(id: string, userId?: string) {
+    let c;
+    if (userId) {
+
+      c = await this.repo.getContestById(id, userId);
+    } else {
+      c = await this.repo.getContestById(id);
+
+    }
     if (!c) throw new BadRequestError("Contest not found");
     return c;
   }
@@ -612,14 +619,14 @@ export default class ContestService {
     try {
       const currentStatus = contest.status;
       const contestType = contest.type || '';
-      
+
       // Extract match state from live data
       const matchStatus = liveMatchData.match?.status || '';
       const playStatus = liveMatchData.match?.playStatus || '';
       const tossCompleted = !!liveMatchData.toss?.winner;
       const currentInningsNumber = liveMatchData.live?.inningsNumber || 1;
       const currentOvers = parseFloat(liveMatchData.live?.currentScore?.overs || '0');
-      
+
       logger.info(`[CONTEST SERVICE] Determining status for contest ${contest.id} (${contestType}): current=${currentStatus}, match=${matchStatus}, play=${playStatus}, toss=${tossCompleted}, inningsNum=${currentInningsNumber}, overs=${currentOvers}`);
 
       // Handle match cancellation
@@ -628,7 +635,7 @@ export default class ContestService {
       }
 
       // Status transition logic based on contest type
-      
+
       // Pre-match contests (full match predictions)
       if (contestType.includes('match') || contestType.includes('full')) {
         if (currentStatus === 'upcoming' && tossCompleted) {
@@ -641,14 +648,14 @@ export default class ContestService {
           return 'calculating'; // Match ended, calculate results
         }
       }
-      
+
       // Phase-based contests (powerplay, middle, death)
       else if (contestType.includes('powerplay') || contestType.includes('middle') || contestType.includes('death')) {
         // Extract which innings this contest is for (1 or 2)
         const contestInningsNum = this.getContestInningsNumber(contestType);
-        
+
         logger.info(`[CONTEST SERVICE] Phase contest ${contest.id}: contestInnings=${contestInningsNum}, currentInnings=${currentInningsNumber}, overs=${currentOvers}`);
-        
+
         // Powerplay: overs 1-6
         if (contestType.includes('powerplay')) {
           if (currentStatus === 'upcoming' && tossCompleted) {
@@ -661,12 +668,12 @@ export default class ContestService {
             return 'calculating'; // Powerplay ended
           }
         }
-        
+
         // Middle overs: overs 7-15 (T20) or 7-40 (ODI)
         else if (contestType.includes('middle')) {
           const format = liveMatchData.match?.format || 't20';
           const middleEnd = format === 'odi' ? 40 : 15;
-          
+
           if (currentStatus === 'upcoming' && tossCompleted) {
             return 'live';
           }
@@ -677,12 +684,12 @@ export default class ContestService {
             return 'calculating';
           }
         }
-        
+
         // Death overs: overs 16-20 (T20) or 41-50 (ODI)
         else if (contestType.includes('death')) {
           const format = liveMatchData.match?.format || 't20';
           const deathStart = format === 'odi' ? 40 : 15;
-          
+
           if (currentStatus === 'upcoming' && tossCompleted) {
             return 'live';
           }
@@ -697,7 +704,7 @@ export default class ContestService {
 
       // No status change
       return null;
-      
+
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] determineContestStatus error: ${error.message}`);
       return null;
@@ -715,14 +722,14 @@ export default class ContestService {
     if (parts.length > 0) {
       const lastPart = parts[parts.length - 1]; // e.g., "powerplay1", "death2", "middle1"
       const lastChar = lastPart.charAt(lastPart.length - 1);
-      
+
       if (lastChar === '2') {
         return 2;
       } else if (lastChar === '1') {
         return 1;
       }
     }
-    
+
     // Default to innings 1 if can't determine
     logger.warn(`[CONTEST SERVICE] Could not determine innings from contestType: ${contestType}, defaulting to 1`);
     return 1;
@@ -739,14 +746,14 @@ export default class ContestService {
     if (parts.length > 0) {
       const lastPart = parts[parts.length - 1]; // e.g., "powerplay1", "death2", "middle1"
       const lastChar = lastPart.charAt(lastPart.length - 1);
-      
+
       if (lastChar === '2') {
         return 'innings2';
       } else if (lastChar === '1') {
         return 'innings1';
       }
     }
-    
+
     // Default to innings1 if can't determine
     logger.warn(`[CONTEST SERVICE] Could not determine innings from contestType: ${contestType}, defaulting to innings1`);
     return 'innings1';
@@ -757,18 +764,18 @@ export default class ContestService {
    */
   private normalizeInnings(rawInnings: string): string {
     if (!rawInnings) return '';
-    
+
     // Handle "b_1" format (team_inningsNumber)
     const match = rawInnings.match(/_(\d+)$/);
     if (match) {
       return `innings${match[1]}`;
     }
-    
+
     // Already in correct format
     if (rawInnings.startsWith('innings')) {
       return rawInnings;
     }
-    
+
     return rawInnings;
   }
 
@@ -816,11 +823,11 @@ export default class ContestService {
       // Generate answers for ALL questions at once using AI
       let successCount = 0;
       let failCount = 0;
-      
+
       try {
         logger.info(`[CONTEST SERVICE] Calling AI to generate answers for all questions`);
         logger.info(`[CONTEST SERVICE] Questions sent to AI: ${JSON.stringify(questions.map(q => ({ id: q.id, question: q.question })))}`);
-        
+
         // Call AI with all questions at once, including ball-by-ball data if available
         const generatedAnswers = await this.generativeAI.generateAnswers(
           liveMatchData.match,
@@ -837,7 +844,7 @@ export default class ContestService {
             try {
               // Find matching question by questionId from AI response
               const question = questions.find(q => q.id === answerData.questionId);
-              
+
               if (!question) {
                 logger.warn(`[CONTEST SERVICE] No matching question found for questionId: ${answerData.questionId}`);
                 failCount++;
@@ -945,14 +952,14 @@ export default class ContestService {
   private async updateLeaderboard(contestId: string): Promise<void> {
     try {
       const userScores = await this.repo.getUserContestScores(contestId);
-      
+
       if (!userScores || userScores.length === 0) {
         logger.info(`[CONTEST SERVICE] No user scores to update for contest ${contestId}`);
         return;
       }
 
       logger.info(`[CONTEST SERVICE] Updating leaderboard for ${userScores.length} users in contest ${contestId}`);
-      
+
       for (const userScore of userScores) {
         try {
           await this.repo.updateUserContestScore(
@@ -985,7 +992,7 @@ export default class ContestService {
 
       // Find all contests stuck in calculating status
       const stuckContests = await this.repo.getContestsByStatus('calculating', matchId);
-      
+
       if (!stuckContests || stuckContests.length === 0) {
         logger.info(`[CONTEST SERVICE] No stuck contests found`);
         return {
@@ -1002,17 +1009,17 @@ export default class ContestService {
       for (const contest of stuckContests) {
         try {
           logger.info(`[CONTEST SERVICE] Force completing contest ${contest.id} - ${contest.title}`);
-          
+
           // Simply mark as completed (scores should already be calculated)
           await this.repo.updateContestStatus(contest.id, 'completed');
-          
+
           fixedCount++;
           results.push({
             contestId: contest.id,
             title: contest.title,
             status: 'fixed'
           });
-          
+
           logger.info(`[CONTEST SERVICE] ✅ Force completed contest ${contest.id}`);
         } catch (err: any) {
           logger.error(`[CONTEST SERVICE] Failed to fix contest ${contest.id}: ${err.message}`);
