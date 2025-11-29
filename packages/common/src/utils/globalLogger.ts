@@ -32,13 +32,16 @@ const baseLogger = winston.createLogger({
   ],
 });
 
-if (process.env.NODE_ENV !== "production") {
-  baseLogger.add(
-    new winston.transports.Console({
-      format: combine(colorize(), logFormat),
-    })
-  );
-}
+// In development, add colorized console output
+// In production, add console output without colors for container log aggregation
+baseLogger.add(
+  new winston.transports.Console({
+    format:
+      process.env.NODE_ENV === "production"
+        ? logFormat
+        : combine(colorize(), logFormat),
+  })
+);
 
 // Function to get caller information
 function getCallerInfo(): string {
