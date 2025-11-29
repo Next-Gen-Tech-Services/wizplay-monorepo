@@ -36,7 +36,7 @@ transports.push(
   })
 );
 
-// Add file transports only if directory exists and is writable
+// Add file transports only if directory exists (defensive check in case creation failed)
 try {
   if (fs.existsSync(logDir)) {
     // File transport format - use JSON in production, simple format in development
@@ -96,7 +96,7 @@ function getCallerInfo(): string {
       !line?.includes("logger.js") &&
       !line?.includes("globalLogger")
     ) {
-      // Try to extract file path and line? number
+      // Try to extract file path and line number
       let match = line?.match(/\(([^)]+)\)/);
       if (!match) {
         match = line?.match(/at\s+(.+)/);
