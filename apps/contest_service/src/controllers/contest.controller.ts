@@ -102,7 +102,8 @@ export default class ContestController {
 
   public async getContest(req: Request, res: Response) {
     const id = req.params.id;
-    const c = await this.contestService.getContest(id);
+    const userId = req.userId;
+    const c = await this.contestService.getContest(id, userId);
     return res.status(STATUS_CODE.SUCCESS).json({ success: true, data: c });
   }
 
