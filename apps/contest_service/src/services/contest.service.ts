@@ -54,8 +54,9 @@ export default class ContestService {
     return this.repo.listContestsByMatch(matchId, limit, offset, userId, statusFilter);
   }
 
-  public async getContest(id: string) {
-    const c = await this.repo.getContestById(id);
+  public async getContest(id: string,userId?: string) {
+    
+    const c = await this.repo.getContestById(id, userId);
     if (!c) throw new BadRequestError("Contest not found");
     return c;
   }
