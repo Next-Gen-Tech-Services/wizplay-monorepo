@@ -13,32 +13,52 @@ const logFormat = printf(({ level, message, timestamp, stack }) => {
 const logDir = path.join(process.cwd(), "logs");
 
 // Ensure logs folder exists
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
+try {
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir, { recursive: true });
+  }
+} catch (error) {
+  console.error("Failed to create logs directory:", error);
 }
+
+// Determine log level from environment variable or default
+const logLevel = process.env.LOG_LEVEL || (process.env.NODE_ENV === "production" ? "info" : "debug");
 
 // Base winston logger
 const baseLogger = winston.createLogger({
-  level: "info",
+  level: logLevel,
   format: combine(timestamp(), errors({ stack: true }), logFormat),
   transports: [
     new winston.transports.File({
       filename: path.join(logDir, "server.log"),
+      handleExceptions: true,
+      handleRejections: true,
     }),
     new winston.transports.File({
       filename: path.join(logDir, "error.log"),
       level: "error",
+      handleExceptions: true,
+      handleRejections: true,
     }),
   ],
+  exitOnError: false,
 });
 
-if (process.env.NODE_ENV !== "production") {
+// Always add console in non-production, and optionally in production if CONSOLE_LOGS is enabled
+if (process.env.NODE_ENV !== "production" || process.env.CONSOLE_LOGS === "true") {
   baseLogger.add(
     new winston.transports.Console({
       format: combine(colorize(), logFormat),
+      handleExceptions: true,
+      handleRejections: true,
     })
   );
 }
+
+// Handle transport errors
+baseLogger.on("error", (error) => {
+  console.error("Logger error:", error);
+});
 
 // Function to get caller information
 function getCallerInfo(): string {

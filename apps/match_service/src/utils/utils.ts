@@ -2,6 +2,7 @@ import { logger } from "@repo/common";
 import ServerConfigs from "../configs/server.config";
 import axios from "axios";
 import crypto from "crypto";
+import redis from "../configs/redis.config";
 
 export function generateOTPUtil(): string {
   const buffer = crypto.randomInt(1000, 9999);
@@ -14,6 +15,10 @@ export function generateUUID(): string {
 
 export async function generateApiToken(): Promise<string | undefined> {
   try {
+    const redisToken = await redis.getter("roanuzToken");
+    if (redisToken) {
+      return redisToken;
+    }
     const response = await axios({
       method: "POST",
       url: `https://api.sports.roanuz.com/v5/core/${ServerConfigs.ROANUZ_PK}/auth/`,
@@ -27,7 +32,10 @@ export async function generateApiToken(): Promise<string | undefined> {
         throw new Error(response?.data?.error);
       }
       const authToken = response?.data?.data?.token;
-
+      const result = await redis.setter("roanuzToken", authToken, 36000);
+      if(!result) {
+        logger.error("[UTILS] Failed to store Roanuz token in Redis");
+      }
       return authToken;
     } catch (error: any) {
       logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);
