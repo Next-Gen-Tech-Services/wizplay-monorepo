@@ -42,12 +42,20 @@ export default class ContestRepository {
       // hasJoined should be true if user has joined (has entry in UserContest)
       let hasJoined = false;
       if (userId) {
+        logger.debug(`[CONTEST-REPO] Checking if user ${userId} joined contest ${id}`);
         const joined = await this._DB.UserContest.findOne({
           where: { userId, contestId: id },
-          attributes: ["id"],
+          attributes: ["id", "status"],
           raw: true,
         });
         hasJoined = !!joined;
+        if (joined) {
+          logger.info(`[CONTEST-REPO] ✅ Contest ${id} - User ${userId} HAS JOINED (status: ${joined.status})`);
+        } else {
+          logger.info(`[CONTEST-REPO] ❌ Contest ${id} - User ${userId} HAS NOT JOINED`);
+        }
+      } else {
+        logger.debug(`[CONTEST-REPO] Contest ${id} - No userId provided, hasJoined will be false`);
       }
 
       // Helper: compress a single contest's rank/prize array into consecutive ranges with same amount
@@ -231,24 +239,43 @@ export default class ContestRepository {
       let submittedContestIds = new Set<string>();
       
       if (userId) {
+        const userIdStr = String(userId);
+        logger.info(`[CONTEST-REPO] 🔍 Fetching joined contests for userId: ${userIdStr}`);
+        
         const joinedRows = await this._DB.UserContest.findAll({
-          where: { userId },
-          attributes: ["contestId"],
+          where: { userId: userIdStr },
+          attributes: ["id", "contestId", "status"],
           raw: true,
         });
+        
+        logger.info(`[CONTEST-REPO] Found ${joinedRows.length} UserContest records for user ${userIdStr}`);
+        
         joinedRows.forEach((r: any) => {
-          if (r && r.contestId) joinedContestIds.add(String(r.contestId));
+          if (r && r.contestId) {
+            const contestIdStr = String(r.contestId);
+            joinedContestIds.add(contestIdStr);
+            logger.debug(`[CONTEST-REPO]   → Adding joined contest: ${contestIdStr} (status: ${r.status})`);
+          }
         });
         
         // Get contests where user has submitted answers
         const submittedRows = await this._DB.UserSubmission.findAll({
-          where: { userId },
+          where: { userId: userIdStr },
           attributes: ["contestId"],
           raw: true,
         });
+        
+        logger.info(`[CONTEST-REPO] Found ${submittedRows.length} UserSubmission records for user ${userIdStr}`);
+        
         submittedRows.forEach((r: any) => {
-          if (r && r.contestId) submittedContestIds.add(String(r.contestId));
+          if (r && r.contestId) {
+            const contestIdStr = String(r.contestId);
+            submittedContestIds.add(contestIdStr);
+            logger.debug(`[CONTEST-REPO]   → Adding submitted contest: ${contestIdStr}`);
+          }
         });
+      } else {
+        logger.info(`[CONTEST-REPO] ⚠️ No userId provided, hasJoined will be false for all contests`);
       }
 
       const compressRankArray = (
@@ -309,9 +336,14 @@ export default class ContestRepository {
         const data = contest.toJSON();
         
         // hasJoined is true if user has joined the contest (has entry in UserContest)
-        const hasJoined = userId
-          ? joinedContestIds.has(String(data.id))
-          : false;
+        const contestId = String(data.id);
+        const hasJoined = userId && joinedContestIds.has(contestId);
+        
+        if (hasJoined) {
+          logger.info(`[CONTEST-REPO] ✅ Contest ${contestId} - hasJoined: TRUE for user ${userId}`);
+        } else if (userId) {
+          logger.debug(`[CONTEST-REPO] ❌ Contest ${contestId} - hasJoined: FALSE for user ${userId}`);
+        }
         
         if (userContestAlias && data[userContestAlias])
           delete data[userContestAlias];
@@ -816,34 +848,64 @@ export default class ContestRepository {
    */
   public async getUserContestScores(contestId: string): Promise<any[]> {
     try {
-      const { fn, col, literal } = require('sequelize');
+      logger.info(`[CONTEST-REPO] Fetching user scores for contest ${contestId}`);
       
       // First check if there are any submissions
       const submissionCount = await this._DB.UserSubmission.count({
         where: { contestId }
       });
 
+      logger.info(`[CONTEST-REPO] Found ${submissionCount} total submissions for contest ${contestId}`);
+
       if (submissionCount === 0) {
         logger.info(`[CONTEST-REPO] No submissions found for contest ${contestId}`);
         return [];
       }
 
-      const scores = await this._DB.UserSubmission.findAll({
+      // Get all submissions raw
+      const submissions = await this._DB.UserSubmission.findAll({
         where: { contestId },
-        attributes: [
-          'userId',
-          [fn('COALESCE', fn('SUM', col('points')), 0), 'totalScore'],
-        ],
-        group: ['userId'],
-        order: [[literal('totalScore'), 'DESC']],
+        attributes: ['userId', 'totalScore', 'maxScore'],
         raw: true,
       });
 
-      // Add ranks
-      return scores.map((score: any, index: number) => ({
-        ...score,
-        rank: index + 1,
-      }));
+      logger.info(`[CONTEST-REPO] Retrieved ${submissions.length} submissions with totalScore`);
+
+      // Group by userId and get max score for each user
+      const userScoresMap = new Map<string, { userId: string; totalScore: number; maxScore: number }>();
+      
+      submissions.forEach((submission: any) => {
+        const userId = String(submission.userId);
+        const totalScore = Number(submission.totalScore) || 0;
+        const maxScore = Number(submission.maxScore) || 0;
+        
+        if (!userScoresMap.has(userId)) {
+          userScoresMap.set(userId, { userId, totalScore, maxScore });
+        } else {
+          // Keep the highest score for this user
+          const existing = userScoresMap.get(userId)!;
+          if (totalScore > existing.totalScore) {
+            userScoresMap.set(userId, { userId, totalScore, maxScore });
+          }
+        }
+      });
+
+      // Convert to array and sort by totalScore descending
+      const scores = Array.from(userScoresMap.values())
+        .sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0))
+        .map((score, index) => ({
+          userId: score.userId,
+          totalScore: score.totalScore,
+          maxScore: score.maxScore,
+          rank: index + 1,
+        }));
+
+      logger.info(`[CONTEST-REPO] Calculated scores for ${scores.length} unique users in contest ${contestId}`);
+      scores.forEach(score => {
+        logger.debug(`[CONTEST-REPO] User ${score.userId}: rank=${score.rank}, score=${score.totalScore}/${score.maxScore}`);
+      });
+
+      return scores;
     } catch (err: any) {
       logger.error(`getUserContestScores DB error: ${err?.message ?? err}`);
       logger.error(`getUserContestScores DB stack: ${err?.stack || 'No stack'}`);
