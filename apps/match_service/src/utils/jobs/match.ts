@@ -7,6 +7,7 @@ import ServerConfigs from "../../configs/server.config";
 import MatchRepository from "../../repositories/match.repository";
 import TournamentRepository from "../../repositories/tournament.repository";
 import { extractMatches, formatMatchData } from "../formatMatchData";
+import { generateApiToken } from "../utils";
 
 class MatchCrons {
   private authToken: string | null;
@@ -23,32 +24,32 @@ class MatchCrons {
     this.tournamentRepository = new TournamentRepository();
   }
 
-  async generateApiToken() {
-    try {
-      const response = await axios({
-        method: "POST",
-        url: `https://api.sports.roanuz.com/v5/core/${this.roanuzPK}/auth/`,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: new URLSearchParams({ api_key: this.roanuzAK }).toString(),
-      });
+  // async generateApiToken() {
+  //   try {
+  //     const response = await axios({
+  //       method: "POST",
+  //       url: `https://api.sports.roanuz.com/v5/core/${this.roanuzPK}/auth/`,
+  //       headers: {
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //       },
+  //       data: new URLSearchParams({ api_key: this.roanuzAK }).toString(),
+  //     });
 
-      if (response?.status !== 200) {
-        throw new Error(response?.data?.error);
-      }
+  //     if (response?.status !== 200) {
+  //       throw new Error(response?.data?.error);
+  //     }
 
-      logger.info(
-        `[MATCH-CRON] auth response: ${JSON.stringify(response.status)}`
-      );
-      this.authToken = response?.data?.data?.token;
-      const result = await redis.setter("roanuzToken", this.authToken!);
+  //     logger.info(
+  //       `[MATCH-CRON] auth response: ${JSON.stringify(response.status)}`
+  //     );
+  //     this.authToken = response?.data?.data?.token;
+  //     const result = await redis.setter("roanuzToken", this.authToken!);
 
-      return result;
-    } catch (error: any) {
-      logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);
-    }
-  }
+  //     return result;
+  //   } catch (error: any) {
+  //     logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);
+  //   }
+  // }
 
   async getMatchData() {
     try {
@@ -128,7 +129,7 @@ class MatchCrons {
   async scheduleJob() {
     cron.schedule("0 0 * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
-      const token = await this.generateApiToken();
+      const token = await generateApiToken();
       
       // Fetch regular fixtures
       const regularData = await this.getMatchData();
