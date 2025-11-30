@@ -172,8 +172,7 @@ export default class ContestRepository {
 
       return {
         ...d,
-        hasJoined,  // TRUE only if user has SUBMITTED answers
-        isJoined,   // TRUE if user has joined the contest (for fee logic)
+        hasJoined : hasJoined && isJoined,  // TRUE only if user has SUBMITTED answers
         rankRanges, // [{from, to, amount, totalPayout}, ...]
         matchData, // populated match data
       };
@@ -363,7 +362,7 @@ export default class ContestRepository {
           data.prize ??
           null;
         const rankRanges = compressRankArray(rankArray);
-        return { ...data, hasJoined, isJoined, rankRanges };
+        return { ...data, hasJoined : hasJoined && isJoined, rankRanges };
       });
 
       // Fetch match data for all contests
