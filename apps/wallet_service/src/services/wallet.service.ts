@@ -58,6 +58,18 @@ export default class ContestService {
     }
   }
 
+  /**
+   * Credit contest winnings to user wallet (internal service call - no auth required)
+   */
+  public async creditContestWinnings(userId: string, amount: number, contestId: string): Promise<any> {
+    try {
+      const transactionInfo = await this.repo.depositCoins(userId, amount, 'contest_winnings');
+      return transactionInfo;
+    } catch (error: any) {
+      throw new ServerError(`Error crediting contest winnings: ${error.message}`);
+    }
+  }
+
   public async getUserTransactions(userId: string) {
     try {
       const walletInfo = await this.repo.getTransactions(userId);

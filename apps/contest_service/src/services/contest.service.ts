@@ -62,7 +62,136 @@ export default class ContestService {
   }
 
   public async updateContest(id: string, patch: UpdateContestPayload) {
-    return this.repo.updateContest(id, patch);
+    // Get the current contest to check status change
+    const currentContest = await this.repo.getContestById(id);
+    if (!currentContest) {
+      throw new BadRequestError("Contest not found");
+    }
+
+    const oldStatus = currentContest.status;
+    const newStatus = patch.status;
+
+    // Update the contest first
+    const updated = await this.repo.updateContest(id, patch);
+
+    // If status changed to "calculating", trigger the calculation process
+    if (newStatus === 'calculating' && oldStatus !== 'calculating') {
+      logger.info(`[CONTEST SERVICE] Status changed to calculating for contest ${id}, triggering calculation`);
+      
+      // Trigger calculation asynchronously (don't block the API response)
+      this.triggerContestCalculation(id, currentContest.matchId).catch(err => {
+        logger.error(`[CONTEST SERVICE] Error triggering calculation for contest ${id}: ${err?.message}`);
+      });
+    }
+
+    return updated;
+  }
+
+  /**
+   * Trigger contest calculation - fetch match data and process
+   */
+  private async triggerContestCalculation(contestId: string, matchId: string): Promise<void> {
+    try {
+      logger.info(`[CONTEST SERVICE] Fetching match data for calculation - contestId: ${contestId}, matchId: ${matchId}`);
+
+      // Fetch match data from match_service
+      const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL;
+      
+      if (!matchServiceUrl) {
+        logger.error(`[CONTEST SERVICE] Match service URL not configured`);
+        throw new Error("Match service URL not configured");
+      }
+
+      logger.info(`[CONTEST SERVICE] Using match service URL: ${matchServiceUrl}`);
+
+      // 1. Get basic match data from match by ID endpoint
+      let matchData = null;
+      try {
+        const matchResponse = await axios.get(
+          `${matchServiceUrl}/api/v1/matches/${matchId}`,
+          {
+            timeout: 30000,
+            headers: { "Content-Type": "application/json" }
+          }
+        );
+
+        logger.info(`[CONTEST SERVICE] Match data response received`, matchResponse.data);
+        if (matchResponse.data?.success && matchResponse.data?.data) {
+          matchData = matchResponse.data.data;
+          logger.info(`[CONTEST SERVICE] Match data fetched for matchId: ${matchId}`);
+        } else {
+          logger.error(`[CONTEST SERVICE] Failed to fetch match data: ${JSON.stringify(matchResponse.data)}`);
+          throw new Error("Failed to fetch match data");
+        }
+      } catch (matchErr: any) {
+        logger.error(`[CONTEST SERVICE] Error fetching match data: ${matchErr?.message}`);
+        logger.error(`[CONTEST SERVICE] Match fetch error details: ${JSON.stringify(matchErr?.response?.data || {})}`);
+        throw new Error(`Failed to fetch match data: ${matchErr?.message}`);
+      }
+
+      // 2. Get live data and ball-by-ball data from live-score endpoint
+      let liveData = null;
+      let ballByBallData = null;
+      
+      try {
+        const liveResponse = await axios.get(
+          `${matchServiceUrl}/api/v1/matches/${matchData.key}/live-score`,
+          {
+            timeout: 30000,
+            headers: { "Content-Type": "application/json" }
+          }
+        );
+
+        if (liveResponse.data?.success && liveResponse.data?.data) {
+          const liveResponseData = liveResponse.data.data;
+          
+          // Extract live data - check if it's wrapped in simplifiedData
+          if (liveResponseData.simplifiedData) {
+            liveData = liveResponseData.simplifiedData;
+            ballByBallData = liveResponseData.simplifiedData?.ballByBallData || null;
+          } else {
+            liveData = liveResponseData;
+            ballByBallData = liveResponseData?.ballByBallData || null;
+          }
+          
+          logger.info(`[CONTEST SERVICE] Live data fetched successfully`);
+          logger.info(`[CONTEST SERVICE] ballByBallData: ${ballByBallData ? 'present' : 'not available'}`);
+        } else {
+          logger.warn(`[CONTEST SERVICE] No live data available for match ${matchId}, using match data as fallback`);
+        }
+      } catch (liveErr: any) {
+        logger.warn(`[CONTEST SERVICE] Failed to fetch live data: ${liveErr?.message}`);
+        logger.warn(`[CONTEST SERVICE] Will use match data as fallback for live data`);
+      }
+      
+      // Construct liveMatchData object for AI processing
+      const liveMatchData = {
+        match: matchData,
+        live: liveData || matchData,
+        ballByBallData: ballByBallData
+      };
+
+      logger.info(`[CONTEST SERVICE] Constructed liveMatchData object, processing contest calculation`);
+      logger.info(`[CONTEST SERVICE] liveMatchData.match: ${matchData ? 'present' : 'missing'}`);
+      logger.info(`[CONTEST SERVICE] liveMatchData.live: ${liveData ? 'from live endpoint' : 'using match data'}`);
+      logger.info(`[CONTEST SERVICE] liveMatchData.ballByBallData: ${ballByBallData ? 'present' : 'missing'}`);
+
+      // Process the contest calculation
+      await this.processContestCalculation(contestId, matchId, liveMatchData);
+
+      logger.info(`[CONTEST SERVICE] ✅ Contest calculation completed for contest ${contestId}`);
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] triggerContestCalculation error: ${error.message}`);
+      logger.error(`[CONTEST SERVICE] Error stack: ${error.stack}`);
+      
+      // Mark contest as completed even on error to avoid stuck state
+      try {
+        await this.repo.updateContestStatus(contestId, 'completed');
+        logger.warn(`[CONTEST SERVICE] Marked contest ${contestId} as completed despite calculation error`);
+      } catch (statusErr: any) {
+        logger.error(`[CONTEST SERVICE] Failed to update status: ${statusErr.message}`);
+      }
+    }
   }
 
   public async deleteContest(id: string) {
@@ -817,11 +946,23 @@ export default class ContestService {
 
       logger.info(`[CONTEST SERVICE] Processing ${questions.length} questions`);
 
-      // Fetch ball-by-ball data (embedded in liveMatchData)
+      // Normalize liveMatchData structure
+      // Handle different data structures from:
+      // 1. triggerContestCalculation (from update contest API): { match, live, ballByBallData }
+      // 2. updateContestStatuses (from livematch webhook): enhanced data with match/live at root level
+      let matchData = liveMatchData.match || liveMatchData;
+      let liveData = liveMatchData.live || liveMatchData;
       let ballByBallData = null;
+
       try {
+        // Check for ballByBallData in different possible locations
         if (liveMatchData.ballByBallData) {
           ballByBallData = liveMatchData.ballByBallData;
+        } else if (liveMatchData.simplifiedData?.ballByBallData) {
+          ballByBallData = liveMatchData.simplifiedData.ballByBallData;
+        }
+        
+        if (ballByBallData) {
           logger.info(`[CONTEST SERVICE] Retrieved ball-by-ball data from liveMatchData`);
         } else {
           logger.warn(`[CONTEST SERVICE] No ball-by-ball data found in liveMatchData`);
@@ -829,6 +970,8 @@ export default class ContestService {
       } catch (ballErr: any) {
         logger.error(`[CONTEST SERVICE] Error accessing ball-by-ball data: ${ballErr?.message}`);
       }
+
+      logger.info(`[CONTEST SERVICE] Data structure: matchData=${matchData ? 'present' : 'missing'}, liveData=${liveData ? 'present' : 'missing'}, ballByBallData=${ballByBallData ? 'present' : 'missing'}`);
 
       // Generate answers for ALL questions at once using AI
       let successCount = 0;
@@ -838,10 +981,10 @@ export default class ContestService {
         logger.info(`[CONTEST SERVICE] Calling AI to generate answers for all questions`);
         logger.info(`[CONTEST SERVICE] Questions sent to AI: ${JSON.stringify(questions.map(q => ({ id: q.id, question: q.question })))}`);
         
-        // Call AI with all questions at once, including ball-by-ball data if available
+        // Call AI with normalized data - works for both webhook and update API sources
         const generatedAnswers = await this.generativeAI.generateAnswers(
-          liveMatchData.match,
-          liveMatchData.live,
+          matchData,
+          liveData,
           questions,
           ballByBallData // Pass ball-by-ball data to AI
         );
@@ -1045,11 +1188,113 @@ export default class ContestService {
 
       await Promise.all(updatePromises);
       logger.info(`[CONTEST SERVICE] ✅ Leaderboard updated for contest ${contestId} with ${userScores.length} rankings`);
+
+      // Distribute prizes after updating leaderboard
+      await this.distributePrizes(contestId);
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] updateLeaderboard error: ${error.message}`);
       logger.error(`[CONTEST SERVICE] Stack: ${error.stack}`);
       // Don't throw - allow contest to complete even if leaderboard update fails
       logger.warn(`[CONTEST SERVICE] Continuing despite leaderboard error for contest ${contestId}`);
+    }
+  }
+
+  /**
+   * Distribute prizes to users based on their final ranks
+   */
+  private async distributePrizes(contestId: string): Promise<void> {
+    try {
+      logger.info(`[CONTEST SERVICE] Starting prize distribution for contest ${contestId}`);
+
+      // Get prize breakdown for this contest
+      const prizeBreakdown = await this.repo.getPrizeBreakdown(contestId);
+      
+      if (!prizeBreakdown || prizeBreakdown.length === 0) {
+        logger.info(`[CONTEST SERVICE] No prize breakdown found for contest ${contestId}, skipping prize distribution`);
+        return;
+      }
+
+      logger.info(`[CONTEST SERVICE] Found ${prizeBreakdown.length} prize tiers for contest ${contestId}`);
+
+      // Get all user contests with their ranks
+      const userContests = await this.repo.getUserContestsWithRanks(contestId);
+      
+      if (!userContests || userContests.length === 0) {
+        logger.info(`[CONTEST SERVICE] No users found for prize distribution in contest ${contestId}`);
+        return;
+      }
+
+      logger.info(`[CONTEST SERVICE] Distributing prizes to ${userContests.length} users in contest ${contestId}`);
+
+      let successCount = 0;
+      let failCount = 0;
+
+      for (const userContest of userContests) {
+        try {
+          const userRank = userContest.rank;
+          
+          if (!userRank) {
+            logger.warn(`[CONTEST SERVICE] User ${userContest.userId} has no rank, skipping prize distribution`);
+            continue;
+          }
+
+          // Find the prize tier for this rank
+          const prizeTier = prizeBreakdown.find((prize: any) => {
+            const rankFrom = prize.rankFrom || prize.rank_from;
+            const rankTo = prize.rankTo || prize.rank_to;
+            return userRank >= rankFrom && userRank <= rankTo;
+          });
+
+          if (!prizeTier) {
+            logger.info(`[CONTEST SERVICE] No prize tier for rank ${userRank} (user ${userContest.userId})`);
+            continue;
+          }
+
+          const prizeAmount = Number(prizeTier.amount);
+          
+          if (prizeAmount <= 0) {
+            logger.info(`[CONTEST SERVICE] Zero prize amount for rank ${userRank} (user ${userContest.userId})`);
+            continue;
+          }
+
+          // Credit the prize to user's wallet via wallet service
+          logger.info(`[CONTEST SERVICE] Crediting ${prizeAmount} to user ${userContest.userId} for rank ${userRank}`);
+          
+          const walletServiceUrl = ServerConfigs.WALLET_SERVICE_URL;
+          const response = await axios.post(
+            `${walletServiceUrl}/api/v1/wallet/internal/credit-contest-winnings`,
+            {
+              userId: userContest.userId,
+              amount: prizeAmount,
+              contestId: contestId
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              timeout: 10000
+            }
+          );
+
+          if (response.data?.success) {
+            logger.info(`[CONTEST SERVICE] ✅ Prize credited to user ${userContest.userId}: ${prizeAmount} coins for rank ${userRank}`);
+            successCount++;
+          } else {
+            logger.error(`[CONTEST SERVICE] Failed to credit prize to user ${userContest.userId}: ${JSON.stringify(response.data)}`);
+            failCount++;
+          }
+        } catch (creditErr: any) {
+          logger.error(`[CONTEST SERVICE] Error crediting prize to user ${userContest.userId}: ${creditErr?.message}`);
+          failCount++;
+        }
+      }
+
+      logger.info(`[CONTEST SERVICE] ✅ Prize distribution completed for contest ${contestId}: ${successCount} success, ${failCount} failed`);
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] distributePrizes error: ${error.message}`);
+      logger.error(`[CONTEST SERVICE] Stack: ${error.stack}`);
+      // Don't throw - allow contest to complete even if prize distribution fails
+      logger.warn(`[CONTEST SERVICE] Continuing despite prize distribution error for contest ${contestId}`);
     }
   }
 

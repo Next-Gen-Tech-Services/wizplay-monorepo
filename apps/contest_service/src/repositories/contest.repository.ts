@@ -666,7 +666,7 @@ export default class ContestRepository {
     try {
       const rows = await this._DB.ContestPrize.findAll({
         where: { contestId },
-        order: [["rank", "ASC"]],
+        order: [["rankFrom", "ASC"]],
       });
       return rows.map((r: any) => r.toJSON());
     } catch (err: any) {
@@ -856,14 +856,15 @@ export default class ContestRepository {
   public async getUserContestScores(contestId: string): Promise<any[]> {
     try {
       // Get all submissions grouped by user with their totalScore
+      // Note: Using snake_case column names because model has underscored: true
       const submissions = await this._DB.UserSubmission.findAll({
         where: { contestId },
         attributes: [
           'userId',
-          [this._DB.sequelize.fn('MAX', this._DB.sequelize.col('totalScore')), 'totalScore'],
-          [this._DB.sequelize.fn('MAX', this._DB.sequelize.col('maxScore')), 'maxScore'],
+          [this._DB.sequelize.fn('MAX', this._DB.sequelize.col('total_score')), 'totalScore'],
+          [this._DB.sequelize.fn('MAX', this._DB.sequelize.col('max_score')), 'maxScore'],
         ],
-        group: ['userId'],
+        group: ['user_id'],
         raw: true,
       });
 
@@ -876,7 +877,7 @@ export default class ContestRepository {
       const sorted = submissions.sort((a: any, b: any) => (b.totalScore || 0) - (a.totalScore || 0));
       
       const scores = sorted.map((score: any, index: number) => ({
-        userId: score.userId,
+        userId: score.userId || score.user_id,
         totalScore: score.totalScore || 0,
         maxScore: score.maxScore || 0,
         rank: index + 1,
@@ -904,6 +905,25 @@ export default class ContestRepository {
     } catch (err: any) {
       logger.error(`updateUserContestScore DB error: ${err?.message ?? err}`);
       throw new ServerError("Database error updating user contest score");
+    }
+  }
+
+  /**
+   * Get all user contests with their ranks for prize distribution
+   */
+  public async getUserContestsWithRanks(contestId: string): Promise<any[]> {
+    try {
+      const userContests = await this._DB.UserContest.findAll({
+        where: { contestId },
+        attributes: ['userId', 'contestId', 'score', 'rank'],
+        order: [['rank', 'ASC']],
+        raw: true,
+      });
+      logger.info(`[CONTEST-REPO] Found ${userContests.length} user contests for prize distribution in contest ${contestId}`);
+      return userContests;
+    } catch (err: any) {
+      logger.error(`getUserContestsWithRanks DB error: ${err?.message ?? err}`);
+      throw new ServerError("Database error fetching user contests with ranks");
     }
   }
 }
