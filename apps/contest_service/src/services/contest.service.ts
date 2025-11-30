@@ -208,20 +208,36 @@ export default class ContestService {
         throw new BadRequestError("Contest is full");
       }
 
-      // 4) check existing active join
-      const existing = await this.userContestRepo!.findActiveJoin(
+      // 4) Check if user has already SUBMITTED answers → block completely
+      const existingSubmission = await DB.UserSubmission.findOne({
+        where: { userId, contestId },
+        attributes: ["id"],
+        transaction: tx,
+      });
+      if (existingSubmission) {
+        await tx.rollback();
+        const e = new Error("User has already submitted answers for this contest");
+        (e as any).code = "ALREADY_SUBMITTED";
+        throw e;
+      }
+
+      // 5) Check if user has already JOINED (but not submitted)
+      // If already joined: skip fee deduction and creation, return existing record
+      const existingJoin = await this.userContestRepo!.findActiveJoin(
         userId,
         contestId,
         { transaction: tx }
       );
-      if (existing) {
-        await tx.rollback();
-        const e = new Error("User already joined this contest");
-        (e as any).code = "CONFLICT";
-        throw e;
+      if (existingJoin) {
+        await tx.commit();
+        logger.info(
+          `[contest-service] User ${userId} already joined contest ${contestId} - allowing re-entry for submission (no fee)`
+        );
+        // Return existing join record (user can proceed to submit)
+        return existingJoin.toJSON();
       }
 
-      // 5) deduct wallet balance (if entryFee > 0)
+      // 6) deduct wallet balance (if entryFee > 0) - only for NEW joins
       const entryFee = contest.getDataValue("entryFee") as number | null;
       if (entryFee && entryFee > 0) {
         const walletUrl =
@@ -264,7 +280,7 @@ export default class ContestService {
         }
       }
 
-      // 6) create join row
+      // 7) create join row
       const created = await this.userContestRepo!.create(
         {
           userId,
@@ -276,7 +292,7 @@ export default class ContestService {
         { transaction: tx }
       );
 
-      // 7) increment filled spots atomically
+      // 8) increment filled spots atomically
       await this.repo!.incrementFilledSpots(contestId, 1, { transaction: tx });
 
       await tx.commit();

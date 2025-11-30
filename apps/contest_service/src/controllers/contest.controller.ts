@@ -149,6 +149,13 @@ export default class ContestController {
         `ContestController.joinContest error: ${err?.message ?? err}`
       );
 
+      if (err?.code === "ALREADY_SUBMITTED") {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: err.message || "User has already submitted answers for this contest",
+        });
+      }
+
       if (err?.code === "CONFLICT") {
         return res.status(STATUS_CODE.BAD_REQUEST).json({
           success: false,

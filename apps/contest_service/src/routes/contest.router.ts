@@ -38,7 +38,7 @@ router.post("/contests", async (req, res) => {
   return result;
 });
 
-router.get("/contests/:id", async (req, res) => {
+router.get("/contests/:id", requireAuth, async (req, res) => {
   const result = await contestController.getContest(req, res);
   return result;
 });

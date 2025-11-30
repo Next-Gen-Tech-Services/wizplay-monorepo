@@ -38,31 +38,37 @@ export default class ContestRepository {
       const data = contest.toJSON();
       const d = data as any; // <-- cast to any once for dynamic fields
 
-      // --- optional: compute hasJoined if userId provided ---
-      // hasJoined should be true if:
-      // 1. User has submitted answers (has UserSubmission record), OR
-      // 2. User has joined the contest (has UserContest record)
+      // --- Compute hasJoined and isJoined based on user state ---
+      // hasJoined: TRUE only if user has SUBMITTED answers (blocks further submissions)
+      // isJoined: TRUE if user has joined the contest (for fee logic - don't charge again)
+      //
+      // Cases:
+      // 1. First time joining: hasJoined=false, isJoined=false → charge fee, allow join & submit
+      // 2. Joined but not submitted: hasJoined=false, isJoined=true → no fee, allow submit
+      // 3. Joined and submitted: hasJoined=true, isJoined=true → block further action
       let hasJoined = false;
-      let hasSubmitted = false;
+      let isJoined = false;
       
       if (userId) {
-        // Check if user has submitted answers
-        const submission = await this._DB.UserSubmission.findOne({
-          where: { userId, contestId: id },
-          attributes: ["id"],
-          raw: true,
-        });
-        hasSubmitted = !!submission;
-        
         // Check if user has joined the contest
         const joined = await this._DB.UserContest.findOne({
           where: { userId, contestId: id },
           attributes: ["id"],
           raw: true,
         });
+        isJoined = !!joined;
         
-        // If submitted answers OR joined the contest
-        hasJoined = hasSubmitted || !!joined;
+        // Check if user has submitted answers
+        const submission = await this._DB.UserSubmission.findOne({
+          where: { userId, contestId: id },
+          attributes: ["id"],
+          raw: true,
+        });
+        
+        // hasJoined is TRUE only if user has SUBMITTED (not just joined)
+        hasJoined = !!submission;
+        
+        logger.info(`[CONTEST-REPO] Contest ${id} - User ${userId}: isJoined=${isJoined}, hasJoined(submitted)=${hasJoined}`);
       }
 
       // Helper: compress a single contest's rank/prize array into consecutive ranges with same amount
@@ -166,7 +172,8 @@ export default class ContestRepository {
 
       return {
         ...d,
-        hasJoined,
+        hasJoined,  // TRUE only if user has SUBMITTED answers
+        isJoined,   // TRUE if user has joined the contest (for fee logic)
         rankRanges, // [{from, to, amount, totalPayout}, ...]
         matchData, // populated match data
       };
@@ -334,14 +341,16 @@ export default class ContestRepository {
       const items = result.rows.map((contest: any) => {
         const data = contest.toJSON();
         
-        // hasJoined is true if user has:
-        // 1. Submitted answers (UserSubmission exists), OR
-        // 2. Joined the contest (UserContest exists)
-        // If submitted, they are definitely joined even if no UserContest record
+        // hasJoined: TRUE only if user has SUBMITTED answers (blocks further submissions)
+        // isJoined: TRUE if user has joined the contest (for fee logic - don't charge again)
+        //
+        // Cases:
+        // 1. First time: hasJoined=false, isJoined=false → charge fee, allow join & submit
+        // 2. Joined no submit: hasJoined=false, isJoined=true → no fee, allow submit
+        // 3. Joined + submitted: hasJoined=true, isJoined=true → block further action
         const contestId = String(data.id);
-        const hasJoined = userId
-          ? (submittedContestIds.has(contestId) || joinedContestIds.has(contestId))
-          : false;
+        const hasJoined = userId ? submittedContestIds.has(contestId) : false;
+        const isJoined = userId ? joinedContestIds.has(contestId) : false;
         
         if (userContestAlias && data[userContestAlias])
           delete data[userContestAlias];
@@ -354,7 +363,7 @@ export default class ContestRepository {
           data.prize ??
           null;
         const rankRanges = compressRankArray(rankArray);
-        return { ...data, hasJoined, rankRanges };
+        return { ...data, hasJoined, isJoined, rankRanges };
       });
 
       // Fetch match data for all contests
