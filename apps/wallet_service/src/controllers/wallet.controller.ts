@@ -50,6 +50,25 @@ export default class WalletController {
       .json({ success: true, data: result });
   }
 
+  /**
+   * Credit contest winnings to user wallet (internal service call - no auth required)
+   * This is called by contest_service to distribute prizes
+   */
+  public async creditContestWinnings(req: Request, res: Response) {
+    const { userId, amount, contestId }: { userId: string, amount: number, contestId: string } = req.body;
+    
+    if (!userId || !amount || amount <= 0) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: 'userId and valid amount are required' });
+    }
+
+    const result = await this.walletService.creditContestWinnings(userId, amount, contestId);
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
+
   public async getUserTransactions(req: Request, res: Response) {
     const userId: string = req.userId!;
     const result = await this.walletService.getUserTransactions(userId);

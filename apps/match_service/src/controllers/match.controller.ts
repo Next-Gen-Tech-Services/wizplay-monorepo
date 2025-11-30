@@ -189,8 +189,9 @@ export default class MatchController {
           // This now includes ballByBallData in the same object
           await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(enhancedData));
 
-          // Update contest statuses based on live match data
-          this.updateContestStatuses(matchId, raw).catch(err => {
+          // Update contest statuses based on live match data (with enhanced ball-by-ball data for AI)
+          // Pass enhancedData so AI can generate accurate answers using ball-by-ball data
+          this.updateContestStatuses(matchId, enhancedData || raw).catch(err => {
             console.error("[CONTEST-STATUS] Error updating contest statuses:", err);
           });
 
