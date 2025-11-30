@@ -32,10 +32,12 @@ export async function generateApiToken(): Promise<string | undefined> {
         throw new Error(response?.data?.error);
       }
       const authToken = response?.data?.data?.token;
-      const result = await redis.setter("roanuzToken", authToken, 36000);
+      // Token expires every 24 hours (86400 seconds) - set TTL slightly less to ensure refresh before expiry
+      const result = await redis.setter("roanuzToken", authToken, 82800); // 23 hours TTL
       if(!result) {
         logger.error("[UTILS] Failed to store Roanuz token in Redis");
       }
+      logger.info("[UTILS] Roanuz API token generated and cached for 23 hours");
       return authToken;
     } catch (error: any) {
       logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);

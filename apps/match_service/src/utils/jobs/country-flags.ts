@@ -5,20 +5,17 @@ import * as fs from "fs";
 import * as path from "path";
 import redis from "../../configs/redis.config";
 import ServerConfigs from "../../configs/server.config";
+import { generateApiToken } from "../utils";
 
 class CountryFlagsCron {
- private authToken: string | null;
   private roanuzPK: string;
-  private roanuzAK: string;
-    private flagsDirectory: string;
+  private flagsDirectory: string;
 
   constructor() {
-    this.authToken = null;
     this.roanuzPK = ServerConfigs.ROANUZ_PK;
-    this.roanuzAK = ServerConfigs.ROANUZ_AK;
 
     this.flagsDirectory = path.join(process.cwd(), "public", "flags");
-    
+
     // Create flags directory if it doesn't exist
     if (!fs.existsSync(this.flagsDirectory)) {
       fs.mkdirSync(this.flagsDirectory, { recursive: true });
@@ -26,42 +23,23 @@ class CountryFlagsCron {
     }
   }
 
-  async generateApiToken() {
-      try {
-        const response = await axios({
-          method: "POST",
-          url: `https://api.sports.roanuz.com/v5/core/${this.roanuzPK}/auth/`,
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          data: new URLSearchParams({ api_key: this.roanuzAK }).toString(),
-        });
-  
-        if (response?.status !== 200) {
-          throw new Error(response?.data?.error);
-        }
-  
-        logger.info(
-          `[MATCH-CRON] auth response: ${JSON.stringify(response.status)}`
-        );
-        this.authToken = response?.data?.data?.token;
-        const result = await redis.setter("roanuzToken", this.authToken!);
-  
-        return result;
-      } catch (error: any) {
-        logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);
-      }
-    }
   private async getCountryList(): Promise<any[]> {
     try {
       const roanuzToken = await redis.getter("roanuzToken");
-      
+
+      if (!roanuzToken) {
+        logger.warn("[FLAGS-CRON] No Roanuz token available, generating new one...");
+        await generateApiToken();
+      }
+
+      const token = await redis.getter("roanuzToken");
+
       const response = await axios({
         method: "GET",
         url: `https://api.sports.roanuz.com/v5/cricket/${this.roanuzPK}/country/list/`,
         headers: {
           "Content-Type": "application/json",
-          "rs-token": roanuzToken || this.authToken,
+          "rs-token": token,
         },
       });
 
@@ -79,13 +57,13 @@ class CountryFlagsCron {
 
   private async downloadFlag(countryCode: string): Promise<boolean> {
     try {
-    //   const roanuzToken = await redis.getter("roanuzToken");
-      
+      const roanuzToken = await redis.getter("roanuzToken");
+
       const response = await axios({
         method: "GET",
         url: `https://api.sports.roanuz.com/v5/cricket/${this.roanuzPK}/country/${countryCode}/flags/`,
         headers: {
-          "rs-token": this.authToken,
+          "rs-token": roanuzToken,
         },
         responseType: "arraybuffer", // Important for binary data
       });
@@ -109,7 +87,7 @@ class CountryFlagsCron {
       logger.info("[FLAGS-CRON] Starting country flags sync...");
 
       const countries = await this.getCountryList();
-      
+
       if (!countries || countries.length === 0) {
         logger.warn("[FLAGS-CRON] No countries found to sync");
         return;
@@ -122,14 +100,14 @@ class CountryFlagsCron {
       for (let i = 0; i < countries.length; i++) {
         const country = countries[i];
         const countryCode = country.code || country.short_code;
-        
+
         if (!countryCode) {
           logger.warn(`[FLAGS-CRON] Country missing code: ${JSON.stringify(country)}`);
           continue;
         }
 
         const success = await this.downloadFlag(countryCode);
-        
+
         if (success) {
           successCount++;
         } else {
@@ -156,20 +134,20 @@ class CountryFlagsCron {
   }
 
   public async scheduleJob(): Promise<void> {
-    // Run once on startup
+    // Run once on startup - generate API token using shared utility
     logger.info("[FLAGS-CRON] Running initial flags sync on startup...");
-    // Generate API token and sync flags on startup so public/flags is populated
     try {
-      await this.generateApiToken();
-      await this.syncFlags();
+      await generateApiToken();
+      logger.info("[FLAGS-CRON] API token generated successfully");
     } catch (err: any) {
-      logger.error(`[FLAGS-CRON] Initial flags sync failed: ${err?.message || err}`);
+      logger.error(`[FLAGS-CRON] Initial token generation failed: ${err?.message || err}`);
     }
 
     // Schedule to run daily at 2 AM (when traffic is low)
     cron.schedule("0 2 * * *", async () => {
       logger.info("[FLAGS-CRON] Running scheduled flags sync...");
-    //   await this.syncFlags();
+      await generateApiToken();
+      await this.syncFlags();
     });
 
     logger.info("[FLAGS-CRON] Job scheduled to run daily at 2 AM");

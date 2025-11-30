@@ -45,87 +45,13 @@ export default class LeaderboardService {
       throw err;
     }
 
-    /* CACHING CODE - Enable when Redis client supports TTL
-    const cacheKey = `leaderboard:contest:${contestId}:${limit}:${offset}`;
-
-    try {
-      // Try cache first
-      const cached = await redis.getter(cacheKey);
-      if (cached) {
-        logger.debug(`Leaderboard cache HIT for ${contestId}`);
-        return {
-          ...JSON.parse(cached),
-          fromCache: true,
-        };
-      }
-
-      // Cache miss - fetch from database
-      logger.debug(`Leaderboard cache MISS for ${contestId}`);
-      const result = await this.leaderboardRepo.getContestLeaderboard(
-        contestId,
-        limit,
-        offset
-      );
-
-      // Cache for 5 minutes (requires Redis client update)
-      await redis.setter(cacheKey, JSON.stringify(result), 300);
-
-      return {
-        ...result,
-        fromCache: false,
-      };
-    } catch (err: any) {
-      logger.error(
-        `LeaderboardService.getContestLeaderboardCached error: ${err?.message ?? err}`
-      );
-      return this.leaderboardRepo.getContestLeaderboard(
-        contestId,
-        limit,
-        offset
-      );
-    }
-    */
+  
   }
 
-  /**
-   * Invalidate leaderboard cache when new submission arrives
-   * 
-   * TODO: Enable when Redis client supports delete
-   */
+ 
   async invalidateContestLeaderboardCache(contestId: string) {
-    // Placeholder - implement when Redis client is updated
     logger.debug(`Cache invalidation requested for contest ${contestId}`);
-    
-    /* CACHING CODE - Enable when Redis supports delete
-    try {
-      // Delete all cached pages for this contest
-      const pattern = `leaderboard:contest:${contestId}:*`;
-      
-      // For production, use Redis SCAN with pattern matching
-      const keys = await this.getKeysByPattern(pattern);
-      
-      if (keys.length > 0) {
-        await Promise.all(keys.map((key) => redis.deleter(key)));
-        logger.info(
-          `Invalidated ${keys.length} leaderboard cache entries for contest ${contestId}`
-        );
-      }
-    } catch (err: any) {
-      logger.error(
-        `LeaderboardService.invalidateContestLeaderboardCache error: ${err?.message ?? err}`
-      );
-    }
-    */
-  }
-
-  /**
-   * Get keys matching pattern (helper for cache invalidation)
-   */
-  private async getKeysByPattern(pattern: string): Promise<string[]> {
-    // This is a simplified version
-    // In production, implement proper SCAN-based pattern matching
-    // to avoid blocking Redis with KEYS command
-    return [];
+   
   }
 
   /**

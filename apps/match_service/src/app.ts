@@ -108,7 +108,7 @@ const CronsInit = async () => {
   try {
     logger.info("Waiting for crons to be initialized...");
     await matchCrons.scheduleJob();
-    await countryFlagsCron.scheduleJob();
+    // await countryFlagsCron.scheduleJob();
     logger.info("Cron jobs scheduled successfully");
   } catch (error) {
     logger.error("Failed to initialize cron jobs:", error);
