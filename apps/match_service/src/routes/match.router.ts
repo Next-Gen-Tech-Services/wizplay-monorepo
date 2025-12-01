@@ -7,7 +7,7 @@ import FlagController from "../controllers/flag.controller";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { listMatchesValidator } from "../validators";
 import { getSubscriptionStatus } from "../utils/jobs/init-subscription";
-import { Server as SocketIOServer } from "socket.io";
+import { generateApiToken } from "@/utils/utils";
 
 const router = Router();
 
@@ -18,15 +18,26 @@ router.get("/matches/stats", async (req: Request, res: Response) => {
 });
 
 // GET /matches
-router.get("/matches", requireAuth, listMatchesValidator(), validateRequest, async (req: Request, res: Response) => {
-  const controller = container.resolve(MatchController);
-  return controller.getAllMatches(req, res);
-});
+router.get(
+  "/matches",
+  requireAuth,
+  listMatchesValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const controller = container.resolve(MatchController);
+    return controller.getAllMatches(req, res);
+  }
+);
 
-router.get("/matches/:id", listMatchesValidator(), validateRequest, async (req: Request, res: Response) => {
-  const controller = container.resolve(MatchController);
-  return controller.getMatchById(req, res);
-});
+router.get(
+  "/matches/:id",
+  listMatchesValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const controller = container.resolve(MatchController);
+    return controller.getMatchById(req, res);
+  }
+);
 
 // GET /matches/:id/team-data - Get team data from Roanuz API
 router.get("/matches/:id/team-data", async (req: Request, res: Response) => {
@@ -35,16 +46,24 @@ router.get("/matches/:id/team-data", async (req: Request, res: Response) => {
 });
 
 // PATCH /matches/:id - Update showOnFrontend flag
-router.patch("/matches/:id", validateRequest, async (req: Request, res: Response) => {
-  const controller = container.resolve(MatchController);
-  return controller.updateMatch(req, res);
-});
+router.patch(
+  "/matches/:id",
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const controller = container.resolve(MatchController);
+    return controller.updateMatch(req, res);
+  }
+);
 
 // PATCH /matches/:key/status - Update match status, winner, timestamps
-router.patch("/matches/:key/status", validateRequest, async (req: Request, res: Response) => {
-  const controller = container.resolve(MatchController);
-  return controller.updateMatchStatus(req, res);
-});
+router.patch(
+  "/matches/:key/status",
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const controller = container.resolve(MatchController);
+    return controller.updateMatchStatus(req, res);
+  }
+);
 
 // POST /livematch webhook
 router.post("/matches/livematch", async (req: Request, res: Response) => {
@@ -90,12 +109,33 @@ router.get("/matches/:id/highlights", async (req: Request, res: Response) => {
 });
 
 // Subscription status endpoint (for debugging/monitoring)
-router.get("/matches/subscription/status", async (req: Request, res: Response) => {
+router.get(
+  "/matches/subscription/status",
+  async (req: Request, res: Response) => {
+    try {
+      const status = getSubscriptionStatus();
+      return res.status(200).json({
+        success: true,
+        data: status,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+);
+
+// Subscription status endpoint (for debugging/monitoring)
+router.get("/matches/regenerate-token", async (req: Request, res: Response) => {
   try {
-    const status = getSubscriptionStatus();
+    const newToken = await generateApiToken();
     return res.status(200).json({
       success: true,
-      data: status,
+      data: { token: newToken },
       timestamp: new Date().toISOString(),
     });
   } catch (error: any) {
