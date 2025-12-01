@@ -1,6 +1,7 @@
 import { logger } from "@repo/common";
 import axios from "axios";
 import cron from "node-cron";
+import schedule from "node-schedule";
 import redis from "../../configs/redis.config";
 import ServerConfigs from "../../configs/server.config";
 import MatchRepository from "../../repositories/match.repository";
@@ -19,18 +20,19 @@ class MatchCrons {
     this.tournamentRepository = new TournamentRepository();
   }
 
-
   async getMatchData() {
     try {
       const roanuzToken = await redis.getter("roanuzToken");
-      
+
       if (!roanuzToken) {
-        logger.warn("[MATCH-CRON] No Roanuz token available, generating new one...");
+        logger.warn(
+          "[MATCH-CRON] No Roanuz token available, generating new one..."
+        );
         await generateApiToken();
       }
-      
+
       const token = await redis.getter("roanuzToken");
-      
+
       const matchResponse = await axios({
         method: "GET",
         url: `https://api.sports.roanuz.com/v5/cricket/${this.roanuzPK}/fixtures/`,
@@ -50,7 +52,7 @@ class MatchCrons {
         days: matchResponse?.data?.data?.month?.days,
       };
       const extractedData = extractMatches(inputDays);
-      const matchAndTournament = formatMatchData(extractedData);     
+      const matchAndTournament = formatMatchData(extractedData);
       return matchAndTournament;
     } catch (error: any) {
       logger.error(`[MATCH-CRON] Error in match data api ${error.message}`);
@@ -60,17 +62,19 @@ class MatchCrons {
   async getMG101MatchData() {
     try {
       const roanuzToken = await redis.getter("roanuzToken");
-      
+
       if (!roanuzToken) {
-        logger.warn("[MATCH-CRON] No Roanuz token available for MG101, generating new one...");
+        logger.warn(
+          "[MATCH-CRON] No Roanuz token available for MG101, generating new one..."
+        );
         await generateApiToken();
       }
-      
+
       const token = await redis.getter("roanuzToken");
       const currentDate = new Date();
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-      
+
       const mg101Response = await axios({
         method: "GET",
         url: `https://api.sports.roanuz.com/v5/cricket/${this.roanuzPK}/fixtures/mg/MG101/date/${year}-${month}/page/1/`,
@@ -79,7 +83,7 @@ class MatchCrons {
           "rs-token": token,
         },
       });
-      
+
       logger.info(
         `[MATCH-CRON] MG101 response: ${JSON.stringify(mg101Response.status)}`
       );
@@ -94,42 +98,84 @@ class MatchCrons {
       };
       const extractedMG101Data = extractMatches(mg101InputDays);
       const mg101MatchAndTournament = formatMatchData(extractedMG101Data);
-      
-      logger.info(`[MATCH-CRON] MG101 matches fetched: ${mg101MatchAndTournament.matches?.length || 0}`);
+
+      logger.info(
+        `[MATCH-CRON] MG101 matches fetched: ${mg101MatchAndTournament.matches?.length || 0}`
+      );
 
       return mg101MatchAndTournament;
     } catch (error: any) {
-      logger.error(`[MATCH-CRON] Error in MG101 match data api ${error.message}`);
+      logger.error(
+        `[MATCH-CRON] Error in MG101 match data api ${error.message}`
+      );
       return { matches: [], tournaments: [] };
     }
+  }
+
+  async getScheduleRuleFromEpoch(targetEpoch: any) {
+    // Allow both seconds & milliseconds
+    if (targetEpoch < 1e12) {
+      targetEpoch *= 1000;
+    }
+
+    const target = new Date(targetEpoch);
+    const now = new Date();
+
+    if (target <= now) {
+      throw new Error("Target time must be in the future.");
+    }
+
+    // Node-schedule RecurrenceRule format
+    return {
+      year: target.getFullYear(),
+      month: target.getMonth(), // 0-11
+      date: target.getDate(),
+      hour: target.getHours(),
+      minute: target.getMinutes(),
+      second: target.getSeconds(),
+    };
+  }
+
+  async tokenRefreshJob(targetEpoch: any) {
+    const { year, month, date, hour, minute, second } = await this.getScheduleRuleFromEpoch(targetEpoch);
+    schedule.scheduleJob(
+      { year, month, date, hour, minute, second },
+      async () => {
+        logger.info("[TOKEN-REFRESH-CRON] Token refresh job started");
+        await generateApiToken();
+        logger.info("[TOKEN-REFRESH-CRON] Token refresh job completed");
+      }
+    );
   }
 
   async scheduleJob() {
     cron.schedule("0 0 * * *", async () => {
       logger.info("[MATCH-CRON] cron job scheduled");
-      
+
       // Generate token using shared utility (stores in Redis with TTL)
       await generateApiToken();
-      
+
       // Fetch regular fixtures
       const regularData = await this.getMatchData();
-      
+
       // Fetch MG101 fixtures
       const mg101Data = await this.getMG101MatchData();
-      
+
       // Merge both datasets
       const allMatches = [
         ...(regularData?.matches || []),
         ...(mg101Data?.matches || []),
       ];
-      
+
       const allTournaments = [
         ...(regularData?.tournaments || []),
         ...(mg101Data?.tournaments || []),
       ];
 
       logger.info(`[MATCH-CRON] Total matches to insert: ${allMatches.length}`);
-      logger.info(`[MATCH-CRON] Total tournaments to insert: ${allTournaments.length}`);
+      logger.info(
+        `[MATCH-CRON] Total tournaments to insert: ${allTournaments.length}`
+      );
 
       await this.tournamentRepository.createBulkTournaments(allTournaments);
       await this.matchRepository.createBulkMatches(allMatches);

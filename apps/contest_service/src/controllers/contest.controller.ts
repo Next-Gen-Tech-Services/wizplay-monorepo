@@ -77,7 +77,7 @@ export default class ContestController {
       // Status filter: by default show only upcoming and live contests
       // If type=all, show all contests
       const type = String(req.query.type ?? "").trim().toLowerCase();
-      const statusFilter = type === "all" ? undefined : ["upcoming", "live"];
+      const statusFilter = type === "all" ? undefined : ["upcoming", "live","joining_closed"];
 
       const result = await this.contestService.listContests(
         matchId,

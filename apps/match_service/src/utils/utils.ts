@@ -3,7 +3,7 @@ import ServerConfigs from "../configs/server.config";
 import axios from "axios";
 import crypto from "crypto";
 import redis from "../configs/redis.config";
-
+import matchCron from "../utils/jobs/match";
 export function generateOTPUtil(): string {
   const buffer = crypto.randomInt(1000, 9999);
   return buffer.toString();
@@ -32,6 +32,7 @@ export async function generateApiToken(): Promise<string | undefined> {
         throw new Error(response?.data?.error);
       }
       const authToken = response?.data?.data?.token;
+      matchCron.tokenRefreshJob(response?.data?.data?.expires_at); 
       // Token expires every 24 hours (86400 seconds) - set TTL slightly less to ensure refresh before expiry
       const result = await redis.setter("roanuzToken", authToken, 82800); // 23 hours TTL
       if(!result) {
