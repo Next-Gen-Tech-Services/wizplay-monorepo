@@ -7,7 +7,7 @@ import FlagController from "../controllers/flag.controller";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { listMatchesValidator } from "../validators";
 import { getSubscriptionStatus } from "../utils/jobs/init-subscription";
-import { generateApiToken } from "@/utils/utils";
+import { generateApiToken } from "../utils/utils";
 
 const router = Router();
 
