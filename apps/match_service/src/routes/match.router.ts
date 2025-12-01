@@ -136,6 +136,7 @@ router.get("/matches/regenerate-token", async (req: Request, res: Response) => {
     return res.status(200).json({
       success: true,
       data: { token: newToken },
+      message :"API token regenerated successfully",
       timestamp: new Date().toISOString(),
     });
   } catch (error: any) {
