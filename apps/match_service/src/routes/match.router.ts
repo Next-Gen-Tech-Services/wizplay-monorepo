@@ -8,14 +8,48 @@ import { requireAuth } from "../middlewares/auth.middleware";
 import { listMatchesValidator } from "../validators";
 import { getSubscriptionStatus } from "../utils/jobs/init-subscription";
 import { generateApiToken } from "../utils/utils";
+import TournamentRepository from "../repositories/tournament.repository";
+import { STATUS_CODE } from "@repo/common";
 
 const router = Router();
+
+// GET /tournaments - List all tournaments
+router.get("/matches/tournaments", async (req: Request, res: Response) => {
+  try {
+    const tournamentRepo = new TournamentRepository();
+    const tournaments = await tournamentRepo.fetchAllTournaments();
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      message: "tournaments fetched successfully",
+      data: tournaments,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch tournaments",
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
 
 // GET /matches/stats - Stats for analytics dashboard
 router.get("/matches/stats", async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);
   return controller.getMatchStats(req, res);
 });
+
+// GET /matches/internal - Internal endpoint for service-to-service calls (no auth)
+router.get(
+  "/matches/internal",
+  listMatchesValidator(),
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const controller = container.resolve(MatchController);
+    return controller.getAllMatches(req, res);
+  }
+);
 
 // GET /matches
 router.get(

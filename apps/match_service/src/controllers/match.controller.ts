@@ -76,10 +76,10 @@ export default class MatchController {
 
   async updateMatch(req: Request, res: Response) {
     const { id } = req.params;
-    const { showOnFrontend } = req.body;
+    const { showOnFrontend, contestGenerated } = req.body;
 
     try {
-      const result = await this.matchService.updateMatch(id, showOnFrontend);
+      const result = await this.matchService.updateMatch(id, { showOnFrontend, contestGenerated });
       return res.status(200).json({ success: true, data: result });
     } catch (err: any) {
       // better error mapping with your STATUS_CODE if available

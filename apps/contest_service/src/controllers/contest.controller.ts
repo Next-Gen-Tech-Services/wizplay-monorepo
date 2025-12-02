@@ -513,5 +513,83 @@ export default class ContestController {
       });
     }
   }
+
+  /**
+   * Move contests to calculating status when match is completed
+   * POST /contests/match-completed/:matchId
+   */
+  public async handleMatchCompleted(req: Request, res: Response) {
+    try {
+      const { matchId } = req.params;
+      
+      if (!matchId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "matchId is required",
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      logger.info(`[CONTEST-CONTROLLER] Handling match completion for match ${matchId}`);
+      
+      const result = await this.contestService.moveContestsToCalculating(matchId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: `Moved ${result.updated} contest(s) to calculating status`,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.handleMatchCompleted error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to handle match completion",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  /**
+   * Manually complete stuck contests in calculating status
+   * POST /contests/complete-calculating/:matchId
+   */
+  public async completeCalculatingContests(req: Request, res: Response) {
+    try {
+      const { matchId } = req.params;
+      
+      if (!matchId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "matchId is required",
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      logger.info(`[CONTEST-CONTROLLER] Manually completing calculating contests for match ${matchId}`);
+      
+      const result = await this.contestService.completeCalculatingContests(matchId);
+      
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: `Completed ${result.completed} contest(s)`,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`ContestController.completeCalculatingContests error: ${err?.message ?? err}`);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to complete calculating contests",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }
 

@@ -92,6 +92,8 @@ export interface IMatchFilters {
   startedBefore?: string | undefined;
   teamName?: string | undefined;
   showOnFrontend?: boolean | undefined;
+  date?: string | undefined; // YYYY-MM-DD format for filtering matches on a specific date
+  search?: string | undefined; // Search across name, shortName, tournament
   limit?: number;
   offset?: number;
 }

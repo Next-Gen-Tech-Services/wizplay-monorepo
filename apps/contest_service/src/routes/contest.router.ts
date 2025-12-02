@@ -109,6 +109,18 @@ router.get("/contests/force-complete-stuck", async (req: Request, res: Response)
   return result;
 });
 
+// Handle match completion - move contests to calculating (internal/webhook endpoint)
+router.post("/contests/match-completed/:matchId", async (req: Request, res: Response) => {
+  const result = await contestController.handleMatchCompleted(req, res);
+  return result;
+});
+
+// Manually complete contests stuck in calculating status
+router.post("/contests/complete-calculating/:matchId", async (req: Request, res: Response) => {
+  const result = await contestController.completeCalculatingContests(req, res);
+  return result;
+});
+
 router.post(
   "/contests/generate/questions",
   generateQuestionsValidator(),

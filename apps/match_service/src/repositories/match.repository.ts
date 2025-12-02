@@ -22,12 +22,11 @@ function addTeamFlags(matchData: any): any {
       // Only add flag_url if country_code is not empty
       if (matchData.teams.a.country_code) {
         matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
-      }else{
+      } else {
         matchData.teams.a.flag_url = ``;
-
       }
     }
-    
+
     if (matchData.teams.b) {
       // Ensure country_code is empty string if null/undefined
       if (!matchData.teams.b.country_code) {
@@ -36,9 +35,8 @@ function addTeamFlags(matchData: any): any {
       // Only add flag_url if country_code is not empty
       if (matchData.teams.b.country_code) {
         matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
-      }else{
+      } else {
         matchData.teams.b.flag_url = ``;
-        
       }
     }
   }
@@ -51,7 +49,7 @@ export default class MatchRepository {
     this._DB = DB;
   }
 
-  public async getTestData(): Promise<any> { }
+  public async getTestData(): Promise<any> {}
 
   public async createBulkMatches(matchData: IMatchAttrs[]): Promise<any> {
     try {
@@ -111,12 +109,16 @@ export default class MatchRepository {
       if (filters.sport) where["sport"] = filters.sport;
       if (filters.format) where["format"] = filters.format;
       if (filters.gender) where["gender"] = filters.gender;
-      
+
       // Handle status filter: if not "all", filter for not-started and started statuses
-      if (filters.status !== "all") {
+      if (filters.status) {
+        if (filters.status !== "all") {
+          where["status"] = filters.status;
+        }
+      } else {
         where["status"] = { [Op.in]: ["not_started", "started"] };
       }
-      
+
       if (filters.tournamentKey) where["tournamentKey"] = filters.tournamentKey;
       if (filters.winner) where["winner"] = filters.winner;
       if (
@@ -134,12 +136,43 @@ export default class MatchRepository {
           { homeTeamName: { [Op.iLike]: `%${filters.teamName}%` } },
           { awayTeamName: { [Op.iLike]: `%${filters.teamName}%` } },
         ];
-      if (filters.startedAfter || filters.startedBefore) {
+
+      // Date filter: Filter matches on a specific date (YYYY-MM-DD)
+      if (filters.date) {
+        try {
+          const filterDate = new Date(filters.date);
+          const startOfDay = new Date(filterDate);
+          startOfDay.setHours(0, 0, 0, 0);
+          const endOfDay = new Date(filterDate);
+          endOfDay.setHours(23, 59, 59, 999);
+
+          const startEpoch = Math.floor(startOfDay.getTime() / 1000);
+          const endEpoch = Math.floor(endOfDay.getTime() / 1000);
+
+          where["started_at"] = {
+            [Op.gte]: startEpoch,
+            [Op.lte]: endEpoch,
+          };
+        } catch (error) {
+          logger.warn(`Invalid date filter: ${filters.date}`);
+        }
+      } else if (filters.startedAfter || filters.startedBefore) {
         where["started_at"] = {};
         if (filters.startedAfter)
           (where["started_at"] as any)[Op.gte] = filters.startedAfter;
         if (filters.startedBefore)
           (where["started_at"] as any)[Op.lte] = filters.startedBefore;
+      }
+
+      // Search filter: Search across name, shortName, and tournament data
+      if (filters.search) {
+        const searchTerm = `%${filters.search}%`;
+        (where as any)[Op.or] = [
+          { name: { [Op.iLike]: searchTerm } },
+          { shortName: { [Op.iLike]: searchTerm } },
+          { metricGroup: { [Op.iLike]: searchTerm } },
+          { tournamentKey: { [Op.iLike]: searchTerm } },
+        ];
       }
 
       const limit = Number(filters.limit ?? 20);
@@ -227,10 +260,9 @@ export default class MatchRepository {
 
         // Add team flag URLs and convert nulls to empty strings
         const matchWithFlags = addTeamFlags(plain);
-        
+
         // Recursively replace all null values with empty strings
-       
-        
+
         return matchWithFlags;
       });
 
@@ -252,17 +284,24 @@ export default class MatchRepository {
   }
   public async updateMatch(
     matchId: string,
-    showOnFrontend: boolean
+    updateData: { showOnFrontend?: boolean; contestGenerated?: boolean }
   ): Promise<any> {
     try {
       if (!matchId) {
         throw new ServerError("Missing match id");
       }
 
+      // Filter out undefined values
+      const dataToUpdate: any = {};
+      if (updateData.showOnFrontend !== undefined) {
+        dataToUpdate.showOnFrontend = updateData.showOnFrontend;
+      }
+      if (updateData.contestGenerated !== undefined) {
+        dataToUpdate.contestGenerated = updateData.contestGenerated;
+      }
+
       const match = await this._DB.Match.update(
-        {
-          showOnFrontend: showOnFrontend,
-        },
+        dataToUpdate,
         {
           where: {
             id: matchId,
@@ -420,7 +459,7 @@ export default class MatchRepository {
 
       const matchData = await this._DB.Match.findOne({
         where: { key: matchKey },
-        attributes: ['id'],
+        attributes: ["id"],
         raw: true,
       });
 
@@ -446,7 +485,10 @@ export default class MatchRepository {
     }
   }
 
-  public async removeFromWishlist(userId: string, matchId: string): Promise<number> {
+  public async removeFromWishlist(
+    userId: string,
+    matchId: string
+  ): Promise<number> {
     try {
       if (!userId || !matchId) {
         throw new BadRequestError("invalid user id or match id");

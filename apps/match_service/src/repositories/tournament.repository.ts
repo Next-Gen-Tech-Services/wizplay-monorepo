@@ -40,4 +40,18 @@ export default class TournamentRepository {
       throw new ServerError("Database Error");
     }
   }
+
+  public async fetchAllTournaments(): Promise<ITournamentAtters[]> {
+    try {
+      const tournaments = await Tournament.findAll({
+        attributes: ["id", "key", "name", "shortName", "alternateName", "alternateShortName"],
+        order: [["name", "ASC"]],
+      });
+
+      return tournaments.map((t: any) => t.get({ plain: true }));
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
 }

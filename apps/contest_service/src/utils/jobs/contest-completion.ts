@@ -66,8 +66,179 @@ class ContestCompletionCron {
         const contestData = contest.get({ plain: true });
         await this.processContest(contestData, now);
       }
+
+      // Check for completed matches and update their contests
+      await this.handleCompletedMatches();
     } catch (error: any) {
       logger.error(`[CONTEST-COMPLETION] Error in completeContests: ${error.message}`);
+    }
+  }
+
+  /**
+   * Handle contests for completed matches
+   * Sets all non-completed contests to "calculating" status when match is completed
+   */
+  async handleCompletedMatches() {
+    try {
+      // Find all contests that are not yet calculating/completed
+      const activeContests = await DB.Contest.findAll({
+        where: {
+          status: {
+            [Op.in]: ["upcoming", "live", "joining_closed"],
+          },
+          matchId: {
+            [Op.ne]: null,
+          },
+        },
+        attributes: ["id", "matchId", "status", "title"],
+      });
+
+      if (activeContests.length === 0) {
+        return;
+      }
+
+      logger.info(`[CONTEST-COMPLETION] Checking ${activeContests.length} active contests for completed matches`);
+
+      // Group contests by matchId for efficient batch checking
+      const contestsByMatch = new Map<string, any[]>();
+      for (const contest of activeContests) {
+        const contestData = contest.get({ plain: true });
+        const matchId = contestData.matchId;
+        if (!matchId) continue; // Skip if no matchId
+        if (!contestsByMatch.has(matchId)) {
+          contestsByMatch.set(matchId, []);
+        }
+        contestsByMatch.get(matchId)!.push(contestData);
+      }
+
+      // Check each match
+      for (const [matchId, contests] of contestsByMatch.entries()) {
+        const match = await this.getMatchDetails(matchId);
+        if (!match) {
+          continue;
+        }
+
+        // If match is completed, update all its non-completed contests to "calculating"
+        if (match.status === "completed") {
+          const contestIds = contests.map(c => c.id);
+          
+          const updateResult = await DB.Contest.update(
+            { status: "calculating" },
+            {
+              where: {
+                id: {
+                  [Op.in]: contestIds,
+                },
+              },
+            }
+          );
+
+          logger.info(
+            `[CONTEST-COMPLETION] Match ${matchId} completed - Updated ${updateResult[0]} contests to calculating status`
+          );
+
+          // Trigger calculation for this match's contests
+          if (updateResult[0] > 0) {
+            await this.triggerContestCalculation(matchId, match);
+          }
+        }
+      }
+    } catch (error: any) {
+      logger.error(`[CONTEST-COMPLETION] Error in handleCompletedMatches: ${error.message}`);
+    }
+  }
+
+  /**
+   * Trigger contest calculation and completion
+   * Calls internal service methods to generate answers and calculate scores
+   */
+  async triggerContestCalculation(matchId: string, matchData: any) {
+    try {
+      logger.info(`[CONTEST-COMPLETION] Triggering calculation for match ${matchId}`);
+
+      // Get live match data for answer generation
+      let liveMatchData = null;
+      try {
+        const liveResponse = await axios.get(
+          `${this.matchServiceUrl}/api/v1/matches/${matchId}/live-score`,
+          { timeout: 10000 }
+        );
+        liveMatchData = liveResponse.data?.data;
+        logger.info(`[CONTEST-COMPLETION] Successfully fetched live data for match ${matchId}`);
+      } catch (err: any) {
+        logger.warn(`[CONTEST-COMPLETION] Could not fetch live data for match ${matchId}: ${err.message}`);
+        // Continue anyway - processContestCalculation can handle null live data
+      }
+
+      // Get all contests in calculating status for this match
+      const calculatingContests = await DB.Contest.findAll({
+        where: {
+          matchId: matchId,
+          status: "calculating",
+        },
+      });
+
+      if (calculatingContests.length === 0) {
+        logger.info(`[CONTEST-COMPLETION] No contests in calculating status for match ${matchId}`);
+        return;
+      }
+
+      logger.info(`[CONTEST-COMPLETION] Processing ${calculatingContests.length} contests for calculation`);
+
+      // Import service dynamically to avoid circular dependency
+      const ContestService = require("../../services/contest.service").default;
+      const { container } = require("tsyringe");
+      const contestService = container.resolve(ContestService);
+
+      let successCount = 0;
+      let errorCount = 0;
+
+      // Process each contest
+      for (const contest of calculatingContests) {
+        try {
+          const contestId = contest.id;
+          const contestTitle = contest.get('title');
+          
+          logger.info(`[CONTEST-COMPLETION] Starting calculation for contest ${contestId} (${contestTitle})`);
+
+          // Prepare live match data structure
+          const dataForCalculation = {
+            match: matchData,
+            live: liveMatchData,
+            ballByBallData: liveMatchData?.ballByBallData || null,
+          };
+
+          // Call service to generate answers, calculate scores, and complete
+          await contestService.processContestCalculation(
+            contestId,
+            matchId,
+            dataForCalculation
+          );
+
+          successCount++;
+          logger.info(`[CONTEST-COMPLETION] ✅ Successfully completed contest ${contestId} - ${successCount}/${calculatingContests.length}`);
+        } catch (calcErr: any) {
+          errorCount++;
+          logger.error(`[CONTEST-COMPLETION] ❌ Error calculating contest ${contest.id}: ${calcErr.message}`);
+          logger.error(`[CONTEST-COMPLETION] Stack trace: ${calcErr.stack}`);
+          
+          // Try to mark as completed anyway to prevent stuck contests
+          try {
+            await DB.Contest.update(
+              { status: "completed" },
+              { where: { id: contest.id } }
+            );
+            logger.warn(`[CONTEST-COMPLETION] Marked contest ${contest.id} as completed despite calculation error`);
+          } catch (updateErr: any) {
+            logger.error(`[CONTEST-COMPLETION] Failed to mark contest ${contest.id} as completed: ${updateErr.message}`);
+          }
+        }
+      }
+
+      logger.info(`[CONTEST-COMPLETION] Calculation summary for match ${matchId}: ${successCount} succeeded, ${errorCount} failed`);
+    } catch (error: any) {
+      logger.error(`[CONTEST-COMPLETION] Error in triggerContestCalculation: ${error.message}`);
+      logger.error(`[CONTEST-COMPLETION] Stack trace: ${error.stack}`);
     }
   }
 

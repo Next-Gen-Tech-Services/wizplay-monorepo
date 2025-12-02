@@ -1358,5 +1358,162 @@ export default class ContestService {
       throw error;
     }
   }
+
+  /**
+   * Move all non-completed contests to calculating status when match is completed
+   * This triggers result calculation and leaderboard updates
+   */
+  public async moveContestsToCalculating(matchId: string): Promise<any> {
+    try {
+      logger.info(`[CONTEST SERVICE] Moving contests to calculating for completed match ${matchId}`);
+
+      // Find all contests for this match that are not yet calculating/completed
+      const contests = await DB.Contest.findAll({
+        where: {
+          matchId: matchId,
+          status: {
+            [Op.in]: ["upcoming", "live", "joining_closed"],
+          },
+        },
+      });
+
+      if (!contests || contests.length === 0) {
+        logger.info(`[CONTEST SERVICE] No active contests found for match ${matchId}`);
+        return {
+          updated: 0,
+          message: 'No active contests found for this match'
+        };
+      }
+
+      logger.info(`[CONTEST SERVICE] Found ${contests.length} active contests, moving to calculating`);
+
+      const contestIds = contests.map(c => c.id);
+
+      // Update all to calculating status
+      const [updateCount] = await DB.Contest.update(
+        { status: "calculating" },
+        {
+          where: {
+            id: {
+              [Op.in]: contestIds,
+            },
+          },
+        }
+      );
+
+      logger.info(`[CONTEST SERVICE] ✅ Moved ${updateCount} contests to calculating status`);
+
+      return {
+        updated: updateCount,
+        contestIds: contestIds,
+        message: `Successfully moved ${updateCount} contests to calculating status`
+      };
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] moveContestsToCalculating error: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
+   * Complete all contests in calculating status for a match
+   * This manually triggers the calculation process for stuck contests
+   */
+  public async completeCalculatingContests(matchId: string): Promise<any> {
+    try {
+      logger.info(`[CONTEST SERVICE] Completing calculating contests for match ${matchId}`);
+
+      // Get all contests in calculating status for this match
+      const contests = await DB.Contest.findAll({
+        where: {
+          matchId: matchId,
+          status: "calculating",
+        },
+      });
+
+      if (!contests || contests.length === 0) {
+        logger.info(`[CONTEST SERVICE] No contests in calculating status for match ${matchId}`);
+        return {
+          completed: 0,
+          message: 'No contests in calculating status for this match'
+        };
+      }
+
+      logger.info(`[CONTEST SERVICE] Found ${contests.length} contests in calculating status`);
+
+      // Get match and live data
+      const matchServiceUrl = process.env.MATCHES_SERVICE_URL || "http://localhost:8002";
+      
+      let matchData = null;
+      let liveData = null;
+      
+      try {
+        const matchResponse = await axios.get(
+          `${matchServiceUrl}/api/v1/matches/${matchId}`,
+          { timeout: 10000 }
+        );
+        matchData = matchResponse.data?.data;
+      } catch (err: any) {
+        logger.warn(`[CONTEST SERVICE] Could not fetch match data: ${err.message}`);
+      }
+
+      try {
+        const liveResponse = await axios.get(
+          `${matchServiceUrl}/api/v1/matches/${matchId}/live-score`,
+          { timeout: 10000 }
+        );
+        liveData = liveResponse.data?.data;
+      } catch (err: any) {
+        logger.warn(`[CONTEST SERVICE] Could not fetch live data: ${err.message}`);
+      }
+
+      let completedCount = 0;
+      const results = [];
+
+      // Process each contest
+      for (const contest of contests) {
+        try {
+          logger.info(`[CONTEST SERVICE] Processing contest ${contest.id} - ${contest.get('title')}`);
+
+          const dataForCalculation = {
+            match: matchData,
+            live: liveData,
+            ballByBallData: liveData?.ballByBallData || null,
+          };
+
+          await this.processContestCalculation(
+            contest.id,
+            matchId,
+            dataForCalculation
+          );
+
+          completedCount++;
+          results.push({
+            contestId: contest.id,
+            title: contest.get('title'),
+            status: 'completed'
+          });
+
+          logger.info(`[CONTEST SERVICE] ✅ Completed contest ${contest.id}`);
+        } catch (err: any) {
+          logger.error(`[CONTEST SERVICE] Failed to complete contest ${contest.id}: ${err.message}`);
+          results.push({
+            contestId: contest.id,
+            title: contest.get('title'),
+            status: 'failed',
+            error: err.message
+          });
+        }
+      }
+
+      return {
+        completed: completedCount,
+        total: contests.length,
+        results
+      };
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] completeCalculatingContests error: ${error.message}`);
+      throw error;
+    }
+  }
 }
 

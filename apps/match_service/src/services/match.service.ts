@@ -47,7 +47,7 @@ export default class MatchService {
     }
   }
 
-  public async updateMatch(matchId: string, showOnFrontend: boolean) {
+  public async updateMatch(matchId: string, updateData: { showOnFrontend?: boolean; contestGenerated?: boolean }) {
     try {
       if (!matchId) {
         throw new BadRequestError("Missing match id");
@@ -55,7 +55,7 @@ export default class MatchService {
 
       const updated = await this.matchRepository.updateMatch(
         matchId,
-        showOnFrontend
+        updateData
       );
 
       return updated;
