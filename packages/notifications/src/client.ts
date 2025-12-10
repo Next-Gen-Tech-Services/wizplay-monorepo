@@ -67,7 +67,7 @@ export class NotificationClient {
         },
         data: {
           type: payload.type,
-          userId: payload.userId,
+          userId: payload.userId || 'unknown',
           ...(payload.data || {}),
           actionUrl: payload.actionUrl || '',
         },

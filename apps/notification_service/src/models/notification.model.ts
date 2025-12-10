@@ -4,7 +4,9 @@ import { NotificationType } from "@repo/notifications";
 
 export interface INotificationAttrs {
   id: string;
-  userId: string;
+  userId: string | null;
+  recipientType: 'user_id' | 'email' | 'phone' | 'all_users';
+  recipientValue: string | null;
   title: string;
   body: string;
   type: NotificationType;
@@ -25,6 +27,8 @@ interface NotificationCreationAttributes
   extends Optional<
     INotificationAttrs,
     | "id"
+    | "userId"
+    | "recipientValue"
     | "data"
     | "imageUrl"
     | "actionUrl"
@@ -43,7 +47,9 @@ export class Notification
   implements INotificationAttrs
 {
   public id!: string;
-  public userId!: string;
+  public userId!: string | null;
+  public recipientType!: 'user_id' | 'email' | 'phone' | 'all_users';
+  public recipientValue!: string | null;
   public title!: string;
   public body!: string;
   public type!: NotificationType;
@@ -71,7 +77,16 @@ export default function (sequelize: Sequelize) {
       },
       userId: {
         type: DataTypes.UUID,
+        allowNull: true,
+      },
+      recipientType: {
+        type: DataTypes.ENUM('user_id', 'email', 'phone', 'all_users'),
         allowNull: false,
+        defaultValue: 'user_id',
+      },
+      recipientValue: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       title: {
         type: DataTypes.STRING,

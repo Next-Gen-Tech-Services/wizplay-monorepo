@@ -27,6 +27,13 @@ router.get(
   }
 );
 
+router.get(
+  "/notifications/all",
+  async (req: Request, res: Response) => {
+    const result = await controller.getAllNotifications(req, res);
+    return result;
+  }
+);
 // Get unread count
 router.get(
   "/notifications/unread/count",

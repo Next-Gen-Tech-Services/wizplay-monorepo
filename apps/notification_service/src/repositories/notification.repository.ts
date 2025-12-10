@@ -13,7 +13,9 @@ export default class NotificationRepository {
    * Create a new notification
    */
   public async create(data: {
-    userId: string;
+    userId: string | null;
+    recipientType: 'user_id' | 'email' | 'phone' | 'all_users';
+    recipientValue: string | null;
     title: string;
     body: string;
     type: NotificationType;
@@ -64,6 +66,21 @@ export default class NotificationRepository {
       });
     } catch (err: any) {
       logger.error(`DB(findByUserId) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
+  public async findAll(limit = 50, offset = 0) {
+    try {
+      const { rows, count } = await this._DB.Notification.findAndCountAll({
+        limit,
+        offset,
+        order: [["createdAt", "DESC"]],
+      });
+      return { items: rows, total: count };
+    }
+    catch (err: any) {
+      logger.error(`DB(findAll) Notification error: ${err?.message ?? err}`);
       throw new ServerError("Database Error");
     }
   }
@@ -174,6 +191,21 @@ export default class NotificationRepository {
       });
     } catch (err: any) {
       logger.error(`DB(deleteOld) Notification error: ${err?.message ?? err}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
+  /**
+   * Update notification with userId when found via email/phone lookup
+   */
+  public async updateNotificationUserId(notificationId: string, userId: string) {
+    try {
+      return await this._DB.Notification.update(
+        { userId },
+        { where: { id: notificationId } }
+      );
+    } catch (err: any) {
+      logger.error(`DB(updateNotificationUserId) error: ${err?.message ?? err}`);
       throw new ServerError("Database Error");
     }
   }

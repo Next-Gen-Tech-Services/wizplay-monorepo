@@ -1,5 +1,7 @@
 export interface NotificationPayload {
-  userId: string;
+  userId?: string;
+  recipientType: 'user_id' | 'email' | 'phone' | 'all_users';
+  recipientValue?: string;
   title: string;
   body: string;
   type: NotificationType;
@@ -18,6 +20,8 @@ export enum NotificationType {
   // Contest notifications
   CONTEST_JOINED = 'contest_joined',
   CONTEST_STARTING = 'contest_starting',
+  CONTEST_LIVE = 'contest_live',
+  CONTEST_COMPLETED = 'contest_completed',
   CONTEST_WON = 'contest_won',
   CONTEST_LOST = 'contest_lost',
   CONTEST_RESULT = 'contest_result',
@@ -29,6 +33,7 @@ export enum NotificationType {
   WITHDRAWAL_FAILED = 'withdrawal_failed',
   
   // Match notifications
+  MATCH_STARTING_SOON = 'match_starting_soon',
   MATCH_STARTED = 'match_started',
   MATCH_ENDED = 'match_ended',
   
@@ -36,6 +41,16 @@ export enum NotificationType {
   SYSTEM_ALERT = 'system_alert',
   PROMOTIONAL = 'promotional',
   REFERRAL_REWARD = 'referral_reward',
+  
+  // Admin notification types
+  INFO = 'info',
+  SUCCESS = 'success',
+  WARNING = 'warning',
+  ERROR = 'error',
+  CONTEST_UPDATE = 'contest_update',
+  WALLET_UPDATE = 'wallet_update',
+  MATCH_UPDATE = 'match_update',
+  SYSTEM = 'system',
 }
 
 export interface FirebaseConfig {

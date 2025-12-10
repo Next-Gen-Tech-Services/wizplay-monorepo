@@ -53,6 +53,12 @@ router.post("/wallet/internal/credit-contest-winnings", async (req, res) => {
   return result;
 });
 
+// Internal endpoint for coupon service to debit coins (no auth required)
+router.post("/wallet/internal/debit", async (req, res) => {
+  const result = await walletController.debitBalance(req, res);
+  return result;
+});
+
 // get all user transactions
 router.get("/wallet/transactions", requireAuth, async (req, res) => {
   const result = await walletController.getUserTransactions(req, res);

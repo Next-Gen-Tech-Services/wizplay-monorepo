@@ -158,4 +158,98 @@ export default class UserController {
       });
     }
   }
+
+  // Service-to-service methods for notification service
+  public async getUserByEmail(req: Request, res: Response) {
+    try {
+      const email = decodeURIComponent(req.params.email);
+
+      if (!email) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Email is required",
+          data: null,
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.userService.getUserByEmail(email);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "User found",
+        data: result.data,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("UserController.getUserByEmail error:", err);
+      return res.status(STATUS_CODE.NOT_FOUND ?? 404).json({
+        success: false,
+        message: "User not found",
+        data: null,
+        errors: (err as Error).message ?? null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async getUserByPhone(req: Request, res: Response) {
+    try {
+      const phone = decodeURIComponent(req.params.phone);
+
+      if (!phone) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "Phone number is required",
+          data: null,
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.userService.getUserByPhone(phone);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "User found",
+        data: result.data,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("UserController.getUserByPhone error:", err);
+      return res.status(STATUS_CODE.NOT_FOUND ?? 404).json({
+        success: false,
+        message: "User not found",
+        data: null,
+        errors: (err as Error).message ?? null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async getAllDeviceTokens(req: Request, res: Response) {
+    try {
+      const result = await this.userService.getAllDeviceTokens();
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: "Device tokens retrieved",
+        data: result.data,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("UserController.getAllDeviceTokens error:", err);
+      return res.status(STATUS_CODE.INTERNAL_SERVER ?? 500).json({
+        success: false,
+        message: "Failed to get device tokens",
+        data: null,
+        errors: (err as Error).message ?? null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

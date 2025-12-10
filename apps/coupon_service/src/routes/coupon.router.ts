@@ -123,4 +123,36 @@ router.post("/assign", async (req: Request, res: Response) => {
   return result;
 });
 
+// Redeem a coupon for a user (one-time use)
+router.post(
+  "/redeem",
+  [
+    body("userId").isString().notEmpty().withMessage("userId is required"),
+    body("couponId").isUUID().withMessage("couponId must be a valid UUID"),
+    validateRequest,
+  ],
+  (req: Request, res: Response) => controller.redeemCoupon(req, res)
+);
+
+// Get available coupons (not yet redeemed)
+router.get(
+  "/available/list",
+  [
+    query("limit").optional().toInt().isInt({ min: 1 }),
+    query("offset").optional().toInt().isInt({ min: 0 }),
+    validateRequest,
+  ],
+  (req: Request, res: Response) => controller.getAvailableCoupons(req, res)
+);
+
+// Get user's redeemed coupons
+router.get(
+  "/user/:userId/redeemed",
+  [
+    param("userId").isString().notEmpty().withMessage("userId is required"),
+    validateRequest,
+  ],
+  (req: Request, res: Response) => controller.getUserRedeemedCoupons(req, res)
+);
+
 export default router;

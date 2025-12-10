@@ -95,4 +95,41 @@ export default class UserContestRepository {
       throw err;
     }
   }
+
+  public async getUserContestsByMatchStatus(userId: string) {
+    try {
+      return await this._DB.UserContest.findAll({
+        where: { userId },
+        include: [
+          {
+            model: this._DB.Contest,
+            as: "contest",
+            attributes: [
+              "id",
+              "matchId",
+              "title",
+              "description",
+              "type",
+              "difficulty",
+              "startAt",
+              "endAt",
+              "entryFee",
+              "prizePool",
+              "pointsPerQuestion",
+              "questionsCount",
+              "totalSpots",
+              "filledSpots",
+              "status",
+            ],
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+    } catch (err: any) {
+      logger.error(
+        `UserContestRepository.getUserContestsByMatchStatus error: ${err?.message ?? err}`
+      );
+      throw err;
+    }
+  }
 }

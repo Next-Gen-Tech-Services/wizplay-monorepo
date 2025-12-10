@@ -9,6 +9,7 @@ import MatchRouter from "./routes/match.router";
 import matchEventHandler from "./utils/events/match.events";
 import matchCrons from "./utils/jobs/match";
 import countryFlagsCron from "./utils/jobs/country-flags";
+import matchNotificationCron from "./utils/jobs/match-notifications";
 import { initializeSubscriptionService } from "./utils/jobs/init-subscription";
 import { connectProducer } from "./utils/kafka";
 import { Server as SocketIOServer, Socket } from "socket.io";
@@ -131,6 +132,20 @@ const SubscriptionInit = async () => {
   }
 };
 
+const NotificationInit = async () => {
+  try {
+    logger.info("Initializing match notifications service...");
+    
+    // Schedule match notification cron jobs
+    matchNotificationCron.scheduleJobs();
+    logger.info("✅ Match notifications service initialized successfully");
+  } catch (error: any) {
+    logger.error("Failed to initialize match notifications service:", error.message);
+    logger.warn("Match notifications will not be available");
+    // Don't crash the app if notifications fail
+  }
+};
+
 const AppInit = async () => {
   const expressApp: Express = express();
   const server = http.createServer(expressApp);
@@ -195,6 +210,7 @@ const AppInit = async () => {
   await BrokerInit();
   await CronsInit();
   await SubscriptionInit();
+  await NotificationInit();
 
   expressApp.use("/api/v1", MatchRouter);
   expressApp.get(

@@ -40,6 +40,24 @@ router.get("/user/:userId", async (req: Request, res: Response) => {
   return result;
 });
 
+// Service-to-service endpoint for finding user by email (for notifications)
+router.get("/internal/user/by-email/:email", async (req: Request, res: Response) => {
+  const result = await controller.getUserByEmail(req, res);
+  return result;
+});
+
+// Service-to-service endpoint for finding user by phone (for notifications)
+router.get("/internal/user/by-phone/:phone", async (req: Request, res: Response) => {
+  const result = await controller.getUserByPhone(req, res);
+  return result;
+});
+
+// Service-to-service endpoint for getting all device tokens (for broadcast notifications)
+router.get("/internal/device-tokens", async (req: Request, res: Response) => {
+  const result = await controller.getAllDeviceTokens(req, res);
+  return result;
+});
+
 router.patch(
   "/user/device-token",
   requireAuth,

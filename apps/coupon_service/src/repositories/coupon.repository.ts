@@ -1,15 +1,21 @@
 // src/repositories/coupon.repository.ts
-import { logger, ServerError } from "@repo/common";
-import { Op } from "sequelize";
+import { logger, ServerError, NotificationHelper } from "@repo/common";
+import axios from "axios";
+import { Op, QueryTypes } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
+import ServerConfigs from "../configs/server.config";
 import { ICouponAtters } from "../dtos/coupon.dto";
 import { Coupon } from "../models/coupon.model";
 
 export default class CouponRepository {
   private _DB: IDatabase = DB;
+  private notificationHelper: NotificationHelper;
 
   constructor() {
     this._DB = DB;
+    this.notificationHelper = new NotificationHelper(
+      ServerConfigs.NOTIFICATION_SERVICE_URL
+    );
   }
 
   /** Just a test helper */
@@ -180,6 +186,175 @@ export default class CouponRepository {
       return result
     } catch (error:any) {
       logger.error(`Database error: ${error.message}`)
+    }
+  }
+
+  /** Redeem a coupon for a user (one-time use) */
+  public async redeemCoupon(userId: string, couponId: string): Promise<any> {
+    try {
+      // Check if coupon exists and is active
+      const coupon = await this._DB.Coupon.findByPk(couponId);
+      if (!coupon) {
+        throw new ServerError("Coupon not found");
+      }
+
+      if (coupon.status !== "active") {
+        throw new ServerError("Coupon is not active");
+      }
+
+      if (new Date(coupon.expiry) < new Date()) {
+        throw new ServerError("Coupon has expired");
+      }
+
+      // Check if coupon is already redeemed
+      const existingRedemption = await this._DB.UserCoupon.findOne({
+        where: { couponId },
+      });
+
+      if (existingRedemption) {
+        throw new ServerError("Coupon has already been redeemed");
+      }
+
+      // Deduct coins from wallet (purchaseAmount)
+      const deductAmount = coupon.purchaseAmount;
+      
+      try {
+        const walletResponse = await axios.post(
+          `${ServerConfigs.WALLET_SERVICE_URL}/api/v1/wallet/internal/debit`,
+          {
+            userId,
+            amount: deductAmount,
+            type: "coupon_purchase",
+            referenceId: couponId,
+            referenceType: "coupon",
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+            timeout: 10000,
+          }
+        );
+
+        if (!walletResponse.data?.success) {
+          throw new ServerError(
+            walletResponse.data?.message || "Failed to deduct coins from wallet"
+          );
+        }
+
+        logger.info(
+          `Deducted ${deductAmount} coins from user ${userId} for coupon ${couponId}`
+        );
+      } catch (walletError: any) {
+        logger.error(`Wallet debit error: ${walletError.message}`);
+        throw new ServerError(
+          walletError.response?.data?.message ||
+            walletError.message ||
+            "Insufficient balance or wallet service unavailable"
+        );
+      }
+
+      // Create user coupon redemption
+      const userCoupon = await this._DB.UserCoupon.create({
+        userId,
+        couponId,
+        redeemedAt: new Date(),
+      });
+
+      // Update coupon status to used
+      await this._DB.Coupon.update(
+        { status: "used" },
+        { where: { id: couponId }, validate: false }
+      );
+
+      // Send notification to user
+      await this.notificationHelper.sendNotification({
+        recipientType: "user_id",
+        userId,
+        type: "coupon_redeemed",
+        title: "🎟️ Coupon Redeemed Successfully!",
+        body: `You've redeemed coupon "${coupon.code}" for ${deductAmount} coins. Enjoy your ${coupon.discountType === "flat" ? `₹${coupon.discountValue}` : `${coupon.discountValue}%`} discount on ${coupon.platform}!`,
+        data: {
+          couponId: coupon.id,
+          couponCode: coupon.code,
+          deductedAmount: deductAmount.toString(),
+          discountValue: coupon.discountValue.toString(),
+          discountType: coupon.discountType,
+          platform: coupon.platform,
+        },
+      });
+
+      return {
+        userCoupon: userCoupon.toJSON(),
+        coupon: coupon.toJSON(),
+      };
+    } catch (error: any) {
+      logger.error(`Database Error: ${error.message}`);
+      throw error instanceof ServerError ? error : new ServerError("Error redeeming coupon");
+    }
+  }
+
+  /** Get available coupons (not yet redeemed) */
+  public async getAvailableCoupons({
+    limit = 10,
+    offset = 0,
+  }: {
+    limit?: number;
+    offset?: number;
+  }): Promise<{ rows: Coupon[]; count: number }> {
+    try {
+      // Use a subquery that returns empty array if table doesn't exist or is empty
+      const redeemedCouponIds = await this._DB.sequelize.query(
+        `SELECT COALESCE(array_agg(coupon_id), '{}') as ids FROM user_coupons WHERE coupon_id IS NOT NULL`,
+        { type: QueryTypes.SELECT }
+      );
+
+      const excludeIds = (redeemedCouponIds[0] as any)?.ids || [];
+
+      const where: any = {
+        status: "active",
+        expiry: {
+          [Op.gt]: new Date(),
+        },
+      };
+
+      // Only add the exclusion if there are actually redeemed coupons
+      if (excludeIds.length > 0) {
+        where.id = {
+          [Op.notIn]: excludeIds,
+        };
+      }
+
+      const { rows, count } = await this._DB.Coupon.findAndCountAll({
+        where,
+        order: [["created_at", "DESC"]],
+        limit,
+        offset,
+      });
+
+      return { rows, count };
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Error fetching available coupons");
+    }
+  }
+
+  /** Get user's redeemed coupons */
+  public async getUserRedeemedCoupons(userId: string): Promise<any[]> {
+    try {
+      const userCoupons = await this._DB.UserCoupon.findAll({
+        where: { userId },
+        include: [
+          {
+            model: this._DB.Coupon,
+            as: "coupon",
+          },
+        ],
+        order: [["redeemed_at", "DESC"]],
+      });
+
+      return userCoupons.map((uc) => uc.toJSON());
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Error fetching user redeemed coupons");
     }
   }
 }

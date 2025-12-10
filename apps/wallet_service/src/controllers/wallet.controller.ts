@@ -25,9 +25,16 @@ export default class WalletController {
   }
 
   public async debitBalance(req: Request, res: Response) {
-    const userId: string = req.userId!;
-    const { amount,type = 'withdrawal' }: { amount: number,type?: TransactionType } = req.body;
-    const result = await this.walletService.debitBalance(userId, amount,type);
+    // For internal service calls, userId comes from req.body
+    // For authenticated user calls, userId comes from req.userId
+    const userId: string = req.body.userId || req.userId!;
+    const { amount, type = 'withdrawal', referenceId, referenceType }: { 
+      amount: number;
+      type?: TransactionType;
+      referenceId?: string;
+      referenceType?: string;
+    } = req.body;
+    const result = await this.walletService.debitBalance(userId, amount, type, referenceId, referenceType);
     return res
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });
@@ -43,8 +50,13 @@ export default class WalletController {
   
   public async creditBalance(req: Request, res: Response) {
     const userId: string = req.userId!;
-    const { amount,type = 'deposit' }: { amount: number,type?: TransactionType } = req.body;
-    const result = await this.walletService.creditBalance(userId, amount,type);
+    const { amount, type = 'deposit', referenceId, referenceType }: { 
+      amount: number;
+      type?: TransactionType;
+      referenceId?: string;
+      referenceType?: string;
+    } = req.body;
+    const result = await this.walletService.creditBalance(userId, amount, type, referenceId, referenceType);
     return res
       .status(STATUS_CODE.SUCCESS)
       .json({ success: true, data: result });

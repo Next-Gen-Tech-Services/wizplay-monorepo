@@ -197,4 +197,44 @@ export default class CouponService {
       throw new ServerError(error?.message || "Error assigning coupons");
     }
   }
+
+  /** Redeem a coupon for a user (one-time use) */
+  public async redeemCoupon(userId: string, couponId: string) {
+    try {
+      const result = await this.couponRepository.redeemCoupon(userId, couponId);
+      return result;
+    } catch (error: any) {
+      logger.error(`[coupon-service] redeemCoupon error: ${error.message}`);
+      throw new ServerError(error?.message || "Error redeeming coupon");
+    }
+  }
+
+  /** Get available coupons (not yet redeemed) */
+  public async getAvailableCoupons(filters: {
+    limit?: number;
+    offset?: number;
+  }) {
+    try {
+      const { rows, count } = await this.couponRepository.getAvailableCoupons(filters);
+      return {
+        items: rows,
+        total: count,
+        message: "Available coupons fetched successfully",
+      };
+    } catch (error: any) {
+      logger.error(`[coupon-service] getAvailableCoupons error: ${error.message}`);
+      throw new ServerError(error?.message || "Error fetching available coupons");
+    }
+  }
+
+  /** Get user's redeemed coupons */
+  public async getUserRedeemedCoupons(userId: string) {
+    try {
+      const coupons = await this.couponRepository.getUserRedeemedCoupons(userId);
+      return coupons;
+    } catch (error: any) {
+      logger.error(`[coupon-service] getUserRedeemedCoupons error: ${error.message}`);
+      throw new ServerError(error?.message || "Error fetching user redeemed coupons");
+    }
+  }
 }

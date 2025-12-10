@@ -34,6 +34,8 @@ export interface IMatchAttrs {
   expectedEndedAt: number;
   showOnFrontend?: boolean;
   contestGenerated?: boolean;
+  startingSoonNotificationSent?: boolean;
+  matchStartedNotificationSent?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

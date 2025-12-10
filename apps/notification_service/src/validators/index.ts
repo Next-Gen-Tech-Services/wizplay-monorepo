@@ -36,7 +36,9 @@ export const resetPassValidator = () => {
 // Notification validators
 export const sendNotificationValidator = () => {
   return [
-    body("userId").isUUID().withMessage("userId must be a valid UUID"),
+    body("recipientType").isIn(['user_id', 'email', 'phone', 'all_users']).withMessage("recipientType must be one of: user_id, email, phone, all_users"),
+    body("userId").optional().isUUID().withMessage("userId must be a valid UUID when provided"),
+    body("recipientValue").optional().isString().withMessage("recipientValue must be a string when provided"),
     body("title").trim().notEmpty().withMessage("title is required"),
     body("body").trim().notEmpty().withMessage("body is required"),
     body("type").trim().notEmpty().withMessage("type is required"),

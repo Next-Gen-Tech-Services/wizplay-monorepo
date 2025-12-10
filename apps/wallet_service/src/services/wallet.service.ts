@@ -29,9 +29,9 @@ export default class ContestService {
     }
   }
 
-  public async debitBalance(userId: string, amount: number, type:TransactionType) {
+  public async debitBalance(userId: string, amount: number, type: TransactionType, referenceId?: string, referenceType?: string) {
     try {
-      const transactionInfo = await this.repo.withdrawCoins(userId, amount,type);
+      const transactionInfo = await this.repo.withdrawCoins(userId, amount, type, referenceId, referenceType);
       return transactionInfo;
     } catch (error: any) {
       // Re-throw the error as-is to preserve the error type and message
@@ -48,9 +48,9 @@ export default class ContestService {
       throw new ServerError(`Error fetching wallet data: ${error.message}`);
     }
   }
-  public async creditBalance(userId: string, amount: number,type:TransactionType) {
+  public async creditBalance(userId: string, amount: number, type: TransactionType, referenceId?: string, referenceType?: string) {
     try {
-      const transactionInfo = await this.repo.depositCoins(userId, amount,type);
+      const transactionInfo = await this.repo.depositCoins(userId, amount, type, referenceId, referenceType);
       return transactionInfo;
     } catch (error: any) {
       // Re-throw the error as-is to preserve the error type and message
@@ -63,7 +63,7 @@ export default class ContestService {
    */
   public async creditContestWinnings(userId: string, amount: number, contestId: string): Promise<any> {
     try {
-      const transactionInfo = await this.repo.depositCoins(userId, amount, 'contest_winnings');
+      const transactionInfo = await this.repo.depositCoins(userId, amount, 'contest_winnings', contestId, 'contest');
       return transactionInfo;
     } catch (error: any) {
       throw new ServerError(`Error crediting contest winnings: ${error.message}`);

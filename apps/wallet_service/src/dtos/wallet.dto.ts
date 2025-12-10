@@ -7,7 +7,8 @@ export type TransactionType =
   | "bonus"
   | "joining_bonus"
   | "referral"
-  | "referral_bonus";
+  | "referral_bonus"
+  | "coupon_purchase";
 
 export type TransactionStatus =
   | "pending"

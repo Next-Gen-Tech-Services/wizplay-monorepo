@@ -5,6 +5,7 @@ export * from "./middlewares/error.middleware";
 export * from "./middlewares/reqId.middleware";
 export * from "./middlewares/request-validation";
 export * from "./utils/globalLogger";
+export * from "./utils/notification-helper";
 export * from "./utils/password";
 export * from "./utils/statusCodes";
 export * from "./utils/token";

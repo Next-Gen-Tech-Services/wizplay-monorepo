@@ -86,4 +86,38 @@ export default class UserService {
       throw new BadRequestError(error.message || "Failed to update device token");
     }
   }
+
+  // Service-to-service methods for notification service
+  public async getUserByEmail(email: string) {
+    try {
+      const result = await this.userRepository.findByEmail(email);
+      if (!result) {
+        throw new BadRequestError("User not found with this email");
+      }
+      return { data: result, message: "User found" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to find user by email");
+    }
+  }
+
+  public async getUserByPhone(phoneNumber: string) {
+    try {
+      const result = await this.userRepository.findByPhone(phoneNumber);
+      if (!result) {
+        throw new BadRequestError("User not found with this phone number");
+      }
+      return { data: result, message: "User found" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to find user by phone");
+    }
+  }
+
+  public async getAllDeviceTokens() {
+    try {
+      const result = await this.userRepository.getAllDeviceTokens();
+      return { data: { deviceTokens: result }, message: "Device tokens retrieved" };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to get device tokens");
+    }
+  }
 }

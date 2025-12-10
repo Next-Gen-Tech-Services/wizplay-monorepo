@@ -28,6 +28,18 @@ router.get("/contests/internal/active/:matchId", async (req, res) => {
   return result;
 });
 
+// Internal endpoint to get contest details for wallet service (no auth required)
+router.get("/contests/internal/:id", async (req, res) => {
+  const result = await contestController.getContest(req, res);
+  return result;
+});
+
+// Internal endpoint to get users who joined contests for a match (no auth required)
+router.get("/contests/internal/match/:matchId/users", async (req, res) => {
+  const result = await contestController.getUsersJoinedForMatch(req, res);
+  return result;
+});
+
 router.get("/contests", requireAuth, async (req, res) => {
   const result = await contestController.listByMatch(req, res);
   return result;
@@ -38,23 +50,8 @@ router.post("/contests", async (req, res) => {
   return result;
 });
 
-router.get("/contests/:id", requireAuth, async (req, res) => {
-  const result = await contestController.getContest(req, res);
-  return result;
-});
-
-router.patch("/contests/:id", async (req, res) => {
-  const result = await contestController.updateContest(req, res);
-  return result;
-});
-
-router.delete("/contests/:id", async (req, res) => {
-  const result = await contestController.deleteContest(req, res);
-  return result;
-});
-
 /**
- * User Contests
+ * User Contests - Must come BEFORE /contests/:id to avoid conflicts
  */
 
 router.post(
@@ -83,6 +80,35 @@ router.get(
     return result;
   }
 );
+
+// Get user joined contests grouped by match status (upcoming, live, completed)
+router.get(
+  "/contests/joined-by-status",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await contestController.getUserJoinedContestsByMatchStatus(req, res);
+    return result;
+  }
+);
+
+/**
+ * Generic Contest Routes - Must come AFTER specific user contest routes
+ */
+
+router.get("/contests/:id", requireAuth, async (req, res) => {
+  const result = await contestController.getContest(req, res);
+  return result;
+});
+
+router.patch("/contests/:id", async (req, res) => {
+  const result = await contestController.updateContest(req, res);
+  return result;
+});
+
+router.delete("/contests/:id", async (req, res) => {
+  const result = await contestController.deleteContest(req, res);
+  return result;
+});
 
 /**
  * Generative AI

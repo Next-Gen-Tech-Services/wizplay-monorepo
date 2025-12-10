@@ -72,7 +72,8 @@ export default function (sequelize: Sequelize) {
           "bonus",
           "joining_bonus",
           "referral",
-          "referral_bonus"
+          "referral_bonus",
+          "coupon_purchase"
         ),
         allowNull: false,
       },

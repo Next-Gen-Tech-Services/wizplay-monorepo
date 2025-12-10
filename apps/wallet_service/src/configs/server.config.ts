@@ -29,6 +29,7 @@ class ServerConfigs {
   static COUPON_SERVICE_URL: string = process.env.COUPONS_SERVICE_URL as string;
   static CONTEST_SERVICE_URL: string = process.env.CONTEST_SERVICE_URL as string;
   static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
+  static NOTIFICATION_SERVICE_URL: string = process.env.NOTIFICATION_SERVICE_URL || "http://localhost:4007";
   static DB_SSL: string = process.env.DB_SSL || "false";
   private constructor() {}
 }

@@ -1,5 +1,5 @@
 import { logger } from "@repo/common";
-import { Op } from "sequelize/lib/operators";
+import { Op } from "sequelize";
 import { DB, IDatabase } from "../configs/database.config";
 import ServerConfigs from "../configs/server.config";
 import { KAFKA_EVENTS, Language } from "../types";
@@ -340,6 +340,51 @@ export default class UserRepository {
       return result;
     } catch (error: any) {
       logger.error(`[Error updating device token: ${error.message}]`);
+      throw error;
+    }
+  }
+
+  // Service-to-service methods for notification service
+  public async findByEmail(email: string): Promise<any> {
+    try {
+      const result = await this._DB.User.findOne({
+        where: { email },
+        attributes: ['userId', 'email', 'phoneNumber', 'deviceToken', 'name']
+      });
+      return result;
+    } catch (error: any) {
+      logger.error(`[Error finding user by email: ${error.message}]`);
+      throw error;
+    }
+  }
+
+  public async findByPhone(phoneNumber: string): Promise<any> {
+    try {
+      const result = await this._DB.User.findOne({
+        where: { phoneNumber },
+        attributes: ['userId', 'email', 'phoneNumber', 'deviceToken', 'name']
+      });
+      return result;
+    } catch (error: any) {
+      logger.error(`[Error finding user by phone: ${error.message}]`);
+      throw error;
+    }
+  }
+
+  public async getAllDeviceTokens(): Promise<string[]> {
+    try {
+      const users = await this._DB.User.findAll({
+        where: { 
+          deviceToken: { [Op.ne]: null }
+        },
+        attributes: ['deviceToken']
+      });
+      
+      return users
+        .map((user: any) => user.deviceToken)
+        .filter((token: string) => token && token.trim());
+    } catch (error: any) {
+      logger.error(`[Error getting all device tokens: ${error.message}]`);
       throw error;
     }
   }

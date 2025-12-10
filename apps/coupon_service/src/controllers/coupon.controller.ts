@@ -119,4 +119,103 @@ export default class CouponController {
       timestamp: new Date().toISOString(),
     });
   }
+
+  /** Redeem a coupon for a user (one-time use) */
+  public async redeemCoupon(req: Request, res: Response) {
+    const { userId, couponId } = req.body;
+
+    if (!userId || !couponId) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: "userId and couponId are required",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    try {
+      const result = await this.couponService!.redeemCoupon(userId, couponId);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: "Coupon redeemed successfully",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      const statusCode = err.message.includes("not found") 
+        ? STATUS_CODE.NOT_FOUND 
+        : err.message.includes("already redeemed") || err.message.includes("Insufficient")
+        ? STATUS_CODE.BAD_REQUEST
+        : STATUS_CODE.INTERNAL_SERVER;
+
+      return res.status(statusCode).json({
+        success: false,
+        data: null,
+        message: err.message || "Failed to redeem coupon",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  /** Get available coupons (not yet redeemed) */
+  public async getAvailableCoupons(req: Request, res: Response) {
+    const { limit, offset } = req.query;
+
+    const result = await this.couponService!.getAvailableCoupons({
+      limit: limit ? Number(limit) : 10,
+      offset: offset ? Number(offset) : 0,
+    });
+
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      data: result.items,
+      message: "Available coupons fetched successfully",
+      errors: null,
+      timestamp: new Date().toISOString(),
+      pagination: {
+        total: result.total,
+        limit: limit ?? 10,
+        offset: offset ?? 0,
+      },
+    });
+  }
+
+  /** Get user's redeemed coupons */
+  public async getUserRedeemedCoupons(req: Request, res: Response) {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: "userId is required",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    try {
+      const result = await this.couponService!.getUserRedeemedCoupons(userId);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: "User redeemed coupons fetched successfully",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err.message || "Failed to fetch user redeemed coupons",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

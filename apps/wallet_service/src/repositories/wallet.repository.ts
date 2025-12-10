@@ -1,14 +1,18 @@
 // src/repositories/contest.repository.ts
 import { Wallet } from "@/models/wallet.model";
-import { BadRequestError, logger, ServerError } from "@repo/common";
+import { BadRequestError, logger, ServerError, NotificationHelper } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
+import ServerConfigs from "../configs/server.config";
 import { TransactionType } from "../dtos/wallet.dto";
+import axios from "axios";
 
 export default class WalletRepository {
   private _DB: IDatabase = DB;
+  private notificationHelper: NotificationHelper;
 
   constructor() {
     this._DB = DB;
+    this.notificationHelper = new NotificationHelper(ServerConfigs.NOTIFICATION_SERVICE_URL);
   }
 
   public async getAllWallets(): Promise<any> {
@@ -50,6 +54,15 @@ export default class WalletRepository {
         balanceAfter: 100,
       });
 
+      // Send welcome notification for joining bonus
+      await this.notificationHelper.sendWalletNotification(
+        userId, 
+        'deposit', 
+        100, 
+        100,
+        'joining_bonus'
+      );
+
       return newWallet;
     } catch (err: any) {
       logger.error(`DB error: ${err?.message ?? err}`);
@@ -75,7 +88,7 @@ export default class WalletRepository {
     }
   }
 
-  public async withdrawCoins(userId: string, amount: number,type:TransactionType): Promise<any> {
+  public async withdrawCoins(userId: string, amount: number, type: TransactionType, referenceId?: string, referenceType?: string): Promise<any> {
     try {
       const walletInfo = await this._DB.Wallet.findOne({
         where: {
@@ -111,7 +124,18 @@ export default class WalletRepository {
           amount: amount,
           balanceBefore: walletInfo.balance,
           balanceAfter: updatedWalletInfo[1][0].balance,
+          referenceId: referenceId || null,
+          referenceType: referenceType || null,
         });
+
+        // Send notification for withdrawal
+        await this.notificationHelper.sendWalletNotification(
+          userId, 
+          'withdrawal', 
+          amount, 
+          updatedWalletInfo[1][0].balance,
+          type
+        );
       }
 
       return {
@@ -128,7 +152,7 @@ export default class WalletRepository {
     }
   }
 
-  public async depositCoins(userId: string, amount: number,type :TransactionType): Promise<any> {
+  public async depositCoins(userId: string, amount: number, type: TransactionType, referenceId?: string, referenceType?: string): Promise<any> {
     try {
       const walletInfo = await this._DB.Wallet.findOne({
         where: {
@@ -170,7 +194,18 @@ export default class WalletRepository {
           amount: amount,
           balanceBefore: walletInfo.balance,
           balanceAfter: updatedWalletInfo[1][0].balance,
+          referenceId: referenceId || null,
+          referenceType: referenceType || null,
         });
+
+        // Send notification for deposit
+        await this.notificationHelper.sendWalletNotification(
+          userId, 
+          'deposit', 
+          amount, 
+          updatedWalletInfo[1][0].balance,
+          type
+        );
       }
 
       return {
@@ -219,7 +254,9 @@ export default class WalletRepository {
         throw new BadRequestError("No transactions found for this user");
       }
 
-      return transactions;
+      // Enhance transactions with contest/match data
+      const enhancedTransactions = await this.enhanceTransactionsWithReferenceData(transactions);
+      return enhancedTransactions;
     } catch (err: any) {
       logger.error(`DB error: ${err?.message ?? err}`);
       throw new ServerError(err.message);
@@ -239,10 +276,156 @@ export default class WalletRepository {
         return [];
       }
 
-      return transactions.map((transaction) => transaction.toJSON());
+      // Enhance transactions with contest/match data
+      const enhancedTransactions = await this.enhanceTransactionsWithReferenceData(transactions);
+      return enhancedTransactions;
     } catch (err: any) {
       logger.error(`DB error: ${err?.message ?? err}`);
       throw new ServerError(err.message);
+    }
+  }
+
+  /**
+   * Enhance transactions with contest/match reference data
+   */
+  private async enhanceTransactionsWithReferenceData(transactions: any[]): Promise<any[]> {
+    try {
+      const enhancedTransactions = await Promise.all(
+        transactions.map(async (transaction) => {
+          const transactionData = transaction.toJSON();
+          
+          // If no reference data, return as-is
+          if (!transactionData.referenceId || !transactionData.referenceType) {
+            return transactionData;
+          }
+
+          // Fetch reference data based on type
+          let referenceData = null;
+          
+          try {
+            if (transactionData.referenceType === 'contest') {
+              // Contest data now includes match data from the internal endpoint
+              referenceData = await this.fetchContestData(transactionData.referenceId);
+            } else if (transactionData.referenceType === 'match') {
+              referenceData = await this.fetchMatchData(transactionData.referenceId);
+            }
+          } catch (err) {
+            logger.warn(`Failed to fetch ${transactionData.referenceType} data for ID ${transactionData.referenceId}: ${err}`);
+          }
+
+          return {
+            ...transactionData,
+            referenceData
+          };
+        })
+      );
+
+      return enhancedTransactions;
+    } catch (err: any) {
+      logger.error(`Error enhancing transactions: ${err?.message ?? err}`);
+      // Return plain transactions if enhancement fails
+      return transactions.map(t => t.toJSON());
+    }
+  }
+
+  /**
+   * Fetch contest data from contest service
+   */
+  private async fetchContestData(contestId: string): Promise<any> {
+    try {
+      const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || 'http://localhost:4005';
+      const fullUrl = `${contestServiceUrl}/api/v1/contests/internal/${contestId}`;
+      
+      logger.info(`[WALLET] Attempting to fetch contest data from: ${fullUrl}`);
+      logger.info(`[WALLET] Contest service URL config: ${ServerConfigs.CONTEST_SERVICE_URL}`);
+      
+      const response = await axios.get(fullUrl, {
+        timeout: 10000, // Increased timeout
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      logger.info(`[WALLET] Contest service response status: ${response.status}`);
+      logger.info(`[WALLET] Contest service raw response: ${JSON.stringify(response.data)}`);
+      
+      const data = response.data as any;
+      
+      if (!data || !data.success) {
+        logger.warn(`[WALLET] Contest service returned unsuccessful response for contest ${contestId}: ${JSON.stringify(data)}`);
+        return null;
+      }
+      
+      if (!data.data) {
+        logger.warn(`[WALLET] Contest service returned no data for contest ${contestId}`);
+        return null;
+      }
+      
+      const contestData = {
+        id: data.data.id,
+        title: data.data.title,
+        matchId: data.data.matchId,
+        entryFee: data.data.entryFee,
+        prizePool: data.data.prizePool,
+        status: data.data.status,
+        matchData: data.data.matchData || null
+      };
+      
+      logger.info(`[WALLET] Successfully processed contest data for ${contestId}: ${JSON.stringify(contestData)}`);
+      return contestData;
+    } catch (err: any) {
+      if (err.code === 'ECONNREFUSED') {
+        logger.error(`[WALLET] Contest service is not running at ${ServerConfigs.CONTEST_SERVICE_URL || 'http://localhost:4005'}`);
+      } else if (err.response) {
+        logger.error(`[WALLET] Contest service responded with error ${err.response.status}: ${JSON.stringify(err.response.data)}`);
+      } else {
+        logger.error(`[WALLET] Failed to fetch contest data for ${contestId}: ${err.message}`);
+      }
+      return null;
+    }
+  }
+
+  /**
+   * Fetch match data from match service
+   */
+  private async fetchMatchData(matchId: string): Promise<any> {
+    try {
+      const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL || 'http://localhost:4004';
+      const response = await axios.get(`${matchServiceUrl}/api/v1/matches/internal/${matchId}`, {
+        timeout: 5000
+      });
+      
+      const data = response.data as any;
+      return {
+        id: data.data?.id,
+        title: data.data?.title,
+        homeTeam: {
+          name: data.data?.homeTeam?.name,
+          shortName: data.data?.homeTeam?.shortName,
+          logo: data.data?.homeTeam?.logo
+        },
+        awayTeam: {
+          name: data.data?.awayTeam?.name,
+          shortName: data.data?.awayTeam?.shortName,
+          logo: data.data?.awayTeam?.logo
+        },
+        competition: data.data?.competition,
+        matchDate: data.data?.matchDate,
+        status: data.data?.status,
+        venue: data.data?.venue
+      };
+    } catch (err: any) {
+      const serviceUrl = ServerConfigs.CONTEST_SERVICE_URL || 'http://localhost:4005';
+      
+      if (err.code === 'ECONNREFUSED') {
+        logger.error(`[WALLET] Contest service is not accessible at ${serviceUrl} - connection refused`);
+      } else if (err.code === 'ETIMEDOUT') {
+        logger.error(`[WALLET] Contest service request timed out`);
+      } else {
+        logger.error(`[WALLET] Failed to fetch contest data: ${err?.response?.status} - ${err?.response?.data?.message || err.message}`);
+      }
+      
+      return null;
     }
   }
 }

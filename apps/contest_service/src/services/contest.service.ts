@@ -19,6 +19,8 @@ import {
 } from "../utils/questionsFormatter";
 import axios from "axios";
 import ServerConfigs from "../configs/server.config";
+import contestNotificationService from "../utils/notifications/contest-notifications";
+
 export interface JoinContestPayload {
   userId: string;
   contestId: string;
@@ -59,6 +61,36 @@ export default class ContestService {
     const c = await this.repo.getContestById(id, userId);
     if (!c) throw new BadRequestError("Contest not found");
     return c;
+  }
+
+  /**
+   * Get contest with populated match data for internal service calls
+   */
+  public async getContestWithMatchData(id: string): Promise<any> {
+    const contest = await this.repo.getContestById(id);
+    if (!contest) throw new BadRequestError("Contest not found");
+    
+    // Convert to plain object - check if toJSON exists (Sequelize model) or use as-is (plain object)
+    const contestData = typeof contest.toJSON === 'function' ? contest.toJSON() : contest;
+    
+    // Fetch match data if matchId exists
+    if (contestData.matchId) {
+      try {
+        const matchServiceUrl = ServerConfigs.MATCHES_SERVICE_URL || 'http://localhost:4004';
+        const matchResponse = await axios.get(`${matchServiceUrl}/api/v1/matches/internal/${contestData.matchId}`, {
+          timeout: 5000
+        });
+        
+        const matchData = matchResponse.data?.data;
+        if (matchData) {
+          contestData.matchData  = matchData;
+        }
+      } catch (err: any) {
+        logger.warn(`Failed to fetch match data for contest ${id}: ${err?.response?.data?.message || err.message}`);
+      }
+    }
+    
+    return contestData;
   }
 
   public async updateContest(id: string, patch: UpdateContestPayload) {
@@ -381,7 +413,9 @@ export default class ContestService {
             debitUrl,
             {
               amount: entryFee,
-              type: 'contest_entry'
+              type: 'contest_entry',
+              referenceId: contestId,
+              referenceType: 'contest'
             },
             {
               headers: authHeader ? { Authorization: authHeader } : {},
@@ -456,7 +490,9 @@ export default class ContestService {
               creditUrl,
               {
                 amount: entryFee,
-                type: 'contest_refund'
+                type: 'contest_refund',
+                referenceId: contestId,
+                referenceType: 'contest'
               },
               {
                 headers: { Authorization: authHeader },
@@ -538,6 +574,145 @@ export default class ContestService {
     } catch (err: any) {
       logger.error(`ContestService.userContest error: ${err?.message ?? err}`);
       throw new ServerError("Failed to fetch user contests");
+    }
+  }
+
+  /** Get user's joined contests grouped by match status (upcoming, live, completed) */
+  public async getUserJoinedContestsByMatchStatus(userId: string) {
+    try {
+      const userContests = await this.userContestRepo!.getUserContestsByMatchStatus(userId);
+      
+      // If no contests found, return empty arrays
+      if (!userContests || userContests.length === 0) {
+        return {
+          upcoming: [],
+          live: [],
+          completed: [],
+          totalMatches: 0,
+        };
+      }
+
+      // Group contests by matchId
+      const matchMap = new Map<string, any[]>();
+      
+      for (const userContest of userContests) {
+        const userContestPlain = userContest.toJSON() as any;
+        const contest = userContestPlain.contest;
+        const matchId = contest?.matchId;
+        
+        if (!matchId) continue;
+        
+        const contestData = {
+          userContestId: userContestPlain.id,
+          contestId: contest?.id,
+          title: contest?.title,
+          description: contest?.description,
+          type: contest?.type,
+          difficulty: contest?.difficulty,
+          startAt: contest?.startAt,
+          endAt: contest?.endAt,
+          entryFee: contest?.entryFee,
+          prizePool: contest?.prizePool,
+          pointsPerQuestion: contest?.pointsPerQuestion,
+          questionsCount: contest?.questionsCount,
+          totalSpots: contest?.totalSpots,
+          filledSpots: contest?.filledSpots,
+          status: contest?.status,
+        };
+        
+        if (!matchMap.has(matchId)) {
+          matchMap.set(matchId, []);
+        }
+        matchMap.get(matchId)!.push(contestData);
+      }
+
+      const result = {
+        upcoming: [] as any[],
+        live: [] as any[],
+        completed: [] as any[],
+      };
+
+      // Fetch match data and categorize
+      await Promise.all(
+        Array.from(matchMap.entries()).map(async ([matchId, contests]) => {
+          try {
+            const matchResponse = await axios.get(
+              `${ServerConfigs.MATCHES_SERVICE_URL}/api/v1/matches/${matchId}`,
+              { timeout: 5000 }
+            );
+
+            const matchData = matchResponse.data?.data;
+            if (!matchData) {
+              return;
+            }
+
+            // Extract team data from nested structure
+            const teamA = matchData.teams?.a || {};
+            const teamB = matchData.teams?.b || {};
+
+            // Build match object with contests
+            const matchWithContests = {
+              matchId: matchData.id,
+              key: matchData.key,
+              name: matchData.name,
+              shortName: matchData.shortName,
+              matchType: matchData.matchType,
+              status: matchData.status,
+              venue: matchData.venue || matchData.venueInfo?.name || null,
+              dateTimeGMT: matchData.dateTimeGMT,
+              teamA: teamA.name || matchData.teamA,
+              teamB: teamB.name || matchData.teamB,
+              teamACode: teamA.code || teamA.alternate_code || null,
+              teamBCode: teamB.code || teamB.alternate_code || null,
+              teamAScore: matchData.teamAScore || matchData.score?.[0] || null,
+              teamBScore: matchData.teamBScore || matchData.score?.[1] || null,
+              teamAFlagUrl: teamA.flag_url || matchData.teamAFlagUrl || null,
+              teamBFlagUrl: teamB.flag_url || matchData.teamBFlagUrl || null,
+              series: matchData.series || matchData.seriesName || matchData.tournaments?.name || null,
+              seriesShortName: matchData.tournaments?.shortName || null,
+              format: matchData.format,
+              subTitle: matchData.subTitle || null,
+              startedAt: matchData.startedAt,
+              expectedStartedAt: matchData.expectedStartedAt,
+              expectedEndedAt: matchData.expectedEndedAt,
+              contests: contests,
+              totalContests: contests.length,
+            };
+            
+            // Categorize by match status
+            const matchStatus = matchData.status?.toLowerCase();
+            const now = Date.now();
+            const startedAt = matchData.startedAt || matchData.expectedStartedAt;
+            
+            if (matchStatus === 'completed' || matchStatus === 'ended') {
+              result.completed.push(matchWithContests);
+            } else if (matchStatus === 'live' || matchStatus === 'started' || 
+                      (startedAt && startedAt <= now && matchStatus !== 'not_started')) {
+              result.live.push(matchWithContests);
+            } else {
+              result.upcoming.push(matchWithContests);
+            }
+          } catch (matchError: any) {
+            logger.warn(`Error fetching match ${matchId}: ${matchError.message}`);
+          }
+        })
+      );
+
+      return {
+        upcoming: result.upcoming,
+        live: result.live,
+        completed: result.completed,
+        totalMatches: matchMap.size,
+      };
+    } catch (err: any) {
+      logger.warn(`ContestService.getUserJoinedContestsByMatchStatus error: ${err?.message ?? err}`);
+      // Return empty arrays instead of throwing error
+      return {
+        upcoming: [],
+        live: [],
+        completed: [],
+        totalMatches: 0,
+      };
     }
   }
 
@@ -743,8 +918,26 @@ export default class ContestService {
    */
   public async updateContestStatus(contestId: string, newStatus: string): Promise<void> {
     try {
+      // Get contest details before updating
+      const contestDetails = await this.repo.findById(contestId);
+      const oldStatus = contestDetails?.status;
+      
       await this.repo.updateContestStatus(contestId, newStatus as any);
-      logger.info(`[CONTEST SERVICE] Updated contest ${contestId} status to ${newStatus}`);
+      logger.info(`[CONTEST SERVICE] Updated contest ${contestId} status from ${oldStatus} to: ${newStatus}`);
+      
+      // Send notifications for status changes
+      if (contestDetails && oldStatus !== newStatus) {
+        const contestTitle = contestDetails.title;
+        const matchId = contestDetails.matchId;
+        
+        if (newStatus === 'live' && oldStatus !== 'live') {
+          // Contest went live - notify all users
+          await contestNotificationService.notifyContestLive(contestId, contestTitle, matchId || '');
+        } else if (newStatus === 'completed' && oldStatus !== 'completed') {
+          // Contest completed - notify joined users and all users
+          await contestNotificationService.notifyContestCompleted(contestId, contestTitle, matchId || '');
+        }
+      }
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] updateContestStatus error: ${error.message}`);
       throw error;
@@ -930,8 +1123,8 @@ export default class ContestService {
       logger.info(`[CONTEST SERVICE] Starting calculation for contest ${contestId}`);
 
       // Get contest with questions
-      const contest = await this.repo.getContestById(contestId);
-      if (!contest) {
+      const contestData = await this.repo.getContestById(contestId);
+      if (!contestData) {
         throw new Error(`Contest ${contestId} not found`);
       }
 
@@ -1035,9 +1228,17 @@ export default class ContestService {
       // Calculate user scores
       await this.calculateUserScores(contestId);
 
+      // Get contest details for notification
+      const contestInfo = await this.repo.findById(contestId);
+      
       // Move contest to completed (always update status at the end)
       await this.repo.updateContestStatus(contestId, 'completed');
       logger.info(`[CONTEST SERVICE] ✅ Contest ${contestId} marked as completed (${successCount}/${questions.length} answers generated)`);
+      
+      // Send completion notification
+      if (contestInfo) {
+        await contestNotificationService.notifyContestCompleted(contestId, contestInfo.title, contestInfo.matchId || '');
+      }
 
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] processContestCalculation error for contest ${contestId}: ${error.message}`);
@@ -1513,6 +1714,48 @@ export default class ContestService {
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] completeCalculatingContests error: ${error.message}`);
       throw error;
+    }
+  }
+
+  /**
+   * Get all unique users who joined contests for a specific match
+   */
+  public async getUsersJoinedForMatch(matchId: string): Promise<string[]> {
+    try {
+      logger.info(`[CONTEST SERVICE] Getting users joined for match: ${matchId}`);
+
+      // Get all contests for this match
+      const contests = await DB.Contest.findAll({
+        where: { matchId },
+        attributes: ['id']
+      });
+
+      if (!contests || contests.length === 0) {
+        logger.info(`[CONTEST SERVICE] No contests found for match: ${matchId}`);
+        return [];
+      }
+
+      const contestIds = contests.map(c => c.id);
+      logger.info(`[CONTEST SERVICE] Found ${contestIds.length} contests for match: ${matchId}`);
+
+      // Get all unique users who joined any of these contests
+      const userContests = await DB.UserContest.findAll({
+        where: {
+          contestId: {
+            [Op.in]: contestIds
+          }
+        },
+        attributes: ['userId'],
+        group: ['userId']
+      });
+
+      const userIds = userContests.map(uc => uc.userId);
+      logger.info(`[CONTEST SERVICE] Found ${userIds.length} unique users joined for match: ${matchId}`);
+
+      return userIds;
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] getUsersJoinedForMatch error: ${error.message}`);
+      throw new ServerError(error.message || "Failed to get users joined for match");
     }
   }
 }

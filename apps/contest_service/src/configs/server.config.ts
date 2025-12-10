@@ -30,6 +30,7 @@ class ServerConfigs {
   static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
   static MATCHES_SERVICE_URL: string = process.env.MATCHES_SERVICE_URL as string;
   static USER_SERVICE_URL: string = process.env.USER_SERVICE_URL as string;
+  static NOTIFICATION_SERVICE_URL: string = process.env.NOTIFICATION_SERVICE_URL as string;
   static DB_SSL: string = process.env.DB_SSL as string;
   private constructor() {}
 }

@@ -29,6 +29,8 @@ class ServerConfigs {
   static SMTP_HOST: string = process.env.SMTP_HOST as string;
   static SMTP_PORT: string = process.env.SMTP_PORT as string;
   static DB_SSL: string = process.env.DB_SSL as string;
+  static WALLET_SERVICE_URL: string = process.env.WALLET_SERVICE_URL as string;
+  static NOTIFICATION_SERVICE_URL: string = process.env.NOTIFICATION_SERVICE_URL as string;
 
   private constructor() {}
 }

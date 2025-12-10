@@ -5,15 +5,15 @@ export type CouponDiscountType = "flat" | "percent";
 
 export interface ICouponAtters {
   id: string;
-  code: string; // e.g., GET50OFF
-  title: string; // e.g., Flat ₹50 off on orders above ₹249
-  platform: string; // can be Swiggy, Zomato, Blinkit, or any other value
+  code: string; 
+  title: string;
+  platform: string; 
   discountType: CouponDiscountType;
-  discountValue: number; // e.g., 50 or 20
-  purchaseAmount: number; // e.g., 249
-  expiry: Date; // ISO Date
+  discountValue: number;
+  purchaseAmount: number; 
+  expiry: Date; 
   status: CouponStatus;
-  usageCount: number; // total times applied
+  usageCount: number; 
   maxUsePerUser?: number | null;
   createdAt?: Date;
   updatedAt?: Date;

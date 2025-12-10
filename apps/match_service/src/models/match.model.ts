@@ -35,6 +35,8 @@ export class Match
   public expectedEndedAt!: number;
   public showOnFrontend: boolean;
   public contestGenerated: boolean;
+  public startingSoonNotificationSent?: boolean;
+  public matchStartedNotificationSent?: boolean;
 
   public teams!: any; // JSONB
 
@@ -130,6 +132,14 @@ export default function (sequelize: Sequelize) {
         defaultValue: false,
       },
       contestGenerated: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      startingSoonNotificationSent: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      matchStartedNotificationSent: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },

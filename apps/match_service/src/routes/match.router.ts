@@ -51,6 +51,15 @@ router.get(
   }
 );
 
+// GET /matches/internal/:id - Internal endpoint for getting specific match (no auth)
+router.get(
+  "/matches/internal/:id",
+  async (req: Request, res: Response) => {
+    const controller = container.resolve(MatchController);
+    return controller.getMatchById(req, res);
+  }
+);
+
 // GET /matches
 router.get(
   "/matches",
