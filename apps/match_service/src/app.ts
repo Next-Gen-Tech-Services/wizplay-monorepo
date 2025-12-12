@@ -206,6 +206,9 @@ const AppInit = async () => {
 
   // Serve static flag images
   expressApp.use("/api/v1/matches/flags/", express.static("public/flags"));
+  
+  // Serve static player images
+  expressApp.use("/api/v1/matches/player-images/", express.static("public/player_images"));
 
   await BrokerInit();
   await CronsInit();

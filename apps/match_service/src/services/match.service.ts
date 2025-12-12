@@ -209,12 +209,36 @@ export default class MatchService {
 
       // Build team A players
       const teamAPlayers = squadAKeys.map((playerKey: string) => {
-        return matchData.players[playerKey]?.player || null;
+        const playerData = matchData.players[playerKey]?.player;
+        if (!playerData) return null;
+        
+        // Use local image with fallback to API image
+        const baseUrl = ServerConfigs.ASSET_SERVICE_URL || `http://localhost:${ServerConfigs.APP_PORT}`;
+        const localImageUrl = `${baseUrl}/api/v1/matches/player-images/${playerKey}.png`;
+        const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
+        
+        return {
+          ...playerData,
+          image: localImageUrl,
+          apiImage: apiImage, // Keep API image as fallback
+        };
       }).filter((p: any) => p !== null);
 
       // Build team B players
       const teamBPlayers = squadBKeys.map((playerKey: string) => {
-        return matchData.players[playerKey]?.player || null;
+        const playerData = matchData.players[playerKey]?.player;
+        if (!playerData) return null;
+        
+        // Use local image with fallback to API image
+        const baseUrl = ServerConfigs.ASSET_SERVICE_URL || `http://localhost:${ServerConfigs.APP_PORT}`;
+        const localImageUrl = `${baseUrl}/api/v1/matches/player-images/${playerKey}.png`;
+        const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
+        
+        return {
+          ...playerData,
+          image: localImageUrl,
+          apiImage: apiImage, // Keep API image as fallback
+        };
       }).filter((p: any) => p !== null);
 
       // Return simplified team data

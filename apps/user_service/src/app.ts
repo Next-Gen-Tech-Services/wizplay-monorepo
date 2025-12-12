@@ -6,6 +6,7 @@ import AnalyticsRouter from "./routes/analytics.router";
 import ReferralRouter from "./routes/referral.router";
 import UserRouter from "./routes/user.router";
 import WishlistRouter from "./routes/wishlist.router";
+import BannerRouter from "./routes/banner.router";
 import userEventHandler from "./utils/events/user.events";
 import { connectProducer } from "./utils/kafka";
 
@@ -45,12 +46,16 @@ const AppInit = async () => {
   expressApp.use(express.json());
   expressApp.use(attachRequestId);
 
+  // Serve static banner images
+  expressApp.use("/api/v1/banners", express.static("public/banners"));
+
   await BrokerInit();
 
   expressApp.use("/api/v1", UserRouter);
   expressApp.use("/api/v1/referrals", ReferralRouter);
   expressApp.use("/api/v1/wishlist", WishlistRouter);
   expressApp.use("/api/v1", AnalyticsRouter);
+  expressApp.use("/api/v1", BannerRouter);
   expressApp.get(
     `${ServerConfigs.API_VERSION}/health-check`,
     async (req: Request, res: Response): Promise<Response> => {
