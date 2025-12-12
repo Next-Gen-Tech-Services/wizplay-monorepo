@@ -37,11 +37,17 @@ export default class Service {
   public async generateOtp(phoneNumber: string): Promise<any> {
     const userExist =
       await this.userRepository.userWithPhoneExistRepo(phoneNumber);
-    const otpCode: string = generateOTPUtil();
+    
+    // Special test account for Google/App Store - always use OTP 1234
+    const isTestAccount = phoneNumber === "+918889689990" || phoneNumber === "918889689990";
+    const otpCode: string = isTestAccount ? "1234" : generateOTPUtil();
     logger.info(`OTP Code : ${otpCode}`);
 
     // if (ServerConfigs.NODE_ENV === "development") {
-      const res = await sendOtpUtil(phoneNumber);
+      // Skip MSG91 for test account
+      if (!isTestAccount) {
+        const res = await sendOtpUtil(phoneNumber);
+      }
     // }
     if (userExist) {
       const updateOtp = await this.userRepository.updateRecentOtp({
@@ -92,11 +98,23 @@ export default class Service {
       }
 
       let verifiedUser;
+      
+      // Special test account for Google/App Store - always accept OTP 1234
+      const isTestAccount = phoneNumber === "+918889689990" || phoneNumber === "918889689990";
 
       // if (ServerConfigs.NODE_ENV === "development") {
-        const response = await verifyOtpUtil(phoneNumber, otpCode);
-        if (response?.type === "error") {
-          throw new BadRequestError(response?.message);
+        if (isTestAccount) {
+          // For test account, verify OTP is 1234
+          if (otpCode !== "1234") {
+            throw new BadRequestError("Invalid OTP for test account");
+          }
+          logger.info(`Test account OTP verified: ${phoneNumber}`);
+        } else {
+          // Normal flow - verify via MSG91
+          const response = await verifyOtpUtil(phoneNumber, otpCode);
+          if (response?.type === "error") {
+            throw new BadRequestError(response?.message);
+          }
         }
 
         verifiedUser =
