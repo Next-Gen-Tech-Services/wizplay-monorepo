@@ -49,7 +49,7 @@ export function formatContestsForBulkInsert(
     resultTime: contest.resultTime ?? null,
     timeCommitment: contest.timeCommitment ?? null,
     platform: contest.platform ?? "default",
-    status: "upcoming",
+    status: contest.type?.toLowerCase().includes("prematch") ? "live" : "upcoming",
   }));
 }
 

@@ -39,6 +39,12 @@ export default class ContestService {
 
   public async createContest(payload: CreateContestPayload) {
     if (!payload.matchId) throw new BadRequestError("matchId required");
+    
+    // Set status to "live" for contests with type containing "prematch"
+    if (payload.type?.toLowerCase().includes("prematch")) {
+      payload.status = "live";
+    }
+    
     // business rules could go here
     const created = await this.repo.createContest(payload);
     logger.info(`[contest-service] created contest ${created.id}`);

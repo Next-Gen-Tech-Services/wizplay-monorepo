@@ -133,7 +133,7 @@ export default class ContestRepository {
         d.prizeBreakup ??
         d.prize ??
         null;
-      const rankRanges = compressRankArray(rankArray);
+      const rankRanges = compressRankArray(rankArray).filter(range => range.amount > 0);
 
       // clean up any joined association keys if present
       const contestAssociations = this._DB.Contest.associations || {};
@@ -145,6 +145,9 @@ export default class ContestRepository {
       if (userContestAlias && d[userContestAlias]) delete d[userContestAlias];
       if (d.userJoins) delete d.userJoins;
       if (d.userContests) delete d.userContests;
+      
+      // Remove prizeBreakdown from response
+      if (d.prizeBreakdown) delete d.prizeBreakdown;
 
       logger.info(`[CONTEST-REPO] Fetching match data for contest ${id}`);
       // Fetch match data if matchId exists
@@ -355,13 +358,18 @@ export default class ContestRepository {
           delete data[userContestAlias];
         if (data.userJoins) delete data.userJoins;
         if (data.userContests) delete data.userContests;
+        
         const rankArray =
           data.prizeBreakdown?.perRank ??
           data.ranks ??
           data.prizeBreakup ??
           data.prize ??
           null;
-        const rankRanges = compressRankArray(rankArray);
+        const rankRanges = compressRankArray(rankArray).filter(range => range.amount > 0);
+        
+        // Remove prizeBreakdown from response
+        if (data.prizeBreakdown) delete data.prizeBreakdown;
+        
         return { ...data, hasJoined : hasJoined && isJoined, rankRanges };
       });
 
