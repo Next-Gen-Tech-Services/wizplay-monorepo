@@ -68,8 +68,8 @@ RUN addgroup --system --gid 1001 nodejs && \
 # Copy deployed files from deploy stage
 COPY --from=deploy --chown=userservice:nodejs /deploy/output ./
 
-# Create logs directory with proper permissions
-RUN mkdir -p ./logs && chown -R userservice:nodejs ./logs
+# Create logs and banners directories with proper permissions
+RUN mkdir -p ./logs ./public/banners && chown -R userservice:nodejs ./logs ./public/banners
 
 USER userservice
 

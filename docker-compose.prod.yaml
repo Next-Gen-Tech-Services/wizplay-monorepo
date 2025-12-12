@@ -117,6 +117,8 @@ services:
       REDIS_HOST: redis
     env_file:
       - .env.production
+    volumes:
+      - user_banners:/app/public/banners
     depends_on:
       redis:
         condition: service_healthy
@@ -323,4 +325,6 @@ volumes:
   redis_data:
     driver: local
   match_flags:
+    driver: local
+  user_banners:
     driver: local
