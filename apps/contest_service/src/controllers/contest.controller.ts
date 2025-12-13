@@ -80,7 +80,7 @@ export default class ContestController {
         .trim()
         .toLowerCase();
       const statusFilter =
-        type === "all" ? undefined : ["upcoming", "live", "joining_closed"];
+        type === "all" ? undefined : ["upcoming", "live", "joining_closed", "calculating", "completed"];
 
       const result = await this.contestService.listContests(
         matchId,

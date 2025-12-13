@@ -7,7 +7,7 @@ import FlagController from "../controllers/flag.controller";
 import { requireAuth } from "../middlewares/auth.middleware";
 import { listMatchesValidator } from "../validators";
 import { getSubscriptionStatus } from "../utils/jobs/init-subscription";
-import { generateApiToken } from "../utils/utils";
+import { generateApiToken, generateRefershApiToken } from "../utils/utils";
 import TournamentRepository from "../repositories/tournament.repository";
 import { STATUS_CODE } from "@repo/common";
 
@@ -175,7 +175,7 @@ router.get(
 // Subscription status endpoint (for debugging/monitoring)
 router.get("/matches/regenerate-token", async (req: Request, res: Response) => {
   try {
-    const newToken = await generateApiToken();
+    const newToken = await generateRefershApiToken(true);
     return res.status(200).json({
       success: true,
       data: { token: newToken },
