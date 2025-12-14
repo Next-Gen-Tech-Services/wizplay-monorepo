@@ -5,9 +5,9 @@ import ServerConfigs from "./server.config";
 export interface IRedis {
   connectClient(): Promise<void>;
   disconnectClient(): void;
-  setter(key: string, value: string): Promise<boolean>;
+  setter(key: string, value: string, ttl?: number): Promise<boolean>;
   getter(key: string): Promise<any>;
-  setInList(listKey: string, value: string): Promise<boolean>;
+  setInList(listKey: string, value: string, ttl?: number): Promise<boolean>;
   getList(listKey: string, start?: number, end?: number): Promise<any[]>;
   popBatch(listKey: string, count: number): Promise<string[]>;
   deleter(key: string): Promise<boolean>;
@@ -72,11 +72,14 @@ class Redis implements IRedis {
     }
   }
 
-  async setInList(listKey: string, value: string): Promise<boolean> {
+  async setInList(listKey: string, value: string, ttl?: number): Promise<boolean> {
     try {
       if (typeof listKey !== "string") listKey = JSON.stringify(listKey);
       if (typeof value !== "string") value = JSON.stringify(value);
       const result = await this.client.rPush(listKey, value);
+      if (ttl && result) {
+        await this.client.expire(listKey, ttl);
+      }
       if (result) {
         return true;
       } else {

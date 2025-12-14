@@ -187,7 +187,7 @@ export default class MatchController {
 
           // push enhanced data inside redis for quick access (use key for Redis)
           // This now includes ballByBallData in the same object
-          await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(enhancedData));
+          await redis.setInList(`${matchKey}:live_updates`, JSON.stringify(enhancedData), 18000); // 5 hours TTL
 
           // Update contest statuses based on live match data (with enhanced ball-by-ball data for AI)
           // Pass enhancedData so AI can generate accurate answers using ball-by-ball data

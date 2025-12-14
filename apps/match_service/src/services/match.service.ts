@@ -58,9 +58,59 @@ export default class MatchService {
         updateData
       );
 
+      // Auto-generate contest if match is now visible and contest not generated
+      if (updateData.showOnFrontend === true && updated) {
+        const match = await this.matchRepository.getMatchWithId(matchId);
+        if (match && !match.contestGenerated) {
+          // Trigger contest generation asynchronously
+          this.triggerContestGeneration(matchId, match).catch(err => {
+            logger.error(`[AUTO-CONTEST] Failed to generate contest for match ${matchId}: ${err.message}`);
+          });
+        }
+      }
+
       return updated;
     } catch (error: any) {
       throw new BadRequestError(error?.message || "Failed to update match");
+    }
+  }
+
+  /**
+   * Trigger contest generation for a match
+   */
+  private async triggerContestGeneration(matchId: string, match: any): Promise<void> {
+    try {
+      const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
+      
+      logger.info(`[AUTO-CONTEST] Triggering contest generation for match ${matchId}`);
+
+      const response = await axios.post(
+        `${contestServiceUrl}/api/v1/contests/generate`,
+        {
+          matchData: match, // Send full match data
+        },
+        {
+          timeout: 10000,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        logger.info(`[AUTO-CONTEST] Contest generation triggered successfully for match ${matchId}`);
+        
+        // Mark contest as generated
+        await this.matchRepository.updateMatch(matchId, { contestGenerated: true });
+      }
+    } catch (error: any) {
+      // Check if it's a duplicate/already generating error
+      if (error.response?.status === 409 || error.response?.data?.message?.includes('already')) {
+        logger.warn(`[AUTO-CONTEST] Contest already being generated for match ${matchId}`);
+      } else {
+        logger.error(`[AUTO-CONTEST] Error triggering contest generation: ${error.message}`);
+        throw error;
+      }
     }
   }
 
@@ -212,15 +262,13 @@ export default class MatchService {
         const playerData = matchData.players[playerKey]?.player;
         if (!playerData) return null;
         
-        // Use local image with fallback to API image
-        const baseUrl = ServerConfigs.ASSET_SERVICE_URL || `http://localhost:${ServerConfigs.APP_PORT}`;
-        const localImageUrl = `${baseUrl}/api/v1/matches/player-images/${playerKey}.png`;
+        // Use API image directly since local images don't match player keys
         const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
         
         return {
           ...playerData,
-          image: localImageUrl,
-          apiImage: apiImage, // Keep API image as fallback
+          image: apiImage,
+          apiImage: apiImage,
         };
       }).filter((p: any) => p !== null);
 
@@ -229,15 +277,13 @@ export default class MatchService {
         const playerData = matchData.players[playerKey]?.player;
         if (!playerData) return null;
         
-        // Use local image with fallback to API image
-        const baseUrl = ServerConfigs.ASSET_SERVICE_URL || `http://localhost:${ServerConfigs.APP_PORT}`;
-        const localImageUrl = `${baseUrl}/api/v1/matches/player-images/${playerKey}.png`;
+        // Use API image directly since local images don't match player keys
         const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
         
         return {
           ...playerData,
-          image: localImageUrl,
-          apiImage: apiImage, // Keep API image as fallback
+          image: apiImage,
+          apiImage: apiImage,
         };
       }).filter((p: any) => p !== null);
 

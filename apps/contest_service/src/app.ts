@@ -9,7 +9,6 @@ import LeaderboardRouter from "./routes/leaderboard.router";
 import userEventHandler from "./utils/events/contest.events";
 import { connectProducer } from "./utils/kafka";
 import contestCompletionCron from "./utils/jobs/contest-completion";
-import autoContestGenerationCron from "./utils/jobs/auto-contest-generation";
 
 const BrokerInit = async (retryCount = 0, maxRetries = 10) => {
   try {
@@ -51,7 +50,6 @@ const AppInit = async () => {
 
   // Initialize cron jobs
   contestCompletionCron.scheduleJob();
-  autoContestGenerationCron.scheduleJob();
   logger.info("✅ Cron jobs initialized");
 
   expressApp.use("/api/v1", ContestRouter);

@@ -154,7 +154,8 @@ class MatchSubscriptionService {
     try {
       await redis.setter(
         "subscribedMatches",
-        JSON.stringify(Array.from(this.subscribedMatches))
+        JSON.stringify(Array.from(this.subscribedMatches)),
+        3600 // 1 hour TTL
       );
     } catch (error: any) {
       console.error("Error saving subscribed matches:", error.message);

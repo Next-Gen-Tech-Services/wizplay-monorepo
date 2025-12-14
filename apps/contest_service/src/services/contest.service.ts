@@ -271,6 +271,20 @@ export default class ContestService {
 
   public async generateContests(matchData: any) {
     try {
+      // Check if contests already exist or are being generated for this match
+      const existingContests = await DB.Contest.count({
+        where: { matchId: matchData.id }
+      });
+
+      if (existingContests > 0) {
+        logger.warn(`[CONTEST-GEN] Contests already exist for match ${matchData.id}. Skipping generation.`);
+        return {
+          data: null,
+          message: "Contests already generated for this match",
+          alreadyExists: true,
+        };
+      }
+
       const contests = await this.generativeAI.generateContest(
         matchData
       );
@@ -304,6 +318,7 @@ export default class ContestService {
       };
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE ERROR]: ${error.message}`);
+      throw error;
     }
   }
 

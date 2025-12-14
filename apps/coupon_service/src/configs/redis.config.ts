@@ -5,7 +5,7 @@ import ServerConfigs from "./server.config";
 export interface IRedis {
   connectClient(): Promise<void>;
   disconnectClient(): void;
-  setter(key: string, value: string): Promise<boolean>;
+  setter(key: string, value: string, ttl?: number): Promise<boolean>;
   getter(key: string): Promise<any>;
 }
 
@@ -40,11 +40,13 @@ class Redis implements IRedis {
     }
   }
 
-  async setter(key: string, value: string): Promise<boolean> {
+  async setter(key: string, value: string, ttl?: number): Promise<boolean> {
     try {
       if (typeof key !== "string") key = JSON.stringify(key);
       if (typeof value !== "string") value = JSON.stringify(value);
-      const result = await this.client.set(key, value);
+      const result = await this.client.set(key, value, {
+        EX: ttl,
+      });
       if (result) {
         return true;
       } else {

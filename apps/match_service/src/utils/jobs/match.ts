@@ -1,7 +1,6 @@
 import { logger } from "@repo/common";
 import axios from "axios";
 import cron from "node-cron";
-import schedule from "node-schedule";
 import redis from "../../configs/redis.config";
 import ServerConfigs from "../../configs/server.config";
 import MatchRepository from "../../repositories/match.repository";
@@ -110,42 +109,6 @@ class MatchCrons {
       );
       return { matches: [], tournaments: [] };
     }
-  }
-
-  async getScheduleRuleFromEpoch(targetEpoch: any) {
-    // Allow both seconds & milliseconds
-    if (targetEpoch < 1e12) {
-      targetEpoch *= 1000;
-    }
-
-    const target = new Date(targetEpoch);
-    const now = new Date();
-
-    if (target <= now) {
-      throw new Error("Target time must be in the future.");
-    }
-
-    // Node-schedule RecurrenceRule format
-    return {
-      year: target.getFullYear(),
-      month: target.getMonth(), // 0-11
-      date: target.getDate(),
-      hour: target.getHours(),
-      minute: target.getMinutes(),
-      second: target.getSeconds(),
-    };
-  }
-
-  async tokenRefreshJob(targetEpoch: any) {
-    const { year, month, date, hour, minute, second } = await this.getScheduleRuleFromEpoch(targetEpoch);
-    schedule.scheduleJob(
-      { year, month, date, hour, minute, second },
-      async () => {
-        logger.info("[TOKEN-REFRESH-CRON] Token refresh job started");
-        await generateApiToken();
-        logger.info("[TOKEN-REFRESH-CRON] Token refresh job completed");
-      }
-    );
   }
 
   async scheduleJob() {

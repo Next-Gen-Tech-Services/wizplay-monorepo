@@ -125,7 +125,7 @@ class CountryFlagsCron {
       );
 
       // Cache the country list in Redis for quick lookup
-      await redis.setter("country_list", JSON.stringify(countries));
+      await redis.setter("country_list", JSON.stringify(countries), 86400); // 24 hours TTL
       logger.info("[FLAGS-CRON] Cached country list in Redis");
 
     } catch (error: any) {

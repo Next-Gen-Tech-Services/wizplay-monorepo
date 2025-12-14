@@ -333,6 +333,17 @@ export default class ContestController {
     try {
       const result = await this.contestService.generateContests(matchData);
 
+      // If contests already exist, return 409 Conflict
+      if (result?.alreadyExists) {
+        return res.status(409).json({
+          success: false,
+          data: null,
+          message: result.message,
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
       return res.status(STATUS_CODE.SUCCESS).json({
         success: true,
         data: result?.data,

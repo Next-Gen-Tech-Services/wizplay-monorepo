@@ -208,7 +208,7 @@ export default class Service {
       }
 
       const resetToken = encryptPassword(user.email).toString();
-      const setCache = await this.redis.setter(user.email, resetToken);
+      const setCache = await this.redis.setter(user.email, resetToken, 1800); // 30 minutes TTL
       logger.info(`[auth-service] Adding reset token: ${resetToken}`);
 
       const resetLink = `${ServerConfigs.CLIENT_HOST}/reset-password?token=${resetToken}&email=${email}`;

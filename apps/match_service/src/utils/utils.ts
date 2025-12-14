@@ -16,9 +16,21 @@ export function generateUUID(): string {
 export async function generateApiToken(): Promise<string | undefined> {
   try {
     const redisToken = await redis.getter("roanuzToken");
-    if (redisToken) {
-      return redisToken;
+    const tokenExpiry = await redis.getter("roanuzTokenExpiry");
+    
+    // Check if token exists and is not expired
+    if (redisToken && tokenExpiry) {
+      const expiryTime = parseFloat(tokenExpiry);
+      const currentTime = Date.now() / 1000; // Convert to seconds
+      
+      if (currentTime < expiryTime) {
+        logger.info("[UTILS] Using existing valid Roanuz token");
+        return redisToken;
+      } else {
+        logger.warn("[UTILS] Token expired, generating new one...");
+      }
     }
+    
     const response = await axios({
       method: "POST",
       url: `https://api.sports.roanuz.com/v5/core/${ServerConfigs.ROANUZ_PK}/auth/`,
@@ -32,13 +44,20 @@ export async function generateApiToken(): Promise<string | undefined> {
         throw new Error(response?.data?.error);
       }
       const authToken = response?.data?.data?.token;
-      matchCron.tokenRefreshJob(response?.data?.data?.expires_at); 
-      // Token expires every 24 hours (86400 seconds) - set TTL slightly less to ensure refresh before expiry
-      const result = await redis.setter("roanuzToken", authToken, 82800); // 23 hours TTL
-      if(!result) {
+      const expiresAt = response?.data?.data?.expires;
+      
+      // Calculate TTL based on expires timestamp
+      const currentTime = Date.now() / 1000;
+      const ttl = Math.floor(expiresAt - currentTime - 300); // Expire 5 minutes before actual expiry
+      
+      // Store token and expiry timestamp
+      const tokenResult = await redis.setter("roanuzToken", authToken, ttl);
+      const expiryResult = await redis.setter("roanuzTokenExpiry", expiresAt.toString(), ttl);
+      
+      if(!tokenResult || !expiryResult) {
         logger.error("[UTILS] Failed to store Roanuz token in Redis");
       }
-      logger.info("[UTILS] Roanuz API token generated and cached for 23 hours");
+      logger.info(`[UTILS] Roanuz API token generated and cached until ${new Date(expiresAt * 1000).toISOString()}`);
       return authToken;
     } catch (error: any) {
       logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);
@@ -47,7 +66,6 @@ export async function generateApiToken(): Promise<string | undefined> {
 
 export async function generateRefershApiToken(refresh: boolean = false): Promise<string | undefined> {
   try {
-    let redisToken ;
     const response = await axios({
       method: "POST",
       url: `https://api.sports.roanuz.com/v5/core/${ServerConfigs.ROANUZ_PK}/auth/`,
@@ -61,13 +79,20 @@ export async function generateRefershApiToken(refresh: boolean = false): Promise
         throw new Error(response?.data?.error);
       }
       const authToken = response?.data?.data?.token;
-      matchCron.tokenRefreshJob(response?.data?.data?.expires_at); 
-      // Token expires every 24 hours (86400 seconds) - set TTL slightly less to ensure refresh before expiry
-      const result = await redis.setter("roanuzToken", authToken, 82800); // 23 hours TTL
-      if(!result) {
+      const expiresAt = response?.data?.data?.expires;
+      
+      // Calculate TTL based on expires timestamp
+      const currentTime = Date.now() / 1000;
+      const ttl = Math.floor(expiresAt - currentTime - 300); // Expire 5 minutes before actual expiry
+      
+      // Store token and expiry timestamp
+      const tokenResult = await redis.setter("roanuzToken", authToken, ttl);
+      const expiryResult = await redis.setter("roanuzTokenExpiry", expiresAt.toString(), ttl);
+      
+      if(!tokenResult || !expiryResult) {
         logger.error("[UTILS] Failed to store Roanuz token in Redis");
       }
-      logger.info("[UTILS] Roanuz API token generated and cached for 23 hours");
+      logger.info(`[UTILS] Roanuz API token refreshed and cached until ${new Date(expiresAt * 1000).toISOString()}`);
       return authToken;
     } catch (error: any) {
       logger.error(`[MATCH-CRON] Error in auth api ${error.message}`);
