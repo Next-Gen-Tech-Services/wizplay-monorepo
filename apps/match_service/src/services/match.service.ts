@@ -58,9 +58,12 @@ export default class MatchService {
         updateData
       );
 
+
       // Auto-generate contest if match is now visible and contest not generated
-      if (updateData.showOnFrontend === true && updated) {
-        const match = await this.matchRepository.getMatchWithId(matchId);
+      if (updateData.showOnFrontend == true && updated) {
+        const match = await this.matchRepository.getMatchById(matchId);
+            logger.info(`[AUTO-CONTEST] Update to generate contest for match ${JSON.stringify(match)}`);
+
         if (match && !match.contestGenerated) {
           // Trigger contest generation asynchronously
           this.triggerContestGeneration(matchId, match).catch(err => {
@@ -97,12 +100,8 @@ export default class MatchService {
         }
       );
 
-      if (response.status === 200 || response.status === 201) {
-        logger.info(`[AUTO-CONTEST] Contest generation triggered successfully for match ${matchId}`);
-        
-        // Mark contest as generated
         await this.matchRepository.updateMatch(matchId, { contestGenerated: true });
-      }
+
     } catch (error: any) {
       // Check if it's a duplicate/already generating error
       if (error.response?.status === 409 || error.response?.data?.message?.includes('already')) {
