@@ -8,10 +8,34 @@ import ServerConfigs from "../configs/server.config";
 import { IMatchFilters } from "../interfaces/match";
 import MatchRepository from "../repositories/match.repository";
 import { generateApiToken } from "../utils/utils";
+import * as fs from "fs";
+import * as path from "path";
 
 @autoInjectable()
 export default class MatchService {
   constructor(private readonly matchRepository: MatchRepository) { }
+
+  /**
+   * Helper method to find local player image
+   * Checks for .png, .jpg, .jpeg extensions
+   * Returns relative URL path if found, null otherwise
+   */
+  private getLocalPlayerImage(playerKey: string): string | null {
+    const extensions = ['.png', '.jpg', '.jpeg'];
+    const playerImagesDir = path.join(__dirname, '../../public/player_images');
+    
+    for (const ext of extensions) {
+      const fileName = `${playerKey}${ext}`;
+      const filePath = path.join(playerImagesDir, fileName);
+      
+      if (fs.existsSync(filePath)) {
+        // Return URL path matching the static route
+        return `${ServerConfigs.ASSET_SERVICE_URL}api/v1/matches/player-images/${fileName}`;
+      }
+    }
+    
+    return null;
+  }
 
   public async fetchAllMatchesWithFilters(query: IMatchFilters, userId: any) {
     try {
@@ -261,13 +285,12 @@ export default class MatchService {
         const playerData = matchData.players[playerKey]?.player;
         if (!playerData) return null;
         
-        // Use API image directly since local images don't match player keys
-        const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
+        // Try to get local player image first, fall back to API image
+        const localImage = this.getLocalPlayerImage(playerKey);
         
         return {
           ...playerData,
-          image: apiImage,
-          apiImage: apiImage,
+          image: localImage || null, // Use local if available, otherwise API
         };
       }).filter((p: any) => p !== null);
 
@@ -276,13 +299,15 @@ export default class MatchService {
         const playerData = matchData.players[playerKey]?.player;
         if (!playerData) return null;
         
-        // Use API image directly since local images don't match player keys
+        // Try to get local player image first, fall back to API image
+        const localImage = this.getLocalPlayerImage(playerKey);
         const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
         
         return {
           ...playerData,
-          image: apiImage,
-          apiImage: apiImage,
+          image: localImage || apiImage, // Use local if available, otherwise API
+          localImage: localImage, // Keep track of local image
+          apiImage: apiImage, // Keep track of API image
         };
       }).filter((p: any) => p !== null);
 
