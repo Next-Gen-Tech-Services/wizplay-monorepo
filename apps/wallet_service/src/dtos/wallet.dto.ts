@@ -19,11 +19,13 @@ export type TransactionStatus =
 export interface IWalletAttrs {
   id: string;
   userId: string;
-  balance: number; // Total available balance
-  totalDeposited: number;
-  totalWithdrawn: number;
-  totalWinnings: number; // Lifetime winnings
-  totalReferralEarnings: number; // Lifetime referral earnings
+  balance: number; // Total available balance (depositAmount + winningAmount)
+  depositAmount: number; // Available deposit balance (includes deposits + referrals + bonuses)
+  winningAmount: number; // Available winning balance from contests (used for redemptions)
+  totalDeposited: number; // Lifetime total of all deposits
+  totalWithdrawn: number; // Lifetime total of all withdrawals
+  totalWinnings: number; // Lifetime total of contest winnings
+  totalReferralEarnings: number; // Lifetime total of referral earnings
   currency: string;
   status: "active" | "suspended" | "closed";
   createdAt?: Date;
@@ -39,6 +41,8 @@ export interface CreateWalletPayload {
 
 export interface UpdateWalletPayload {
   balance?: number;
+  depositAmount?: number;
+  winningAmount?: number;
   totalDeposited?: number;
   totalWithdrawn?: number;
   totalWinnings?: number;

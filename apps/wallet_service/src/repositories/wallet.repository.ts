@@ -30,6 +30,8 @@ export default class WalletRepository {
       const newWallet = await this._DB.Wallet.create({
         userId,
         balance: 100,
+        depositAmount: 100, // Joining bonus goes to deposit amount
+        winningAmount: 0,
         totalDeposited: 0,
         totalWithdrawn: 0,
         totalWinnings: 0,
@@ -104,10 +106,41 @@ export default class WalletRepository {
         throw new BadRequestError("Insufficient wallet balance");
       }
 
+      // For contest_entry, use deposit first, then winning amount
+      let deductFromDeposit = 0;
+      let deductFromWinning = 0;
+
+      if (type === "contest_entry") {
+        // Try to deduct from deposit first
+        if (walletInfo.depositAmount >= amount) {
+          deductFromDeposit = amount;
+        } else {
+          // Use all available deposit, then take from winning
+          deductFromDeposit = walletInfo.depositAmount;
+          deductFromWinning = amount - walletInfo.depositAmount;
+          
+          // Check if we have enough in winning amount
+          if (walletInfo.winningAmount < deductFromWinning) {
+            throw new BadRequestError("Insufficient wallet balance");
+          }
+        }
+      } else {
+        // For other transactions (withdrawal, etc.), deduct from total balance proportionally
+        const totalBalance = walletInfo.depositAmount + walletInfo.winningAmount;
+        if (totalBalance > 0) {
+          const depositRatio = walletInfo.depositAmount / totalBalance;
+          deductFromDeposit = Math.min(Math.floor(amount * depositRatio), walletInfo.depositAmount);
+          deductFromWinning = amount - deductFromDeposit;
+        }
+      }
+
       const walletPayload = {
-        balance: walletInfo?.balance - Number(amount),
-        totalWithdrawn: walletInfo?.totalWithdrawn + Number(amount),
+        balance: walletInfo.balance - Number(amount),
+        depositAmount: walletInfo.depositAmount - deductFromDeposit,
+        winningAmount: walletInfo.winningAmount - deductFromWinning,
+        totalWithdrawn: walletInfo.totalWithdrawn + Number(amount),
       };
+
       const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {
         where: {
           userId,
@@ -166,16 +199,38 @@ export default class WalletRepository {
 
       let walletPayload: {
         balance: number;
+        depositAmount?: number;
+        winningAmount?: number;
         totalReferralEarnings?: number;
         totalWinnings?: number;
+        totalDeposited?: number;
       } = {
-        balance: walletInfo?.balance + Number(amount),
+        balance: walletInfo.balance + Number(amount),
       };
 
-      if(type === "referral_bonus") {
-        walletPayload["totalReferralEarnings"] = walletInfo?.totalReferralEarnings + Number(amount);
-      }else{
-        walletPayload["totalWinnings"] = walletInfo?.totalWinnings + Number(amount);
+      // Determine which balance to credit based on transaction type
+      if (type === "deposit") {
+        // Regular deposits go to depositAmount
+        walletPayload["depositAmount"] = walletInfo.depositAmount + Number(amount);
+        walletPayload["totalDeposited"] = walletInfo.totalDeposited + Number(amount);
+      } else if (type === "referral_bonus" || type === "referral") {
+        // Referral earnings go to depositAmount (with deposits)
+        walletPayload["depositAmount"] = walletInfo.depositAmount + Number(amount);
+        walletPayload["totalReferralEarnings"] = walletInfo.totalReferralEarnings + Number(amount);
+      } else if (type === "contest_winnings") {
+        // Contest winnings go to winningAmount
+        walletPayload["winningAmount"] = walletInfo.winningAmount + Number(amount);
+        walletPayload["totalWinnings"] = walletInfo.totalWinnings + Number(amount);
+      } else if (type === "joining_bonus" || type === "bonus") {
+        // Bonuses go to depositAmount (like referrals)
+        walletPayload["depositAmount"] = walletInfo.depositAmount + Number(amount);
+      } else if (type === "contest_refund") {
+        // Refunds restore to the original balance proportionally
+        // For simplicity, add to depositAmount as it was likely deducted from there first
+        walletPayload["depositAmount"] = walletInfo.depositAmount + Number(amount);
+      } else {
+        // Default: add to depositAmount for safety
+        walletPayload["depositAmount"] = walletInfo.depositAmount + Number(amount);
       }
 
       const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {
@@ -426,6 +481,77 @@ export default class WalletRepository {
       }
       
       return null;
+    }
+  }
+
+  /**
+   * Withdraw coins from winning amount only (for coupon purchases/reward redemption)
+   * This ensures only winnings can be used for rewards, not deposited amounts
+   */
+  public async withdrawFromWinningAmount(userId: string, amount: number, type: TransactionType, referenceId?: string, referenceType?: string): Promise<any> {
+    try {
+      const walletInfo = await this._DB.Wallet.findOne({
+        where: {
+          userId,
+        },
+      });
+
+      if (!walletInfo) {
+        throw new BadRequestError("Wallet not found for this user");
+      }
+
+      // Check if user has enough winning amount
+      if (walletInfo.winningAmount < amount) {
+        throw new BadRequestError("Insufficient winning balance. Only winning amount can be used for reward redemption.");
+      }
+
+      const walletPayload = {
+        balance: walletInfo.balance - Number(amount),
+        winningAmount: walletInfo.winningAmount - Number(amount),
+        totalWithdrawn: walletInfo.totalWithdrawn + Number(amount),
+      };
+
+      const updatedWalletInfo = await this._DB.Wallet.update(walletPayload, {
+        where: {
+          userId,
+        },
+        returning: true,
+      });
+
+      let createTransaction;
+      if (updatedWalletInfo[0]) {
+        createTransaction = await this._DB.Transaction.create({
+          walletId: walletInfo.id,
+          type: type,
+          userId: userId,
+          amount: amount,
+          balanceBefore: walletInfo.balance,
+          balanceAfter: updatedWalletInfo[1][0].balance,
+          referenceId: referenceId || null,
+          referenceType: referenceType || null,
+        });
+
+        // Send notification for withdrawal
+        await this.notificationHelper.sendWalletNotification(
+          userId, 
+          'withdrawal', 
+          amount, 
+          updatedWalletInfo[1][0].balance,
+          type
+        );
+      }
+
+      return {
+        wallet: updatedWalletInfo[1][0],
+        transaction: createTransaction,
+      };
+    } catch (err: any) {
+      // Re-throw BadRequestError as-is to preserve the specific error message
+      if (err instanceof BadRequestError) {
+        throw err;
+      }
+      logger.error(`DB error in withdrawFromWinningAmount: ${err?.message ?? err}`);
+      throw new ServerError(err.message);
     }
   }
 }

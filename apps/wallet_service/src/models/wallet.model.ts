@@ -21,6 +21,8 @@ export class Wallet
   public id!: string;
   public userId!: string;
   public balance!: number;
+  public depositAmount!: number;
+  public winningAmount!: number;
   public totalDeposited!: number;
   public totalWithdrawn!: number;
   public totalWinnings!: number;
@@ -49,6 +51,24 @@ export default function (sequelize: Sequelize) {
       },
 
       balance: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+          min: 0,
+        },
+      },
+
+      depositAmount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+          min: 0,
+        },
+      },
+
+      winningAmount: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,

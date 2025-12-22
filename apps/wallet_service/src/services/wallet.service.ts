@@ -70,6 +70,19 @@ export default class ContestService {
     }
   }
 
+  /**
+   * Debit from winning amount only (for coupon purchase/reward redemption)
+   */
+  public async debitFromWinningAmount(userId: string, amount: number, type: TransactionType, referenceId?: string, referenceType?: string): Promise<any> {
+    try {
+      const transactionInfo = await this.repo.withdrawFromWinningAmount(userId, amount, type, referenceId, referenceType);
+      return transactionInfo;
+    } catch (error: any) {
+      // Re-throw the error as-is to preserve the error type and message
+      throw error;
+    }
+  }
+
   public async getUserTransactions(userId: string) {
     try {
       const walletInfo = await this.repo.getTransactions(userId);

@@ -215,12 +215,12 @@ export default class CouponRepository {
         throw new ServerError("Coupon has already been redeemed");
       }
 
-      // Deduct coins from wallet (purchaseAmount)
+      // Deduct coins from winning amount only (purchaseAmount)
       const deductAmount = coupon.purchaseAmount;
       
       try {
         const walletResponse = await axios.post(
-          `${ServerConfigs.WALLET_SERVICE_URL}/api/v1/wallet/internal/debit`,
+          `${ServerConfigs.WALLET_SERVICE_URL}/api/v1/wallet/internal/debit-winning`,
           {
             userId,
             amount: deductAmount,
@@ -241,14 +241,14 @@ export default class CouponRepository {
         }
 
         logger.info(
-          `Deducted ${deductAmount} coins from user ${userId} for coupon ${couponId}`
+          `Deducted ${deductAmount} coins from user ${userId}'s winning amount for coupon ${couponId}`
         );
       } catch (walletError: any) {
         logger.error(`Wallet debit error: ${walletError.message}`);
         throw new ServerError(
           walletError.response?.data?.message ||
             walletError.message ||
-            "Insufficient balance or wallet service unavailable"
+            "Insufficient winning balance or wallet service unavailable. Only winning amount can be used for reward redemption."
         );
       }
 

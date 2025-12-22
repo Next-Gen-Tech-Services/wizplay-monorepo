@@ -81,6 +81,31 @@ export default class WalletController {
       .json({ success: true, data: result });
   }
 
+  /**
+   * Debit from winning amount only (for coupon purchase/reward redemption)
+   * Internal service call - no auth required
+   */
+  public async debitFromWinningAmount(req: Request, res: Response) {
+    const { userId, amount, type = 'coupon_purchase', referenceId, referenceType }: { 
+      userId: string;
+      amount: number;
+      type?: TransactionType;
+      referenceId?: string;
+      referenceType?: string;
+    } = req.body;
+    
+    if (!userId || !amount || amount <= 0) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST)
+        .json({ success: false, message: 'userId and valid amount are required' });
+    }
+
+    const result = await this.walletService.debitFromWinningAmount(userId, amount, type, referenceId, referenceType);
+    return res
+      .status(STATUS_CODE.SUCCESS)
+      .json({ success: true, data: result });
+  }
+
   public async getUserTransactions(req: Request, res: Response) {
     const userId: string = req.userId!;
     const result = await this.walletService.getUserTransactions(userId);
