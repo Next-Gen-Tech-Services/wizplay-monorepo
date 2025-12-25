@@ -37,6 +37,7 @@ class ServerConfigs {
     .GOOGLE_IOS_CLIENT_ID as string;
   static GOOGLE_ANDROID_CLIENT_ID: string = process.env
     .GOOGLE_ANDROID_CLIENT_ID as string;
+  static APPLE_BUNDLE_ID: string = process.env.APPLE_BUNDLE_ID as string;
   private constructor() {}
 }
 

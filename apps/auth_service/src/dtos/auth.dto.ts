@@ -3,6 +3,7 @@ export interface IAuthAtters {
   userId: string;
   email?: string | null;
   phoneNumber?: string | null;
+  appleUserId?: string | null;
   provider: "local" | "google" | "apple" | "email";
   password?: string | null;
   otpCode?: string | null;

@@ -117,6 +117,30 @@ export default class AuthController {
     });
   }
 
+  public async authWithApple(req: Request, res: Response) {
+    try {
+      const { identity_token, first_name, last_name } = req.body;
+      const result = await this.authService.appleAuth(identity_token, first_name, last_name);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result.data,
+        token: result.token,
+        message: result.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      return res.status(STATUS_CODE.BAD_REQUEST).json({
+        success: false,
+        data: null,
+        message: err?.message || "Apple authentication failed",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
   public async getAuthByUserId(req: Request, res: Response) {
     try {
       const { userId } = req.params;

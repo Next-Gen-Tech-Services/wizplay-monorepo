@@ -92,6 +92,30 @@ router.post(
   }
 );
 
+// APPLE LOGIN ROUTE
+router.post(
+  "/auth/apple",
+  [
+    body("identity_token")
+      .isString()
+      .notEmpty()
+      .withMessage("Identity token is required"),
+    body("first_name")
+      .optional()
+      .isString()
+      .withMessage("First name must be a string"),
+    body("last_name")
+      .optional()
+      .isString()
+      .withMessage("Last name must be a string"),
+  ],
+  validateRequest,
+  async (req: Request, res: Response) => {
+    const result = await controller.authWithApple(req, res);
+    return result;
+  }
+);
+
 // GET AUTH DATA BY USER ID (for inter-service communication)
 router.get("/auth/user/:userId", async (req: Request, res: Response) => {
   const result = await controller.getAuthByUserId(req, res);

@@ -14,6 +14,7 @@ import ServerConfigs from "../configs/server.config";
 import { IGoogleResponse } from "../interfaces/user.interface";
 import AuthRepository from "../repositories/auth.repository";
 import { KAFKA_EVENTS } from "../types";
+import { handleAppleAuth } from "../utils/apple-config";
 import { handleGoogleAuth } from "../utils/google-config";
 import { publishUserEvent } from "../utils/kafka";
 import { sendOtpUtil, verifyOtpUtil } from "../utils/otp";
@@ -352,6 +353,123 @@ export default class Service {
     } catch (error: any) {
       logger.error(`Error fetching auth data by userId: ${error.message}`);
       throw new ServerError("Failed to fetch auth data");
+    }
+  }
+
+  public async appleAuth(identityToken: string, firstName?: string, lastName?: string) {
+    try {
+      const payload = await handleAppleAuth(identityToken);
+      
+      if (!payload || !payload.sub) {
+        throw new UnAuthorizError("Invalid Apple token or user identifier not provided");
+      }
+
+      const { sub: appleUserId, email } = payload;
+      
+      // First, check if user exists by Apple user ID
+      let userExists = await this.userRepository.userExistWithAppleId(appleUserId);
+
+      if (userExists) {
+        // User exists with this Apple ID, log them in
+        if (!userExists.onboarded) {
+          await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
+            userId: userExists.userId,
+            authId: userExists.id,
+            email: userExists.email || undefined,
+          });
+          logger.debug("signup event published");
+        } else {
+          logger.warn("user is already onboarded");
+        }
+
+        const token = generateToken(
+          {
+            session_id: `${userExists.id}:${userExists.userId}:${userExists.email || appleUserId}`,
+          },
+          ServerConfigs.TOKEN_SECRET
+        );
+        logger.warn(`Generated Token : ${token}`);
+
+        return {
+          data: userExists,
+          token: token,
+          message: "Authentication successful",
+        };
+      }
+
+      // Check if user exists with the same email (from Google or email provider)
+      if (email) {
+        const userWithEmail = await this.userRepository.userExistWithEmail(email);
+        
+        if (userWithEmail) {
+          // Link Apple ID to existing account
+          logger.info(`Linking Apple ID to existing account with email: ${email}`);
+          const linkedUser = await this.userRepository.linkAppleIdToUser(
+            userWithEmail.userId,
+            appleUserId
+          );
+
+          if (!linkedUser.onboarded) {
+            await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
+              userId: linkedUser.userId,
+              authId: linkedUser.id,
+              email: linkedUser.email || undefined,
+            });
+            logger.debug("signup event published");
+          }
+
+          const token = generateToken(
+            {
+              session_id: `${linkedUser.id}:${linkedUser.userId}:${linkedUser.email || appleUserId}`,
+            },
+            ServerConfigs.TOKEN_SECRET
+          );
+          logger.warn(`Generated Token : ${token}`);
+
+          return {
+            data: linkedUser,
+            token: token,
+            message: "Authentication successful - Apple account linked",
+          };
+        }
+      }
+
+      // Create new user - no existing account found
+      const userId = generateUUID();
+      const createUser = await this.userRepository.createAuthUserWithApple({
+        email: email,
+        userId,
+        appleUserId,
+        provider: "apple",
+      });
+
+      if (!createUser.onboarded) {
+        await publishUserEvent(KAFKA_EVENTS.USER_SIGNUP, {
+          userId: createUser.userId,
+          authId: createUser.id,
+          email: createUser.email || undefined,
+        });
+        logger.debug("signup event published");
+      } else {
+        logger.warn("user is already onboarded");
+      }
+
+      const token = generateToken(
+        {
+          session_id: `${createUser.id}:${createUser.userId}:${createUser.email || appleUserId}`,
+        },
+        ServerConfigs.TOKEN_SECRET
+      );
+      logger.warn(`Generated Token : ${token}`);
+
+      return {
+        data: createUser,
+        token: token,
+        message: "Authentication successful",
+      };
+    } catch (error: any) {
+      logger.error(`Apple Auth Error: ${error.message}`);
+      throw error;
     }
   }
 }

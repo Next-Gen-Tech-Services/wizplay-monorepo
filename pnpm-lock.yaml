@@ -47,6 +47,12 @@ importers:
       googleapis:
         specifier: ^160.0.0
         version: 160.0.0
+      jsonwebtoken:
+        specifier: ^9.0.2
+        version: 9.0.2
+      jwks-rsa:
+        specifier: ^3.2.0
+        version: 3.2.0
       kafkajs:
         specifier: ^2.2.4
         version: 2.2.4
@@ -99,6 +105,9 @@ importers:
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
       '@types/node':
         specifier: ^24.1.0
         version: 24.3.1

@@ -2,6 +2,7 @@ import { logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
 import {
   IClearOtpPayload,
+  ICreateAppleAuthUser,
   ICreateGoogleAuthUser,
   ICreatePhoneAuthUser,
   IUpdateOTP,
@@ -88,6 +89,24 @@ export default class AuthRepository {
     }
   }
 
+  public async createAuthUserWithApple(
+    data: ICreateAppleAuthUser
+  ): Promise<any> {
+    try {
+      const result = await this._DB.Auth.create({
+        ...data,
+        type: "user",
+      });
+      if (!result) {
+        throw new ServerError("Database Error");
+      }
+      return result.toJSON();
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
   public async verifyOtpRepo({
     phoneNumber,
     otpCode,
@@ -143,6 +162,21 @@ export default class AuthRepository {
     }
   }
 
+  public async userExistWithAppleId(appleUserId: string): Promise<any> {
+    try {
+      const user = await this._DB.Auth.findOne({
+        where: {
+          appleUserId: appleUserId,
+        },
+      });
+
+      return user;
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
   public async updatePassword(email: string, password: string): Promise<any> {
     try {
       const result = await this._DB.Auth.update(
@@ -156,6 +190,36 @@ export default class AuthRepository {
         }
       );
       return result;
+    } catch (error: any) {
+      logger.error(`Database Error: ${error}`);
+      throw new ServerError("Database Error");
+    }
+  }
+
+  public async linkAppleIdToUser(userId: string, appleUserId: string): Promise<any> {
+    try {
+      const result = await this._DB.Auth.update(
+        {
+          appleUserId: appleUserId,
+        },
+        {
+          where: {
+            userId: userId,
+          },
+          returning: true,
+        }
+      );
+      
+      if (result[0] === 0) {
+        throw new ServerError("User not found or update failed");
+      }
+      
+      // Return the updated user
+      const updatedUser = await this._DB.Auth.findOne({
+        where: { userId },
+      });
+      
+      return updatedUser;
     } catch (error: any) {
       logger.error(`Database Error: ${error}`);
       throw new ServerError("Database Error");

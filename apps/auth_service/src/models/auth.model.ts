@@ -13,6 +13,7 @@ interface AuthCreationAttributes
     | "lastLoginAt"
     | "phoneNumber"
     | "email"
+    | "appleUserId"
     | "otpExpiresAt"
   > {}
 
@@ -24,6 +25,7 @@ export class Auth
   public userId!: string;
   public email!: string | null;
   public phoneNumber!: string | null;
+  public appleUserId!: string | null;
   public provider!: "local" | "google" | "apple" | "email";
   public type!: "user" | "admin";
   public password?: string | null;
@@ -54,6 +56,11 @@ export default function (sequelize: Sequelize) {
         defaultValue: null,
       },
       phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null,
+      },
+      appleUserId: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,
@@ -114,6 +121,15 @@ export default function (sequelize: Sequelize) {
           fields: ["phone_number"], // Note: underscored naming
           where: {
             phone_number: {
+              [Op.ne]: null,
+            },
+          },
+        },
+        {
+          unique: true,
+          fields: ["apple_user_id"],
+          where: {
+            apple_user_id: {
               [Op.ne]: null,
             },
           },

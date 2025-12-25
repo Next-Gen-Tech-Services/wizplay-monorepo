@@ -15,6 +15,13 @@ export interface ICreateGoogleAuthUser {
   provider: "google";
 }
 
+export interface ICreateAppleAuthUser {
+  email?: string;
+  userId: string;
+  appleUserId: string;
+  provider: "apple";
+}
+
 export interface IVerifyOtpPayload {
   phoneNumber: string;
   otpCode: string;
