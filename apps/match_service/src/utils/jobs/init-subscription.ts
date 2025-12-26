@@ -18,7 +18,7 @@ export async function initializeSubscriptionService() {
   try {
     logger.info("[SUBSCRIPTION] Initializing match subscription service...");
 
-    // Get Roanuz token from Redis
+    // Ensure Roanuz token is available in Redis
     let token = await generateApiToken();
 
     if (!token) {
@@ -43,9 +43,8 @@ export async function initializeSubscriptionService() {
     const matchRepository = new MatchRepository();
     const matchService = new MatchService(matchRepository);
 
-    // Create and start subscription service
+    // Create and start subscription service (token will be fetched dynamically)
     subscriptionServiceInstance = new MatchSubscriptionService(
-      token,
       matchRepository,
       matchService
     );

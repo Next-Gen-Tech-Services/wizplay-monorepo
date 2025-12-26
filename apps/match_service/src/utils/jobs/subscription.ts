@@ -2,6 +2,7 @@ import redis from "../../configs/redis.config";
 import MatchRepository from "../../repositories/match.repository";
 import MatchService from "../../services/match.service";
 import { startMatchWorker, stopMatchWorker } from "../workers/manager.worker";
+import { generateApiToken, forceRefreshApiToken } from "../utils";
 
 interface Match {
   id: string;
@@ -19,16 +20,22 @@ class MatchSubscriptionService {
   private statusCheckInterval: NodeJS.Timeout | null = null;
   private matchRepository: MatchRepository;
   private matchService: MatchService;
-  public token: string;
 
   constructor(
-    token: string,
     matchRepository: MatchRepository,
     matchService: MatchService
   ) {
-    this.token = token;
     this.matchRepository = matchRepository;
     this.matchService = matchService;
+  }
+
+  // Helper method to get a fresh token
+  private async getToken(): Promise<string> {
+    const token = await generateApiToken();
+    if (!token) {
+      throw new Error("Failed to get Roanuz API token");
+    }
+    return token;
   }
 
   // Start monitoring matches
@@ -106,9 +113,10 @@ class MatchSubscriptionService {
       await Promise.all(
         batch.map(async (matchKey) => {
           try {
+            const token = await this.getToken();
             const result = await this.matchService.fetchAndUpdateMatchStatus(
               matchKey,
-              this.token
+              token
             );
             
             if (result.updated) {
@@ -305,7 +313,31 @@ class MatchSubscriptionService {
   // Subscribe to a match
   private async subscribeToMatch(matchId: string) {
     try {
-      const result = await this.matchService.subscribeMatch(matchId, this.token);
+      let token = await this.getToken();
+      let result;
+      
+      try {
+        result = await this.matchService.subscribeMatch(matchId, token);
+      } catch (error: any) {
+        // Check if it's a 401 error (invalid token)
+        const errorCode = error.response?.data?.error?.code;
+        const httpStatus = error.response?.data?.error?.http_status_code;
+        
+        if (errorCode === "A-401-0" || httpStatus === 401) {
+          console.log(`⚠️ Token expired for match ${matchId}, refreshing token and retrying...`);
+          
+          // Force refresh the token
+          const newToken = await forceRefreshApiToken();
+          if (!newToken) {
+            throw new Error("Failed to refresh token");
+          }
+          
+          // Retry subscription with new token
+          result = await this.matchService.subscribeMatch(matchId, newToken);
+        } else {
+          throw error;
+        }
+      }
       
       // Check if already subscribed
       if (result.already_subscribed) {
@@ -318,9 +350,10 @@ class MatchSubscriptionService {
       startMatchWorker(matchId);
       // Immediately fetch and update match status after subscribing
       try {
+        const token = await this.getToken();
         const statusResult = await this.matchService.fetchAndUpdateMatchStatus(
           matchId,
-          this.token
+          token
         );
         if (statusResult.updated) {
           console.log(`📊 Initial status update for ${matchId}: ${statusResult.status}`);
@@ -343,7 +376,8 @@ class MatchSubscriptionService {
   // Unsubscribe from a match
   private async unsubscribeFromMatch(matchId: string) {
     try {
-      const result = await this.matchService.unsubscribeMatch(matchId, this.token);
+      const token = await this.getToken();
+      const result = await this.matchService.unsubscribeMatch(matchId, token);
       
       // Check if already unsubscribed
       if (result.already_unsubscribed) {
