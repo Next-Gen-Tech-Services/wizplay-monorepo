@@ -135,6 +135,17 @@ router.get("/flags/status", async (req: Request, res: Response) => {
   return controller.getFlagStatus(req, res);
 });
 
+// Team flag routes
+router.get("/flags/team/:teamKey", async (req: Request, res: Response) => {
+  const controller = new FlagController();
+  return controller.getTeamFlag(req, res);
+});
+
+router.get("/flags/teams", async (req: Request, res: Response) => {
+  const controller = new FlagController();
+  return controller.getAllTeamMappings(req, res);
+});
+
 // Live match data routes
 router.get("/matches/:id/live-score", async (req: Request, res: Response) => {
   const controller = container.resolve(MatchController);

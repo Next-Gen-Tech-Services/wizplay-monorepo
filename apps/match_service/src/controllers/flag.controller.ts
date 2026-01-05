@@ -1,6 +1,7 @@
 import { logger } from "@repo/common";
 import { Request, Response } from "express";
 import countryFlagsCron from "../utils/jobs/country-flags";
+import FlagMappingService from "../utils/flagMapping.service";
 
 /**
  * Manual trigger endpoint for syncing country flags
@@ -46,18 +47,89 @@ export default class FlagController {
         });
       }
 
-      const files = fs.readdirSync(flagsDir).filter((f: string) => f.endsWith(".png"));
+      const files = fs.readdirSync(flagsDir).filter((f: string) => 
+        f.endsWith(".png") || f.endsWith(".jpg") || f.endsWith(".jpeg") || f.endsWith(".svg")
+      );
+      
+      // Get team mapping stats
+      const flagService = FlagMappingService.getInstance();
+      const stats = flagService.getStats();
       
       return res.status(200).json({
         success: true,
         totalFlags: files.length,
         flags: files,
+        mappingStats: stats,
       });
     } catch (error: any) {
       logger.error(`[FLAG-CONTROLLER] Error: ${error.message}`);
       return res.status(500).json({
         success: false,
         message: "Failed to get flag status",
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+   * Get flag URL for a specific team key
+   */
+  public async getTeamFlag(req: Request, res: Response) {
+    try {
+      const { teamKey } = req.params;
+      
+      if (!teamKey) {
+        return res.status(400).json({
+          success: false,
+          message: "Team key is required",
+        });
+      }
+
+      const flagService = FlagMappingService.getInstance();
+      const flagUrl = flagService.getFlagUrl(teamKey, process.env.ASSET_SERVICE_URL || "");
+      
+      if (!flagUrl) {
+        return res.status(404).json({
+          success: false,
+          message: `No flag found for team key: ${teamKey}`,
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        teamKey,
+        flagUrl,
+        filename: flagService.getFlagFilename(teamKey),
+      });
+    } catch (error: any) {
+      logger.error(`[FLAG-CONTROLLER] Error: ${error.message}`);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to get team flag",
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+   * Get all available team keys and their flag mappings
+   */
+  public async getAllTeamMappings(req: Request, res: Response) {
+    try {
+      const flagService = FlagMappingService.getInstance();
+      const teamKeys = flagService.getAllTeamKeys();
+      const stats = flagService.getStats();
+      
+      return res.status(200).json({
+        success: true,
+        totalMappings: stats.totalMappings,
+        teamKeys: teamKeys,
+      });
+    } catch (error: any) {
+      logger.error(`[FLAG-CONTROLLER] Error: ${error.message}`);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to get team mappings",
         error: error.message,
       });
     }

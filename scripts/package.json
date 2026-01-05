@@ -1,0 +1,17 @@
+{
+  "name": "wizplay-db-scripts",
+  "version": "1.0.0",
+  "description": "Database maintenance scripts for WizPlay",
+  "scripts": {
+    "cleanup": "node database-cleanup.js",
+    "cleanup:dry": "node database-cleanup.js --dry-run",
+    "cleanup:confirm": "node database-cleanup.js --confirm"
+  },
+  "dependencies": {
+    "sequelize": "^6.35.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  }
+}

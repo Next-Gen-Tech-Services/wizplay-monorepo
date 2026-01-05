@@ -5,36 +5,30 @@ import { IMatchAttrs } from "../dtos/match.dto";
 import { IMatchFilters } from "../interfaces/match";
 import { Match } from "../models/match.model";
 import ServerConfigs from "../configs/server.config";
+import FlagMappingService from "../utils/flagMapping.service";
 
 /**
- * Add team flag URLs to match data based on country codes
- * Uses locally stored flags downloaded from Roanuz API
+ * Add team flag URLs to match data based on team keys
+ * Uses locally stored flags with team key based filenames
  */
 function addTeamFlags(matchData: any): any {
   if (matchData && matchData.teams) {
     const baseUrl = ServerConfigs.ASSET_SERVICE_URL;
+    const flagService = FlagMappingService.getInstance();
 
     if (matchData.teams.a) {
-      // Ensure country_code is empty string if null/undefined
-      if (!matchData.teams.a.country_code) {
-        matchData.teams.a.country_code = "";
-      }
-      // Only add flag_url if country_code is not empty
-      if (matchData.teams.a.country_code) {
-        matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.country_code.toLowerCase()}.svg`;
+      // Use team key for flag URL generation
+      if (matchData.teams.a.key) {
+        matchData.teams.a.flag_url = flagService.getFlagUrl(matchData.teams.a.key, baseUrl);
       } else {
         matchData.teams.a.flag_url = ``;
       }
     }
 
     if (matchData.teams.b) {
-      // Ensure country_code is empty string if null/undefined
-      if (!matchData.teams.b.country_code) {
-        matchData.teams.b.country_code = "";
-      }
-      // Only add flag_url if country_code is not empty
-      if (matchData.teams.b.country_code) {
-        matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.country_code.toLowerCase()}.svg`;
+      // Use team key for flag URL generation
+      if (matchData.teams.b.key) {
+        matchData.teams.b.flag_url = flagService.getFlagUrl(matchData.teams.b.key, baseUrl);
       } else {
         matchData.teams.b.flag_url = ``;
       }
