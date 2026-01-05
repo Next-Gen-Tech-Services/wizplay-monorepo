@@ -206,10 +206,23 @@ const AppInit = async () => {
   expressApp.use(attachRequestId);
 
   // Serve static flag images
-  expressApp.use("/api/v1/matches/flags", express.static(path.join(process.cwd(), "public", "flags")));
+  const flagsPath = path.join(process.cwd(), "public", "flags");
+  logger.info(`[STATIC-SERVE] Setting up flag static serving at /api/v1/matches/flags from: ${flagsPath}`);
+  logger.info(`[STATIC-SERVE] Current working directory: ${process.cwd()}`);
+  
+  // Check if the flags directory exists
+  const fs = require('fs');
+  if (fs.existsSync(flagsPath)) {
+    logger.info(`[STATIC-SERVE] Flags directory exists with ${fs.readdirSync(flagsPath).length} files`);
+  } else {
+    logger.error(`[STATIC-SERVE] Flags directory NOT found at: ${flagsPath}`);
+  }
+
+  expressApp.use("/api/v1/matches/flags", express.static(flagsPath));
   
   // Serve static player images
-  expressApp.use("/api/v1/matches/player-images", express.static(path.join(process.cwd(), "public", "player_images")));
+  const playerImagesPath = path.join(process.cwd(), "public", "player_images");
+  expressApp.use("/api/v1/matches/player-images", express.static(playerImagesPath));
 
   await BrokerInit();
   await CronsInit();
