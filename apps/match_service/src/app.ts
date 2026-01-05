@@ -4,6 +4,7 @@ import { container } from "tsyringe";
 import cors from "cors";
 import http from "http";
 import express, { Express, Request, Response } from "express";
+import path from "path";
 import ServerConfigs from "./configs/server.config";
 import MatchRouter from "./routes/match.router";
 import matchEventHandler from "./utils/events/match.events";
@@ -205,10 +206,10 @@ const AppInit = async () => {
   expressApp.use(attachRequestId);
 
   // Serve static flag images
-  expressApp.use("/api/v1/matches/flags/", express.static("public/flags"));
+  expressApp.use("/api/v1/matches/flags", express.static(path.join(process.cwd(), "public", "flags")));
   
   // Serve static player images
-  expressApp.use("/api/v1/matches/player-images/", express.static("public/player_images"));
+  expressApp.use("/api/v1/matches/player-images", express.static(path.join(process.cwd(), "public", "player_images")));
 
   await BrokerInit();
   await CronsInit();
