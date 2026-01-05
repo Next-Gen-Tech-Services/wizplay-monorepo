@@ -5,33 +5,21 @@ import { IMatchAttrs } from "../dtos/match.dto";
 import { IMatchFilters } from "../interfaces/match";
 import { Match } from "../models/match.model";
 import ServerConfigs from "../configs/server.config";
-import FlagMappingService from "../utils/flagMapping.service";
 
 /**
- * Add team flag URLs to match data based on team keys
- * Uses locally stored flags with team key based filenames
+ * Add simple team flag URLs based on team keys
+ * Constructs URLs as: baseUrl + api/v1/matches/flags/ + teamKey + .png
  */
 function addTeamFlags(matchData: any): any {
-  if (matchData && matchData.teams) {
+  if (matchData && matchData.teams && ServerConfigs.ASSET_SERVICE_URL) {
     const baseUrl = ServerConfigs.ASSET_SERVICE_URL;
-    const flagService = FlagMappingService.getInstance();
 
-    if (matchData.teams.a) {
-      // Use team key for flag URL generation
-      if (matchData.teams.a.key) {
-        matchData.teams.a.flag_url = flagService.getFlagUrl(matchData.teams.a.key, baseUrl);
-      } else {
-        matchData.teams.a.flag_url = ``;
-      }
+    if (matchData.teams.a && matchData.teams.a.key) {
+      matchData.teams.a.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.a.key}.png`;
     }
 
-    if (matchData.teams.b) {
-      // Use team key for flag URL generation
-      if (matchData.teams.b.key) {
-        matchData.teams.b.flag_url = flagService.getFlagUrl(matchData.teams.b.key, baseUrl);
-      } else {
-        matchData.teams.b.flag_url = ``;
-      }
+    if (matchData.teams.b && matchData.teams.b.key) {
+      matchData.teams.b.flag_url = `${baseUrl}api/v1/matches/flags/${matchData.teams.b.key}.png`;
     }
   }
   return matchData;
@@ -252,10 +240,8 @@ export default class MatchRepository {
             : Boolean(plain.wishlisted);
         if (plain.wishlists !== undefined) delete plain.wishlists;
 
-        // Add team flag URLs and convert nulls to empty strings
+        // Add team flag URLs
         const matchWithFlags = addTeamFlags(plain);
-
-        // Recursively replace all null values with empty strings
 
         return matchWithFlags;
       });

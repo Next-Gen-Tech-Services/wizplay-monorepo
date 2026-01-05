@@ -13,7 +13,6 @@ import matchNotificationCron from "./utils/jobs/match-notifications";
 import { initializeSubscriptionService } from "./utils/jobs/init-subscription";
 import { connectProducer } from "./utils/kafka";
 import { Server as SocketIOServer, Socket } from "socket.io";
-import FlagMappingService from "./utils/flagMapping.service";
 import redis from "./configs/redis.config";
 import MatchLiveRepository from "./repositories/matchLive.repository";
 import { transformCricketMatch } from "./utils/transformLiveMatchData";
@@ -147,22 +146,6 @@ const NotificationInit = async () => {
   }
 };
 
-const FlagMappingInit = async () => {
-  try {
-    logger.info("Initializing flag mapping service...");
-    
-    const flagService = FlagMappingService.getInstance();
-    flagService.loadMapping();
-    
-    const stats = flagService.getStats();
-    logger.info(`✅ Flag mapping service initialized successfully with ${stats.totalMappings} team mappings`);
-  } catch (error: any) {
-    logger.error("Failed to initialize flag mapping service:", error.message);
-    logger.warn("Flag mapping will use fallback behavior");
-    // Don't crash the app if flag mapping fails
-  }
-};
-
 const AppInit = async () => {
   const expressApp: Express = express();
   const server = http.createServer(expressApp);
@@ -231,7 +214,6 @@ const AppInit = async () => {
   await CronsInit();
   await SubscriptionInit();
   await NotificationInit();
-  await FlagMappingInit();
 
   expressApp.use("/api/v1", MatchRouter);
   expressApp.get(
