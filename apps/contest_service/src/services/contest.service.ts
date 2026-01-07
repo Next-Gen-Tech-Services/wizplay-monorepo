@@ -461,7 +461,7 @@ export default class ContestService {
           const error = new BadRequestError(
             walletErr?.response?.data?.message || "Insufficient wallet balance"
           );
-          error.code = "INSUFFICIENT_FUNDS";
+          (error as any).code = "INSUFFICIENT_FUNDS";
           throw error;
         }
       }
