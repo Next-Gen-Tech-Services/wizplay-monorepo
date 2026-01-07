@@ -187,6 +187,13 @@ export default class ContestController {
         });
       }
 
+      if (err?.code === "INSUFFICIENT_FUNDS") {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: err.message || "Insufficient wallet balance",
+        });
+      }
+
       // fallback
       return res
         .status(STATUS_CODE.INTERNAL_SERVER)

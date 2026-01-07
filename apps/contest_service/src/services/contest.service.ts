@@ -458,9 +458,11 @@ export default class ContestService {
           logger.error(
             `[contest-service] Wallet deduction failed: ${walletErr?.response?.data?.message || walletErr.message}`
           );
-          throw new BadRequestError(
+          const error = new BadRequestError(
             walletErr?.response?.data?.message || "Insufficient wallet balance"
           );
+          error.code = "INSUFFICIENT_FUNDS";
+          throw error;
         }
       }
 
