@@ -127,7 +127,7 @@ export default class UserRepository {
 
   public async updateWithId(
     userId: string,
-    payload: { name: string; email: string }
+    payload: { name?: string; email?: string; status?: "active" | "inactive" | "suspended" | "banned" }
   ): Promise<any> {
     try {
       const user = await this._DB.User.update(payload, {
