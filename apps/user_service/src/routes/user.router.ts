@@ -3,7 +3,7 @@ import { Request, Response, Router } from "express";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import UserController from "../controllers/user.controller";
-import { requireAuth } from "../middlewares/auth.middleware";
+import { requireAuth, requireAdminAuth } from "../middlewares/auth.middleware";
 import { updateNameValidator } from "../validators";
 
 const router = Router();
@@ -63,6 +63,16 @@ router.patch(
   requireAuth,
   async (req: Request, res: Response) => {
     const result = await controller.updateDeviceToken(req, res);
+    return result;
+  }
+);
+
+// Admin endpoint for updating user status
+router.patch(
+  "/admin/user/:userId/status",
+  requireAdminAuth,
+  async (req: Request, res: Response) => {
+    const result = await controller.updateUserStatus(req, res);
     return result;
   }
 );

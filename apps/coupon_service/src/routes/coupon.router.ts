@@ -78,6 +78,9 @@ router.get(
   (req: Request, res: Response) => controller.list(req, res)
 );
 
+// Get coupon statistics for analytics dashboard (no validation needed)
+router.get("/stats", (req: Request, res: Response) => controller.getCouponStats(req, res));
+
 // Get single coupon
 router.get(
   "/:id",
@@ -154,5 +157,6 @@ router.get(
   ],
   (req: Request, res: Response) => controller.getUserRedeemedCoupons(req, res)
 );
+
 
 export default router;

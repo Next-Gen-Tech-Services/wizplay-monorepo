@@ -856,8 +856,7 @@ export default class ContestService {
         scheduled,
         running,
         completed,
-        totalParticipantsResult,
-        totalPrizePoolResult
+        totalParticipantsResult
       ] = await Promise.all([
         // Total contests
         DB.Contest.count(),
@@ -878,14 +877,7 @@ export default class ContestService {
         }),
 
         // Total participants across all contests
-        DB.UserContest.count(),
-
-        // Total prize pool
-        DB.Contest.sum('prizePool', {
-          where: {
-            prizePool: { [Op.ne]: null }
-          }
-        })
+        DB.UserContest.count()
       ]);
 
       return {
@@ -894,7 +886,6 @@ export default class ContestService {
         running,
         completed,
         totalParticipants: totalParticipantsResult || 0,
-        totalPrizePool: totalPrizePoolResult || 0,
       };
     } catch (err: any) {
       logger.error(`ContestService.getContestStats error: ${err?.message ?? err}`);
@@ -1779,6 +1770,106 @@ export default class ContestService {
     } catch (error: any) {
       logger.error(`[CONTEST SERVICE] getUsersJoinedForMatch error: ${error.message}`);
       throw new ServerError(error.message || "Failed to get users joined for match");
+    }
+  }
+
+  /**
+   * Toggle contest reminder for a user
+   * If reminder exists and is active, deactivate it
+   * If reminder exists and is inactive, activate it
+   * If reminder doesn't exist, create it
+   */
+  public async toggleContestReminder(userId: string, contestId: string): Promise<{ isActive: boolean; message: string }> {
+    try {
+      logger.info(`[CONTEST SERVICE] Toggling reminder for user ${userId} and contest ${contestId}`);
+
+      // Check if contest exists
+      const contest = await DB.Contest.findByPk(contestId);
+      if (!contest) {
+        throw new ServerError("Contest not found");
+      }
+
+      // Find existing reminder
+      const existingReminder = await DB.ContestReminder.findOne({
+        where: { userId, contestId }
+      });
+
+      if (existingReminder) {
+        // Toggle the reminder
+        existingReminder.isActive = !existingReminder.isActive;
+        await existingReminder.save();
+
+        logger.info(`[CONTEST SERVICE] Reminder ${existingReminder.isActive ? 'activated' : 'deactivated'} for user ${userId}`);
+        
+        return {
+          isActive: existingReminder.isActive,
+          message: existingReminder.isActive 
+            ? 'Reminder activated successfully' 
+            : 'Reminder deactivated successfully'
+        };
+      } else {
+        // Create new reminder
+        await DB.ContestReminder.create({
+          userId,
+          contestId,
+          isActive: true
+        });
+
+        logger.info(`[CONTEST SERVICE] Reminder created for user ${userId} and contest ${contestId}`);
+        
+        return {
+          isActive: true,
+          message: 'Reminder set successfully'
+        };
+      }
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] toggleContestReminder error: ${error.message}`);
+      throw new ServerError(error.message || "Failed to toggle contest reminder");
+    }
+  }
+
+  /**
+   * Get users who have active reminders for a specific contest
+   */
+  public async getUsersWithReminders(contestId: string): Promise<string[]> {
+    try {
+      logger.info(`[CONTEST SERVICE] Getting users with reminders for contest: ${contestId}`);
+
+      const reminders = await DB.ContestReminder.findAll({
+        where: {
+          contestId,
+          isActive: true
+        },
+        attributes: ['userId']
+      });
+
+      const userIds = reminders.map(r => r.userId);
+      logger.info(`[CONTEST SERVICE] Found ${userIds.length} users with active reminders for contest: ${contestId}`);
+
+      return userIds;
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] getUsersWithReminders error: ${error.message}`);
+      throw new ServerError(error.message || "Failed to get users with reminders");
+    }
+  }
+
+  /**
+   * Check if a user has an active reminder for a contest
+   */
+  public async hasContestReminder(userId: string, contestId: string): Promise<boolean> {
+    try {
+      const reminder = await DB.ContestReminder.findOne({
+        where: {
+          userId,
+          contestId,
+          isActive: true
+        }
+      });
+
+      return !!reminder;
+    } catch (error: any) {
+      logger.error(`[CONTEST SERVICE] hasContestReminder error: ${error.message}`);
+      return false;
     }
   }
 }

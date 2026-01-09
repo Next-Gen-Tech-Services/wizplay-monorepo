@@ -13,7 +13,7 @@ import * as path from "path";
 
 @autoInjectable()
 export default class MatchService {
-  constructor(private readonly matchRepository: MatchRepository) { }
+  constructor(private readonly matchRepository: MatchRepository) {}
 
   /**
    * Helper method to find local player image
@@ -21,19 +21,19 @@ export default class MatchService {
    * Returns relative URL path if found, null otherwise
    */
   private getLocalPlayerImage(playerKey: string): string | null {
-    const extensions = ['.png', '.jpg', '.jpeg'];
-    const playerImagesDir = path.join(__dirname, '../../public/player_images');
-    
+    const extensions = [".png", ".jpg", ".jpeg"];
+    const playerImagesDir = path.join(__dirname, "../../public/player_images");
+
     for (const ext of extensions) {
       const fileName = `${playerKey}${ext}`;
       const filePath = path.join(playerImagesDir, fileName);
-      
+
       if (fs.existsSync(filePath)) {
         // Return URL path matching the static route
         return `${ServerConfigs.ASSET_SERVICE_URL}api/v1/matches/player-images/${fileName}`;
       }
     }
-    
+
     return null;
   }
 
@@ -50,7 +50,7 @@ export default class MatchService {
   public async fetchMatchById(matchId: string) {
     try {
       const match = await this.matchRepository.getMatchById(matchId);
-      
+
       return match;
     } catch (error: any) {
       throw new BadRequestError(error.message);
@@ -63,7 +63,7 @@ export default class MatchService {
       if (!matchId) {
         return null;
       }
-      
+
       return { id: matchId, key: matchKey };
     } catch (error: any) {
       logger.error(`getMatchByKey error: ${error.message}`);
@@ -71,7 +71,10 @@ export default class MatchService {
     }
   }
 
-  public async updateMatch(matchId: string, updateData: { showOnFrontend?: boolean; contestGenerated?: boolean }) {
+  public async updateMatch(
+    matchId: string,
+    updateData: { showOnFrontend?: boolean; contestGenerated?: boolean }
+  ) {
     try {
       if (!matchId) {
         throw new BadRequestError("Missing match id");
@@ -82,16 +85,22 @@ export default class MatchService {
         updateData
       );
 
-
-      // Auto-generate contest if match is now visible and contest not generated
+      // Auto-generate contest if match is now visible and contest generation is enabled
       if (updateData.showOnFrontend == true && updated) {
         const match = await this.matchRepository.getMatchById(matchId);
-            logger.info(`[AUTO-CONTEST] Update to generate contest for match ${JSON.stringify(match)}`);
+        logger.info(
+          `[AUTO-CONTEST] Update to generate contest for match ${JSON.stringify(match)}`
+        );
 
-        if (match && !match.contestGenerated) {
+        if (match.contestGenerated !== true) {
           // Trigger contest generation asynchronously
-          this.triggerContestGeneration(matchId, match).catch(err => {
-            logger.error(`[AUTO-CONTEST] Failed to generate contest for match ${matchId}: ${err.message}`);
+          await this.matchRepository.updateMatch(matchId, {
+            contestGenerated: true,
+          });
+          this.triggerContestGeneration(matchId, match).catch((err) => {
+            logger.error(
+              `[AUTO-CONTEST] Failed to generate contest for match ${matchId}: ${err.message}`
+            );
           });
         }
       }
@@ -105,11 +114,17 @@ export default class MatchService {
   /**
    * Trigger contest generation for a match
    */
-  private async triggerContestGeneration(matchId: string, match: any): Promise<void> {
+  private async triggerContestGeneration(
+    matchId: string,
+    match: any
+  ): Promise<void> {
     try {
-      const contestServiceUrl = ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
-      
-      logger.info(`[AUTO-CONTEST] Triggering contest generation for match ${matchId}`);
+      const contestServiceUrl =
+        ServerConfigs.CONTEST_SERVICE_URL || "http://localhost:4005";
+
+      logger.info(
+        `[AUTO-CONTEST] Triggering contest generation for match ${matchId}`
+      );
 
       const response = await axios.post(
         `${contestServiceUrl}/api/v1/contests/generate`,
@@ -117,21 +132,29 @@ export default class MatchService {
           matchData: match, // Send full match data
         },
         {
-          timeout: 10000,
+          timeout: 100000,
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
 
-        await this.matchRepository.updateMatch(matchId, { contestGenerated: true });
-
+      await this.matchRepository.updateMatch(matchId, {
+        contestGenerated: true,
+      });
     } catch (error: any) {
       // Check if it's a duplicate/already generating error
-      if (error.response?.status === 409 || error.response?.data?.message?.includes('already')) {
-        logger.warn(`[AUTO-CONTEST] Contest already being generated for match ${matchId}`);
+      if (
+        error.response?.status === 409 ||
+        error.response?.data?.message?.includes("already")
+      ) {
+        logger.warn(
+          `[AUTO-CONTEST] Contest already being generated for match ${matchId}`
+        );
       } else {
-        logger.error(`[AUTO-CONTEST] Error triggering contest generation: ${error.message}`);
+        logger.error(
+          `[AUTO-CONTEST] Error triggering contest generation: ${error.message}`
+        );
         throw error;
       }
     }
@@ -178,8 +201,8 @@ export default class MatchService {
       );
       throw new BadRequestError(
         JSON.stringify(error.response?.data?.error) ||
-        error?.message ||
-        "Failed to subscribe to match updates"
+          error?.message ||
+          "Failed to subscribe to match updates"
       );
     }
   }
@@ -211,7 +234,9 @@ export default class MatchService {
       const errorCode = error.response?.data?.error?.code;
       if (errorCode === "P-400-4" || errorCode === "P-404-1") {
         // Not subscribed or already unsubscribed - treat as success
-        logger.info(`Match ${matchId} is not subscribed or already unsubscribed - skipping`);
+        logger.info(
+          `Match ${matchId} is not subscribed or already unsubscribed - skipping`
+        );
         return {
           data: null,
           message: "Not subscribed or already unsubscribed",
@@ -225,8 +250,8 @@ export default class MatchService {
       );
       throw new BadRequestError(
         error.response?.data?.message ||
-        error?.message ||
-        "Failed to unsubscribe from match updates"
+          error?.message ||
+          "Failed to unsubscribe from match updates"
       );
     }
   }
@@ -270,46 +295,56 @@ export default class MatchService {
 
       // Check if we should filter by playing XI
       const showOnlyPlayingXI = matchData.data_review?.playing_xi === true;
-      
+
       // Get player keys from squad
-      const squadAKeys = matchData.squad?.a?.playing_xi?.length > 0 
-        ? matchData.squad.a.playing_xi 
-        : matchData.squad?.a?.player_keys || [];
-      
-      const squadBKeys = matchData.squad?.b?.playing_xi?.length > 0 
-        ? matchData.squad.b.playing_xi 
-        : matchData.squad?.b?.player_keys || [];
+      const squadAKeys =
+        matchData.squad?.a?.playing_xi?.length > 0
+          ? matchData.squad.a.playing_xi
+          : matchData.squad?.a?.player_keys || [];
+
+      const squadBKeys =
+        matchData.squad?.b?.playing_xi?.length > 0
+          ? matchData.squad.b.playing_xi
+          : matchData.squad?.b?.player_keys || [];
 
       // Build team A players
-      const teamAPlayers = squadAKeys.map((playerKey: string) => {
-        const playerData = matchData.players[playerKey]?.player;
-        if (!playerData) return null;
-        
-        // Try to get local player image first, fall back to API image
-        const localImage = this.getLocalPlayerImage(playerKey);
-        
-        return {
-          ...playerData,
-          image: localImage || null, // Use local if available, otherwise API
-        };
-      }).filter((p: any) => p !== null);
+      const teamAPlayers = squadAKeys
+        .map((playerKey: string) => {
+          const playerData = matchData.players[playerKey]?.player;
+          if (!playerData) return null;
+
+          // Try to get local player image first, fall back to API image
+          const localImage = this.getLocalPlayerImage(playerKey);
+
+          return {
+            ...playerData,
+            image: localImage || null, // Use local if available, otherwise API
+          };
+        })
+        .filter((p: any) => p !== null);
 
       // Build team B players
-      const teamBPlayers = squadBKeys.map((playerKey: string) => {
-        const playerData = matchData.players[playerKey]?.player;
-        if (!playerData) return null;
-        
-        // Try to get local player image first, fall back to API image
-        const localImage = this.getLocalPlayerImage(playerKey);
-        const apiImage = playerData.image || playerData.image_url || playerData.logo_url || null;
-        
-        return {
-          ...playerData,
-          image: localImage || apiImage, // Use local if available, otherwise API
-          localImage: localImage, // Keep track of local image
-          apiImage: apiImage, // Keep track of API image
-        };
-      }).filter((p: any) => p !== null);
+      const teamBPlayers = squadBKeys
+        .map((playerKey: string) => {
+          const playerData = matchData.players[playerKey]?.player;
+          if (!playerData) return null;
+
+          // Try to get local player image first, fall back to API image
+          const localImage = this.getLocalPlayerImage(playerKey);
+          const apiImage =
+            playerData.image ||
+            playerData.image_url ||
+            playerData.logo_url ||
+            null;
+
+          return {
+            ...playerData,
+            image: localImage || apiImage, // Use local if available, otherwise API
+            localImage: localImage, // Keep track of local image
+            apiImage: apiImage, // Keep track of API image
+          };
+        })
+        .filter((p: any) => p !== null);
 
       // Return simplified team data
       return {
@@ -333,8 +368,8 @@ export default class MatchService {
       );
       throw new BadRequestError(
         error.response?.data?.message ||
-        error?.message ||
-        "Failed to fetch match team data"
+          error?.message ||
+          "Failed to fetch match team data"
       );
     }
   }
@@ -397,7 +432,7 @@ export default class MatchService {
       // Extract status information
       const status = matchData.status; // e.g., "started", "completed", "not_started"
       const playStatus = matchData.play_status; // e.g., "live", "result"
-      
+
       const updateData: any = {};
 
       // Map API status to database status
@@ -408,7 +443,7 @@ export default class MatchService {
         }
       } else if (status === "completed" || playStatus === "result") {
         updateData.status = "completed";
-        
+
         // Set endedAt if not already set
         if (matchData.completed_date_approximate) {
           updateData.endedAt = matchData.completed_date_approximate;
@@ -448,8 +483,8 @@ export default class MatchService {
       );
       throw new BadRequestError(
         error.response?.data?.message ||
-        error?.message ||
-        "Failed to fetch and update match status"
+          error?.message ||
+          "Failed to fetch and update match status"
       );
     }
   }
@@ -460,47 +495,39 @@ export default class MatchService {
   public async getMatchStats() {
     try {
       const now = new Date();
-      
-      const [
-        total,
-        upcoming,
-        live,
-        completed
-      ] = await Promise.all([
+
+      const [total, upcoming, live, completed] = await Promise.all([
         // Total matches
         DB.Match.count(),
-        
+
         // Upcoming matches (status: not_started, scheduled, or upcoming)
         DB.Match.count({
           where: {
             [Op.or]: [
-              { status: 'not_started' },
-              { status: 'scheduled' },
-              { status: 'upcoming' }
-            ]
-          }
+              { status: "not_started" },
+              { status: "scheduled" },
+              { status: "upcoming" },
+            ],
+          },
         }),
-        
+
         // Live matches
         DB.Match.count({
           where: {
             [Op.or]: [
-              { status: 'live' },
-              { status: 'started' },
-              { status: 'in_progress' }
-            ]
-          }
+              { status: "live" },
+              { status: "started" },
+              { status: "in_progress" },
+            ],
+          },
         }),
-        
+
         // Completed matches
         DB.Match.count({
           where: {
-            [Op.or]: [
-              { status: 'completed' },
-              { status: 'finished' }
-            ]
-          }
-        })
+            [Op.or]: [{ status: "completed" }, { status: "finished" }],
+          },
+        }),
       ]);
 
       return {

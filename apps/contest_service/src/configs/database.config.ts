@@ -10,6 +10,9 @@ import initUserContestModel, { UserContest } from "../models/userContest.model";
 import initUserSubmission, {
   UserSubmission,
 } from "../models/userSubmission.model";
+import initContestReminderModel, {
+  ContestReminder,
+} from "../models/contestReminder.model";
 import ServerConfigs from "./server.config";
 
 export interface IDatabase {
@@ -20,6 +23,7 @@ export interface IDatabase {
   Question: typeof Question;
   UserContest: typeof UserContest;
   UserSubmission: typeof UserSubmission;
+  ContestReminder: typeof ContestReminder;
 }
 
 // SSL configuration
@@ -52,6 +56,7 @@ const QuestionInstance = initQuestionModel(sequelize);
 const UserContestInstance = initUserContestModel(sequelize);
 const UserSubmissionInstance = initUserSubmission(sequelize);
 const ContestPrizeInstance = initContestPrizeModel(sequelize);
+const ContestReminderInstance = initContestReminderModel(sequelize);
 UserSubmissionInstance.belongsTo(QuestionInstance, {
   foreignKey: "questionId",
   as: "question",
@@ -105,6 +110,19 @@ UserSubmissionInstance.belongsTo(ContestInstance, {
   as: "contest",
 });
 
+// ContestReminder associations
+ContestInstance.hasMany(ContestReminderInstance, {
+  foreignKey: "contest_id",
+  as: "reminders",
+  onDelete: "CASCADE",
+  hooks: true,
+});
+
+ContestReminderInstance.belongsTo(ContestInstance, {
+  foreignKey: "contest_id",
+  as: "contest",
+});
+
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
@@ -127,4 +145,5 @@ export const DB: IDatabase = {
   Question: QuestionInstance,
   UserContest: UserContestInstance,
   UserSubmission: UserSubmissionInstance,
+  ContestReminder: ContestReminderInstance,
 };

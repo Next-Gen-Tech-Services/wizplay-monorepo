@@ -237,4 +237,15 @@ export default class CouponService {
       throw new ServerError(error?.message || "Error fetching user redeemed coupons");
     }
   }
+
+  /** Get coupon statistics for analytics dashboard */
+  public async getCouponStats() {
+    try {
+      const stats = await this.couponRepository.getCouponStats();
+      return stats;
+    } catch (error: any) {
+      logger.error(`[coupon-service] getCouponStats error: ${error.message}`);
+      throw new ServerError(error?.message || "Error fetching coupon statistics");
+    }
+  }
 }

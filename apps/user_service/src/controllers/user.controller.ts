@@ -252,4 +252,38 @@ export default class UserController {
       });
     }
   }
+
+  public async updateUserStatus(req: Request, res: Response) {
+    try {
+      const { userId } = req.params;
+      const { status } = req.body;
+
+      if (!userId) {
+        throw new BadRequestError("User ID is required");
+      }
+
+      if (!status || !["active", "inactive", "suspended", "banned"].includes(status)) {
+        throw new BadRequestError("Valid status is required (active, inactive, suspended, banned)");
+      }
+
+      const result = await this.userService.updateUserStatus(userId, status);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        message: result.message,
+        data: result.data,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err) {
+      console.error("UserController.updateUserStatus error:", err);
+      return res.status(STATUS_CODE.INTERNAL_SERVER ?? 500).json({
+        success: false,
+        message: "Failed to update user status",
+        data: null,
+        errors: (err as Error).message ?? null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

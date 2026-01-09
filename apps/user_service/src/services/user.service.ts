@@ -120,4 +120,22 @@ export default class UserService {
       throw new BadRequestError(error.message || "Failed to get device tokens");
     }
   }
+
+  public async updateUserStatus(userId: string, status: "active" | "inactive" | "suspended" | "banned") {
+    try {
+      const user = await this.userRepository.findById(userId);
+      if (!user) {
+        throw new BadRequestError("User not found");
+      }
+
+      const result = await this.userRepository.updateWithId(userId, { status });
+      if (!result) {
+        throw new BadRequestError("Error updating user status");
+      }
+      
+      return { data: result[1][0], message: `User status updated to ${status} successfully` };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to update user status");
+    }
+  }
 }

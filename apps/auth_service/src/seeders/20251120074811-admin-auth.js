@@ -17,6 +17,7 @@ module.exports = {
         onboarded: true,
         otp_expires_at: null,
         type: "admin",
+        status: "active",
         created_at: new Date(),
         updated_at: new Date(),
       },

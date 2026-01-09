@@ -291,4 +291,28 @@ export default class AuthRepository {
       throw new ServerError("Database Error");
     }
   }
+
+  public async updateAuthStatus(userId: string, status: "active" | "inactive" | "suspended" | "banned"): Promise<boolean> {
+    try {
+      const [affectedCount] = await this._DB.Auth.update(
+        { status },
+        {
+          where: {
+            userId: userId,
+          },
+        }
+      );
+      
+      if (affectedCount > 0) {
+        logger.info(`Auth status updated successfully for userId: ${userId} to ${status}`);
+        return true;
+      } else {
+        logger.warn(`No rows updated for userId: ${userId}`);
+        return false;
+      }
+    } catch (error: any) {
+      logger.error(`Database Error in updateAuthStatus: ${error.message || error}`);
+      throw error;
+    }
+  }
 }

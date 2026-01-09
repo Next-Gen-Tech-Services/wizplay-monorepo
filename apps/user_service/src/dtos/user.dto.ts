@@ -10,6 +10,7 @@ export interface IUserAtters {
   phoneNumber?: string | null;
   onboarded: boolean;
   type: "user" | "admin";
+  status: "active" | "inactive" | "suspended" | "banned";
   selectedLanguage: Language;
   referralCode?: string | null;
   deviceToken?: string | null;

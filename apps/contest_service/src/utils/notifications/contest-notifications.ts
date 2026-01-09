@@ -136,26 +136,75 @@ class ContestNotificationService {
     try {
       logger.info(`[CONTEST-NOTIFICATIONS] Sending live notification for contest: ${contestId}`);
 
+      // Get contest details for richer notification data
+      const contest = await DB.Contest.findByPk(contestId, {
+        include: [
+          {
+            model: DB.Question,
+            as: 'questions',
+            attributes: ['id', 'type']
+          }
+        ]
+      });
+
+      if (!contest) {
+        logger.error(`[CONTEST-NOTIFICATIONS] Contest ${contestId} not found`);
+        return;
+      }
+
       const matchInfo = await this.getMatchInfo(matchId);
       const teams = matchInfo?.teams || "Match";
       const contestName = contestTitle || "Contest";
 
-      // Send notification to all users (contest is now open for joining)
-      await this.sendNotification({
-        recipientType: 'all_users',
-        title: '🚀 Contest is Live!',
-        body: `Join the ${contestName} for ${teams}. Predict and win big!`,
-        type: NotificationType.CONTEST_LIVE,
-        data: {
+      // Get users who have set reminders for this contest
+      const usersWithReminders = await DB.ContestReminder.findAll({
+        where: {
           contestId,
-          contestTitle: contestName,
-          matchId,
-          teams,
-          status: 'live',
+          isActive: true
         },
+        attributes: ['userId']
       });
 
-      logger.info(`[CONTEST-NOTIFICATIONS] Sent live notification for contest: ${contestName} (${contestId})`);
+      const reminderUserIds = usersWithReminders.map(r => r.userId);
+
+      if (reminderUserIds.length > 0) {
+        logger.info(`[CONTEST-NOTIFICATIONS] Sending reminders to ${reminderUserIds.length} users with active reminders`);
+        
+        // Send personalized notifications to users who set reminders
+        for (const userId of reminderUserIds) {
+          await this.sendNotification({
+            recipientType: 'user_id',
+            userId: userId,
+            title: '🎯 Your Contest is Now Live!',
+            body: `The contest "${contestName}" you wanted to join for ${teams} is now live! Join now to predict and win rewards.`,
+            type: NotificationType.CONTEST_LIVE,
+            data: {
+              contestId,
+              contestTitle: contestName,
+              matchId,
+              teams,
+              status: 'live',
+              entryFee: contest.entryFee || 0,
+              prizePool: contest.prizePool || 0,
+              totalParticipants: contest.totalParticipants || 0,
+              questionsCount: contest.questions?.length || 0,
+              hasReminder: true,
+              // Data needed to open the contest
+              action: 'open_contest',
+              contestData: {
+                id: contestId,
+                title: contestName,
+                matchId: matchId,
+              }
+            },
+          });
+        }
+        logger.info(`[CONTEST-NOTIFICATIONS] Sent live notifications to ${reminderUserIds.length} users with reminders`);
+      } else {
+        logger.info(`[CONTEST-NOTIFICATIONS] No users with active reminders for contest: ${contestName}`);
+      }
+
+      logger.info(`[CONTEST-NOTIFICATIONS] Completed live notification for contest: ${contestName} (${contestId})`);
     } catch (error: any) {
       logger.error(`[CONTEST-NOTIFICATIONS] Error sending live notification for contest ${contestId}: ${error.message}`);
     }
@@ -168,6 +217,22 @@ class ContestNotificationService {
     try {
       logger.info(`[CONTEST-NOTIFICATIONS] Sending completion notification for contest: ${contestId}`);
 
+      // Get contest details for richer notification
+      const contest = await DB.Contest.findByPk(contestId, {
+        include: [
+          {
+            model: DB.ContestPrize,
+            as: 'prizes',
+            attributes: ['id', 'position', 'amount', 'type']
+          }
+        ]
+      });
+
+      if (!contest) {
+        logger.error(`[CONTEST-NOTIFICATIONS] Contest ${contestId} not found`);
+        return;
+      }
+
       const matchInfo = await this.getMatchInfo(matchId);
       const teams = matchInfo?.teams || "Match";
       const contestName = contestTitle || "Contest";
@@ -176,13 +241,24 @@ class ContestNotificationService {
       const joinedUsers = await this.getUsersJoinedForContest(contestId);
 
       if (joinedUsers.length > 0) {
+        logger.info(`[CONTEST-NOTIFICATIONS] Sending completion notifications to ${joinedUsers.length} joined users`);
+        
         // Send personalized notification to users who joined
         for (const userId of joinedUsers) {
+          // Get user's rank and winnings for this contest
+          const userContest = await DB.UserContest.findOne({
+            where: { userId, contestId },
+            attributes: ['rank', 'score']
+          });
+
+          const rank = userContest?.rank;
+          const score = userContest?.score || 0;
+          
           await this.sendNotification({
             recipientType: 'user_id',
             userId: userId,
-            title: '🏆 Contest Results are Out!',
-            body: `Results for ${contestName} (${teams}) are now available. Check your ranking and rewards!`,
+            title: '🏆 Contest Results Are Out!',
+            body: `Results for "${contestName}" (${teams}) are now available. ${rank ? `You ranked #${rank}!` : 'Check your performance and rewards!'}`,
             type: NotificationType.CONTEST_COMPLETED,
             data: {
               contestId,
@@ -191,29 +267,26 @@ class ContestNotificationService {
               teams,
               status: 'completed',
               hasJoined: true,
+              userRank: rank || null,
+              userScore: score,
+              totalParticipants: contest.totalParticipants || 0,
+              prizePool: contest.prizePool || 0,
+              // Data needed to open the contest results
+              action: 'open_contest_results',
+              contestData: {
+                id: contestId,
+                title: contestName,
+                matchId: matchId,
+              }
             },
           });
         }
         logger.info(`[CONTEST-NOTIFICATIONS] Sent completion notifications to ${joinedUsers.length} joined users for: ${contestName}`);
+      } else {
+        logger.info(`[CONTEST-NOTIFICATIONS] No users joined contest: ${contestName}`);
       }
 
-      // Send general notification to all users
-      await this.sendNotification({
-        recipientType: 'all_users',
-        title: '📊 Contest Completed!',
-        body: `${contestName} for ${teams} has ended. Results are now available!`,
-        type: NotificationType.CONTEST_COMPLETED,
-        data: {
-          contestId,
-          contestTitle: contestName,
-          matchId,
-          teams,
-          status: 'completed',
-          hasJoined: false,
-        },
-      });
-
-      logger.info(`[CONTEST-NOTIFICATIONS] Sent completion notification for contest: ${contestName} (${contestId})`);
+      logger.info(`[CONTEST-NOTIFICATIONS] Completed notification flow for contest: ${contestName} (${contestId})`);
     } catch (error: any) {
       logger.error(`[CONTEST-NOTIFICATIONS] Error sending completion notification for contest ${contestId}: ${error.message}`);
     }

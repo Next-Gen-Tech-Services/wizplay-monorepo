@@ -91,6 +91,26 @@ router.get(
   }
 );
 
+// Toggle contest reminder for a user
+router.post(
+  "/contests/:contestId/reminder/toggle",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await contestController.toggleContestReminder(req, res);
+    return result;
+  }
+);
+
+// Get contest reminder status for a user
+router.get(
+  "/contests/:contestId/reminder/status",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await contestController.getContestReminderStatus(req, res);
+    return result;
+  }
+);
+
 /**
  * Generic Contest Routes - Must come AFTER specific user contest routes
  */

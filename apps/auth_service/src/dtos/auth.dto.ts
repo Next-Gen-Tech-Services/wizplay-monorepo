@@ -11,6 +11,7 @@ export interface IAuthAtters {
   lastLoginAt?: Date | null;
   onboarded: boolean;
   type: "user" | "admin";
+  status: "active" | "inactive" | "suspended" | "banned";
   createdAt?: Date;
   updatedAt?: Date;
 }

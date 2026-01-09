@@ -750,4 +750,88 @@ export default class ContestController {
       });
     }
   }
+
+  public async toggleContestReminder(req: Request, res: Response) {
+    try {
+      const userId = req.body.userId;
+      const contestId = req.params.contestId;
+
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "userId is required",
+        });
+      }
+
+      if (!contestId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "contestId is required",
+        });
+      }
+
+      const result = await this.contestService.toggleContestReminder(userId, contestId);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: result.message,
+      });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.toggleContestReminder error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to toggle contest reminder",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  public async getContestReminderStatus(req: Request, res: Response) {
+    try {
+      const userId = req.body.userId;
+      const contestId = req.params.contestId;
+
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "userId is required",
+        });
+      }
+
+      if (!contestId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          message: "contestId is required",
+        });
+      }
+
+      const hasReminder = await this.contestService.hasContestReminder(userId, contestId);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: {
+          hasReminder,
+          contestId,
+          userId
+        },
+        message: "Reminder status retrieved successfully",
+      });
+    } catch (err: any) {
+      logger.error(
+        `ContestController.getContestReminderStatus error: ${err?.message ?? err}`
+      );
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to get contest reminder status",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

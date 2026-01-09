@@ -218,4 +218,43 @@ export default class CouponController {
       });
     }
   }
+
+  /** Get coupon statistics for analytics dashboard */
+  public async getCouponStats(req: Request, res: Response) {
+    try {
+      const result = await this.couponService!.getCouponStats();
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result,
+        message: "Coupon statistics fetched successfully",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error(`[CouponController] getCouponStats error: ${err.message}`);
+      
+      // Determine appropriate status code based on error type
+      let statusCode = STATUS_CODE.INTERNAL_SERVER;
+      let errorMessage = "Failed to fetch coupon statistics";
+      
+      if (err.message && err.message.includes('Database connection error')) {
+        statusCode = STATUS_CODE.INTERNAL_SERVER || 503;
+        errorMessage = "Database service unavailable";
+      } else if (err.message && err.message.includes('tables not found')) {
+        statusCode = STATUS_CODE.BAD_REQUEST;
+        errorMessage = "Coupon service not properly initialized";
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      return res.status(statusCode).json({
+        success: false,
+        data: null,
+        message: errorMessage,
+        errors: err.message || null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

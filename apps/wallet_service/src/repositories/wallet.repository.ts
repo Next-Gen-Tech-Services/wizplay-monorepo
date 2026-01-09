@@ -134,10 +134,15 @@ export default class WalletRepository {
         }
       }
 
+      // Ensure balance calculation is consistent
+      const newDepositAmount = walletInfo.depositAmount - deductFromDeposit;
+      const newWinningAmount = walletInfo.winningAmount - deductFromWinning;
+      const newBalance = newDepositAmount + newWinningAmount;
+      
       const walletPayload = {
-        balance: walletInfo.balance - Number(amount),
-        depositAmount: walletInfo.depositAmount - deductFromDeposit,
-        winningAmount: walletInfo.winningAmount - deductFromWinning,
+        balance: newBalance,
+        depositAmount: newDepositAmount,
+        winningAmount: newWinningAmount,
         totalWithdrawn: walletInfo.totalWithdrawn + Number(amount),
       };
 
@@ -505,9 +510,13 @@ export default class WalletRepository {
         throw new BadRequestError("Insufficient winning balance. Only winning amount can be used for reward redemption.");
       }
 
+      // Calculate new balances ensuring consistency
+      const newWinningAmount = walletInfo.winningAmount - Number(amount);
+      const newTotalBalance = walletInfo.depositAmount + newWinningAmount;
+
       const walletPayload = {
-        balance: walletInfo.balance - Number(amount),
-        winningAmount: walletInfo.winningAmount - Number(amount),
+        balance: newTotalBalance,
+        winningAmount: newWinningAmount,
         totalWithdrawn: walletInfo.totalWithdrawn + Number(amount),
       };
 

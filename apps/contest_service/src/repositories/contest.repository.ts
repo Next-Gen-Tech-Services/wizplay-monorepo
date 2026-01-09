@@ -48,6 +48,7 @@ export default class ContestRepository {
       // 3. Joined and submitted: hasJoined=true, isJoined=true → block further action
       let hasJoined = false;
       let isJoined = false;
+      let hasReminder = false;
       
       if (userId) {
         // Check if user has joined the contest
@@ -67,8 +68,16 @@ export default class ContestRepository {
         
         // hasJoined is TRUE only if user has SUBMITTED (not just joined)
         hasJoined = !!submission;
+
+        // Check if user has set a reminder for this contest
+        const reminder = await this._DB.ContestReminder.findOne({
+          where: { userId, contestId: id, isActive: true },
+          attributes: ["id"],
+          raw: true,
+        });
+        hasReminder = !!reminder;
         
-        logger.info(`[CONTEST-REPO] Contest ${id} - User ${userId}: isJoined=${isJoined}, hasJoined(submitted)=${hasJoined}`);
+        logger.info(`[CONTEST-REPO] Contest ${id} - User ${userId}: isJoined=${isJoined}, hasJoined(submitted)=${hasJoined}, hasReminder=${hasReminder}`);
       }
 
       // Helper: compress a single contest's rank/prize array into consecutive ranges with same amount
@@ -176,6 +185,7 @@ export default class ContestRepository {
       return {
         ...d,
         hasJoined : hasJoined && isJoined,  // TRUE only if user has SUBMITTED answers
+        hasReminder, // TRUE if user has set an active reminder for this contest
         rankRanges, // [{from, to, amount, totalPayout}, ...]
         matchData, // populated match data
       };
@@ -253,6 +263,7 @@ export default class ContestRepository {
 
       let joinedContestIds = new Set<string>();
       let submittedContestIds = new Set<string>();
+      let reminderContestIds = new Set<string>();
       
       if (userId) {
         logger.info(`[CONTEST-REPO] Fetching contest data for userId: ${userId}`);
@@ -282,6 +293,20 @@ export default class ContestRepository {
           if (r && r.contestId) {
             submittedContestIds.add(String(r.contestId));
             logger.debug(`[CONTEST-REPO]   → Submitted: ${r.contestId}`);
+          }
+        });
+
+        // Get contests where user has set reminders
+        const reminderRows = await this._DB.ContestReminder.findAll({
+          where: { userId, isActive: true },
+          attributes: ["contestId"],
+          raw: true,
+        });
+        logger.info(`[CONTEST-REPO] Found ${reminderRows.length} reminders for user ${userId}`);
+        reminderRows.forEach((r: any) => {
+          if (r && r.contestId) {
+            reminderContestIds.add(String(r.contestId));
+            logger.debug(`[CONTEST-REPO]   → Reminder: ${r.contestId}`);
           }
         });
       }
@@ -353,6 +378,7 @@ export default class ContestRepository {
         const contestId = String(data.id);
         const hasJoined = userId ? submittedContestIds.has(contestId) : false;
         const isJoined = userId ? joinedContestIds.has(contestId) : false;
+        const hasReminder = userId ? reminderContestIds.has(contestId) : false;
         
         if (userContestAlias && data[userContestAlias])
           delete data[userContestAlias];
@@ -370,7 +396,7 @@ export default class ContestRepository {
         // Remove prizeBreakdown from response
         if (data.prizeBreakdown) delete data.prizeBreakdown;
         
-        return { ...data, hasJoined : hasJoined && isJoined, rankRanges };
+        return { ...data, hasJoined : hasJoined && isJoined, hasReminder, rankRanges };
       });
 
       // Fetch match data for all contests

@@ -184,4 +184,50 @@ export default class AuthController {
       });
     }
   }
+
+  public async updateAuthStatus(req: Request, res: Response): Promise<any> {
+    try {
+      const { userId } = req.params;
+      const { status } = req.body;
+
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          data: null,
+          message: "User ID is required",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      if (!status || !["active", "inactive", "suspended", "banned"].includes(status)) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          data: null,
+          message: "Valid status is required (active, inactive, suspended, banned)",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.authService.updateAuthStatus(userId, status);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: result.data,
+        message: result.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error("AuthController.updateAuthStatus error:", err);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to update auth status",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }

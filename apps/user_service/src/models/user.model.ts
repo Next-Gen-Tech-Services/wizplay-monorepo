@@ -12,6 +12,7 @@ interface UserCreationAttributes
     | "phoneNumber"
     | "email"
     | "name"
+    | "status"
   > {}
 
 export class User
@@ -27,6 +28,7 @@ export class User
   onboarded!: boolean;
   userName!: string;
   type: "user" | "admin";
+  status!: "active" | "inactive" | "suspended" | "banned";
   selectedLanguage!: Language;
   referralCode?: string | null;
   deviceToken?: string | null;
@@ -80,6 +82,11 @@ export default function (sequelize: Sequelize) {
         type: DataTypes.ENUM("user", "admin"),
         allowNull: false,
         defaultValue: "user",
+      },
+      status: {
+        type: DataTypes.ENUM("active", "inactive", "suspended", "banned"),
+        allowNull: false,
+        defaultValue: "active",
       },
       selectedLanguage: {
         type: DataTypes.STRING,

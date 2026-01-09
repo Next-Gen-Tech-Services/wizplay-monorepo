@@ -357,4 +357,103 @@ export default class CouponRepository {
       throw new ServerError("Error fetching user redeemed coupons");
     }
   }
+
+  /** Get coupon statistics for analytics dashboard */
+  public async getCouponStats(): Promise<any> {
+    try {
+      // Check if the tables exist first
+      const tableExists = await this.checkTablesExist();
+      
+      if (!tableExists) {
+        logger.warn(`[CouponRepository] Coupon tables not found, returning default stats`);
+        return {
+          total: 0,
+          active: 0,
+          expired: 0,
+          redeemed: 0,
+          totalValue: 0,
+        };
+      }
+
+      const [
+        total,
+        active,
+        expired,
+        redeemedCount,
+        totalDiscountValue
+      ] = await Promise.all([
+        // Total coupons
+        this._DB.Coupon.count(),
+        
+        // Active coupons (not expired and status active)
+        this._DB.Coupon.count({
+          where: {
+            status: 'active',
+            expiry: { [Op.gt]: new Date() }
+          }
+        }),
+        
+        // Expired coupons
+        this._DB.Coupon.count({
+          where: {
+            [Op.or]: [
+              { expiry: { [Op.lt]: new Date() } },
+              { status: 'expired' }
+            ]
+          }
+        }),
+        
+        // Redeemed coupons count
+        this._DB.UserCoupon.count(),
+        
+        // Total discount value of all active coupons
+        this._DB.Coupon.sum('discountValue', {
+          where: {
+            status: 'active',
+            discountType: 'flat'
+          }
+        }) || 0
+      ]);
+
+      return {
+        total,
+        active,
+        expired,
+        redeemed: redeemedCount,
+        totalValue: totalDiscountValue,
+      };
+    } catch (error: any) {
+      logger.error(`[CouponRepository] getCouponStats database error: ${error.message}`);
+      logger.error(`[CouponRepository] Error details: ${error.stack}`);
+      
+      // Check if it's a database connection issue
+      if (error.name === 'SequelizeConnectionError') {
+        throw new ServerError("Database connection error while fetching coupon statistics");
+      }
+      
+      // Check if it's a table doesn't exist error
+      if (error.message && (error.message.includes('does not exist') || error.message.includes('doesn\'t exist'))) {
+        throw new ServerError("Coupon tables not found - please run database migrations");
+      }
+      
+      throw new ServerError(`Error fetching coupon statistics: ${error.message}`);
+    }
+  }
+
+  /** Check if coupon tables exist in the database */
+  private async checkTablesExist(): Promise<boolean> {
+    try {
+      await Promise.all([
+        this._DB.sequelize.query('SELECT 1 FROM "coupons" LIMIT 1', { type: QueryTypes.SELECT }),
+        this._DB.sequelize.query('SELECT 1 FROM "user_coupons" LIMIT 1', { type: QueryTypes.SELECT })
+      ]);
+      return true;
+    } catch (error: any) {
+      if (error.message && (error.message.includes('does not exist') || error.message.includes('doesn\'t exist'))) {
+        return false;
+      }
+      // For other errors, we'll let them bubble up
+      throw error;
+    }
+  }
 }

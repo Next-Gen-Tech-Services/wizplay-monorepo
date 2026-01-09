@@ -15,6 +15,7 @@ module.exports = {
         email: "admin@wizplay.com",
         phone_number: "+917795020428",
         type: "admin",
+        status: "active",
         created_at: new Date(),
         updated_at: new Date(),
       },

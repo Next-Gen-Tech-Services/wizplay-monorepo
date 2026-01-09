@@ -4,6 +4,7 @@ import { body } from "express-validator";
 import "reflect-metadata";
 import { container } from "tsyringe";
 import AuthController from "../controllers/auth.controller";
+import { isAdminMiddleware } from "../middlewares/admin.middleware";
 import {
   authCodeValidator,
   emailPassValidator,
@@ -121,5 +122,15 @@ router.get("/auth/user/:userId", async (req: Request, res: Response) => {
   const result = await controller.getAuthByUserId(req, res);
   return result;
 });
+
+// Admin endpoint for updating auth status
+router.patch(
+  "/admin/fix tr/:userId/status",
+  isAdminMiddleware,
+  async (req: Request, res: Response) => {
+    const result = await controller.updateAuthStatus(req, res);
+    return result;
+  }
+);
 
 export default router;

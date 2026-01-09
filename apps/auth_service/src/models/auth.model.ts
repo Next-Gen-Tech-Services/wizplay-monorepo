@@ -15,6 +15,7 @@ interface AuthCreationAttributes
     | "email"
     | "appleUserId"
     | "otpExpiresAt"
+    | "status"
   > {}
 
 export class Auth
@@ -33,6 +34,7 @@ export class Auth
   public otpExpiresAt!: Date | null;
   public lastLoginAt!: Date | null;
   public onboarded: boolean;
+  public status!: "active" | "inactive" | "suspended" | "banned";
   public readonly createdAt?: Date;
   public readonly updatedAt?: Date;
 }
@@ -99,6 +101,11 @@ export default function (sequelize: Sequelize) {
         type: DataTypes.ENUM("user", "admin"),
         allowNull: false,
         defaultValue: "user",
+      },
+      status: {
+        type: DataTypes.ENUM("active", "inactive", "suspended", "banned"),
+        allowNull: false,
+        defaultValue: "active",
       },
     },
     {

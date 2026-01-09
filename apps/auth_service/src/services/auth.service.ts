@@ -472,4 +472,22 @@ export default class Service {
       throw error;
     }
   }
+
+  public async updateAuthStatus(userId: string, status: "active" | "inactive" | "suspended" | "banned") {
+    try {
+      const user = await this.userRepository.findAuthByUserId(userId);
+      if (!user) {
+        throw new BadRequestError("User not found");
+      }
+
+      const result = await this.userRepository.updateAuthStatus(userId, status);
+      if (!result) {
+        throw new BadRequestError("Error updating auth status");
+      }
+      
+      return { data: result, message: `Auth status updated to ${status} successfully` };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to update auth status");
+    }
+  }
 }

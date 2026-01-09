@@ -19,13 +19,19 @@ interface AnalyticsSummary {
         running: number;
         completed: number;
         totalParticipants: number;
-        totalPrizePool: number;
     };
     matches: {
         total: number;
         upcoming: number;
         live: number;
         completed: number;
+    };
+    coupons: {
+        total: number;
+        active: number;
+        redeemed: number;
+        expired: number;
+        totalValue: number;
     };
     wallets: {
         totalBalance: number;
@@ -57,12 +63,13 @@ export default class AnalyticsService {
     async getDashboardAnalytics(): Promise<AnalyticsSummary> {
         try {
             // Parallel fetch from all services
-            const [userStats, contestStats, matchStats, walletStats] =
+            const [userStats, contestStats, matchStats, walletStats, couponStats] =
                 await Promise.allSettled([
                     this.getUserAnalytics(),
                     this.getContestAnalytics(),
                     this.getMatchAnalytics(),
                     this.getWalletAnalytics(),
+                    this.getCouponAnalytics(),
                 ]);
 
             return {
@@ -78,6 +85,10 @@ export default class AnalyticsService {
                     matchStats.status === "fulfilled"
                         ? matchStats.value
                         : this.getDefaultMatchStats(),
+                coupons:
+                    couponStats.status === "fulfilled"
+                        ? couponStats.value
+                        : this.getDefaultCouponStats(),
                 wallets:
                     walletStats.status === "fulfilled"
                         ? walletStats.value.wallets
@@ -87,8 +98,8 @@ export default class AnalyticsService {
                         ? walletStats.value.transactions
                         : this.getDefaultTransactionStats(),
                 revenue:
-                    contestStats.status === "fulfilled"
-                        ? this.calculateRevenue(contestStats.value)
+                    contestStats.status === "fulfilled" && walletStats.status === "fulfilled"
+                        ? this.calculateRevenue(contestStats.value, walletStats.value)
                         : this.getDefaultRevenueStats(),
             };
         } catch (error: any) {
@@ -119,7 +130,12 @@ export default class AnalyticsService {
                 userCount,
                 adminCount,
             ] = await Promise.all([
-                DB.User.count(),
+                DB.User.count({
+                    where: {
+                       
+                        type: 'user'
+                    },
+                }),
                 DB.User.count({
                     where: {
                         createdAt: {
@@ -330,11 +346,59 @@ export default class AnalyticsService {
     }
 
     /**
+     * Get coupon analytics from coupon_service
+     */
+    private async getCouponAnalytics() {
+        try {
+            const couponServiceUrl = ServerConfigs.COUPON_SERVICE_URL;
+            
+            if (!couponServiceUrl) {
+                logger.info(`[AnalyticsService] Coupon service URL not configured, using defaults`);
+                return this.getDefaultCouponStats();
+            }
+
+            // Try to fetch from coupon service API
+            try {
+                const response = await axios.get(`${couponServiceUrl}/api/v1/coupons/stats`);
+
+                logger.info(`[AnalyticsService] Coupon service response status: ${response.status}`);
+                if (response.status === 200 && response.data?.success && response.data?.data) {
+                    return response.data.data;
+                }
+                
+                if (response.status === 400) {
+                    logger.warn(`[AnalyticsService] Coupon service returned 400 - possibly missing database tables or invalid request`);
+                } else if (response.status === 404) {
+                    logger.warn(`[AnalyticsService] Coupon stats endpoint not found - using defaults`);
+                } else {
+                    logger.warn(`[AnalyticsService] Coupon service returned status ${response.status}`);
+                }
+                
+            } catch (apiError: any) {
+                if (apiError.code === 'ECONNREFUSED') {
+                    logger.warn(`[AnalyticsService] Coupon service not available (connection refused)`);
+                } else {
+                    logger.warn(`[AnalyticsService] Coupon service API failed: ${apiError.message}`);
+                }
+            }
+
+            logger.info(`[AnalyticsService] Using default coupon stats - API endpoint not ready`);
+            return this.getDefaultCouponStats();
+        } catch (error: any) {
+            logger.error(
+                `[AnalyticsService] Coupon analytics error: ${error.message}`
+            );
+            return this.getDefaultCouponStats();
+        }
+    }
+
+    /**
      * Calculate revenue metrics
      */
-    private calculateRevenue(contestStats: any) {
-        const totalEntryFees = contestStats.totalPrizePool || 0;
-        const totalPayouts = contestStats.totalPrizePool * 0.85 || 0; // Assuming 85% payout
+    private calculateRevenue(contestStats: any, walletStats: any) {
+        // Use actual wallet transaction data for accurate revenue calculation
+        const totalEntryFees = walletStats?.transactions?.volumeThisMonth || 0; // Total transaction volume as entry fees
+        const totalPayouts = walletStats?.wallets?.totalWinnings || 0; // Actual winnings paid out
         const netRevenue = totalEntryFees - totalPayouts;
 
         return {
@@ -402,6 +466,16 @@ export default class AnalyticsService {
             totalEntryFees: 0,
             totalPayouts: 0,
             netRevenue: 0,
+        };
+    }
+
+    private getDefaultCouponStats() {
+        return {
+            total: 0,
+            active: 0,
+            redeemed: 0,
+            expired: 0,
+            totalValue: 0,
         };
     }
 }
