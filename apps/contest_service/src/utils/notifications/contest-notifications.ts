@@ -186,8 +186,8 @@ class ContestNotificationService {
               status: 'live',
               entryFee: contest.entryFee || 0,
               prizePool: contest.prizePool || 0,
-              totalParticipants: contest.totalParticipants || 0,
-              questionsCount: contest.questions?.length || 0,
+              totalParticipants: contest.filledSpots || 0,
+              questionsCount: contest.questionsCount || 0,
               hasReminder: true,
               // Data needed to open the contest
               action: 'open_contest',
@@ -269,7 +269,7 @@ class ContestNotificationService {
               hasJoined: true,
               userRank: rank || null,
               userScore: score,
-              totalParticipants: contest.totalParticipants || 0,
+              totalParticipants: contest.filledSpots || 0,
               prizePool: contest.prizePool || 0,
               // Data needed to open the contest results
               action: 'open_contest_results',
