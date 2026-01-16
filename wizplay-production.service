@@ -1,0 +1,19 @@
+[Unit]
+Description=Wizplay Production Services
+Requires=docker.service
+After=docker.service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/var/www/html/wizplay-monorepo
+ExecStart=/usr/local/bin/docker-compose -f docker-compose.prod.yaml up -d
+ExecStop=/usr/local/bin/docker-compose -f docker-compose.prod.yaml down
+TimeoutStartSec=0
+User=root
+Group=docker
+
+[Install]
+WantedBy=multi-user.target
