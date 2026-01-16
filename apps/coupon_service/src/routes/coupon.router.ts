@@ -158,5 +158,29 @@ router.get(
   (req: Request, res: Response) => controller.getUserRedeemedCoupons(req, res)
 );
 
+// Assign coupons to contest winners (internal endpoint)
+router.post(
+  "/assign-to-winners",
+  [
+    body("contestId").isUUID().withMessage("contestId must be a valid UUID"),
+    body("winners").isArray().withMessage("winners must be an array"),
+    body("winners.*.userId").isString().notEmpty().withMessage("userId is required"),
+    body("winners.*.rank").isInt({ min: 1, max: 3 }).withMessage("rank must be 1, 2, or 3"),
+    validateRequest,
+  ],
+  (req: Request, res: Response) => controller.assignToWinners(req, res)
+);
+
+// Get contest coupon assignments (admin endpoint)
+router.get(
+  "/contest-assignments",
+  [
+    query("contestId").optional().isUUID().withMessage("contestId must be a valid UUID"),
+    query("limit").optional().isInt({ min: 1, max: 100 }).toInt(),
+    query("offset").optional().isInt({ min: 0 }).toInt(),
+    validateRequest,
+  ],
+  (req: Request, res: Response) => controller.getContestAssignments(req, res)
+);
 
 export default router;

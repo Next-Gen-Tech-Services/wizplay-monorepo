@@ -1242,6 +1242,9 @@ export default class ContestService {
       // Calculate user scores
       await this.calculateUserScores(contestId);
 
+      // Auto-assign coupons to winners
+      await this.assignCouponsToWinners(contestId);
+
       // Get contest details for notification
       const contestInfo = await this.repo.findById(contestId);
       
@@ -1510,6 +1513,77 @@ export default class ContestService {
       logger.error(`[CONTEST SERVICE] Stack: ${error.stack}`);
       // Don't throw - allow contest to complete even if prize distribution fails
       logger.warn(`[CONTEST SERVICE] Continuing despite prize distribution error for contest ${contestId}`);
+    }
+  }
+
+  /**
+   * Auto-assign coupons to top 3 contest winners
+   */
+  private async assignCouponsToWinners(contestId: string): Promise<void> {
+    try {
+      logger.info(`[CONTEST SERVICE] Starting coupon assignment for contest ${contestId}`);
+
+      // Get top 3 winners with their ranks
+      const userContests = await this.repo.getUserContestsWithRanks(contestId);
+      
+      if (!userContests || userContests.length === 0) {
+        logger.info(`[CONTEST SERVICE] No participants found for contest ${contestId}, skipping coupon assignment`);
+        return;
+      }
+
+      // Filter only top 3 winners
+      const winners = userContests
+        .filter((uc: any) => uc.rank && uc.rank <= 3)
+        .map((uc: any) => ({
+          userId: uc.userId,
+          rank: uc.rank,
+        }));
+
+      if (winners.length === 0) {
+        logger.info(`[CONTEST SERVICE] No top 3 winners found for contest ${contestId}, skipping coupon assignment`);
+        return;
+      }
+
+      logger.info(`[CONTEST SERVICE] Found ${winners.length} winners for coupon assignment in contest ${contestId}`);
+
+      // Call coupon service to assign coupons
+      const couponServiceUrl = ServerConfigs.COUPON_SERVICE_URL || "http://localhost:4004";
+      
+      const response = await axios.post(
+        `${couponServiceUrl}/api/v1/coupons/assign-to-winners`,
+        {
+          contestId,
+          winners,
+        },
+        {
+          timeout: 10000,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Internal-Request': 'true'
+          }
+        }
+      );
+
+      if (response.data?.success) {
+        const assignments = response.data.data;
+        logger.info(`[CONTEST SERVICE] ✅ Successfully assigned ${assignments.length} coupons to winners for contest ${contestId}`);
+        
+        // Log each assignment for admin tracking
+        assignments.forEach((assignment: any) => {
+          logger.info(`[CONTEST SERVICE] → Assigned coupon ${assignment.couponId} to user ${assignment.userId} (rank ${assignment.rank})`);
+        });
+      } else {
+        logger.warn(`[CONTEST SERVICE] Coupon assignment partially failed for contest ${contestId}: ${JSON.stringify(response.data)}`);
+      }
+
+    } catch (error: any) {
+      if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+        logger.warn(`[CONTEST SERVICE] Coupon service unavailable for contest ${contestId}, skipping coupon assignment`);
+      } else {
+        logger.error(`[CONTEST SERVICE] assignCouponsToWinners error for contest ${contestId}: ${error.message}`);
+      }
+      // Don't throw - allow contest to complete even if coupon assignment fails
+      logger.warn(`[CONTEST SERVICE] Continuing despite coupon assignment error for contest ${contestId}`);
     }
   }
 

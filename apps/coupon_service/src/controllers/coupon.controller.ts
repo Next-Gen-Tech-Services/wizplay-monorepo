@@ -257,4 +257,38 @@ export default class CouponController {
       });
     }
   }
+
+  /** Assign coupons to contest winners */
+  public async assignToWinners(req: Request, res: Response) {
+    const { contestId, winners } = req.body;
+    const result = await this.couponService!.assignCouponsToWinners(contestId, winners);
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      data: result.data,
+      message: result.message,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
+
+  /** Get contest coupon assignments */
+  public async getContestAssignments(req: Request, res: Response) {
+    const { contestId } = req.query;
+    const limit = Number(req.query.limit) || 50;
+    const offset = Number(req.query.offset) || 0;
+    
+    const result = await this.couponService!.getContestCouponAssignments(
+      contestId as string,
+      limit,
+      offset
+    );
+    
+    return res.status(STATUS_CODE.SUCCESS).json({
+      success: true,
+      data: result.data,
+      message: result.message,
+      errors: null,
+      timestamp: new Date().toISOString(),
+    });
+  }
 }

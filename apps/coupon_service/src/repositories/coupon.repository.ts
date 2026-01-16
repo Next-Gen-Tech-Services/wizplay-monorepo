@@ -440,6 +440,128 @@ export default class CouponRepository {
     }
   }
 
+  /** Assign coupons to contest winners */
+  public async assignCouponsToWinners(
+    contestId: string,
+    winners: Array<{
+      userId: string;
+      rank: number;
+    }>
+  ): Promise<any[]> {
+    try {
+      logger.info(`[COUPON-REPO] Assigning coupons to ${winners.length} winners for contest ${contestId}`);
+
+      // Get available contest coupons for this contest
+      const contestCoupons = await this._DB.ContestCoupon.findAll({
+        where: {
+          contestId,
+          userId: null, // Only unassigned coupons
+        },
+        order: [['rank', 'ASC']],
+      });
+
+      if (contestCoupons.length === 0) {
+        logger.warn(`[COUPON-REPO] No contest coupons found for contest ${contestId}`);
+        return [];
+      }
+
+      const assignments = [];
+
+      for (const winner of winners) {
+        // Find the coupon for this rank
+        const contestCoupon = contestCoupons.find(cc => cc.rank === winner.rank);
+        
+        if (contestCoupon) {
+          // Update the contest coupon with the winner's userId
+          await this._DB.ContestCoupon.update(
+            { 
+              userId: winner.userId,
+              assignedAt: new Date()
+            },
+            { 
+              where: { id: contestCoupon.id } 
+            }
+          );
+
+          // Create user coupon entry for redemption
+          const userCoupon = await this._DB.UserCoupon.create({
+            userId: winner.userId,
+            couponId: contestCoupon.couponId,
+            redeemedAt: new Date(),
+          });
+
+          assignments.push({
+            contestCouponId: contestCoupon.id,
+            userId: winner.userId,
+            rank: winner.rank,
+            couponId: contestCoupon.couponId,
+            userCouponId: userCoupon.id,
+          });
+
+          logger.info(`[COUPON-REPO] Assigned coupon ${contestCoupon.couponId} to user ${winner.userId} (rank ${winner.rank})`);
+        } else {
+          logger.warn(`[COUPON-REPO] No coupon available for rank ${winner.rank} in contest ${contestId}`);
+        }
+      }
+
+      logger.info(`[COUPON-REPO] Successfully assigned ${assignments.length} coupons for contest ${contestId}`);
+      return assignments;
+    } catch (error: any) {
+      logger.error(`[COUPON-REPO] Error assigning coupons to winners: ${error.message}`);
+      throw new ServerError(error?.message || "Error assigning coupons to winners");
+    }
+  }
+
+  /** Get contest coupon assignments for admin view */
+  public async getContestCouponAssignments(
+    contestId?: string,
+    limit: number = 50,
+    offset: number = 0
+  ): Promise<any[]> {
+    try {
+      const whereClause: any = {};
+      if (contestId) {
+        whereClause.contestId = contestId;
+      }
+
+      const assignments = await this._DB.ContestCoupon.findAll({
+        where: whereClause,
+        include: [
+          {
+            model: this._DB.Coupon,
+            as: 'coupon',
+            attributes: ['id', 'code', 'title', 'discountType', 'discountValue', 'status'],
+          },
+        ],
+        order: [['createdAt', 'DESC']],
+        limit,
+        offset,
+      });
+
+      return assignments.map((assignment: any) => ({
+        id: assignment.id,
+        contestId: assignment.contestId,
+        matchId: assignment.matchId,
+        userId: assignment.userId,
+        rank: assignment.rank,
+        assignedAt: assignment.assignedAt,
+        createdAt: assignment.createdAt,
+        coupon: assignment.coupon ? {
+          id: assignment.coupon.id,
+          code: assignment.coupon.code,
+          title: assignment.coupon.title,
+          discountType: assignment.coupon.discountType,
+          discountValue: assignment.coupon.discountValue,
+          status: assignment.coupon.status,
+        } : null,
+        assignmentReason: 'contest_winning',
+      }));
+    } catch (error: any) {
+      logger.error(`[COUPON-REPO] Error getting contest coupon assignments: ${error.message}`);
+      throw new ServerError(error?.message || "Error getting contest coupon assignments");
+    }
+  }
+
   /** Check if coupon tables exist in the database */
   private async checkTablesExist(): Promise<boolean> {
     try {

@@ -248,4 +248,42 @@ export default class CouponService {
       throw new ServerError(error?.message || "Error fetching coupon statistics");
     }
   }
+
+  /** Assign coupons to contest winners */
+  public async assignCouponsToWinners(
+    contestId: string,
+    winners: Array<{
+      userId: string;
+      rank: number;
+    }>
+  ) {
+    try {
+      const assignments = await this.couponRepository.assignCouponsToWinners(contestId, winners);
+      return {
+        data: assignments,
+        message: "Coupons assigned to winners successfully",
+      };
+    } catch (error: any) {
+      logger.error(`[coupon-service] assignCouponsToWinners error: ${error.message}`);
+      throw new ServerError(error?.message || "Error assigning coupons to winners");
+    }
+  }
+
+  /** Get contest coupon assignments for admin */
+  public async getContestCouponAssignments(
+    contestId?: string,
+    limit: number = 50,
+    offset: number = 0
+  ) {
+    try {
+      const assignments = await this.couponRepository.getContestCouponAssignments(contestId, limit, offset);
+      return {
+        data: assignments,
+        message: "Contest coupon assignments retrieved successfully",
+      };
+    } catch (error: any) {
+      logger.error(`[coupon-service] getContestCouponAssignments error: ${error.message}`);
+      throw new ServerError(error?.message || "Error getting contest coupon assignments");
+    }
+  }
 }
