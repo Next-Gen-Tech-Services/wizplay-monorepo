@@ -58,7 +58,7 @@ WalletTransactionInstance.belongsTo(WalletInstance, {
 export async function connectDatabase() {
   try {
     await sequelize.authenticate();
-    if (ServerConfigs.DB_SYNC === 'false') {
+    if (ServerConfigs.DB_SYNC === 'true') {
       await sequelize.sync({ alter: true });
       logger.info("Database synced ✅");
     }
