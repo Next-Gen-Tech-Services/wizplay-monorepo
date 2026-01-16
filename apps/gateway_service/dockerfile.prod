@@ -35,7 +35,7 @@ COPY turbo.json ./
 
 # Build the gateway service
 WORKDIR /app/apps/gateway_service
-RUN pnpm run build
+RUN NODE_OPTIONS="--max-old-space-size=4096" pnpm run build
 
 # Stage 3: Use pnpm deploy for production
 FROM base AS deploy
