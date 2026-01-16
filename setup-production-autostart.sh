@@ -19,15 +19,23 @@ PROJECT_DIR="/var/www/html/wizplay-monorepo"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 
 echo "📁 Setting up project directory..."
+# Get current directory absolute path
+CURRENT_DIR=$(pwd)
+
 # Create project directory if it doesn't exist
 if [ ! -d "$PROJECT_DIR" ]; then
     mkdir -p "$PROJECT_DIR"
 fi
 
-# Copy project files to production directory
-echo "📋 Copying project files..."
-cp -r . "$PROJECT_DIR/"
-chown -R root:docker "$PROJECT_DIR"
+# Copy project files to production directory only if we're not already there
+if [ "$CURRENT_DIR" != "$PROJECT_DIR" ]; then
+    echo "📋 Copying project files from $CURRENT_DIR to $PROJECT_DIR..."
+    cp -r . "$PROJECT_DIR/"
+    chown -R root:docker "$PROJECT_DIR"
+else
+    echo "📋 Already in project directory, skipping copy..."
+    chown -R root:docker "$PROJECT_DIR"
+fi
 
 echo "🔧 Installing systemd service..."
 # Copy the service file
