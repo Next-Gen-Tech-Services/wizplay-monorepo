@@ -3,4 +3,5 @@ export enum KAFKA_EVENTS {
   USER_LOGIN = "user_login",
   USER_SEND_OTP = "user_send_otp",
   USER_ONBOARDED = "user_onboarded",
+  USER_DELETED = "user_deleted",
 }

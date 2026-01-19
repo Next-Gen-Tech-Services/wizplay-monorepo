@@ -315,4 +315,29 @@ export default class AuthRepository {
       throw error;
     }
   }
+
+  public async softDeleteUser(userId: string): Promise<boolean> {
+    try {
+      // Update status to inactive (soft delete)
+      const [affectedCount] = await this._DB.Auth.update(
+        { status: "inactive" },
+        {
+          where: {
+            userId: userId,
+          },
+        }
+      );
+      
+      if (affectedCount > 0) {
+        logger.info(`User soft deleted successfully for userId: ${userId}`);
+        return true;
+      } else {
+        logger.warn(`No rows updated for userId: ${userId} during soft delete`);
+        return false;
+      }
+    } catch (error: any) {
+      logger.error(`Database Error in softDeleteUser: ${error.message || error}`);
+      throw error;
+    }
+  }
 }

@@ -490,4 +490,33 @@ export default class Service {
       throw new BadRequestError(error.message || "Failed to update auth status");
     }
   }
+
+  public async deleteAccount(userId: string) {
+    try {
+      const user = await this.userRepository.findAuthByUserId(userId);
+      if (!user) {
+        throw new BadRequestError("User not found");
+      }
+
+      if (user.status === "inactive") {
+        return { message: "Account is already deactivated" };
+      }
+
+      const result = await this.userRepository.softDeleteUser(userId);
+      if (!result) {
+        throw new BadRequestError("Error deactivating account");
+      }
+
+      // Publish user deletion event
+      await publishUserEvent(KAFKA_EVENTS.USER_DELETED, {
+        userId: userId,
+        authId: user.id,
+        email: user.email,
+      });
+      
+      return { message: "Account deactivated successfully. You can contact support to reactivate your account." };
+    } catch (error: any) {
+      throw new BadRequestError(error.message || "Failed to deactivate account");
+    }
+  }
 }

@@ -5,6 +5,7 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import AuthController from "../controllers/auth.controller";
 import { isAdminMiddleware } from "../middlewares/admin.middleware";
+import { requireAuth } from "../middlewares/auth.middleware";
 import {
   authCodeValidator,
   emailPassValidator,
@@ -125,10 +126,20 @@ router.get("/auth/user/:userId", async (req: Request, res: Response) => {
 
 // Admin endpoint for updating auth status
 router.patch(
-  "/admin/fix tr/:userId/status",
+  "/admin/auth/:userId/status",
   isAdminMiddleware,
   async (req: Request, res: Response) => {
     const result = await controller.updateAuthStatus(req, res);
+    return result;
+  }
+);
+
+// Delete account endpoint (soft delete)
+router.delete(
+  "/auth/delete-account",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const result = await controller.deleteAccount(req, res);
     return result;
   }
 );

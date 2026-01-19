@@ -230,4 +230,39 @@ export default class AuthController {
       });
     }
   }
+
+  public async deleteAccount(req: Request, res: Response): Promise<any> {
+    try {
+      const userId = req.currentUserId;
+
+      if (!userId) {
+        return res.status(STATUS_CODE.BAD_REQUEST).json({
+          success: false,
+          data: null,
+          message: "User ID not found in token",
+          errors: null,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      const result = await this.authService.deleteAccount(userId);
+
+      return res.status(STATUS_CODE.SUCCESS).json({
+        success: true,
+        data: null,
+        message: result.message,
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      logger.error("AuthController.deleteAccount error:", err);
+      return res.status(STATUS_CODE.INTERNAL_SERVER).json({
+        success: false,
+        data: null,
+        message: err?.message || "Failed to deactivate account",
+        errors: null,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
 }
