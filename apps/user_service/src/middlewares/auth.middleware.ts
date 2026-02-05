@@ -42,6 +42,22 @@ export const requireAuth = async (
       throw new UnAuthorizError();
     }
 
+    // Check if user is inactive and provide specific message
+    if (user.status === "inactive") {
+      logger.error(
+        `[USER SERVICE MIDDLEWARE]: User account is inactive: ${user.id}`,
+      );
+      throw new UnAuthorizError("Your account has been deactivated. Please contact admin for assistance.");
+    }
+
+    // Check for other non-active statuses
+    if (user.status !== "active") {
+      logger.error(
+        `[USER SERVICE MIDDLEWARE]: User account status is ${user.status}: ${user.id}`,
+      );
+      throw new UnAuthorizError("Your account access has been restricted. Please contact admin for assistance.");
+    }
+
     req.currentUser = user;
     return next();
   } catch (error) {
@@ -79,6 +95,22 @@ export const requireAdminAuth = async (
     logger.info(`[MIDDLEWARE] Admin Type: ${admin?.type}`);
     if (!admin || admin.type !== "admin") {
       throw new UnAuthorizError();
+    }
+
+    // Check if admin account is inactive
+    if (admin.status === "inactive") {
+      logger.error(
+        `[USER SERVICE MIDDLEWARE]: Admin account is inactive: ${admin.id}`,
+      );
+      throw new UnAuthorizError("Your account has been deactivated. Please contact admin for assistance.");
+    }
+
+    // Check for other non-active statuses
+    if (admin.status !== "active") {
+      logger.error(
+        `[USER SERVICE MIDDLEWARE]: Admin account status is ${admin.status}: ${admin.id}`,
+      );
+      throw new UnAuthorizError("Your account access has been restricted. Please contact admin for assistance.");
     }
 
     req.currentUser = admin;

@@ -77,4 +77,13 @@ router.patch(
   }
 );
 
+// Internal service endpoint for updating user status (service-to-service)
+router.patch(
+  "/internal/user/:userId/status",
+  async (req: Request, res: Response) => {
+    const result = await controller.updateUserStatusInternal(req, res);
+    return result;
+  }
+);
+
 export default router;

@@ -420,7 +420,7 @@ export default class CouponRepository {
         active,
         expired,
         redeemed: redeemedCount,
-        totalValue: totalDiscountValue,
+        totalValue: totalDiscountValue ?? 0 ,
       };
     } catch (error: any) {
       logger.error(`[CouponRepository] getCouponStats database error: ${error.message}`);

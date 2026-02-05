@@ -124,6 +124,12 @@ router.get("/auth/user/:userId", async (req: Request, res: Response) => {
   return result;
 });
 
+// Verify user status (for inter-service communication)
+router.get("/auth/verify-status/:userId", async (req: Request, res: Response) => {
+  const result = await controller.verifyUserStatus(req, res);
+  return result;
+});
+
 // Admin endpoint for updating auth status
 router.patch(
   "/admin/auth/:userId/status",

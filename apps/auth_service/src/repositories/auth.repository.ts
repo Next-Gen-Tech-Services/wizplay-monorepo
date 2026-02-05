@@ -1,5 +1,6 @@
 import { logger, ServerError } from "@repo/common";
 import { DB, IDatabase } from "../configs/database.config";
+import axios from "axios";
 import {
   IClearOtpPayload,
   ICreateAppleAuthUser,
@@ -19,7 +20,7 @@ export default class AuthRepository {
   public async getTestData(): Promise<any> {}
 
   public async userWithPhoneExistRepo(
-    phoneNumber: string
+    phoneNumber: string,
   ): Promise<Auth | null> {
     try {
       const user = await this._DB.Auth.findOne({
@@ -44,7 +45,7 @@ export default class AuthRepository {
           where: {
             phoneNumber: data.phoneNumber,
           },
-        }
+        },
       );
       return result;
     } catch (error: any) {
@@ -54,7 +55,7 @@ export default class AuthRepository {
   }
 
   public async createAuthUserWithPhone(
-    data: ICreatePhoneAuthUser
+    data: ICreatePhoneAuthUser,
   ): Promise<any> {
     try {
       const result = await this._DB.Auth.create({
@@ -72,7 +73,7 @@ export default class AuthRepository {
   }
 
   public async createAuthUserWithGoogle(
-    data: ICreateGoogleAuthUser
+    data: ICreateGoogleAuthUser,
   ): Promise<any> {
     try {
       const result = await this._DB.Auth.create({
@@ -90,7 +91,7 @@ export default class AuthRepository {
   }
 
   public async createAuthUserWithApple(
-    data: ICreateAppleAuthUser
+    data: ICreateAppleAuthUser,
   ): Promise<any> {
     try {
       const result = await this._DB.Auth.create({
@@ -136,7 +137,7 @@ export default class AuthRepository {
           otpExpiresAt: null,
           lastLoginAt: lastLoginAt ?? new Date(),
         },
-        { where: { phoneNumber } }
+        { where: { phoneNumber } },
       );
       if (count === 0) {
         throw new ServerError("Update failed");
@@ -187,7 +188,7 @@ export default class AuthRepository {
           where: {
             email: email,
           },
-        }
+        },
       );
       return result;
     } catch (error: any) {
@@ -196,7 +197,10 @@ export default class AuthRepository {
     }
   }
 
-  public async linkAppleIdToUser(userId: string, appleUserId: string): Promise<any> {
+  public async linkAppleIdToUser(
+    userId: string,
+    appleUserId: string,
+  ): Promise<any> {
     try {
       const result = await this._DB.Auth.update(
         {
@@ -207,18 +211,18 @@ export default class AuthRepository {
             userId: userId,
           },
           returning: true,
-        }
+        },
       );
-      
+
       if (result[0] === 0) {
         throw new ServerError("User not found or update failed");
       }
-      
+
       // Return the updated user
       const updatedUser = await this._DB.Auth.findOne({
         where: { userId },
       });
-      
+
       return updatedUser;
     } catch (error: any) {
       logger.error(`Database Error: ${error}`);
@@ -228,7 +232,7 @@ export default class AuthRepository {
 
   public async updateOnboardingStatus(
     userId: string,
-    authId: string
+    authId: string,
   ): Promise<any> {
     try {
       // First check if user exists and current status
@@ -245,7 +249,9 @@ export default class AuthRepository {
       }
 
       if (user.onboarded) {
-        logger.info(`User already onboarded for userId: ${userId}, authId: ${authId}`);
+        logger.info(
+          `User already onboarded for userId: ${userId}, authId: ${authId}`,
+        );
         return true;
       }
 
@@ -260,11 +266,11 @@ export default class AuthRepository {
             id: authId,
           },
           returning: true,
-        }
+        },
       );
-      
+
       logger.debug(`Update result: affected rows: ${result[0]}`);
-      
+
       // result[0] is the number of affected rows
       if (result[0] >= 1) {
         return true;
@@ -273,7 +279,9 @@ export default class AuthRepository {
         return false;
       }
     } catch (error: any) {
-      logger.error(`Database Error in updateOnboardingStatus: ${error.message || error}`);
+      logger.error(
+        `Database Error in updateOnboardingStatus: ${error.message || error}`,
+      );
       throw error;
     }
   }
@@ -287,12 +295,17 @@ export default class AuthRepository {
       });
       return authData;
     } catch (error: any) {
-      logger.error(`Database Error in findAuthByUserId: ${error.message || error}`);
+      logger.error(
+        `Database Error in findAuthByUserId: ${error.message || error}`,
+      );
       throw new ServerError("Database Error");
     }
   }
 
-  public async updateAuthStatus(userId: string, status: "active" | "inactive" | "suspended" | "banned"): Promise<boolean> {
+  public async updateAuthStatus(
+    userId: string,
+    status: "active" | "inactive" | "suspended" | "banned",
+  ): Promise<boolean> {
     try {
       const [affectedCount] = await this._DB.Auth.update(
         { status },
@@ -300,18 +313,49 @@ export default class AuthRepository {
           where: {
             userId: userId,
           },
-        }
+        },
       );
-      
+
       if (affectedCount > 0) {
-        logger.info(`Auth status updated successfully for userId: ${userId} to ${status}`);
+        logger.info(
+          `Auth status updated successfully for userId: ${userId} to ${status}`,
+        );
+
+        // Also update user status in user_service
+        try {
+          const userServiceUrl =
+            process.env.USER_SERVICE_URL || "http://localhost:4002";
+          const serviceSecret =
+            process.env.SERVICE_SECRET || "wizplay-internal-secret-2024";
+          await axios.patch(
+            `${userServiceUrl}/api/v1/internal/user/${userId}/status`,
+            { status },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "x-service-secret": serviceSecret,
+              },
+            },
+          );
+          logger.info(
+            `User status updated successfully in user_service for userId: ${userId} to ${status}`,
+          );
+        } catch (userServiceError: any) {
+          logger.error(
+            `Failed to update user status in user_service: ${userServiceError.message}`,
+          );
+          // Don't throw error here - auth status is already updated
+        }
+
         return true;
       } else {
         logger.warn(`No rows updated for userId: ${userId}`);
         return false;
       }
     } catch (error: any) {
-      logger.error(`Database Error in updateAuthStatus: ${error.message || error}`);
+      logger.error(
+        `Database Error in updateAuthStatus: ${error.message || error}`,
+      );
       throw error;
     }
   }
@@ -325,18 +369,41 @@ export default class AuthRepository {
           where: {
             userId: userId,
           },
-        }
+        },
       );
-      
+
       if (affectedCount > 0) {
         logger.info(`User soft deleted successfully for userId: ${userId}`);
+        try {
+          const userServiceUrl =
+            process.env.USER_SERVICE_URL || "http://localhost:4002";
+          await axios.patch(
+            `${userServiceUrl}/api/v1/internal/user/${userId}/status`,
+            { status: "inactive" },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            },
+          );
+          logger.info(
+            `User status updated successfully in user_service for userId: ${userId}`,
+          );
+        } catch (userServiceError: any) {
+          logger.error(
+            `Failed to update user status in user_service: ${userServiceError.message}`,
+          );
+          // Don't throw error here - auth status is already updated
+        }
         return true;
       } else {
         logger.warn(`No rows updated for userId: ${userId} during soft delete`);
         return false;
       }
     } catch (error: any) {
-      logger.error(`Database Error in softDeleteUser: ${error.message || error}`);
+      logger.error(
+        `Database Error in softDeleteUser: ${error.message || error}`,
+      );
       throw error;
     }
   }
